@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 18:12:23
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-08-07 22:51:38
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -18,7 +18,7 @@
             <span class="saying-write">|</span>
             <i class="saying-icon iconfont icon-xia"></i>
           </div>
-          <h1 style="margin-top: 15px">Hello~ I'm snows_l</h1>
+          <h1 class="text" style="margin-top: 15px">Hello~ I'm snows_l</h1>
         </div>
         <div class="author-info">
           <div class="info-item" data-tip="pre">
@@ -34,6 +34,9 @@
           <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
             <img class="img" src="@/assets/images/common/mail.png" alt="" srcset="" />
           </div>
+          <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
+            <img :src="api" alt="" />
+          </div>
           <div class="info-item">
             <img class="btn" src="@/assets/images/common/next.png" alt="" srcset="" />
           </div>
@@ -47,8 +50,8 @@
             p-id="21356"></path>
         </svg>
       </div>
-      <div class="bottom-bg"></div>
-      <div class="bottom-bg1 bottom-bg"></div>
+      <div v-if="!state.isDark" class="bottom-bg"></div>
+      <div v-if="!state.isDark" class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
       <div class="other-content">
@@ -149,13 +152,15 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
+import { getTheme } from '@/utils/common';
+import { onMounted, onUpdated, reactive, watch } from 'vue';
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
   saying: '',
   isShowContent: false,
   loading: false,
   isMore: true,
+  isDark: false,
   articleList: [
     {
       createTime: '2021-08-05',
@@ -211,8 +216,10 @@ const list = [
   }
 ];
 
+const qq = '37523953';
+let api = 'http://q1.qlogo.cn/g?b=qq&nk=' + encodeURIComponent(qq) + '&s=640';
+
 const infoMap = {
-  // qq: 'tencent://message/?uin=37523953',
   qq: 'mqqwpa://im/proxy?src_type=web&qq_number=37523953',
   email: 'mailto:snows_l@163.com'
 };
@@ -269,10 +276,30 @@ const handleInfo = (type: srting) => {
   }
 };
 
+watch(
+  () => localStorage.getItem('isDark'),
+  n => {
+    console.log('-------- n --------', n);
+  },
+  { immediate: true, deep: true }
+);
+
+const localStorageChangeCallback = (e: StorageEvent) => {
+  // 监听需要的键名
+  if (e.key === 'isDark') {
+    state.isDark = e.newValue as any;
+    console.log('-------- state.isDark --------', state.isDark);
+  }
+};
+
 onMounted(() => {
   inputSaying();
   state.isShowContent = true;
+  //监听localStorage变化
+  window.addEventListener('setItemEvent', localStorageChangeCallback);
+  state.isDark = getTheme() === 'dark';
 });
+onUpdated(() => {});
 </script>
 
 <style lang="scss" scoped>
@@ -281,6 +308,7 @@ onMounted(() => {
     width: 100%;
     height: 100vh;
     position: relative;
+    background-color: var(--bg-image-warp-color);
     .content-warp {
       width: 100%;
       position: absolute;
@@ -311,7 +339,8 @@ onMounted(() => {
         padding: 20px 0;
         margin-top: 30px;
         border-radius: 10px;
-        background-color: #ffffffb2;
+        background-color: var(--bg-content-color);
+        color: var(--text-color);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -426,7 +455,7 @@ onMounted(() => {
     align-items: center;
 
     .other-content {
-      margin-top: 100px;
+      margin-top: 30px;
       max-width: 820px;
       width: 100%;
       .other-content-item {
@@ -441,6 +470,7 @@ onMounted(() => {
             margin-top: 10px;
             font-size: 20px;
             font-weight: 600;
+            color: var(--text-color);
           }
         }
         .article-item {
@@ -472,7 +502,7 @@ onMounted(() => {
             flex: 1;
             height: 100%;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: var(--bg-content-color);
             .create-time {
               height: 24px;
               padding: 2px 8px;
@@ -493,6 +523,7 @@ onMounted(() => {
               overflow: hidden;
               text-overflow: ellipsis;
               text-align: left;
+              color: var(--text-color);
             }
             .article-title:hover {
               color: var(--theme-color);
@@ -515,6 +546,7 @@ onMounted(() => {
                 }
                 span {
                   font-size: 12px;
+                  color: var(--text-color);
                 }
               }
               img {
@@ -532,7 +564,7 @@ onMounted(() => {
               -webkit-line-clamp: 4;
               overflow: hidden;
               text-overflow: ellipsis;
-              color: #555;
+              color: var(--text-color-2);
             }
           }
         }

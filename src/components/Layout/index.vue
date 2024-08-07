@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 15:49:16
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-07 21:10:26
+ * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp">
@@ -160,9 +160,12 @@ onUnmounted(() => {
       .title-text {
         font-size: 25px;
         padding: 5px 10px;
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: var(--bg-content-color);
         border-radius: 5px;
-        color: #505050;
+        color: var(--text-color);
+      }
+      .title-sub-text {
+        color: var(--text-color);
       }
     }
     .flutter:hover {

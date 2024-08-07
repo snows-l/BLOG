@@ -22,8 +22,9 @@ var 引流 = [
 
 // 切换夜间模式
 function toggleNightMode() {
-  const body = document.querySelector('body');
-  body.classList.toggle('night-mode');
+  const html = document.querySelector('html');
+  html.classList.toggle('dark');
+  localStorage.setItem('isDark', html.classList.contains('dark'));
 }
 
 const initConfig = {

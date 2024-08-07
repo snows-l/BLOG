@@ -11,14 +11,27 @@ body {
 }
 
 :root {
+  --theme: 'light';
   --theme-color: #18a058;
   --theme-light-color: #18a057a7;
   --theme-light-color-2: #18a05794;
   --theme-light-color-3: #18a05777;
   --theme-light-color-4: #18a05759;
-  --theme-bg-color: #f8f9fa;
-  --theme-text-color: #212529;
-  --bg-warp-color: #fffffdd6;
+
+  --text-color: #222222;
+  --text-color-2: #555555;
+  --bg-warp-color: #ffffffda;
+  --bg-content-color: #ffffffd6;
+  --bg-image-warp-color: transparent;
+}
+
+:root.dark {
+  --theme: 'dark';
+  --text-color: #eeeeeee7;
+  --text-color-2: #999999;
+  --bg-warp-color: #000000d6;
+  --bg-content-color: #0000007c;
+  --bg-image-warp-color: #000000d6;
 }
 
 // 定义（在全局样式中定义）
