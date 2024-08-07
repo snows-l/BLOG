@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 18:04:59
+ * @LastEditTime: 2024-08-07 18:12:23
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -140,7 +140,9 @@
         </div>
       </div>
       <div class="bottom-loading">
-        <div class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
+        <img v-if="state.loading" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
+        <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
+        <div v-if="!state.isMore" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
   </div>
@@ -152,6 +154,8 @@ const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
   saying: '',
   isShowContent: false,
+  loading: false,
+  isMore: true,
   articleList: [
     {
       createTime: '2021-08-05',
@@ -233,7 +237,14 @@ const randomNum = (min: number, max: number) => {
 
 // 加在更多
 const handleLoadMore = () => {
-  state.articleList = [...state.articleList, ...list];
+  state.loading = true;
+  setTimeout(() => {
+    state.articleList = [...state.articleList, ...list];
+    if (state.articleList.length >= 30) {
+      state.isMore = false;
+    }
+    state.loading = false;
+  }, 1000);
 };
 
 const toQQ = () => {
@@ -529,11 +540,15 @@ onMounted(() => {
     }
     .bottom-loading {
       margin: 30px 0;
+      height: 60px;
       .btn-more {
         padding: 10px 20px;
         border-radius: 20px;
         background-color: var(--theme-light-color-4);
         color: var(--theme-color);
+      }
+      .no-more {
+        color: var(--theme-light-color-4);
       }
     }
   }
