@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 17:31:59
+ * @LastEditTime: 2024-08-07 18:04:59
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -140,7 +140,7 @@
         </div>
       </div>
       <div class="bottom-loading">
-        <div class="btn-more pointer">更早的文章</div>
+        <div class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
       </div>
     </div>
   </div>
@@ -170,39 +170,42 @@ const state = reactive({
       title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
       desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
       img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
     }
   ]
 });
+
+const list = [
+  {
+    createTime: '2021-08-05',
+    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+  },
+  {
+    createTime: '2021-08-05',
+    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+  },
+  {
+    createTime: '2021-08-05',
+    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+  },
+  {
+    createTime: '2021-08-05',
+    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+  },
+  {
+    createTime: '2021-08-05',
+    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+  }
+];
 
 const infoMap = {
   // qq: 'tencent://message/?uin=37523953',
@@ -226,6 +229,11 @@ const inputSaying = () => {
 // 产生0-99999之间的数据数
 const randomNum = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+// 加在更多
+const handleLoadMore = () => {
+  state.articleList = [...state.articleList, ...list];
 };
 
 const toQQ = () => {
