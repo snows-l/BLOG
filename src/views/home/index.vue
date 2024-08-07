@@ -1,0 +1,564 @@
+<!--
+ * @Description: ------------ fileDescription -----------
+ * @Author: snows_l snows_l@163.com
+ * @Date: 2024-08-05 12:46:00
+ * @LastEditors: snows_l snows_l@163.com
+ * @LastEditTime: 2024-08-07 17:31:59
+ * @FilePath: /blog/src/views/home/index.vue
+-->
+<template>
+  <div class="home-warp">
+    <div class="first-screen">
+      <div class="content-warp" :class="{ showContent: state.isShowContent }">
+        <img class="avatar" src="@/assets/images/common/avatar.png" alt="" />
+        <div class="saying">
+          <div class="saying-text">
+            <i class="saying-icon iconfont icon-quotes-left"></i>
+            <span class="saying-words">{{ state.saying }}</span>
+            <span class="saying-write">|</span>
+            <i class="saying-icon iconfont icon-xia"></i>
+          </div>
+          <h1 style="margin-top: 15px">Hello~ I'm snows_l</h1>
+        </div>
+        <div class="author-info">
+          <div class="info-item" data-tip="pre">
+            <img class="btn" src="@/assets/images/common/pre.png" alt="" srcset="" />
+          </div>
+          <div class="info-item kbn-qq" data-kbn-tip="QQ" @click="handleInfo('qq')" title="QQ: 37523953">
+            <img class="img" src="@/assets/images/common/qq.png" alt="" srcset="" />
+          </div>
+          <div class="info-item weixin-content kbn-weixin" data-kbn-tip="WeChat" title="WeChat: snows__l">
+            <img class="img weixin-icon" src="@/assets/images/common/weixin.png" alt="" srcset="" />
+            <img class="img weinxin-qrcode" src="@/assets/images/common/wechat-qrcode.png" alt="" srcset="" />
+          </div>
+          <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
+            <img class="img" src="@/assets/images/common/mail.png" alt="" srcset="" />
+          </div>
+          <div class="info-item">
+            <img class="btn" src="@/assets/images/common/next.png" alt="" srcset="" />
+          </div>
+        </div>
+      </div>
+      <div class="bottom-down">
+        <svg t="1682342753354" class="homepage-downicon" viewBox="0 0 1843 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21355" width="80px" height="80px">
+          <path
+            d="M1221.06136021 284.43250057a100.69380037 100.69380037 0 0 1 130.90169466 153.0543795l-352.4275638 302.08090944a100.69380037 100.69380037 0 0 1-130.90169467 0L516.20574044 437.48688007A100.69380037 100.69380037 0 0 1 647.10792676 284.43250057L934.08439763 530.52766665l286.97696258-246.09516608z"
+            fill="rgba(255,255,255,0.8)"
+            p-id="21356"></path>
+        </svg>
+      </div>
+      <div class="bottom-bg"></div>
+      <div class="bottom-bg1 bottom-bg"></div>
+    </div>
+    <div class="other-content-warp">
+      <div class="other-content">
+        <div class="other-content-item">
+          <div class="article-title-warp">
+            <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
+            <h2 class="content-title">Article</h2>
+          </div>
+          <div class="article-warp">
+            <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+              <div class="img-left item-warp" v-if="index % 2 === 0">
+                <div class="cover-img-warp">
+                  <img class="cover-img" :src="item.img" alt="" />
+                </div>
+                <div class="item-content">
+                  <div class="create-time">
+                    <span>
+                      <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
+                      <span>发布于:</span>
+                      <span>{{ item.createTime }}</span>
+                    </span>
+                  </div>
+                  <div class="article-title">
+                    {{ item.title }}
+                  </div>
+                  <div class="auth-info-warp">
+                    <div>
+                      <img src="@/assets/images/common/avatar.png" alt="" />
+                      <span>snows_l</span>
+                    </div>
+                    <div>
+                      <i class="iconfont icon-yanjing"></i>
+                      <span>{{ item.views || randomNum(99, 99999) }}</span>
+                    </div>
+                    <div>
+                      <i class="iconfont icon-comment"></i>
+                      <span>{{ item.views || randomNum(5, 20) }}</span>
+                    </div>
+                    <div>
+                      <i class="iconfont icon-fenxiang1"></i>
+                      <span>{{ item.views || randomNum(20, 1000) }}</span>
+                    </div>
+                  </div>
+                  <div class="article-des text">
+                    {{ item.desc }}
+                  </div>
+                </div>
+              </div>
+              <div class="img-right item-warp" v-else>
+                <div class="item-content">
+                  <div class="create-time">
+                    <span>
+                      <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
+                      <span>发布于:</span>
+                      <span>{{ item.createTime }}</span>
+                    </span>
+                  </div>
+                  <div class="article-title">
+                    {{ item.title }}
+                  </div>
+                  <div class="auth-info-warp">
+                    <div>
+                      <img src="@/assets/images/common/avatar.png" alt="" />
+                      <span>snows_l</span>
+                    </div>
+                    <div>
+                      <i class="iconfont icon-yanjing"></i>
+                      <span>{{ item.views || randomNum(99, 99999) }}</span>
+                    </div>
+                    <div>
+                      <i class="iconfont icon-comment"></i>
+                      <span>{{ item.views || randomNum(5, 20) }}</span>
+                    </div>
+                    <div>
+                      <i class="iconfont icon-fenxiang1"></i>
+                      <span>{{ item.views || randomNum(20, 1000) }}</span>
+                    </div>
+                  </div>
+                  <div class="article-des text">
+                    {{ item.desc }}
+                  </div>
+                </div>
+                <div class="cover-img-warp">
+                  <img class="cover-img" :src="item.img" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-loading">
+        <div class="btn-more pointer">更早的文章</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { reactive, onMounted } from 'vue';
+const saying = '我见众生皆草木，唯你是青山。';
+const state = reactive({
+  saying: '',
+  isShowContent: false,
+  articleList: [
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    },
+    {
+      createTime: '2021-08-05',
+      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
+      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
+      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
+    }
+  ]
+});
+
+const infoMap = {
+  // qq: 'tencent://message/?uin=37523953',
+  qq: 'mqqwpa://im/proxy?src_type=web&qq_number=37523953',
+  email: 'mailto:snows_l@163.com'
+};
+
+// 打字效果输出saying
+const inputSaying = () => {
+  let index = 0;
+  const timer = setInterval(() => {
+    if (index === saying.length) {
+      clearInterval(timer);
+      return;
+    }
+    state.saying += saying[index];
+    index++;
+  }, 120);
+};
+
+// 产生0-99999之间的数据数
+const randomNum = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const toQQ = () => {
+  let system = {};
+  const p = navigator.platform;
+  system.win = p.indexOf('Win') == 0;
+  system.mac = p.indexOf('Mac') == 0;
+  system.x11 = p == 'X11' || p.indexOf('Linux') == 0;
+  if (system.win || system.mac || system.xll) {
+    //如果是电脑跳转到
+    window.open('http://wpa.qq.com/msgrd?v=3&uin=37523953&site=qq&menu=yes');
+  } else {
+    //如果是手机,跳转到
+    window.open('mqqwpa://im/chat?chat_type=wpa&uin=37523953&version=1&src_type=web');
+  }
+};
+const handleInfo = (type: srting) => {
+  if (type === 'qq') {
+    toQQ();
+  } else {
+    window.open(infoMap[type]);
+  }
+};
+
+onMounted(() => {
+  inputSaying();
+  state.isShowContent = true;
+});
+</script>
+
+<style lang="scss" scoped>
+.home-warp {
+  .first-screen {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    .content-warp {
+      width: 100%;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: top 0.8s ease-in, opacity 0.8s ease-in;
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        transition: all 1.2s ease-in-out;
+      }
+      .avatar:hover {
+        border-color: var(--theme-color);
+        transform: rotate(360deg);
+      }
+      .saying {
+        width: 60%;
+        max-width: 750px;
+        min-width: 300px;
+        padding: 20px 0;
+        margin-top: 30px;
+        border-radius: 10px;
+        background-color: #ffffffb2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .saying-icon {
+          margin: 0 10px;
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .saying-write {
+          margin: 0 3px;
+          font-weight: 600;
+          animation: blink 1s infinite;
+        }
+        .saying-words {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          cursor: url('@/assets/images/cursor/text.png'), auto;
+        }
+      }
+      .author-info {
+        display: flex;
+        margin-top: 30px;
+        .info-item {
+          margin: 0 10px;
+          cursor: url('@/assets/images/cursor/pointer.png'), auto;
+          padding: 10px;
+          border-radius: 15px;
+          background-color: var(--bg-warp-color);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .btn,
+        img {
+          width: 30px;
+          height: 30px;
+        }
+        .weixin-content {
+          width: 50px;
+          height: 50px;
+          transition: all 0.8s ease-in-out;
+          overflow: hidden;
+          .weinxin-qrcode {
+            display: none;
+          }
+        }
+        .weixin-content:hover {
+          width: 80px;
+          height: 80px;
+          .weixin-icon {
+            display: none;
+          }
+          .weinxin-qrcode {
+            display: block;
+            width: 60px;
+            height: 60px;
+          }
+        }
+      }
+    }
+    .showContent {
+      top: 50%;
+      opacity: 1;
+    }
+    .bottom-bg {
+      height: 65px;
+      position: absolute;
+      bottom: 0;
+      width: 400%;
+      left: -236px;
+      z-index: 4;
+      transition-duration: 0.4s, 0.4s;
+      animation-name: move2;
+      animation-duration: 240s;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      background-image: url('@/assets/images/common/wave1.png');
+    }
+    .bottom-bg1 {
+      height: 80px;
+      width: 400%;
+      left: 0;
+      z-index: 3;
+      opacity: 1;
+      transition-duration: 0.4s, 0.4s;
+      animation-name: move2;
+      animation-duration: 160s;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-duration: 400s;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      background-image: url('@/assets/images/common/wave2.png');
+    }
+    .bottom-down {
+      position: absolute;
+      bottom: 120px;
+      left: calc(50% - 40px);
+      animation: bottom 2s infinite;
+    }
+  }
+  .other-content-warp {
+    background-color: var(--bg-warp-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .other-content {
+      margin-top: 100px;
+      max-width: 820px;
+      width: 100%;
+      .other-content-item {
+        margin-bottom: 40px;
+        .article-title-warp {
+          margin-bottom: 30px;
+          .article-icon {
+            width: 26px;
+            height: 26px;
+          }
+          .content-title {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: 600;
+          }
+        }
+        .article-item {
+          margin: 40px 0;
+          border-radius: 15px;
+          width: 100%;
+          height: 300px;
+          overflow: hidden;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          .item-warp {
+            display: flex;
+            width: 100%;
+            height: 100%;
+          }
+          .cover-img-warp {
+            width: 450px;
+            height: 100%;
+            overflow: hidden;
+            .cover-img {
+              width: 100%;
+              height: 100%;
+              transition: all 0.8s ease-in-out;
+            }
+            .cover-img:hover {
+              transform: scale(1.1);
+            }
+          }
+          .item-content {
+            flex: 1;
+            height: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            .create-time {
+              height: 24px;
+              padding: 2px 8px;
+              background-color: var(--theme-light-color-4);
+              border-radius: 5px;
+              color: var(--theme-color);
+              width: 220px;
+            }
+            .article-title {
+              margin-top: 20px;
+              height: 80px;
+              font-size: 24px;
+              line-height: 40px;
+              cursor: url('@/assets/images/cursor/text.png'), auto;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: left;
+            }
+            .article-title:hover {
+              color: var(--theme-color);
+            }
+            .auth-info-warp {
+              height: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              div {
+                display: flex;
+                align-items: center;
+                .iconfont {
+                  margin-right: 10px;
+                  font-size: 20px;
+                  color: var(--theme-color);
+                }
+                .icon-yanjing {
+                  font-size: 24px;
+                }
+                span {
+                  font-size: 12px;
+                }
+              }
+              img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-right: 10px;
+              }
+            }
+            .article-des {
+              height: 88px;
+              line-height: 22px;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 4;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #555;
+            }
+          }
+        }
+      }
+    }
+    .bottom-loading {
+      margin: 30px 0;
+      .btn-more {
+        padding: 10px 20px;
+        border-radius: 20px;
+        background-color: var(--theme-light-color-4);
+        color: var(--theme-color);
+      }
+    }
+  }
+}
+
+// 光标闪烁效果动画
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+// 背景动画
+@keyframes move2 {
+  100% {
+    background-position: -100% 0;
+  }
+}
+// 下滑动画
+@keyframes bottom {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+</style>

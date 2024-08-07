@@ -1,0 +1,58 @@
+<!--
+ * @Description: ------------ fileDescription -----------
+ * @Author: snows_l snows_l@163.com
+ * @Date: 2024-08-05 12:45:59
+ * @LastEditors: snows_l snows_l@163.com
+ * @LastEditTime: 2024-08-07 09:52:25
+ * @FilePath: /blog/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="/live2d/TweenLite.js"></script>
+    <script src="/live2d/live2dcubismcore.min.js"></script>
+    <script src="/live2d/pixi.min.js"></script>
+    <script src="/live2d/cubism4.min.js"></script>
+    <script src="/live2d/pio.js"></script>
+    <script src="/live2d/pio_sdk4.js"></script>
+    <script src="/live2d/load.js"></script>
+    <link rel="stylesheet" type="text/css" href="/live2d/pio.css" />
+
+    <!-- <script src="http://124.223.41.220:3333/live2d/TweenLite.js"></script>
+    <script src="http://124.223.41.220:3333/live2d/live2dcubismcore.min.js"></script>
+    <script src="http://124.223.41.220:3333/live2d/pixi.min.js"></script>
+    <script src="http://124.223.41.220:3333/live2d/cubism4.min.js"></script>
+    <script src="http://124.223.41.220:3333/live2d/pio.css"></script>
+    <script src="http://124.223.41.220:3333/live2d/pio.js"></script>
+    <script src="http://124.223.41.220:3333/live2d/pio_sdk4.js"></script>
+    <script src="http://124.223.41.220:3333/live2d/load.js"></script> -->
+    <style>
+      html,
+      body {
+        height: 100vh;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+      }
+      #pio-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 999999;
+      }
+      #pio {
+        height: 260px;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
