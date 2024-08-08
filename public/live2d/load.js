@@ -22,7 +22,6 @@ var 引流 = [
 
 // 切换夜间模式
 function toggleNightMode() {
-  console.log('------- toggleNightMode -------');
   const html = document.querySelector('html');
   html.classList.toggle('dark');
   localStorage.setItem('isDark', html.classList.contains('dark'));
@@ -40,9 +39,9 @@ const initConfig = {
     custom: [
       { selector: '.comment-form', text: 'Content Tooltip' },
       { selector: '.home-social a:last-child', text: 'Blog Tooltip' },
-      { selector: '.list .postname .kbn-read, .kbn-article', type: 'read' },
+      { selector: '.list .postname, .kbn-read, .kbn-article', type: 'read' },
       { selector: '.post-content a, .page-content a, .post a, .kbn-link', type: 'link' },
-      { selector: '.kbn-qq, .kbn-weixin, .kbn-wechat .kbn-email, kbn-chart', type: 'chart' }
+      { selector: '.kbn-qq, .kbn-weixin, .kbn-wechat, .kbn-email, kbn-chart', type: 'chart' }
     ],
     homeLink: '', // 首页链接
     homePort: '3000' // 首页domain端口号

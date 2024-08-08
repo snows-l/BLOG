@@ -3,16 +3,16 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 17:18:44
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-08 21:31:02
+ * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp">
     <div class="mobile-menu-warp" :class="{ mMenuShow: state.mMenuShow }">
       <div class="mobile-menu">
-        <div class="top-close">
+        <!-- <div class="top-close">
           <i class="iconfont icon-cc-close-crude" @click="handleMMenuShow(false)"></i>
-        </div>
+        </div> -->
         <div class="avatar-warp">
           <img class="avatar pointer" @click="handleTo('avatar')" :src="state.avatar" alt="" srcset="" />
         </div>
@@ -22,7 +22,7 @@
     <div class="layout-content-warp" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
       <!-- mobile header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="state.isMobile">
-        <i :style="{ opacity: !state.mMenuShow ? 1 : 0 }" class="iconfont icon-caidan" @click="handleMMenuShow(true)"></i>
+        <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
           <span class="title-sub-text" style="margin: 0 10px 0 5px">の</span>
@@ -44,7 +44,7 @@
           </div>
         </div>
       </header>
-      <main>
+      <main @click="handleClickMain">
         <router-view></router-view>
       </main>
     </div>
@@ -52,8 +52,8 @@
 </template>
 
 <script lang="ts" setup>
-import { isMobile, getQQAvatar } from '@/utils/common';
 import { routes } from '@/router';
+import { getQQAvatar, isMobile } from '@/utils/common';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
@@ -83,8 +83,13 @@ const handleTo = (path: string) => {
   }
 };
 
+const handleClickMain = () => {
+  if (state.mMenuShow) state.mMenuShow = false;
+};
+
 // 监听滚动条
 const scorllCallback = () => {
+  if (state.mMenuShow) state.mMenuShow = false;
   if (layoutRef.value.scrollTop > 60) {
     state.isFlutter = false;
   } else {
@@ -93,8 +98,7 @@ const scorllCallback = () => {
 };
 
 const handleMMenuShow = (falg: boolean) => {
-  state.mMenuShow = falg;
-  console.log('------- handleMMenuShow -------', state.mMenuShow);
+  state.mMenuShow = !state.mMenuShow;
 };
 
 onMounted(() => {
@@ -105,7 +109,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  layoutRef.value.removeEventListener('scroll', scorllCallback);
+  layoutRef.value && layoutRef.value.removeEventListener('scroll', scorllCallback);
 });
 </script>
 
@@ -116,12 +120,12 @@ onUnmounted(() => {
   background-image: url('@/assets/images/common/bg-img.png');
   position: relative;
   .mobile-menu-warp {
-    width: 100%;
+    width: var(--m-menu-width);
     height: 100vh;
     background-color: var(--bg-modal-color);
     position: absolute;
     top: 0;
-    left: -100vw;
+    left: calc(0px - var(--m-menu-width));
     z-index: 9999;
     transition: left 0.8s ease;
     .mobile-menu {
@@ -140,7 +144,7 @@ onUnmounted(() => {
           height: 100px;
           border-radius: 50%;
           border: 2px solid #ccc;
-          transition: all 1.2s ease-in-out;
+          transition: all 1.2s ease;
           &:hover {
             transform: rotate(360deg);
             border-color: var(--theme-color);
@@ -184,7 +188,7 @@ onUnmounted(() => {
       padding: 0 20px;
       background: var(--bg-warp-color);
       border-bottom: 1px solid var(--theme-light-color-3);
-      transition: all 0.8s ease;
+      transition: left 0.8s ease, width 0.8s ease, top 0.8s ease;
       position: fixed;
       left: 0;
       top: 0;
@@ -224,7 +228,7 @@ onUnmounted(() => {
           height: 100%;
           position: absolute;
           right: -402px;
-          transition: right 1s ease-in;
+          transition: right 1s ease;
         }
         .menuShow {
           right: v-bind(avatarWidth);
@@ -243,8 +247,8 @@ onUnmounted(() => {
 
     .flutter {
       width: 95%;
-      -webkit-transition: all 1s ease !important;
-      transition: all 1s ease !important;
+      -webkit-transition: all 0.8s ease !important;
+      transition: all 0.8s ease !important;
       background: transparent;
       position: fixed;
       left: 2.5%;
@@ -252,7 +256,7 @@ onUnmounted(() => {
       z-index: 999;
       border-radius: 10px;
       word-break: keep-all;
-      border: 1px solid #fff;
+      border: 1px solid var(--text-color);
       &:hover {
         background: var(--bg-warp-color);
         border: 1px solid var(--theme-light-color);
@@ -260,7 +264,10 @@ onUnmounted(() => {
     }
 
     .rightHeader {
-      left: calc(100vh - var(--m-menu-width));
+      left: var(--m-menu-width);
+    }
+    .rightHeader.flutter {
+      left: calc(var(--m-menu-width) + 2.5%);
     }
 
     .mobile-header-warp {

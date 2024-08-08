@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 17:30:17
- * @FilePath: /blog/src/utils/common.js
+ * @LastEditTime: 2024-08-08 21:17:51
+ * @FilePath: /BLOG/src/utils/common.js
  */
 // 重写 localStorage 的 setItem 方法，派发自定义事件
 export const dispatchEventStroage = () => {
@@ -30,4 +30,9 @@ const { body } = document;
 export const isMobile = (w = 860) => {
   const rect = body.getBoundingClientRect();
   return rect.width - 1 <= w;
+};
+
+// 设置网页标题
+export const setDocmentTitle = title => {
+  document.title = title;
 };

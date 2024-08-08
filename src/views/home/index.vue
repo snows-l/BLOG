@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 17:17:40
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-08-08 22:33:07
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -34,7 +34,7 @@
           <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
             <img class="img" src="@/assets/images/common/mail.png" alt="" srcset="" />
           </div>
-          <div class="info-item">
+          <div class="info-item kbn-link" data-tip="link">
             <img class="btn" src="@/assets/images/common/next.png" alt="" srcset="" />
           </div>
         </div>
@@ -67,7 +67,7 @@
                   <div class="create-time">
                     <span>
                       <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                      <span>发布于:</span>
+                      <span>发布于：</span>
                       <span>{{ item.createTime }}</span>
                     </span>
                   </div>
@@ -76,7 +76,7 @@
                   </div>
                   <div class="auth-info-warp">
                     <div>
-                      <img src="@/assets/images/common/avatar.png" alt="" />
+                      <img :src="state.avatar" alt="" />
                       <span>snows_l</span>
                     </div>
                     <div>
@@ -102,7 +102,7 @@
                   <div class="create-time">
                     <span>
                       <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                      <span>发布于:</span>
+                      <span>发布于：</span>
                       <span>{{ item.createTime }}</span>
                     </span>
                   </div>
@@ -111,7 +111,7 @@
                   </div>
                   <div class="auth-info-warp">
                     <div>
-                      <img src="@/assets/images/common/avatar.png" alt="" />
+                      <img :src="state.avatar" alt="" />
                       <span>snows_l</span>
                     </div>
                     <div>
@@ -154,7 +154,7 @@
                     <div class="create-time">
                       <span>
                         <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                        <span>发布于:</span>
+                        <span>发布于：</span>
                         <span>{{ item.createTime }}</span>
                       </span>
                     </div>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="auth-info-warp">
                       <div>
-                        <img src="@/assets/images/common/avatar.png" alt="" />
+                        <img loading="lazy" :src="state.avatar" vertical-align="middle" alt="" />
                         <span>snows_l</span>
                       </div>
                       <div>
@@ -202,7 +202,7 @@
 import router from '@/router';
 import { getQQAvatar, isMobile } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
-import { onMounted, onUpdated, reactive, watch, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, reactive } from 'vue';
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
   saying: '',
@@ -544,7 +544,7 @@ onUnmounted(() => {
           }
           .cover-img-warp {
             width: 450px;
-            height: 300px;
+            height: 280px;
             overflow: hidden;
             .cover-img {
               width: 100%;
@@ -566,13 +566,13 @@ onUnmounted(() => {
               background-color: var(--theme-light-color-4);
               border-radius: 5px;
               color: var(--theme-color);
-              width: 200px;
+              width: 204px;
             }
             .article-title {
               margin-top: 20px;
-              height: 80px;
-              font-size: 24px;
-              line-height: 40px;
+              height: 60px;
+              font-size: 20px;
+              line-height: 30px;
               cursor: url('@/assets/images/cursor/text.png'), auto;
               display: -webkit-box;
               -webkit-box-orient: vertical;
@@ -614,8 +614,8 @@ onUnmounted(() => {
               }
             }
             .article-des {
-              height: 88px;
-              line-height: 22px;
+              height: 86px;
+              line-height: 21px;
               display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 4;
@@ -636,26 +636,36 @@ onUnmounted(() => {
         height: auto !important;
         .cover-img-warp {
           width: 100% !important;
-          height: 220px !important;
+          height: 180px !important;
         }
 
         .item-content {
           .article-title {
-            height: 60px !important;
-            line-height: 30px !important;
+            margin-top: 10px !important;
+            height: 40px !important;
+            line-height: 20px !important;
+            font-size: 16px !important;
+          }
+        }
+        .auth-info-warp {
+          height: 30px !important;
+          img {
+            width: 20px !important;
+            height: 20px !important;
           }
         }
         .article-des {
-          height: 60px !important;
-          line-height: 20px !important;
-          -webkit-line-clamp: 3 !important;
+          height: 30px !important;
+          line-height: 15px !important;
+          font-size: 12px !important;
+          -webkit-line-clamp: 2 !important;
         }
       }
     }
 
     .bottom-loading {
-      margin: 30px 0;
-      height: 60px;
+      margin-bottom: 20px;
+      height: 40px;
       .btn-more {
         padding: 10px 20px;
         border-radius: 20px;

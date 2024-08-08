@@ -192,13 +192,13 @@ var Paul_Pio = function (prop) {
         if (e.length) {
           for (var j = 0; j < e.length; j++) {
             if (t.type === 'read') {
-              const text = this.innerText || this.dataset.kbnTip || this.title;
+              const text = this.innerText || (this.dataset && this.dataset.kbnTip) || this.title || '这篇文章';
               e[j].onmouseover = function () {
                 modules.render('想阅读 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type === 'link') {
               e[j].onmouseover = function () {
-                const text = this.innerText || this.dataset.kbnTip || this.title;
+                const text = this.innerText || this.dataset.kbnTip || this.title || '这个链接';
                 modules.render('想了解一下 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type === 'chart') {

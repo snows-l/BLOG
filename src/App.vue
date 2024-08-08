@@ -3,11 +3,41 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-05 16:04:42
- * @FilePath: /blog/src/App.vue
+ * @LastEditTime: 2024-08-08 21:45:08
+ * @FilePath: /BLOG/src/App.vue
 -->
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
+import { watch } from 'vue';
+import { RouterView, useRoute } from 'vue-router';
+import { routes } from './router/index';
+import { setDocmentTitle } from './utils/common';
+
+const route = useRoute();
+let routesList = [];
+routes.forEach(item => {
+  if (item.children) {
+    item.children.forEach(child => {
+      routesList.push(child);
+    });
+  } else {
+    routesList.push(item);
+  }
+});
+
+watch(
+  () => route.path,
+  n => {
+    let title = '';
+    for (let i = 0; i < routesList.length; i++) {
+      if (routesList[i].path === n) {
+        title = routesList[i].meta.title;
+        break;
+      }
+    }
+    if (title === '') title = '首页';
+    setDocmentTitle(title + ' | ' + import.meta.env.VITE_API_TITLE);
+  }
+);
 </script>
 
 <template>
