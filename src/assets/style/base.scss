@@ -17,21 +17,24 @@ body {
   --theme-light-color-2: #18a05794;
   --theme-light-color-3: #18a05777;
   --theme-light-color-4: #18a05759;
+  --m-menu-width: 260px;
 
   --text-color: #222222;
   --text-color-2: #555555;
-  --bg-warp-color: #ffffffda;
-  --bg-content-color: #ffffffd6;
+  --bg-warp-color: #ffffffed;
+  --bg-content-color: #ffffffef;
   --bg-image-warp-color: transparent;
+  --bg-modal-color: #35333378;
 }
 
 :root.dark {
   --theme: 'dark';
-  --text-color: #eeeeeee7;
+  --text-color: #eeeeee;
   --text-color-2: #999999;
-  --bg-warp-color: #000000d6;
-  --bg-content-color: #0000007c;
-  --bg-image-warp-color: #000000d6;
+  --bg-warp-color: #33333397;
+  --bg-content-color: #111111ef;
+  --bg-image-warp-color: #33333397;
+  --bg-modal-color: #cec7c778;
 }
 
 // 定义（在全局样式中定义）

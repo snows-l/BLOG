@@ -3,14 +3,10 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 22:50:09
- * @FilePath: /BLOG/src/utils/common.js
+ * @LastEditTime: 2024-08-08 14:39:41
+ * @FilePath: /blog/src/utils/common.js
  */
-export const getTheme = () => {
-  return Array.from(document.documentElement.classList).includes('dark') ? 'dark' : 'light';
-};
-
-// 重新定义 localStorage 的 setItem 方法，派发自定义事件
+// 重写 localStorage 的 setItem 方法，派发自定义事件
 export const dispatchEventStroage = () => {
   const signSetItem = localStorage.setItem;
   localStorage.setItem = function (key, val) {
@@ -22,4 +18,16 @@ export const dispatchEventStroage = () => {
     window.dispatchEvent(setEvent);
     signSetItem.apply(this, arguments);
   };
+};
+
+// 根据QQ号获取QQ头像地址
+export const getQQAvatar = (qq = '37523953') => {
+  return 'http://q1.qlogo.cn/g?b=qq&nk=' + encodeURIComponent(qq) + '&s=640';
+};
+
+// 判断当前 视口 是否小于 w 像素
+const { body } = document;
+export const isMobile = (w = 800) => {
+  const rect = body.getBoundingClientRect();
+  return rect.width - 1 <= w;
 };

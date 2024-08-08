@@ -3,14 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-06-25 15:36:48
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 20:37:26
- * @FilePath: /BLOG/src/utils/color.js
+ * @LastEditTime: 2024-08-08 09:26:00
+ * @FilePath: /blog/src/utils/color.js
  */
 // 处理主题样式
 export function handleThemeStyle(theme) {
-  document.documentElement.style.setProperty('--el-color-primary', theme);
+  document.documentElement.style.setProperty('--theme-color', theme);
   for (let i = 1; i <= 9; i++) {
-    document.documentElement.style.setProperty(`--el-color-primary-light-${i}`, `${getLightColor(theme, i / 10)}`);
+    document.documentElement.style.setProperty(`--theme-light-color-${i}`, `${getLightColor(theme, i / 10)}`);
   }
   for (let i = 1; i <= 9; i++) {
     document.documentElement.style.setProperty(`--el-color-primary-dark-${i}`, `${getDarkColor(theme, i / 10)}`);

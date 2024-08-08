@@ -3,14 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 22:51:38
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-08-08 17:17:40
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
     <div class="first-screen">
       <div class="content-warp" :class="{ showContent: state.isShowContent }">
-        <img class="avatar" src="@/assets/images/common/avatar.png" alt="" />
+        <img class="avatar" :src="state.avatar" alt="" />
         <div class="saying">
           <div class="saying-text">
             <i class="saying-icon iconfont icon-quotes-left"></i>
@@ -34,9 +34,6 @@
           <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
             <img class="img" src="@/assets/images/common/mail.png" alt="" srcset="" />
           </div>
-          <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
-            <img :src="api" alt="" />
-          </div>
           <div class="info-item">
             <img class="btn" src="@/assets/images/common/next.png" alt="" srcset="" />
           </div>
@@ -54,14 +51,14 @@
       <div v-if="!state.isDark" class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
-      <div class="other-content">
+      <div class="other-content" v-if="!state.isMobile">
         <div class="other-content-item">
           <div class="article-title-warp">
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
           </div>
           <div class="article-warp">
-            <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+            <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
                   <img class="cover-img" :src="item.img" alt="" />
@@ -142,6 +139,56 @@
           </div>
         </div>
       </div>
+      <div class="other-content m-other-content" v-else>
+        <div class="other-content-item">
+          <div class="article-title-warp">
+            <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
+            <h2 class="content-title">Article</h2>
+            <div class="article-warp">
+              <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+                <div class="img-left item-warp">
+                  <div class="cover-img-warp">
+                    <img class="cover-img" :src="item.img" alt="" />
+                  </div>
+                  <div class="item-content">
+                    <div class="create-time">
+                      <span>
+                        <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
+                        <span>发布于:</span>
+                        <span>{{ item.createTime }}</span>
+                      </span>
+                    </div>
+                    <div class="article-title">
+                      {{ item.title }}
+                    </div>
+                    <div class="auth-info-warp">
+                      <div>
+                        <img src="@/assets/images/common/avatar.png" alt="" />
+                        <span>snows_l</span>
+                      </div>
+                      <div>
+                        <i class="iconfont icon-yanjing"></i>
+                        <span>{{ item.views || randomNum(99, 99999) }}</span>
+                      </div>
+                      <div>
+                        <i class="iconfont icon-comment"></i>
+                        <span>{{ item.views || randomNum(5, 20) }}</span>
+                      </div>
+                      <div>
+                        <i class="iconfont icon-fenxiang1"></i>
+                        <span>{{ item.views || randomNum(20, 1000) }}</span>
+                      </div>
+                    </div>
+                    <div class="article-des text">
+                      {{ item.desc }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="bottom-loading">
         <img v-if="state.loading" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
         <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
@@ -152,15 +199,19 @@
 </template>
 
 <script setup lang="ts">
-import { getTheme } from '@/utils/common';
-import { onMounted, onUpdated, reactive, watch } from 'vue';
+import router from '@/router';
+import { getQQAvatar, isMobile } from '@/utils/common';
+import { getTheme } from '@/utils/theme';
+import { onMounted, onUpdated, reactive, watch, onUnmounted } from 'vue';
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
   saying: '',
   isShowContent: false,
+  avatar: getQQAvatar(),
   loading: false,
   isMore: true,
   isDark: false,
+  isMobile: isMobile(),
   articleList: [
     {
       createTime: '2021-08-05',
@@ -215,9 +266,6 @@ const list = [
     img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
   }
 ];
-
-const qq = '37523953';
-let api = 'http://q1.qlogo.cn/g?b=qq&nk=' + encodeURIComponent(qq) + '&s=640';
 
 const infoMap = {
   qq: 'mqqwpa://im/proxy?src_type=web&qq_number=37523953',
@@ -276,30 +324,40 @@ const handleInfo = (type: srting) => {
   }
 };
 
-watch(
-  () => localStorage.getItem('isDark'),
-  n => {
-    console.log('-------- n --------', n);
-  },
-  { immediate: true, deep: true }
-);
+const handleArticle = row => {
+  router.push({
+    path: '/article/detail',
+    query: {
+      id: 12
+    }
+  });
+};
 
 const localStorageChangeCallback = (e: StorageEvent) => {
   // 监听需要的键名
   if (e.key === 'isDark') {
     state.isDark = e.newValue as any;
-    console.log('-------- state.isDark --------', state.isDark);
   }
 };
 
+let timer: null | number = null;
+
 onMounted(() => {
   inputSaying();
-  state.isShowContent = true;
+  timer = setTimeout(() => {
+    state.isShowContent = true;
+  }, 200);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';
 });
-onUpdated(() => {});
+onUnmounted(() => {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+  window.removeEventListener('setItemEvent', localStorageChangeCallback);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -335,7 +393,7 @@ onUpdated(() => {});
       .saying {
         width: 60%;
         max-width: 750px;
-        min-width: 300px;
+        min-width: 350px;
         padding: 20px 0;
         margin-top: 30px;
         border-radius: 10px;
@@ -383,7 +441,7 @@ onUpdated(() => {});
         .weixin-content {
           width: 50px;
           height: 50px;
-          transition: all 0.8s ease-in-out;
+          transition: width 0.8s ease-in-out, height 0.8s ease-in-out;
           overflow: hidden;
           .weinxin-qrcode {
             display: none;
@@ -442,7 +500,7 @@ onUpdated(() => {});
     }
     .bottom-down {
       position: absolute;
-      bottom: 120px;
+      bottom: 80px;
       left: calc(50% - 40px);
       animation: bottom 2s infinite;
     }
@@ -477,17 +535,16 @@ onUpdated(() => {});
           margin: 40px 0;
           border-radius: 15px;
           width: 100%;
-          height: 300px;
+          height: 100%;
           overflow: hidden;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           .item-warp {
             display: flex;
             width: 100%;
-            height: 100%;
           }
           .cover-img-warp {
             width: 450px;
-            height: 100%;
+            height: 300px;
             overflow: hidden;
             .cover-img {
               width: 100%;
@@ -509,7 +566,7 @@ onUpdated(() => {});
               background-color: var(--theme-light-color-4);
               border-radius: 5px;
               color: var(--theme-color);
-              width: 220px;
+              width: 200px;
             }
             .article-title {
               margin-top: 20px;
@@ -570,6 +627,32 @@ onUpdated(() => {});
         }
       }
     }
+
+    .m-other-content {
+      max-width: 90%;
+      .item-warp {
+        display: flex;
+        flex-direction: column;
+        height: auto !important;
+        .cover-img-warp {
+          width: 100% !important;
+          height: 220px !important;
+        }
+
+        .item-content {
+          .article-title {
+            height: 60px !important;
+            line-height: 30px !important;
+          }
+        }
+        .article-des {
+          height: 60px !important;
+          line-height: 20px !important;
+          -webkit-line-clamp: 3 !important;
+        }
+      }
+    }
+
     .bottom-loading {
       margin: 30px 0;
       height: 60px;
@@ -614,6 +697,14 @@ onUpdated(() => {});
   }
   100% {
     transform: translateY(0);
+  }
+}
+</style>
+
+<style lang="scss">
+.dark {
+  .article-item:hover {
+    box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
   }
 }
 </style>

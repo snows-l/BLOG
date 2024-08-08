@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-06 10:44:37
+ * @LastEditTime: 2024-08-08 14:27:25
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
@@ -21,81 +21,101 @@ export const routes = [
     component: Home
   },
   {
-    path: 'article',
+    path: '/article',
     name: 'Article',
     meta: {
       title: '归档',
       icon: 'icon-guidang'
     },
-    component: Home,
     redirect: { name: 'Skill' },
     children: [
       {
-        path: 'skill',
+        path: '/article/skill',
         name: 'Skill',
         meta: {
           title: '技术',
           icon: 'icon-jishufuwu'
         },
-        component: Home
+        component: () => import('../views/article/index.vue')
       },
       {
-        path: 'share',
+        path: '/article/share',
         name: 'Share',
         meta: {
           title: '分享',
           icon: 'icon-fenxiang'
         },
-        component: Home
+
+        component: () => import('../views/article/index.vue')
       },
       {
-        path: 'sduty',
+        path: '/article/sduty',
         name: 'Sduty',
         meta: {
           title: '教程',
           icon: 'icon-jiaocheng-3'
         },
+        component: () => import('../views/article/index.vue')
+      },
+      {
+        path: '/article/detail',
+        name: 'Detail',
+        meta: {
+          title: '详情',
+          icon: 'icon-fenxiang'
+        },
+        isHidden: true,
+        component: () => import('../views/article/detail.vue')
+      },
+      {
+        path: '/article/write',
+        name: 'Write',
+        meta: {
+          title: '写作',
+          icon: 'icon-fenxiang'
+        },
+        isHidden: true,
         component: Home
       }
     ]
   },
   {
-    path: 'list',
+    path: '/list',
     name: 'List',
     meta: {
       title: '清单',
       icon: 'icon-list6'
     },
-    component: Home,
+    redirect: { name: 'Mp3' },
     children: [
       {
-        path: 'mp4',
-        name: 'Mp4',
-        meta: {
-          title: '影视',
-          icon: 'icon-shipinyingshi'
-        },
-        component: Home
-      },
-      {
-        path: 'mp3',
+        path: '/list/mp3',
         name: 'Mp3',
         meta: {
           title: '音乐',
           icon: 'icon-fenxiang'
         },
         component: Home
+      },
+      {
+        path: '/list/mp4',
+        name: 'Mp4',
+        meta: {
+          title: '影视',
+          icon: 'icon-shipinyingshi'
+        },
+        component: Home
       }
     ]
   },
   {
-    path: 'about',
+    path: '/about',
     name: 'About',
     meta: {
       title: '关于',
       icon: 'icon-guanyu'
     },
-    component: Home
+    component: () => import('../views/about/index.vue')
   }
 ];
 
