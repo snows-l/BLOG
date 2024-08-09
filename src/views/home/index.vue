@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 16:43:19
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-08-09 19:23:05
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -571,7 +571,7 @@ onUnmounted(() => {
               background-color: var(--theme-light-color-4);
               border-radius: 5px;
               color: var(--theme-color);
-              width: 204px;
+              width: 210px;
             }
             .article-title {
               margin-top: 20px;

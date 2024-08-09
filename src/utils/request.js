@@ -3,10 +3,10 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:43:46
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 15:47:42
- * @FilePath: /blog/src/utils/request.js
+ * @LastEditTime: 2024-08-09 20:37:03
+ * @FilePath: /BLOG/src/utils/request.js
  */
-import { getToken } from '@/utils/auth';
+// import { getToken } from '@/utils/auth';
 import errorCode from '@/utils/errorCode';
 import axios from 'axios';
 // 创建取消令牌
@@ -49,9 +49,9 @@ service.interceptors.request.use(
     const isToken = (config.headers || {}).isToken === false;
     // 是否需要防止数据重复提交
     const isRepeatSubmit = (config.headers || {}).repeatSubmit === false;
-    if (getToken() && !isToken) {
-      config.headers['Authorization'] = 'Bearer ' + getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
-    }
+    // if (getToken() && !isToken) {
+    //   config.headers['Authorization'] = 'Bearer ' + getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
+    // }
     return config;
   },
   error => {

@@ -3,12 +3,16 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 17:31:21
- * @FilePath: /blog/src/components/pageTopCover/index.vue
+ * @LastEditTime: 2024-08-09 19:11:27
+ * @FilePath: /BLOG/src/components/pageTopCover/index.vue
 -->
 <template>
-  <div class="page-top-cover-warp" style="background-size: cover; background-position: center; background-repeat: no-repeat" :style="{ backgroundImage: `url(${coverImg})` }">
-    <div class="content-warp" :class="{ 'm-content-warp': isMobile }">
+  <div
+    class="page-top-cover-warp"
+    :class="{ 'm-page-top-cover-warp': isMobile }"
+    style="background-size: cover; background-position: center; background-repeat: no-repeat"
+    :style="{ backgroundImage: `url(${coverImg})` }">
+    <div class="content-warp">
       <div class="mudule">
         <i class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
@@ -38,7 +42,6 @@
 
 <script lang="ts" setup>
 import { getQQAvatar } from '@/utils/common';
-import { ref, reactive, watch, onMounted, onUnmounted, computed } from 'vue';
 const props = defineProps({
   coverImg: {
     type: String,
@@ -156,7 +159,11 @@ const randomNum = (min: number, max: number) => {
       }
     }
   }
-  .m-content-warp {
+}
+.m-page-top-cover-warp {
+  height: 300px !important;
+  .content-warp {
+    top: 100px !important;
     max-width: 90% !important;
   }
 }

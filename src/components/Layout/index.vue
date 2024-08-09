@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 16:14:44
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-09 21:31:11
+ * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -16,6 +16,9 @@
         </div>
         <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
       </div>
+      <!-- <div class="music-play-warp">
+        <MusicPlayer></MusicPlayer>
+      </div> -->
     </div>
 
     <!-- layout-warp -->
@@ -56,10 +59,11 @@
     <!-- 置顶 / 设置 -->
     <div class="top-set">
       <div class="top pointer" :class="{ topShow: state.scrollTop > 100 }" @click="handleTop"><i class="iconfont icon-yooxi"></i></div>
+      <div class="set pointer" @click="state.isMusicPlayerShow = !state.isMusicPlayerShow"><i class="icon iconfont icon-a-yinlebofangliebiaoyinle"></i></div>
       <div class="set pointer" @click="state.isSetShow = !state.isSetShow"><i class="icon iconfont icon-shezhi"></i></div>
     </div>
 
-    <!-- 悬浮 设置 -->
+    <!-- 悬浮设置 -->
     <div class="set-warp" :class="{ setShow: state.isSetShow }">
       <div class="theme-warp">
         <div class="theme-item set-item pointer" @click="handleToggerTheme('light')">
@@ -92,6 +96,11 @@
         </div>
       </div>
     </div>
+
+    <!-- 音乐播放器 -->
+    <div class="music-player-warp" :class="{ playerShow: state.isMusicPlayerShow }">
+      <MusicPlayer></MusicPlayer>
+    </div>
   </div>
 </template>
 
@@ -100,10 +109,10 @@ import bg1 from '@/assets/images/common/bg1.png';
 import bg2 from '@/assets/images/common/bg2.png';
 import bg3 from '@/assets/images/common/bg3.png';
 import bg4 from '@/assets/images/common/bg4.png';
-import { setTheme, setFontFamily } from '@/utils/theme';
-
+import MusicPlayer from '@/components/musicPlayer/index.vue';
 import { routes } from '@/router';
 import { getQQAvatar, isMobile } from '@/utils/common';
+import { setFontFamily, setTheme } from '@/utils/theme';
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
@@ -120,6 +129,7 @@ const state = reactive({
   isMenuShow: false,
   mMenuShow: false,
   isSetShow: false,
+  isMusicPlayerShow: false,
   bgImg: bg1,
   fontFamilyIndex: 0,
   avatar: getQQAvatar(),
@@ -271,6 +281,7 @@ onUnmounted(() => {
       background-color: var(--bg-content-color);
       transition: left 0.8s ease;
       .avatar-warp {
+        margin-top: 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -302,6 +313,13 @@ onUnmounted(() => {
           }
         }
       }
+    }
+    .music-play-warp {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      height: 60px;
     }
   }
   .mMenuShow {
@@ -423,7 +441,7 @@ onUnmounted(() => {
   .top-set {
     position: fixed;
     right: 10px;
-    bottom: 30px;
+    bottom: 20px;
     z-index: 99999;
     width: 40px;
     .top,
@@ -536,8 +554,22 @@ onUnmounted(() => {
       }
     }
   }
-  .setShow {
-    bottom: 10px;
+
+  .music-player-warp {
+    position: fixed;
+    right: 60px;
+    bottom: -140px;
+    height: 120px;
+    width: 380px;
+    background-color: transparent;
+    z-index: 99999;
+    border-radius: 10px;
+    display: flex;
+    transition: bottom 0.8s ease;
+  }
+  .setShow,
+  .playerShow {
+    bottom: 20px;
   }
 }
 </style>

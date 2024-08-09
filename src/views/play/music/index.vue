@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 17:30:57
- * @FilePath: /blog/src/views/play/music/index.vue
+ * @LastEditTime: 2024-08-09 19:51:26
+ * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
   <div class="music-warp">
@@ -13,17 +13,28 @@
 </template>
 
 <script lang="ts" setup>
-import { isMobile } from '@/utils/common';
-import PageTopCover from '@/components/pageTopCover/index.vue';
+// import { getMusicList } from '@/api/music';
 import coverImg from '@/assets/images/common/cover-music.png';
-import { ref, reactive, watch, onMounted, onUnmounted, computed } from 'vue';
+import PageTopCover from '@/components/pageTopCover/index.vue';
+import { isMobile } from '@/utils/common';
+import { onMounted, onUnmounted, reactive } from 'vue';
 
 const state = reactive({
   isMobile: isMobile(),
   mudulTitle:
-    '音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐'
+    '音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐音乐',
+  list: []
 });
 
+const getMusicListFn = () => {
+  getMusicList({ isPage: false }).then(res => {
+    state.list = res.data;
+    console.log('-------- res --------', state.list);
+  });
+};
+// getMusicListFn();
+
+// 监听屏幕大小变化
 const resizeCallback = () => {
   state.isMobile = isMobile();
 };
