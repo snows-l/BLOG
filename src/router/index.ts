@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 14:27:25
+ * @LastEditTime: 2024-08-09 16:24:31
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
@@ -80,29 +80,38 @@ export const routes = [
     ]
   },
   {
-    path: '/list',
+    path: '/play',
     name: 'List',
     meta: {
-      title: '清单',
-      icon: 'icon-list6'
+      title: '娱乐',
+      icon: 'icon-yule'
     },
     redirect: { name: 'Mp3' },
     children: [
       {
-        path: '/list/mp3',
+        path: '/play/mp3',
         name: 'Mp3',
         meta: {
           title: '音乐',
-          icon: 'icon-fenxiang'
+          icon: 'icon-a-Sheetmusic'
+        },
+        component: () => import('@/views/play/music/index.vue')
+      },
+      {
+        path: '/play/mp4',
+        name: 'Mp4',
+        meta: {
+          title: '影视',
+          icon: 'icon-shipin'
         },
         component: Home
       },
       {
-        path: '/list/mp4',
-        name: 'Mp4',
+        path: '/play/game',
+        name: 'Game',
         meta: {
-          title: '影视',
-          icon: 'icon-shipinyingshi'
+          title: '小游戏',
+          icon: 'icon-yuleAPP'
         },
         component: Home
       }

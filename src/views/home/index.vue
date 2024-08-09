@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 22:33:07
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-08-09 16:43:19
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -339,9 +339,12 @@ const localStorageChangeCallback = (e: StorageEvent) => {
     state.isDark = e.newValue as any;
   }
 };
+// 监听窗口大小变化
+const resizeCallback = () => {
+  state.isMobile = isMobile();
+};
 
 let timer: null | number = null;
-
 onMounted(() => {
   inputSaying();
   timer = setTimeout(() => {
@@ -349,6 +352,7 @@ onMounted(() => {
   }, 200);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
+  window.addEventListener('resize', resizeCallback);
   state.isDark = getTheme() === 'dark';
 });
 onUnmounted(() => {
@@ -357,6 +361,7 @@ onUnmounted(() => {
     timer = null;
   }
   window.removeEventListener('setItemEvent', localStorageChangeCallback);
+  window.removeEventListener('resize', resizeCallback);
 });
 </script>
 
@@ -502,7 +507,7 @@ onUnmounted(() => {
       position: absolute;
       bottom: 80px;
       left: calc(50% - 40px);
-      animation: bottom 2s infinite;
+      animation: bottomAnimation 1.6s infinite;
     }
   }
   .other-content-warp {
@@ -514,7 +519,7 @@ onUnmounted(() => {
 
     .other-content {
       margin-top: 30px;
-      max-width: 820px;
+      max-width: var(--content-max-width);
       width: 100%;
       .other-content-item {
         margin-bottom: 40px;
@@ -697,13 +702,13 @@ onUnmounted(() => {
     background-position: -100% 0;
   }
 }
-// 下滑动画
-@keyframes bottom {
+// 下滑按钮动画
+@keyframes bottomAnimation {
   0% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(10px);
+    transform: translateY(16px);
   }
   100% {
     transform: translateY(0);

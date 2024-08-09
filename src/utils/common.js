@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 21:17:51
- * @FilePath: /BLOG/src/utils/common.js
+ * @LastEditTime: 2024-08-09 15:56:34
+ * @FilePath: /blog/src/utils/common.js
  */
 // 重写 localStorage 的 setItem 方法，派发自定义事件
 export const dispatchEventStroage = () => {

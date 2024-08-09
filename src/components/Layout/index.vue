@@ -3,22 +3,22 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 21:31:02
- * @FilePath: /BLOG/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-09 16:14:44
+ * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
-  <div class="layout-warp">
+  <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
+    <!-- 移动端 菜单 -->
     <div class="mobile-menu-warp" :class="{ mMenuShow: state.mMenuShow }">
       <div class="mobile-menu">
-        <!-- <div class="top-close">
-          <i class="iconfont icon-cc-close-crude" @click="handleMMenuShow(false)"></i>
-        </div> -->
         <div class="avatar-warp">
           <img class="avatar pointer" @click="handleTo('avatar')" :src="state.avatar" alt="" srcset="" />
         </div>
         <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
       </div>
     </div>
+
+    <!-- layout-warp -->
     <div class="layout-content-warp" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
       <!-- mobile header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="state.isMobile">
@@ -29,6 +29,8 @@
           <span class="title-sub-text">BLOG</span>
         </div>
       </header>
+
+      <!-- 悬浮菜单 -->
       <header v-else class="header-warp" :class="state.isFlutter ? 'flutter' : ''">
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
@@ -44,17 +46,65 @@
           </div>
         </div>
       </header>
+
+      <!-- main -->
       <main @click="handleClickMain">
         <router-view></router-view>
       </main>
+    </div>
+
+    <!-- 置顶 / 设置 -->
+    <div class="top-set">
+      <div class="top pointer" :class="{ topShow: state.scrollTop > 100 }" @click="handleTop"><i class="iconfont icon-yooxi"></i></div>
+      <div class="set pointer" @click="state.isSetShow = !state.isSetShow"><i class="icon iconfont icon-shezhi"></i></div>
+    </div>
+
+    <!-- 悬浮 设置 -->
+    <div class="set-warp" :class="{ setShow: state.isSetShow }">
+      <div class="theme-warp">
+        <div class="theme-item set-item pointer" @click="handleToggerTheme('light')">
+          <img width="30px" height="30px" src="@/assets/images/common/light.png" fit="fill" />
+        </div>
+        <div class="theme-item set-item pointer" @click="handleToggerTheme('dark')">
+          <img width="30px" height="30px" src="@/assets/images/common/night.png" fit="fill" />
+        </div>
+      </div>
+      <div class="bg-img-warp">
+        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(0)">
+          <img width="30px" height="30px" src="@/assets/images/common/icon-huahua.png" fit="fill" />
+        </div>
+        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(1)">
+          <img width="30px" height="30px" src="@/assets/images/common/icon-diandian.png" fit="fill" />
+        </div>
+        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(2)">
+          <img width="30px" height="30px" src="@/assets/images/common/icon-taoxin.png" fit="fill" />
+        </div>
+        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(3)">
+          <img width="30px" height="30px" src="@/assets/images/common/icon-xigua.png" fit="fill" />
+        </div>
+      </div>
+      <div class="font-warp">
+        <div class="font-item set-item pointer a" @click="handleToggleFont('pre')">
+          <img width="30px" height="30px" src="@/assets/images/common/icon-pre-font.png" fit="fill" />
+        </div>
+        <div class="font-item set-item pointer b" @click="handleToggleFont('next')">
+          <img width="30px" height="30px" src="@/assets/images/common/icon-next-font.png" fit="fill" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import bg1 from '@/assets/images/common/bg1.png';
+import bg2 from '@/assets/images/common/bg2.png';
+import bg3 from '@/assets/images/common/bg3.png';
+import bg4 from '@/assets/images/common/bg4.png';
+import { setTheme, setFontFamily } from '@/utils/theme';
+
 import { routes } from '@/router';
 import { getQQAvatar, isMobile } from '@/utils/common';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
 
@@ -65,9 +115,13 @@ const layoutRef = ref(null);
 const state = reactive({
   isMobile: isMobile(),
   isFlutter: true,
+  scrollTop: 0,
   activeMemu: route.path,
   isMenuShow: false,
   mMenuShow: false,
+  isSetShow: false,
+  bgImg: bg1,
+  fontFamilyIndex: 0,
   avatar: getQQAvatar(),
   menuList: routes.filter(item => !item.isHidden).map(item => (item.children ? { ...item, children: item.children.filter(child => !child.isHidden) } : item))
 });
@@ -83,13 +137,80 @@ const handleTo = (path: string) => {
   }
 };
 
+// 点击主体内容
 const handleClickMain = () => {
   if (state.mMenuShow) state.mMenuShow = false;
+  // if (state.isSetShow) state.isSetShow = false;
 };
+
+// 移动端 菜单显示切换
+const handleMMenuShow = (falg: boolean) => {
+  state.mMenuShow = !state.mMenuShow;
+};
+
+// 置顶
+const handleTop = () => {
+  layoutRef.value.scrollTop = 0;
+};
+
+// 切换主题
+const handleToggerTheme = (theme: string) => {
+  setTheme(theme);
+};
+
+// 切换背景
+const handleToggleBgImg = (index: number) => {
+  switch (index) {
+    case 0:
+      state.bgImg = bg1;
+      break;
+    case 1:
+      state.bgImg = bg2;
+      break;
+    case 2:
+      state.bgImg = bg3;
+      break;
+
+    case 3:
+      state.bgImg = bg4;
+      break;
+    default:
+      break;
+  }
+};
+
+const fontFamilys = ['优设标题黑', '华文行楷', 'apple', 'DSDIGI', 'default'];
+// 切换字体
+const handleToggleFont = (type: string) => {
+  if (type === 'pre') {
+    if (state.fontFamilyIndex === 0) {
+      state.fontFamilyIndex = fontFamilys.length - 1;
+    } else {
+      state.fontFamilyIndex--;
+    }
+  } else if (type === 'next') {
+    if (state.fontFamilyIndex === fontFamilys.length - 1) {
+      state.fontFamilyIndex = 0;
+    } else {
+      state.fontFamilyIndex++;
+    }
+  }
+  setFontFamily(fontFamilys[state.fontFamilyIndex]);
+};
+
+// 监页面是否滚动
+watch(
+  () => state.scrollTop,
+  () => {
+    if (state.isSetShow) state.isSetShow = false;
+    // handleClickMain();
+  }
+);
 
 // 监听滚动条
 const scorllCallback = () => {
   if (state.mMenuShow) state.mMenuShow = false;
+  state.scrollTop = layoutRef.value.scrollTop;
   if (layoutRef.value.scrollTop > 60) {
     state.isFlutter = false;
   } else {
@@ -97,8 +218,9 @@ const scorllCallback = () => {
   }
 };
 
-const handleMMenuShow = (falg: boolean) => {
-  state.mMenuShow = !state.mMenuShow;
+// 监听窗口大小变化
+const resizeCallback = () => {
+  state.isMobile = isMobile();
 };
 
 onMounted(() => {
@@ -106,19 +228,33 @@ onMounted(() => {
   setTimeout(() => {
     state.isMenuShow = true;
   }, 200);
+  window.addEventListener('resize', resizeCallback);
 });
 
 onUnmounted(() => {
   layoutRef.value && layoutRef.value.removeEventListener('scroll', scorllCallback);
+  window.removeEventListener('resize', resizeCallback);
 });
 </script>
 
 <style lang="scss" scoped>
+// Y轴旋转动画
+@keyframes quan {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
 .layout-warp {
   height: 100vh;
   overflow: hidden;
-  background-image: url('@/assets/images/common/bg-img.png');
   position: relative;
+
   .mobile-menu-warp {
     width: var(--m-menu-width);
     height: 100vh;
@@ -179,6 +315,7 @@ onUnmounted(() => {
     overflow-x: hidden;
     left: 0;
     transition: left 0.8s ease;
+    scroll-behavior: smooth; // 平滑滚动
     .header-warp {
       width: 100%;
       height: 60px;
@@ -282,6 +419,125 @@ onUnmounted(() => {
   }
   .mainRight {
     left: var(--m-menu-width);
+  }
+  .top-set {
+    position: fixed;
+    right: 10px;
+    bottom: 30px;
+    z-index: 99999;
+    width: 40px;
+    .top,
+    .set {
+      padding: 5px 12px;
+      background-color: var(--bg-warp-color);
+      color: var(--theme-color);
+      border-radius: 5px;
+      border: 1px solid var(--theme-light-color-3);
+      box-shadow: 0 1px 20px 10px rgba(255, 255, 255, 0.394);
+    }
+    .top {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .topShow {
+      opacity: 1;
+    }
+    .set {
+      height: 40px;
+      padding: 12px;
+      margin-top: 10px;
+      .icon {
+        color: var(--theme-color);
+        &:hover {
+          // animation: quan 3s infinite linear;
+          transform: rotateY(30deg);
+        }
+      }
+    }
+  }
+
+  .set-warp {
+    position: fixed;
+    right: 60px;
+    bottom: -140px;
+    height: 120px;
+    max-width: 380px;
+    min-width: 200px;
+    background-color: transparent;
+    z-index: 99999;
+    border-radius: 10px;
+    display: flex;
+    transition: bottom 0.8s ease;
+    .theme-warp {
+      width: 120px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: var(--bg-warp-light-color);
+      .theme-item {
+        width: 50px;
+        height: 100%;
+        line-height: 100px;
+        text-align: center;
+        margin: 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .set-item {
+      border-radius: 10px;
+      color: var(--text-color);
+      box-shadow: 0 1px 20px 10px rgba(255, 255, 255, 0.394);
+      background-color: var(--bg-content-color);
+      border: 1px solid var(--theme-light-color-3);
+      color: var(--text-color);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        border-radius: 10px;
+      }
+    }
+    .bg-img-warp {
+      margin-left: 10px;
+      width: 120px;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: var(--bg-warp-light-color);
+      .bg-img-item {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        margin: 5px;
+      }
+    }
+    .font-warp {
+      margin-left: 10px;
+      width: 60px;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: var(--bg-warp-light-color);
+      .font-item {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        margin: 5px 0;
+        text-align: center;
+      }
+    }
+  }
+  .setShow {
+    bottom: 10px;
   }
 }
 </style>

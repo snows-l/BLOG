@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4644629 */
-  src: url('iconfont.woff2?t=1723105584361') format('woff2'),
-       url('iconfont.woff?t=1723105584361') format('woff'),
-       url('iconfont.ttf?t=1723105584361') format('truetype');
+  src: url('iconfont.woff2?t=1723190716910') format('woff2'),
+       url('iconfont.woff?t=1723190716910') format('woff'),
+       url('iconfont.ttf?t=1723190716910') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,126 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yule:before {
+  content: "\e699";
+}
+
+.icon-shipin:before {
+  content: "\e622";
+}
+
+.icon-yuleAPP:before {
+  content: "\e6bc";
+}
+
+.icon-ziti:before {
+  content: "\e72a";
+}
+
+.icon-flower:before {
+  content: "\e603";
+}
+
+.icon-xigua:before {
+  content: "\e617";
+}
+
+.icon-taoxin:before {
+  content: "\e67f";
+}
+
+.icon-xingkong:before {
+  content: "\e9e3";
+}
+
+.icon-oceanduotuliandong:before {
+  content: "\e647";
+}
+
+.icon-qiehuanziti:before {
+  content: "\e602";
+}
+
+.icon-yewan:before {
+  content: "\ef4a";
+}
+
+.icon-baitian-qingtian:before {
+  content: "\e912";
+}
+
+.icon-shezhi:before {
+  content: "\e68e";
+}
+
+.icon-zanting:before {
+  content: "\e605";
+}
+
+.icon-shangyigeshangyiqu:before {
+  content: "\e670";
+}
+
+.icon-xiayigexiayiqu:before {
+  content: "\e674";
+}
+
+.icon-bofang:before {
+  content: "\e607";
+}
+
+.icon-gengduo1:before {
+  content: "\e6c1";
+}
+
+.icon-shuaxin:before {
+  content: "\ec08";
+}
+
+.icon-zuojiantou:before {
+  content: "\e63b";
+}
+
+.icon-jingyin:before {
+  content: "\e747";
+}
+
+.icon-zanwushuju:before {
+  content: "\e614";
+}
+
+.icon-cancelMute-quxiaojingyin:before {
+  content: "\e619";
+}
+
+.icon-snows:before {
+  content: "\e608";
+}
+
+.icon-gengduo2:before {
+  content: "\e75f";
+}
+
+.icon-a-yinlebofangliebiaoyinle:before {
+  content: "\e67e";
+}
+
+.icon-a-Sheetmusic:before {
+  content: "\e73a";
+}
+
+.icon-APK:before {
+  content: "\e689";
+}
+
+.icon-yooxi:before {
+  content: "\e60b";
+}
+
+.icon-boke:before {
+  content: "\73";
 }
 
 .icon-cc-close-crude:before {
