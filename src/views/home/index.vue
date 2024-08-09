@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 19:23:05
+ * @LastEditTime: 2024-08-10 03:00:34
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -334,6 +334,7 @@ const handleArticle = row => {
 };
 
 const localStorageChangeCallback = (e: StorageEvent) => {
+  console.log('-------- isDark --------', e.newValue);
   // 监听需要的键名
   if (e.key === 'isDark') {
     state.isDark = e.newValue as any;

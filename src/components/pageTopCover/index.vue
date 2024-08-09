@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 19:11:27
+ * @LastEditTime: 2024-08-10 00:57:47
  * @FilePath: /BLOG/src/components/pageTopCover/index.vue
 -->
 <template>
@@ -17,7 +17,7 @@
         <i class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
       </div>
-      <div class="title-warp" v-if="isArticle">{{ mudulDesc }}</div>
+      <div class="title-warp" v-if="mudulDesc">{{ mudulDesc }}</div>
       <div class="article-info" v-if="isArticle">
         <div>
           <img :src="avatar" alt="" />

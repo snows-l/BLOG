@@ -3,13 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 21:53:27
+ * @LastEditTime: 2024-08-09 22:46:07
  * @FilePath: /BLOG/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import './assets/style/main.css';
+import Empty from './components/Empty/index.vue'; // 暂无数据组件
 import { dispatchEventStroage } from './utils/common';
 import { autoToggleTheme } from './utils/theme';
 
@@ -18,6 +19,7 @@ import router from './router';
 
 const app = createApp(App);
 
+app.component('Empty', Empty);
 app.use(dispatchEventStroage);
 app.use(createPinia());
 app.use(router);

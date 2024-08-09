@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 21:31:11
+ * @LastEditTime: 2024-08-10 02:26:04
  * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
@@ -56,14 +56,21 @@
       </main>
     </div>
 
-    <!-- 置顶 / 设置 -->
+    <!-- 置顶 / 音乐 / 设置 -->
     <div class="top-set">
-      <div class="top pointer" :class="{ topShow: state.scrollTop > 100 }" @click="handleTop"><i class="iconfont icon-yooxi"></i></div>
-      <div class="set pointer" @click="state.isMusicPlayerShow = !state.isMusicPlayerShow"><i class="icon iconfont icon-a-yinlebofangliebiaoyinle"></i></div>
-      <div class="set pointer" @click="state.isSetShow = !state.isSetShow"><i class="icon iconfont icon-shezhi"></i></div>
+      <div class="top pointer" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
+        <i class="iconfont icon-yooxi"></i>
+      </div>
+      <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
+        <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
+        <i v-else class="icon iconfont icon-a-yinlebofangliebiaoyinle"></i>
+      </div>
+      <div class="set pointer" @click="handleSetShow">
+        <i class="icon iconfont icon-shezhi"></i>
+      </div>
     </div>
 
-    <!-- 悬浮设置 -->
+    <!-- 设置 弹窗 -->
     <div class="set-warp" :class="{ setShow: state.isSetShow }">
       <div class="theme-warp">
         <div class="theme-item set-item pointer" @click="handleToggerTheme('light')">
@@ -99,7 +106,7 @@
 
     <!-- 音乐播放器 -->
     <div class="music-player-warp" :class="{ playerShow: state.isMusicPlayerShow }">
-      <MusicPlayer></MusicPlayer>
+      <MusicPlayer @music-status="handleMusicStatus" :currentMusicId="state.currentMusicId"></MusicPlayer>
     </div>
   </div>
 </template>
@@ -109,6 +116,7 @@ import bg1 from '@/assets/images/common/bg1.png';
 import bg2 from '@/assets/images/common/bg2.png';
 import bg3 from '@/assets/images/common/bg3.png';
 import bg4 from '@/assets/images/common/bg4.png';
+import $bus from '@/bus/index';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import { routes } from '@/router';
 import { getQQAvatar, isMobile } from '@/utils/common';
@@ -130,6 +138,8 @@ const state = reactive({
   mMenuShow: false,
   isSetShow: false,
   isMusicPlayerShow: false,
+  isMusicPlaying: false,
+  currentMusicId: 0,
   bgImg: bg1,
   fontFamilyIndex: 0,
   avatar: getQQAvatar(),
@@ -208,11 +218,29 @@ const handleToggleFont = (type: string) => {
   setFontFamily(fontFamilys[state.fontFamilyIndex]);
 };
 
+// 显示/隐藏 音乐播放器
+const handleShowMusicPlayer = () => {
+  state.isMusicPlayerShow = !state.isMusicPlayerShow;
+  if (state.isSetShow) state.isSetShow = false;
+};
+
+// 音乐播放状态更新
+const handleMusicStatus = (n: boolean) => {
+  state.isMusicPlaying = n;
+};
+
+// 显示/隐藏 设置
+const handleSetShow = () => {
+  state.isSetShow = !state.isSetShow;
+  if (state.isMusicPlayerShow) state.isMusicPlayerShow = false;
+};
+
 // 监页面是否滚动
 watch(
   () => state.scrollTop,
   () => {
     if (state.isSetShow) state.isSetShow = false;
+    if (state.isMusicPlayerShow) state.isMusicPlayerShow = false;
     // handleClickMain();
   }
 );
@@ -239,6 +267,12 @@ onMounted(() => {
     state.isMenuShow = true;
   }, 200);
   window.addEventListener('resize', resizeCallback);
+  $bus.on('playMusic', ({ id }) => {
+    state.currentMusicId = id;
+    if (!state.isMusicPlayerShow) {
+      state.isMusicPlayerShow = true;
+    }
+  });
 });
 
 onUnmounted(() => {
@@ -281,7 +315,7 @@ onUnmounted(() => {
       background-color: var(--bg-content-color);
       transition: left 0.8s ease;
       .avatar-warp {
-        margin-top: 80px;
+        // margin-top: 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -558,18 +592,29 @@ onUnmounted(() => {
   .music-player-warp {
     position: fixed;
     right: 60px;
-    bottom: -140px;
-    height: 120px;
-    width: 380px;
+    bottom: -120px;
+    height: 100px;
+    width: 320px;
     background-color: transparent;
     z-index: 99999;
     border-radius: 10px;
     display: flex;
     transition: bottom 0.8s ease;
   }
-  .setShow,
   .playerShow {
+    bottom: 15px;
+  }
+  .setShow {
     bottom: 20px;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
