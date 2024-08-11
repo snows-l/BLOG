@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 15:50:16
+ * @LastEditTime: 2024-08-11 17:55:18
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -57,7 +57,7 @@
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
           </div>
-          <div class="article-warp">
+          <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
             <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
@@ -137,6 +137,10 @@
               </div>
             </div>
           </div>
+
+          <div class="no-article" v-else>
+            <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+          </div>
         </div>
       </div>
       <div class="other-content m-other-content" v-else>
@@ -144,7 +148,7 @@
           <div class="article-title-warp">
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
-            <div class="article-warp">
+            <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
               <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
@@ -186,13 +190,16 @@
                 </div>
               </div>
             </div>
+            <div class="m-no-article" v-else>
+              <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+            </div>
           </div>
         </div>
       </div>
       <div class="bottom-loading">
-        <img v-if="state.loading" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
+        <img v-if="state.loading && state.articleList.length != 0" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
         <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
-        <div v-if="!state.isMore" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
+        <div v-if="!state.isMore && !state.loading" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
   </div>
@@ -217,12 +224,13 @@ const state = reactive({
   articleList: [],
   page: {
     page: 1,
-    size: 2,
+    size: 5,
     total: 0
   }
 });
 
 const getArticleListFn = () => {
+  state.loading = true;
   getArticleList(state.page)
     .then(res => {
       if (res.code === 200) {
@@ -235,7 +243,6 @@ const getArticleListFn = () => {
         if (state.articleList.length >= res.total) {
           state.isMore = false; // 已经没有更多数据了
         }
-        state.loading = true;
       }
     })
     .finally(() => {
@@ -645,7 +652,7 @@ onUnmounted(() => {
         color: var(--theme-color);
       }
       .no-more {
-        color: var(--theme-light-color-1);
+        color: var(--theme-light-color-3);
       }
     }
   }

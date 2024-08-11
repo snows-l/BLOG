@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 15:57:25
+ * @LastEditTime: 2024-08-11 18:20:43
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -37,10 +37,11 @@
           </div>
         </div>
       </div>
-      <div class="empty-warp" v-else>
-        <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
-        <span>暂无歌曲</span>
-        <img class="loading-img" src="@/assets/images/common/loading.svg" alt="" />
+      <div class="no-article" :class="{ 'm-no-article': state.isMobile }" v-else>
+        <Empty :text="'暂无音乐数据，期待您的分享~'" :loadingText="'音乐正在拼命加载中...'" :loading="state.loading" />
+      </div>
+      <div class="bottom-loading" v-if="!state.loading && state.list.length > 0">
+        <div class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
   </div>
@@ -56,6 +57,7 @@ import { onMounted, onUnmounted, reactive } from 'vue';
 
 const state = reactive({
   isMobile: isMobile(),
+  loading: false,
   isPlaying: localStorage.getItem('isPlaying') == 'true' ? true : false,
   currentMusicId: localStorage.getItem('currentMusicId') || 0,
   list: [],
@@ -67,21 +69,27 @@ getDict({ dictType: 'music_type' }).then(res => {
 });
 
 const getMusicListFn = () => {
-  getMusicList({ isUnPage: false }).then(res => {
-    state.list = res.data.map(item => {
-      let cover = '';
-      if (item.cover) cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
-      return {
-        id: item.id,
-        title: item.title,
-        artist: item.artist,
-        type: item.type,
-        img: cover,
-        src: import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
-      };
+  state.loading = true;
+  getMusicList({ isUnPage: false })
+    .then(res => {
+      state.list = res.data.map(item => {
+        let cover = '';
+        if (item.cover) cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+        return {
+          id: item.id,
+          title: item.title,
+          artist: item.artist,
+          type: item.type,
+          img: cover,
+          src: import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
+        };
+      });
+      if (!state.currentMusicId) state.currentMusicId = state.list[0].id;
+      state.loading = false;
+    })
+    .finally(() => {
+      state.loading = false;
     });
-    if (!state.currentMusicId) state.currentMusicId = state.list[0].id;
-  });
 };
 getMusicListFn();
 
@@ -183,26 +191,11 @@ onUnmounted(() => {
         }
       }
     }
-    .empty-warp {
+    .no-article {
       height: calc(100vh - 400px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--empty-text-color);
-      font-size: 16px;
-      position: relative;
-      width: 200px;
-      height: 160px;
-      margin-bottom: 10px;
-      .loading-img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 120px;
-        height: 120px;
-      }
+    }
+    .m-no-article {
+      height: calc(100vh - 300px) !important;
     }
     .m-music-list-content {
       width: 96% !important;
@@ -210,6 +203,15 @@ onUnmounted(() => {
         width: 100% !important;
       }
     }
+  }
+}
+.bottom-loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+  .no-more {
+    color: var(--theme-light-color-3);
   }
 }
 </style>

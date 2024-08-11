@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 16:26:55
+ * @LastEditTime: 2024-08-11 18:32:02
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -16,7 +16,7 @@
       :mudulDesc="state.arcticleDetail.title"
       :isArticle="false"></PageTopCover>
 
-    <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': state.isMobile }">
+    <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': state.isMobile }">
       <div class="article-content-warp">
         <div class="article-content">
           <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" />
@@ -37,6 +37,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="no-article" :class="{ 'm-no-article': state.isMobile }" v-else>
+      <Empty :text="'暂无文章内容，请等待作者更新'" :loadingText="'文章内容正在拼命加载中...'" :loading="state.loading" />
     </div>
   </div>
 </template>
@@ -61,30 +64,38 @@ const valueHtml = ref('');
 
 const state = reactive({
   isMobile: isMobile(),
+  loading: false,
   arcticleDetail: {}
 });
 
 const toolbarConfig = {};
 const editorConfig = {
-  placeholder: '请输入内容...',
+  placeholder: '内容加载中...',
   readOnly: true,
   MENU_CONF: {}
 };
 
 // 获取文章详情
 const getArticleDetailFn = () => {
-  getArticleDetail(articleId).then(res => {
-    res.data.subTitle = res.data.subTitle.replace(/&#39;/g, "'");
-    res.data.content = res.data.content.replace(/&#39;/g, "'");
-    res.data.content = decodeURIComponent(res.data.content);
-    state.arcticleDetail = res.data;
-    valueHtml.value = state.arcticleDetail.content;
+  state.loading = true;
+  getArticleDetail(articleId)
+    .then(res => {
+      res.data.subTitle = res.data.subTitle.replace(/&#39;/g, "'");
+      res.data.content = res.data.content.replace(/&#39;/g, "'");
+      res.data.content = decodeURIComponent(res.data.content);
+      state.arcticleDetail = res.data;
+      valueHtml.value = state.arcticleDetail.content;
 
-    state.arcticleDetail.cover =
-      import.meta.env.MODE == 'development'
-        ? import.meta.env.VITE_DEV_BASE_SERVER + state.arcticleDetail.cover
-        : import.meta.env.VITE_PROD_BASE_SERVER + state.arcticleDetail.cover;
-  });
+      state.arcticleDetail.cover =
+        import.meta.env.MODE == 'development'
+          ? import.meta.env.VITE_DEV_BASE_SERVER + state.arcticleDetail.cover
+          : import.meta.env.VITE_PROD_BASE_SERVER + state.arcticleDetail.cover;
+
+      state.loading = false;
+    })
+    .finally(() => {
+      state.loading = false;
+    });
 };
 
 if (articleId) {
@@ -159,6 +170,13 @@ onBeforeUnmount(() => {
     .article-content-warp {
       max-width: 96% !important;
     }
+  }
+
+  .no-article {
+    height: calc(100vh - 400px);
+  }
+  .m-no-article {
+    height: calc(100vh - 300px) !important;
   }
 }
 </style>

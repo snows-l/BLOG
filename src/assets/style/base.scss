@@ -14,20 +14,21 @@ body {
   --theme: 'light';
   --theme-color: #18a058;
   --theme-light-color: #18a05899;
-  --theme-light-color-1: #18a05713;
-  --theme-light-color-2: #18a05730;
-  --theme-light-color-3: #18a05745;
-  --theme-light-color-4: #18a05760;
+  --theme-light-color-1: #18a057e6;
+  --theme-light-color-2: #18a057cc;
+  --theme-light-color-3: #18a057b3;
+  --theme-light-color-4: #18a0579f;
   --theme-light-color-5: #18a05775;
-  --theme-light-color-6: #18a05780;
-  --theme-light-color-7: #18a057a5;
-  --theme-light-color-8: #18a057b9;
-  --theme-light-color-9: #18a057d0;
+  --theme-light-color-6: #18a05762;
+  --theme-light-color-7: #18a05753;
+  --theme-light-color-8: #18a0574b;
+  --theme-light-color-9: #18a05734;
   --m-menu-width: 260px;
   --font-family: '优设标题黑';
   --content-max-width: 820px;
   --empty-text-color: #999999;
 
+  --text-title-color: #333333;
   --text-color: #222222;
   --text-color-2: #555555;
   --bg-warp-color: #ffffffed;
@@ -41,15 +42,16 @@ body {
 
 :root.dark {
   --theme: 'dark';
+  --text-title-color: #5c5a5a;
   --text-color: #eeeeee;
   --text-color-2: #999999;
   --bg-warp-color: #333333b3;
   --bg-warp-light-color: #cbc3c372;
-  --bg-warp-light-color-2: #5a565672;
+  --bg-warp-light-color-2: #81818172;
   --bg-content-color: #111111ef;
   --bg-image-warp-color: #333333b3;
   --bg-modal-color: transparent;
-  --bg-cover-color: #2927278a;
+  --bg-cover-color: #9b999967;
 }
 
 // 定义（在全局样式中定义）

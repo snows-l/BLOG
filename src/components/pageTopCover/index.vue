@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 00:57:47
+ * @LastEditTime: 2024-08-11 18:46:51
  * @FilePath: /BLOG/src/components/pageTopCover/index.vue
 -->
 <template>
@@ -107,7 +107,7 @@ const randomNum = (min: number, max: number) => {
       justify-content: center;
       .iconfont {
         margin-right: 20px;
-        color: var(--text-color);
+        color: var(--theme-light-color-3);
         font-size: 36px;
       }
       .text {

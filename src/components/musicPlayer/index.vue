@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 02:40:47
+ * @LastEditTime: 2024-08-11 17:26:29
  * @FilePath: /BLOG/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -11,15 +11,20 @@
     <audio ref="audioRef" style="display: none" :src="state.currentMusic.src"></audio>
     <div class="cover-warp">
       <img class="cover-img" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
+      <div class="paly-pause">
+        <i @click="handleControl('pause')" v-if="state.isPlaying" class="pointer iconfont icon-zanting"></i>
+        <i @click="handleControl('play')" v-else class="pointer iconfont icon-bofang"></i>
+      </div>
     </div>
     <div class="contral-music-warp">
       <div class="contral-music-content" v-if="musicList.length > 0">
         <div class="music-name">{{ state.currentMusic.title }}{{ state.currentMusic.artist ? '—' + state.currentMusic.artist : '' }}</div>
         <div class="contral-warp">
-          <i @click="handleControl('prev')" class="iconfont icon-shangyigeshangyiqu"></i>
-          <i @click="handleControl('pause')" v-if="state.isPlaying" class="iconfont icon-zanting"></i>
-          <i @click="handleControl('play')" v-else class="iconfont icon-bofang"></i>
-          <i @click="handleControl('next')" class="iconfont icon-xiayigexiayiqu"></i>
+          <i @click="handleControl('prev')" class="pointer iconfont icon-shangyigeshangyiqu"></i>
+          <i @click="handleControl('pause')" v-if="state.isPlaying" class="pointer iconfont icon-zanting"></i>
+          <i @click="handleControl('play')" v-else class="pointer iconfont icon-bofang"></i>
+          <i @click="handleControl('next')" class="pointer iconfont icon-xiayigexiayiqu"></i>
+          <i @click="handleTo('/play/mp3')" class="pointer iconfont icon-a-yinlebofangliebiaoyinle"></i>
           <!-- <i @click="handleControl('unMute')" v-if="!state.isMute" class="iconfont icon-cancelMute-quxiaojingyin"></i>
           <i @click="handleControl('mute')" v-else class="iconfont icon-jingyin"></i> -->
         </div>
@@ -49,6 +54,7 @@ import { getMusicList } from '@/api/music';
 import defaultCover from '@/assets/images/common/default_cover.png';
 import $bus from '@/bus';
 import useResize from '@/hooks/useResize.js';
+import router from '@/router';
 import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 
 const emits = defineEmits(['music-status']);
@@ -60,7 +66,7 @@ const props = defineProps({
   }
 });
 
-const audioRef = ref(null);
+const audioRef = ref();
 const { isMobile } = useResize();
 
 const musicList = ref([]);
@@ -105,17 +111,22 @@ const getMusicListFn = () => {
 };
 getMusicListFn();
 
+// 跳转到指定页面
+const handleTo = (path: string) => {
+  router.push(path);
+};
+
 // 控制静音/取消静音
-const controlVolume = type => {
+const controlVolume = (type: string) => {
   if (type === 'mute') {
-    audioRef.value.volume = 0;
+    (audioRef.value as HTMLAudioElement).volume = 0;
   } else if (type === 'unMute') {
     audioRef.value.volume = 1;
   }
 };
 
 // 控制播放/暂停
-const controlMusic = type => {
+const controlMusic = (type: string) => {
   if (type === 'pause') {
     audioRef.value.pause();
   } else if (type === 'play') {
@@ -128,7 +139,7 @@ const controlMusic = type => {
 };
 
 // 点击控制
-const handleControl = type => {
+const handleControl = (type: string) => {
   if (type == 'pause' || type == 'play') {
     controlMusic(type);
   } else if (type == 'unMute' || type == 'mute') {
@@ -178,7 +189,7 @@ const volumechangeCallback = () => {
 };
 
 // 当前歌曲播放出错回调
-const errorCallback = err => {
+const errorCallback = (err: any) => {
   console.log('music player errorCallback', err);
 };
 
@@ -200,7 +211,7 @@ const pauseCallback = () => {
 };
 
 // 拖动进度条变化回调
-const handleProgressChange = e => {
+const handleProgressChange = (e: any) => {
   audioRef.value.currentTime = (e.target.value / 100) * state.duration;
 };
 
@@ -246,7 +257,7 @@ watch(
   n => {
     emits('music-status', n);
     $bus.emit('musicPlayerStatusChange', n);
-    localStorage.setItem('isPlaying', n);
+    localStorage.setItem('isPlaying', n + '');
   }
 );
 
@@ -275,10 +286,27 @@ watch(
     border-radius: 15px;
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
     .cover-img {
       width: 60px;
       height: 60px;
       border-radius: 50%;
+    }
+    .paly-pause {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      .iconfont {
+        font-size: 30px;
+        color: var(--text-color);
+      }
     }
     .rotate-play {
       animation: spin 5s linear infinite;

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 14:34:48
+ * @LastEditTime: 2024-08-11 18:44:43
  * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
@@ -384,7 +384,7 @@ onUnmounted(() => {
       .title-text {
         font-size: 25px;
         padding: 5px 10px;
-        background-color: var(--bg-content-color);
+        background-color: var(--theme-light-color-6);
         border-radius: 5px;
         color: var(--text-color);
       }
@@ -392,6 +392,9 @@ onUnmounted(() => {
         cursor: url('@/assets/images/cursor/pointer.png'), auto;
         .title-sub-text {
           color: var(--text-color);
+        }
+        .title-sub-text {
+          color: var(--text-title-color);
         }
         &:hover {
           .title-text {

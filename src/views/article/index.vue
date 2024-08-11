@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 16:25:26
+ * @LastEditTime: 2024-08-11 18:37:06
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -98,10 +98,8 @@
           </div>
         </div>
 
-        <div class="empty-warp" v-else>
-          <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
-          <span>暂无文章</span>
-          <img class="loading-img" v-if="state.loading" src="@/assets/images/common/loading.svg" alt="" />
+        <div class="no-article" v-else>
+          <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
         </div>
       </div>
       <div class="other-content m-other-content" v-else>
@@ -147,16 +145,19 @@
             </div>
           </div>
         </div>
-        <div class="empty-warp" v-else>
-          <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
-          <span>暂无文章</span>
-          <img class="loading-img" v-if="state.loading" src="@/assets/images/common/loading.svg" alt="" />
+        <div class="m-no-article" v-else>
+          <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
         </div>
       </div>
       <div class="bottom-loading">
-        <img v-if="state.loading" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
+        <img
+          v-if="state.loading && state.articleList.length > 0"
+          style="width: 40px; height: 40px; margin-bottom: 20px"
+          src="@/assets/images/common/loading.svg"
+          alt=""
+          srcset="" />
         <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
-        <div v-if="!state.isMore" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
+        <div v-if="!state.isMore && state.articleList.length > 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
   </div>
@@ -179,19 +180,19 @@ const route = useRoute();
 const typeMap = {
   1: {
     moduleTitle: '前端-文章列表',
-    moduleIcon: 'icon-wenzhangliebiao',
+    moduleIcon: 'icon-qianduan',
     muduleCover: qianduanCover,
     moduleDesc: '这里是文章列表页面的描述'
   },
   2: {
     moduleTitle: '后端-文章列表',
-    moduleIcon: 'icon-wenzhangliebiao',
+    moduleIcon: 'icon-node-js',
     muduleCover: houduanCover,
     moduleDesc: '这里是文章列表页面的描述'
   },
   3: {
     moduleTitle: '其他-文章列表',
-    moduleIcon: 'icon-wenzhangliebiao',
+    moduleIcon: 'icon-jiaocheng-3',
     muduleCover: otherCover,
     moduleDesc: '这里是文章列表页面的描述'
   }
@@ -213,6 +214,7 @@ const state = reactive({
 });
 
 const getArticleListFn = () => {
+  state.loading = true;
   getArticleList({ ...state.page, type: route.query.type })
     .then(res => {
       if (res.code === 200) {
@@ -225,7 +227,7 @@ const getArticleListFn = () => {
         if (state.articleList.length >= res.total) {
           state.isMore = false; // 已经没有更多数据了
         }
-        state.loading = true;
+        state.loading = false;
       }
     })
     .finally(() => {
@@ -424,44 +426,27 @@ onUnmounted(() => {
     }
   }
   .bottom-loading {
-    margin-bottom: 20px;
-    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     .btn-more {
+      margin-bottom: 20px;
       padding: 10px 20px;
       border-radius: 20px;
       background-color: var(--theme-light-color-9);
       color: var(--theme-color);
     }
     .no-more {
-      color: var(--theme-light-color-1);
+      color: var(--theme-light-color-3);
+      margin-bottom: 20px;
     }
   }
 
-  .empty-warp {
+  .no-article {
     height: calc(100vh - 400px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--empty-text-color);
-    font-size: 16px;
-    position: relative;
-    .empty-img {
-      width: 200px;
-      height: 160px;
-      margin-bottom: 10px;
-    }
-    .loading-img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-    }
+  }
+  .m-no-article {
+    height: calc(100vh - 300px);
   }
 }
 </style>
