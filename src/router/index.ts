@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 16:24:31
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-08-11 14:23:45
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -33,8 +33,11 @@ export const routes = [
         path: '/article/skill',
         name: 'Skill',
         meta: {
-          title: '技术',
-          icon: 'icon-jishufuwu'
+          title: '前端',
+          icon: 'icon-qianduan',
+          query: {
+            type: '1'
+          }
         },
         component: () => import('../views/article/index.vue')
       },
@@ -42,8 +45,11 @@ export const routes = [
         path: '/article/share',
         name: 'Share',
         meta: {
-          title: '分享',
-          icon: 'icon-fenxiang'
+          title: '后端',
+          icon: 'icon-node-js',
+          query: {
+            type: '2'
+          }
         },
 
         component: () => import('../views/article/index.vue')
@@ -52,8 +58,11 @@ export const routes = [
         path: '/article/sduty',
         name: 'Sduty',
         meta: {
-          title: '教程',
-          icon: 'icon-jiaocheng-3'
+          title: '其他分享',
+          icon: 'icon-qita',
+          query: {
+            type: '3'
+          }
         },
         component: () => import('../views/article/index.vue')
       },

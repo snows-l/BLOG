@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 17:21:04
- * @FilePath: /blog/src/components/Layout/Menu.vue
+ * @LastEditTime: 2024-08-11 15:37:19
+ * @FilePath: /BLOG/src/components/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -54,8 +54,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   menuList: {
@@ -81,7 +81,7 @@ const state = reactive({
 const handleTo = item => {
   router.push({
     path: item.path || '/',
-    query: item.query
+    query: item.meta.query || {}
   });
   emits('menu-change');
 };

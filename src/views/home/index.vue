@@ -3,14 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 03:00:34
+ * @LastEditTime: 2024-08-11 15:50:16
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
     <div class="first-screen">
       <div class="content-warp" :class="{ showContent: state.isShowContent }">
-        <img class="avatar" :src="state.avatar" alt="" />
+        <img loading="lazy" class="avatar" :src="state.avatar" alt="" />
         <div class="saying">
           <div class="saying-text">
             <i class="saying-icon iconfont icon-quotes-left"></i>
@@ -61,7 +61,7 @@
             <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
-                  <img class="cover-img" :src="item.img" alt="" />
+                  <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
                 </div>
                 <div class="item-content">
                   <div class="create-time">
@@ -81,19 +81,19 @@
                     </div>
                     <div>
                       <i class="iconfont icon-yanjing"></i>
-                      <span>{{ item.views || randomNum(99, 99999) }}</span>
+                      <span>{{ item.readCount || randomNum(30, 500) }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-comment"></i>
-                      <span>{{ item.views || randomNum(5, 20) }}</span>
+                      <span>{{ item.commentCount || randomNum(5, 20) }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-fenxiang1"></i>
-                      <span>{{ item.views || randomNum(20, 1000) }}</span>
+                      <span>{{ item.shareCount || randomNum(10, 200) }}</span>
                     </div>
                   </div>
                   <div class="article-des text">
-                    {{ item.desc }}
+                    {{ item.subTitle }}
                   </div>
                 </div>
               </div>
@@ -116,23 +116,23 @@
                     </div>
                     <div>
                       <i class="iconfont icon-yanjing"></i>
-                      <span>{{ item.views || randomNum(99, 99999) }}</span>
+                      <span>{{ item.readCount || randomNum(30, 500) }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-comment"></i>
-                      <span>{{ item.views || randomNum(5, 20) }}</span>
+                      <span>{{ item.commentCount || randomNum(5, 20) }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-fenxiang1"></i>
-                      <span>{{ item.views || randomNum(20, 1000) }}</span>
+                      <span>{{ item.shareCount || randomNum(10, 200) }}</span>
                     </div>
                   </div>
                   <div class="article-des text">
-                    {{ item.desc }}
+                    {{ item.subTitle }}
                   </div>
                 </div>
                 <div class="cover-img-warp">
-                  <img class="cover-img" :src="item.img" alt="" />
+                  <img class="cover-img" :src="item.cover" alt="" />
                 </div>
               </div>
             </div>
@@ -148,7 +148,7 @@
               <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
-                    <img class="cover-img" :src="item.img" alt="" />
+                    <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
                   </div>
                   <div class="item-content">
                     <div class="create-time">
@@ -168,19 +168,19 @@
                       </div>
                       <div>
                         <i class="iconfont icon-yanjing"></i>
-                        <span>{{ item.views || randomNum(99, 99999) }}</span>
+                        <span>{{ item.readCount || randomNum(30, 500) }}</span>
                       </div>
                       <div>
                         <i class="iconfont icon-comment"></i>
-                        <span>{{ item.views || randomNum(5, 20) }}</span>
+                        <span>{{ item.commentCount || randomNum(5, 20) }}</span>
                       </div>
                       <div>
                         <i class="iconfont icon-fenxiang1"></i>
-                        <span>{{ item.views || randomNum(20, 1000) }}</span>
+                        <span>{{ item.shareCount || randomNum(10, 200) }}</span>
                       </div>
                     </div>
                     <div class="article-des text">
-                      {{ item.desc }}
+                      {{ item.subTitle }}
                     </div>
                   </div>
                 </div>
@@ -199,9 +199,11 @@
 </template>
 
 <script setup lang="ts">
+import { getArticleList } from '@/api/article';
 import router from '@/router';
-import { getQQAvatar, isMobile } from '@/utils/common';
+import { getQQAvatar, isMobile, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
+import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
@@ -212,60 +214,35 @@ const state = reactive({
   isMore: true,
   isDark: false,
   isMobile: isMobile(),
-  articleList: [
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    },
-    {
-      createTime: '2021-08-05',
-      title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-      desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-      img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-    }
-  ]
+  articleList: [],
+  page: {
+    page: 1,
+    size: 2,
+    total: 0
+  }
 });
 
-const list = [
-  {
-    createTime: '2021-08-05',
-    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-  },
-  {
-    createTime: '2021-08-05',
-    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-  },
-  {
-    createTime: '2021-08-05',
-    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-  },
-  {
-    createTime: '2021-08-05',
-    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-  },
-  {
-    createTime: '2021-08-05',
-    title: 'Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3Hello Vue3',
-    desc: 'Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？Vue3 发布了，你还在等什么？',
-    img: 'http://124.223.41.220:3333/imgs/musics/music_cover_dengyifenzhong20240731171404.png'
-  }
-];
+const getArticleListFn = () => {
+  getArticleList(state.page)
+    .then(res => {
+      if (res.code === 200) {
+        res.data.forEach(item => {
+          item.createTime = moment(item.createTime).format('YYYY-MM-DD');
+          item.cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+        });
+        state.articleList = [...state.articleList, ...res.data];
+        state.page.total = res.total;
+        if (state.articleList.length >= res.total) {
+          state.isMore = false; // 已经没有更多数据了
+        }
+        state.loading = true;
+      }
+    })
+    .finally(() => {
+      state.loading = false;
+    });
+};
+getArticleListFn();
 
 const infoMap = {
   qq: 'mqqwpa://im/proxy?src_type=web&qq_number=37523953',
@@ -285,21 +262,11 @@ const inputSaying = () => {
   }, 120);
 };
 
-// 产生0-99999之间的数据数
-const randomNum = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 // 加在更多
 const handleLoadMore = () => {
   state.loading = true;
-  setTimeout(() => {
-    state.articleList = [...state.articleList, ...list];
-    if (state.articleList.length >= 30) {
-      state.isMore = false;
-    }
-    state.loading = false;
-  }, 1000);
+  state.page.page++;
+  getArticleListFn();
 };
 
 const toQQ = () => {
@@ -328,13 +295,12 @@ const handleArticle = row => {
   router.push({
     path: '/article/detail',
     query: {
-      id: 12
+      id: row.id
     }
   });
 };
 
 const localStorageChangeCallback = (e: StorageEvent) => {
-  console.log('-------- isDark --------', e.newValue);
   // 监听需要的键名
   if (e.key === 'isDark') {
     state.isDark = e.newValue as any;
@@ -569,7 +535,7 @@ onUnmounted(() => {
             .create-time {
               height: 24px;
               padding: 2px 8px;
-              background-color: var(--theme-light-color-4);
+              background-color: var(--theme-light-color-9);
               border-radius: 5px;
               color: var(--theme-color);
               width: 210px;
@@ -635,7 +601,7 @@ onUnmounted(() => {
     }
 
     .m-other-content {
-      max-width: 90%;
+      max-width: 96%;
       .item-warp {
         display: flex;
         flex-direction: column;
@@ -675,11 +641,11 @@ onUnmounted(() => {
       .btn-more {
         padding: 10px 20px;
         border-radius: 20px;
-        background-color: var(--theme-light-color-4);
+        background-color: var(--theme-light-color-9);
         color: var(--theme-color);
       }
       .no-more {
-        color: var(--theme-light-color-4);
+        color: var(--theme-light-color-1);
       }
     }
   }

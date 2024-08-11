@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 02:26:04
+ * @LastEditTime: 2024-08-11 14:34:48
  * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
@@ -16,9 +16,6 @@
         </div>
         <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
       </div>
-      <!-- <div class="music-play-warp">
-        <MusicPlayer></MusicPlayer>
-      </div> -->
     </div>
 
     <!-- layout-warp -->
@@ -95,11 +92,11 @@
         </div>
       </div>
       <div class="font-warp">
-        <div class="font-item set-item pointer a" @click="handleToggleFont('pre')">
-          <img width="30px" height="30px" src="@/assets/images/common/icon-pre-font.png" fit="fill" />
+        <div class="font-item set-item pointer a" @click="handleToggleFont">
+          <img width="25px" height="25px" src="@/assets/images/common/icon-font-toggle.png" fit="fill" />
         </div>
-        <div class="font-item set-item pointer b" @click="handleToggleFont('next')">
-          <img width="30px" height="30px" src="@/assets/images/common/icon-next-font.png" fit="fill" />
+        <div class="font-item set-item pointer b">
+          <input :value="state.currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
         </div>
       </div>
     </div>
@@ -120,7 +117,7 @@ import $bus from '@/bus/index';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import { routes } from '@/router';
 import { getQQAvatar, isMobile } from '@/utils/common';
-import { setFontFamily, setTheme } from '@/utils/theme';
+import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
@@ -137,6 +134,7 @@ const state = reactive({
   isMenuShow: false,
   mMenuShow: false,
   isSetShow: false,
+  currentPrimaryColor: localStorage.getItem('primaryColor') || '#18a058',
   isMusicPlayerShow: false,
   isMusicPlaying: false,
   currentMusicId: 0,
@@ -201,21 +199,20 @@ const handleToggleBgImg = (index: number) => {
 
 const fontFamilys = ['优设标题黑', '华文行楷', 'apple', 'DSDIGI', 'default'];
 // 切换字体
-const handleToggleFont = (type: string) => {
-  if (type === 'pre') {
-    if (state.fontFamilyIndex === 0) {
-      state.fontFamilyIndex = fontFamilys.length - 1;
-    } else {
-      state.fontFamilyIndex--;
-    }
-  } else if (type === 'next') {
-    if (state.fontFamilyIndex === fontFamilys.length - 1) {
-      state.fontFamilyIndex = 0;
-    } else {
-      state.fontFamilyIndex++;
-    }
+const handleToggleFont = () => {
+  if (state.fontFamilyIndex === fontFamilys.length - 1) {
+    state.fontFamilyIndex = 0;
+  } else {
+    state.fontFamilyIndex++;
   }
   setFontFamily(fontFamilys[state.fontFamilyIndex]);
+};
+
+// 设置主要颜色
+const handleToggleColor = e => {
+  setPrimaryColor(e.target.value);
+  state.currentPrimaryColor = e.target.value;
+  localStorage.setItem('primaryColor', state.currentPrimaryColor);
 };
 
 // 显示/隐藏 音乐播放器

@@ -3,20 +3,465 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-08 11:01:19
- * @FilePath: /blog/src/views/article/index.vue
+ * @LastEditTime: 2024-08-11 16:25:26
+ * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
-  <div class="container-warp">article</div>
+  <div class="article-detail-warp">
+    <PageTopCover
+      :moduleTitle="state.currentModule.moduleTitle"
+      :icon="state.currentModule.moduleIcon"
+      :coverImg="state.currentModule.muduleCover"
+      :isMobile="state.isMobile"
+      :mudulDesc="state.currentModule.moduleDesc"
+      :isArticle="false"></PageTopCover>
+    <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': state.isMobile }">
+      <div class="other-content" v-if="!state.isMobile">
+        <div class="article-content-warp" v-if="state.articleList.length > 0">
+          <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+            <div class="img-left item-warp" v-if="index % 2 === 0">
+              <div class="cover-img-warp">
+                <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+              </div>
+              <div class="item-content">
+                <div class="create-time">
+                  <span>
+                    <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
+                    <span>发布于：</span>
+                    <span>{{ item.createTime }}</span>
+                  </span>
+                </div>
+                <div class="article-title">
+                  {{ item.title }}
+                </div>
+                <div class="auth-info-warp">
+                  <div>
+                    <img :src="state.avatar" alt="" />
+                    <span>snows_l</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-yanjing"></i>
+                    <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-comment"></i>
+                    <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-fenxiang1"></i>
+                    <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                  </div>
+                </div>
+                <div class="article-des text">
+                  {{ item.subTitle }}
+                </div>
+              </div>
+            </div>
+            <div class="img-right item-warp" v-else>
+              <div class="item-content">
+                <div class="create-time">
+                  <span>
+                    <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
+                    <span>发布于：</span>
+                    <span>{{ item.createTime }}</span>
+                  </span>
+                </div>
+                <div class="article-title">
+                  {{ item.title }}
+                </div>
+                <div class="auth-info-warp">
+                  <div>
+                    <img :src="state.avatar" alt="" />
+                    <span>snows_l</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-yanjing"></i>
+                    <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-comment"></i>
+                    <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-fenxiang1"></i>
+                    <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                  </div>
+                </div>
+                <div class="article-des text">
+                  {{ item.subTitle }}
+                </div>
+              </div>
+              <div class="cover-img-warp">
+                <img class="cover-img" :src="item.cover" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-warp" v-else>
+          <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
+          <span>暂无文章</span>
+          <img class="loading-img" v-if="state.loading" src="@/assets/images/common/loading.svg" alt="" />
+        </div>
+      </div>
+      <div class="other-content m-other-content" v-else>
+        <div class="article-content-warp" v-if="state.articleList.length > 0">
+          <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+            <div class="img-left item-warp">
+              <div class="cover-img-warp">
+                <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+              </div>
+              <div class="item-content">
+                <div class="create-time">
+                  <span>
+                    <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
+                    <span>发布于：</span>
+                    <span>{{ item.createTime }}</span>
+                  </span>
+                </div>
+                <div class="article-title">
+                  {{ item.title }}
+                </div>
+                <div class="auth-info-warp">
+                  <div>
+                    <img loading="lazy" :src="state.avatar" vertical-align="middle" alt="" />
+                    <span>snows_l</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-yanjing"></i>
+                    <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-comment"></i>
+                    <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                  </div>
+                  <div>
+                    <i class="iconfont icon-fenxiang1"></i>
+                    <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                  </div>
+                </div>
+                <div class="article-des text">
+                  {{ item.subTitle }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-warp" v-else>
+          <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
+          <span>暂无文章</span>
+          <img class="loading-img" v-if="state.loading" src="@/assets/images/common/loading.svg" alt="" />
+        </div>
+      </div>
+      <div class="bottom-loading">
+        <img v-if="state.loading" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
+        <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
+        <div v-if="!state.isMore" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, watch, onMounted, computed } from 'vue';
+import { getArticleList } from '@/api/article';
+import houduanCover from '@/assets/images/common/houduan.png';
+import otherCover from '@/assets/images/common/other.png';
+import qianduanCover from '@/assets/images/common/qianduan.png';
+import PageTopCover from '@/components/pageTopCover/index.vue';
+import { getQQAvatar, isMobile, randomNum } from '@/utils/common';
+import moment from 'moment';
+import { onMounted, onUnmounted, reactive, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
+
+const typeMap = {
+  1: {
+    moduleTitle: '前端-文章列表',
+    moduleIcon: 'icon-wenzhangliebiao',
+    muduleCover: qianduanCover,
+    moduleDesc: '这里是文章列表页面的描述'
+  },
+  2: {
+    moduleTitle: '后端-文章列表',
+    moduleIcon: 'icon-wenzhangliebiao',
+    muduleCover: houduanCover,
+    moduleDesc: '这里是文章列表页面的描述'
+  },
+  3: {
+    moduleTitle: '其他-文章列表',
+    moduleIcon: 'icon-wenzhangliebiao',
+    muduleCover: otherCover,
+    moduleDesc: '这里是文章列表页面的描述'
+  }
+};
+
+const state = reactive({
+  isMobile: isMobile(),
+  avatar: getQQAvatar(),
+  loading: false,
+  isMore: true,
+  type: route.query.type,
+  page: {
+    page: 1,
+    size: 5,
+    total: 0
+  },
+  articleList: [],
+  currentModule: route.query.type ? typeMap[route.query.type] : typeMap[1]
+});
+
+const getArticleListFn = () => {
+  getArticleList({ ...state.page, type: route.query.type })
+    .then(res => {
+      if (res.code === 200) {
+        res.data.forEach(item => {
+          item.createTime = moment(item.createTime).format('YYYY-MM-DD');
+          item.cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+        });
+        state.articleList = [...state.articleList, ...res.data];
+        state.page.total = res.total;
+        if (state.articleList.length >= res.total) {
+          state.isMore = false; // 已经没有更多数据了
+        }
+        state.loading = true;
+      }
+    })
+    .finally(() => {
+      state.loading = false;
+    });
+};
+getArticleListFn();
+
+// 点击文章详情
+const handleArticle = row => {
+  router.push({
+    path: '/article/detail',
+    query: {
+      id: row.id
+    }
+  });
+};
+
+// 加在更多
+const handleLoadMore = () => {
+  state.loading = true;
+  state.page.page++;
+  getArticleListFn();
+};
+
+// 监听窗口大小变化
+const resizeCallback = () => {
+  state.isMobile = isMobile();
+};
+
+watch(
+  () => route.query.type,
+  n => {
+    state.type = n;
+    state.currentModule = typeMap[n];
+    state.page.page = 1;
+    state.page.total = 0;
+    state.articleList = [];
+    state.isMore = true;
+    getArticleListFn();
+  }
+);
+
+onMounted(() => {
+  window.addEventListener('resize', resizeCallback);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeCallback);
+});
 </script>
 
 <style lang="scss" scoped>
-.container-warp {
+.article-detail-warp {
   width: 100%;
   height: 100%;
+  .article-content-warp-out {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-image-warp-color);
+    .article-content-warp {
+      padding: 5px 0;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      .article-item {
+        margin: 40px 0;
+        border-radius: 15px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        .item-warp {
+          display: flex;
+          width: 100%;
+        }
+        .cover-img-warp {
+          width: 450px;
+          height: 280px;
+          overflow: hidden;
+          .cover-img {
+            width: 100%;
+            height: 100%;
+            transition: all 0.8s ease-in-out;
+          }
+          .cover-img:hover {
+            transform: scale(1.1);
+          }
+        }
+        .item-content {
+          flex: 1;
+          height: 100%;
+          padding: 20px;
+          background-color: var(--bg-content-color);
+          .create-time {
+            height: 24px;
+            padding: 2px 8px;
+            background-color: var(--theme-light-color-9);
+            border-radius: 5px;
+            color: var(--theme-color);
+            width: 210px;
+          }
+          .article-title {
+            margin-top: 20px;
+            height: 60px;
+            font-size: 20px;
+            line-height: 30px;
+            cursor: url('@/assets/images/cursor/text.png'), auto;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
+            color: var(--text-color);
+          }
+          .article-title:hover {
+            color: var(--theme-color);
+          }
+          .auth-info-warp {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            div {
+              display: flex;
+              align-items: center;
+              .iconfont {
+                margin-right: 10px;
+                font-size: 20px;
+                color: var(--theme-color);
+              }
+              .icon-yanjing {
+                font-size: 24px;
+              }
+              span {
+                font-size: 12px;
+                color: var(--text-color);
+              }
+            }
+            img {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              margin-right: 10px;
+            }
+          }
+          .article-des {
+            height: 86px;
+            line-height: 21px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-color-2);
+          }
+        }
+      }
+    }
+  }
+  .m-article-content-warp-out {
+    .other-content {
+      max-width: 96%;
+      margin: 0 auto;
+      .item-warp {
+        display: flex;
+        flex-direction: column;
+        height: auto !important;
+        .cover-img-warp {
+          width: 100% !important;
+          height: 180px !important;
+        }
+
+        .item-content {
+          .article-title {
+            margin-top: 10px !important;
+            height: 40px !important;
+            line-height: 20px !important;
+            font-size: 16px !important;
+          }
+        }
+        .auth-info-warp {
+          height: 30px !important;
+          img {
+            width: 20px !important;
+            height: 20px !important;
+          }
+        }
+        .article-des {
+          height: 30px !important;
+          line-height: 15px !important;
+          font-size: 12px !important;
+          -webkit-line-clamp: 2 !important;
+        }
+      }
+    }
+  }
+  .bottom-loading {
+    margin-bottom: 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn-more {
+      padding: 10px 20px;
+      border-radius: 20px;
+      background-color: var(--theme-light-color-9);
+      color: var(--theme-color);
+    }
+    .no-more {
+      color: var(--theme-light-color-1);
+    }
+  }
+
+  .empty-warp {
+    height: calc(100vh - 400px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--empty-text-color);
+    font-size: 16px;
+    position: relative;
+    .empty-img {
+      width: 200px;
+      height: 160px;
+      margin-bottom: 10px;
+    }
+    .loading-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+    }
+  }
 }
 </style>

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 09:34:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 12:42:15
- * @FilePath: /blog/src/utils/theme.js
+ * @LastEditTime: 2024-08-11 14:29:22
+ * @FilePath: /BLOG/src/utils/theme.js
  */
 
 // 获取当前主题
@@ -24,9 +24,10 @@ export const setTheme = theme => {
 };
 
 // 处理主题样式
-export function handleThemeStyle(theme) {
+export function setPrimaryColor(theme) {
   document.documentElement.style.setProperty('--theme-color', theme);
   for (let i = 1; i <= 9; i++) {
+    document.documentElement.style.setProperty(`--theme-light-color`, `${getLightColor(theme, 0.3)}`);
     document.documentElement.style.setProperty(`--theme-light-color-${i}`, `${getLightColor(theme, i / 10)}`);
   }
   for (let i = 1; i <= 9; i++) {

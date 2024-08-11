@@ -164,7 +164,7 @@ const randomNum = (min: number, max: number) => {
   height: 300px !important;
   .content-warp {
     top: 100px !important;
-    max-width: 90% !important;
+    max-width: 96% !important;
   }
 }
 </style>

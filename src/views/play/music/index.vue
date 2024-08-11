@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 03:04:31
+ * @LastEditTime: 2024-08-11 15:57:25
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -30,7 +30,7 @@
                 <div class="info-item text music-type">类型：{{ state.playList.find(row => row.value == item.type).label }}</div>
               </div>
             </div>
-            <div class="is-playing">
+            <div class="is-playing-current">
               <span class="current-music" v-show="state.currentMusicId == item.id">☑️</span>
               <img v-show="state.isPlaying && state.currentMusicId == item.id" src="@/assets/images/common/playing.gif" alt="" />
             </div>
@@ -56,7 +56,7 @@ import { onMounted, onUnmounted, reactive } from 'vue';
 
 const state = reactive({
   isMobile: isMobile(),
-  isPlaying: localStorage.getItem('isPlaying') || false,
+  isPlaying: localStorage.getItem('isPlaying') == 'true' ? true : false,
   currentMusicId: localStorage.getItem('currentMusicId') || 0,
   list: [],
   playList: []
@@ -97,11 +97,12 @@ const resizeCallback = () => {
 
 onMounted(() => {
   window.addEventListener('resize', resizeCallback);
-  //监听localStorage变化
+
+  // 监听 播放器 播放状态变化
   $bus.on('musicPlayerStatusChange', (n: boolean) => {
     state.isPlaying = n;
   });
-
+  // 监听 播放器 当前音乐变化
   $bus.on('musicPlayerCurrentMusicChange', (id: number) => {
     state.currentMusicId = id;
   });
@@ -119,15 +120,12 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   .music-list-content-warp {
-    background-color: var(--bg-warp-color);
+    background-color: var(--bg-image-warp-color);
     .music-list-content {
       max-width: var(--content-max-width);
       margin: 0 auto;
-      // padding: 20px;
-      // background-color: var(--bg-warp-color);
       .music-list {
         display: flex;
-        // flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 20px 0;
@@ -145,7 +143,7 @@ onUnmounted(() => {
             display: flex;
             align-items: center;
           }
-          .is-playing {
+          .is-playing-current {
             top: 0;
             right: 20px;
 
@@ -179,26 +177,24 @@ onUnmounted(() => {
               font-size: 12px;
             }
             .music-title {
-              margin: 10px 0;
+              margin-bottom: 15px;
             }
           }
         }
       }
     }
     .empty-warp {
-      height: calc(100vh - 300px);
+      height: calc(100vh - 400px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: var(--text-color);
-      font-size: 12px;
+      color: var(--empty-text-color);
+      font-size: 16px;
       position: relative;
-      img {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 10px;
-      }
+      width: 200px;
+      height: 160px;
+      margin-bottom: 10px;
       .loading-img {
         position: absolute;
         top: 50%;
@@ -209,7 +205,7 @@ onUnmounted(() => {
       }
     }
     .m-music-list-content {
-      width: 90% !important;
+      width: 96% !important;
       .music-item {
         width: 100% !important;
       }

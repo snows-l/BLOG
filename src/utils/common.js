@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 15:56:34
- * @FilePath: /blog/src/utils/common.js
+ * @LastEditTime: 2024-08-11 13:59:47
+ * @FilePath: /BLOG/src/utils/common.js
  */
 // 重写 localStorage 的 setItem 方法，派发自定义事件
 export const dispatchEventStroage = () => {
@@ -35,4 +35,9 @@ export const isMobile = (w = 860) => {
 // 设置网页标题
 export const setDocmentTitle = title => {
   document.title = title;
+};
+
+// 产生0-99999之间的数据数
+export const randomNum = (min = 0, max = 1) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
