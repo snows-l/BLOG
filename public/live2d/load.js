@@ -41,7 +41,8 @@ const initConfig = {
       { selector: '.home-social a:last-child', text: 'Blog Tooltip' },
       { selector: '.list .postname, .kbn-read, .kbn-article', type: 'read' },
       { selector: '.a, .kbn-link', type: 'link' },
-      { selector: '.kbn-qq, .kbn-weixin, .kbn-wechat, .kbn-email, kbn-chart', type: 'chart' }
+      { selector: '.kbn-qq, .kbn-weixin, .kbn-wechat, .kbn-email, kbn-chart', type: 'chart' },
+      { selector: '.kbn-music', type: 'music' }
     ],
     homeLink: '', // 首页链接
     homePort: '3000' // 首页domain端口号

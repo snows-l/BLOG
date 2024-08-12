@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 18:20:43
+ * @LastEditTime: 2024-08-11 20:44:18
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -16,10 +16,10 @@
       :mudulDesc="'音乐是一种艺术形式，它是由音符组成的乐曲，旋律、节奏、和音色的组合，是人类创造的声音。'"
       :isArticle="false"></PageTopCover>
 
-    <div class="music-list-content-warp">
+    <div class="music-list-content-warp" :class="{ 'm-music-list-content-warp': state.isMobile }">
       <div class="music-list-content" v-if="state.list.length > 0" :class="{ 'm-music-list-content': state.isMobile }">
         <div class="music-list">
-          <div @click="handlePlay(item)" class="music-item pointer kbn-music" v-for="(item, index) in state.list" :key="index">
+          <div @click="handlePlay(item)" class="music-item pointer kbn-music" :title="item.title" v-for="(item, index) in state.list" :key="index">
             <div class="music-item-warp">
               <div class="cover-warp">
                 <img :src="item.img" alt="" />
@@ -27,7 +27,7 @@
               <div class="music-info">
                 <div class="info-item text music-title">{{ item.title }}</div>
                 <div class="info-item text music-artist">歌手：{{ item.artist }}</div>
-                <div class="info-item text music-type">类型：{{ state.playList.find(row => row.value == item.type).label }}</div>
+                <div class="info-item text music-type">类型：{{ state.playList.find(row => row.value == item.type)?.label }}</div>
               </div>
             </div>
             <div class="is-playing-current">
@@ -192,9 +192,13 @@ onUnmounted(() => {
       }
     }
     .no-article {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
       height: calc(100vh - 400px);
     }
     .m-no-article {
+      max-width: 96%;
+      margin: 0 auto;
       height: calc(100vh - 300px) !important;
     }
     .m-music-list-content {
@@ -204,6 +208,9 @@ onUnmounted(() => {
       }
     }
   }
+  .m-music-list-content-warp {
+    min-height: calc(100vh - 300px) !important;
+  }
 }
 .bottom-loading {
   width: 100%;
@@ -212,6 +219,14 @@ onUnmounted(() => {
   padding-bottom: 20px;
   .no-more {
     color: var(--theme-light-color-3);
+  }
+}
+</style>
+
+<style lang="scss">
+.dark {
+  .music-item:hover {
+    box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
   }
 }
 </style>

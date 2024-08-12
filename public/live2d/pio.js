@@ -192,7 +192,7 @@ var Paul_Pio = function (prop) {
         if (e.length) {
           for (var j = 0; j < e.length; j++) {
             if (t.type === 'read') {
-              const text = this.innerText || (this.dataset && this.dataset.kbnTip) || this.title || '这篇文章';
+              const text = this.title || this.innerText || '这篇文章';
               e[j].onmouseover = function () {
                 modules.render('想阅读 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
@@ -205,6 +205,11 @@ var Paul_Pio = function (prop) {
               e[j].onmouseover = function () {
                 const text = this.innerText || this.dataset.kbnTip || this.title;
                 modules.render('想联系我 %t 吗？'.replace(/%t/, '“' + text + '”'));
+              };
+            } else if (t.type == 'music') {
+              e[j].onmouseover = function () {
+                const text = this.title || this.innerText || '这个音乐';
+                modules.render('想听听 %t 吗？点击即可播放。'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.text) {
               e[j].onmouseover = function () {

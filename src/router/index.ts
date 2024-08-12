@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 14:23:45
+ * @LastEditTime: 2024-08-11 19:57:39
  * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
@@ -55,8 +55,8 @@ export const routes = [
         component: () => import('../views/article/index.vue')
       },
       {
-        path: '/article/sduty',
-        name: 'Sduty',
+        path: '/article/share',
+        name: 'Share',
         meta: {
           title: '其他分享',
           icon: 'icon-qita',

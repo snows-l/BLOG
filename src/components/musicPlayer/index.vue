@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 17:26:29
+ * @LastEditTime: 2024-08-11 19:40:40
  * @FilePath: /BLOG/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -282,15 +282,16 @@ watch(
     height: 100px;
     width: 80px;
     background-color: var(--bg-warp-light-color);
-    padding: 10px;
+    padding: 8px;
     border-radius: 15px;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
     .cover-img {
-      width: 60px;
-      height: 60px;
+      border: 4px solid var(--bg-content-color);
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
     }
     .paly-pause {

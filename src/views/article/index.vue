@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 18:37:06
+ * @LastEditTime: 2024-08-11 20:35:42
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -18,7 +18,7 @@
     <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': state.isMobile }">
       <div class="other-content" v-if="!state.isMobile">
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+          <div class="article-item kbn-read pointer" :title="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
             <div class="img-left item-warp" v-if="index % 2 === 0">
               <div class="cover-img-warp">
                 <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
@@ -104,7 +104,7 @@
       </div>
       <div class="other-content m-other-content" v-else>
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+          <div class="article-item kbn-read pointer" :title="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
             <div class="img-left item-warp">
               <div class="cover-img-warp">
                 <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
@@ -229,6 +229,9 @@ const getArticleListFn = () => {
         }
         state.loading = false;
       }
+    })
+    .catch(() => {
+      state.isMore = false;
     })
     .finally(() => {
       state.loading = false;
@@ -387,6 +390,10 @@ onUnmounted(() => {
         }
       }
     }
+    .no-article {
+      margin: 0 auto;
+      max-width: var(--content-max-width);
+    }
   }
   .m-article-content-warp-out {
     .other-content {
@@ -447,6 +454,13 @@ onUnmounted(() => {
   }
   .m-no-article {
     height: calc(100vh - 300px);
+  }
+}
+</style>
+<style lang="scss">
+.dark {
+  .article-item:hover {
+    box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
   }
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 17:55:18
+ * @LastEditTime: 2024-08-11 20:07:57
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -197,9 +197,14 @@
         </div>
       </div>
       <div class="bottom-loading">
-        <img v-if="state.loading && state.articleList.length != 0" style="width: 40px; height: 40px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
+        <img
+          v-if="state.loading && state.articleList.length != 0"
+          style="width: 40px; height: 40px; margin-bottom: 20px"
+          src="@/assets/images/common/loading.svg"
+          alt=""
+          srcset="" />
         <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
-        <div v-if="!state.isMore && !state.loading" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
+        <div v-if="!state.isMore && !state.loading && state.articleList.length != 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
   </div>
@@ -244,6 +249,10 @@ const getArticleListFn = () => {
           state.isMore = false; // 已经没有更多数据了
         }
       }
+    })
+    .catch(() => {
+      console.log('-------- 444 --------');
+      state.isMore = false;
     })
     .finally(() => {
       state.loading = false;
@@ -643,15 +652,15 @@ onUnmounted(() => {
     }
 
     .bottom-loading {
-      margin-bottom: 20px;
-      height: 40px;
       .btn-more {
+        margin-bottom: 20px;
         padding: 10px 20px;
         border-radius: 20px;
         background-color: var(--theme-light-color-9);
         color: var(--theme-color);
       }
       .no-more {
+        margin-bottom: 20px;
         color: var(--theme-light-color-3);
       }
     }
