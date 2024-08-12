@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 21:42:52
+ * @LastEditTime: 2024-08-12 22:35:07
  * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
@@ -246,7 +246,7 @@ const handleSetShow = () => {
 const handleSearch = () => {
   state.isShowSearch = !state.isShowSearch;
   if (state.isShowSearch) {
-    // state.mMenuShow = false;
+    state.mMenuShow = false;
   }
 };
 
