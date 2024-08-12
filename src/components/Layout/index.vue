@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:12:11
+ * @LastEditTime: 2024-08-12 17:57:42
  * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
@@ -13,6 +13,9 @@
       <div class="mobile-menu">
         <div class="avatar-warp">
           <img class="avatar pointer" @click="handleTo('avatar')" :src="state.avatar" alt="" srcset="" />
+        </div>
+        <div class="serch-input-warp pointer" @click="handleSearch">
+          <i class="iconfont icon-sousuo1"></i>
         </div>
         <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
       </div>
@@ -41,8 +44,9 @@
           <div class="menu-warp" :class="{ menuShow: state.isMenuShow }">
             <Menu :menuList="state.menuList" />
           </div>
-          <div class="avatar-warp">
-            <img style="width: 40px; height: 40px; border-radius: 50%" src="@/assets/images/common/default_avatar.png" alt="" />
+          <div class="pointer secrh-warp">
+            <i class="iconfont icon-sousuo1" @click="handleSearch"></i>
+            <!-- <img style="width: 40px; height: 40px; border-radius: 50%" src="@/assets/images/common/default_avatar.png" alt="" /> -->
           </div>
         </div>
       </header>
@@ -105,6 +109,10 @@
     <div class="music-player-warp" :class="{ playerShow: state.isMusicPlayerShow }">
       <MusicPlayer @music-status="handleMusicStatus" :currentMusicId="state.currentMusicId"></MusicPlayer>
     </div>
+
+    <div class="search-home-warp" :class="{ 'is-show-search': state.isShowSearch }" @click="state.isShowSearch = false">
+      <Search @close="state.isShowSearch = false"></Search>
+    </div>
   </div>
 </template>
 
@@ -115,6 +123,7 @@ import bg3 from '@/assets/images/common/bg3.png';
 import bg4 from '@/assets/images/common/bg4.png';
 import $bus from '@/bus/index';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
+import Search from '@/components/Search/index.vue';
 import { routes } from '@/router';
 import { getQQAvatar, isMobile } from '@/utils/common';
 import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
@@ -137,6 +146,7 @@ const state = reactive({
   currentPrimaryColor: localStorage.getItem('primaryColor') || '#18a058',
   isMusicPlayerShow: false,
   isMusicPlaying: false,
+  isShowSearch: false,
   currentMusicId: 0,
   bgImg: bg1,
   fontFamilyIndex: 0,
@@ -232,6 +242,11 @@ const handleSetShow = () => {
   if (state.isMusicPlayerShow) state.isMusicPlayerShow = false;
 };
 
+// 显示/隐藏 搜索
+const handleSearch = () => {
+  state.isShowSearch = !state.isShowSearch;
+};
+
 // 监页面是否滚动
 watch(
   () => state.scrollTop,
@@ -312,11 +327,10 @@ onUnmounted(() => {
       background-color: var(--bg-content-color);
       transition: left 0.8s ease;
       .avatar-warp {
-        // margin-top: 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 40px;
+        margin-bottom: 25px;
         img {
           width: 100px;
           height: 100px;
@@ -341,6 +355,25 @@ onUnmounted(() => {
           color: var(--text-color);
           &:hover {
             color: var(--theme-color);
+          }
+        }
+      }
+      .serch-input-warp {
+        height: 25px;
+        border-radius: 5px;
+        border: 1px solid var(--text-color);
+        margin-bottom: 20px;
+        position: relative;
+        .iconfont {
+          font-size: 20px;
+          position: absolute;
+          top: 2px;
+          right: 10px;
+        }
+        &:hover {
+          border-color: var(--theme-light-color-3);
+          .iconfont {
+            color: var(--theme-light-color-3);
           }
         }
       }
@@ -421,6 +454,21 @@ onUnmounted(() => {
         }
         .menuShow {
           right: v-bind(avatarWidth);
+        }
+        .secrh-warp {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: v-bind(avatarWidth);
+          .iconfont {
+            font-size: 24px;
+            color: var(--text-color);
+          }
+          &:hover {
+            .iconfont {
+              color: var(--theme-light-color-3);
+            }
+          }
         }
         .avatar-warp {
           width: v-bind(avatarWidth);
@@ -600,6 +648,19 @@ onUnmounted(() => {
     border-radius: 10px;
     display: flex;
     transition: bottom 0.8s ease;
+  }
+  .search-home-warp {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: -100vh;
+    left: 0;
+    z-index: 9999;
+    background-color: var(--bg-modal-warp-color);
+    transition: top 0.8s ease;
+  }
+  .is-show-search {
+    top: 0 !important;
   }
   .playerShow {
     bottom: 15px;

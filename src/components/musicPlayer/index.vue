@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:21:43
+ * @LastEditTime: 2024-08-12 17:16:16
  * @FilePath: /blog/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -53,7 +53,6 @@
 import { getMusicList } from '@/api/music';
 import defaultCover from '@/assets/images/common/default_cover.png';
 import $bus from '@/bus';
-import useResize from '@/hooks/useResize.js';
 import router from '@/router';
 import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 
@@ -67,11 +66,9 @@ const props = defineProps({
 });
 
 const audioRef = ref();
-const { isMobile } = useResize();
-
 const musicList = ref([]);
+
 const state = reactive({
-  isMobile: isMobile,
   currentIndex: 0,
   currentMusic: {
     title: '',
