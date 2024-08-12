@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:16:30
+ * @LastEditTime: 2024-08-12 14:53:48
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -21,20 +21,21 @@
           <h1 class="text" style="margin-top: 15px">Hello~ I'm snows_l</h1>
         </div>
         <div class="author-info">
-          <div class="info-item" data-tip="pre">
+          <div class="info-item tool-btn" @click="handleToggleMove('pre')">
             <img class="btn" src="@/assets/images/common/pre.png" alt="" srcset="" />
           </div>
-          <div class="info-item kbn-qq" data-kbn-tip="QQ" @click="handleInfo('qq')" title="QQ: 37523953">
-            <img class="img" src="@/assets/images/common/qq.png" alt="" srcset="" />
+          <div class="info-out-warp-scroll">
+            <div class="info-item-out-warp" :class="{ 'is-tool-next': state.isToolNext }">
+              <div class="info-item-warp" v-for="(infoitemList, index) in infoList" :key="index">
+                <div v-for="(item, index) in infoitemList" :key="index" class="info-item" :class="item.class" :data-kbn-tip="item.kbnTip" @click="handleInfo(item)">
+                  <template v-for="img in item.imgs">
+                    <img class="img" :class="img.class" :src="img.img" alt="" srcset="" />
+                  </template>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="info-item weixin-content kbn-weixin" data-kbn-tip="WeChat" title="WeChat: snows__l">
-            <img class="img weixin-icon" src="@/assets/images/common/weixin.png" alt="" srcset="" />
-            <img class="img weinxin-qrcode" src="@/assets/images/common/wechat-qrcode.png" alt="" srcset="" />
-          </div>
-          <div class="info-item kbn-email" data-kbn-tip="Email" @click="handleInfo('email')" title="Email: snows_l@163.com">
-            <img class="img" src="@/assets/images/common/mail.png" alt="" srcset="" />
-          </div>
-          <div class="info-item kbn-link" data-tip="link">
+          <div class="info-item tool-btn" @click="handleToggleMove('next')">
             <img class="btn" src="@/assets/images/common/next.png" alt="" srcset="" />
           </div>
         </div>
@@ -227,6 +228,7 @@ const state = reactive({
   isMore: true,
   isDark: false,
   isMobile: isMobile(),
+  isToolNext: false,
   articleList: [],
   page: {
     page: 1,
@@ -234,6 +236,89 @@ const state = reactive({
     total: 0
   }
 });
+
+import iconQQ from '@/assets/images/common/qq.png';
+import iconWeixin from '@/assets/images/common/weixin.png';
+import iconQrcode from '@/assets/images/common/wechat-qrcode.png';
+import iconEmail from '@/assets/images/common/mail.png';
+import iconBackstage from '@/assets/images/common/icon_snow.png';
+
+const infoList = [
+  [
+    {
+      class: 'kbn-qq',
+      imgs: [
+        {
+          img: iconQQ
+        }
+      ],
+      kbnTip: 'QQ',
+      title: 'QQ: 37523953',
+      link: false,
+      fnQuery: 'qq'
+    },
+    {
+      class: 'weixin-content kbn-weixin',
+      imgs: [
+        {
+          class: 'weixin-icon',
+          img: iconWeixin
+        },
+        {
+          class: 'weinxin-qrcode',
+          img: iconQrcode
+        }
+      ],
+      kbnTip: 'WeChat',
+      title: 'WeChat: snows__l',
+      link: false,
+      fnQuery: 'weixin'
+    },
+    {
+      class: 'kbn-email',
+      imgs: [{ img: iconEmail }],
+      kbnTip: 'Email',
+      title: 'Email: snows_l@163.com',
+      link: true,
+      fnQuery: 'email'
+    }
+  ],
+  [
+    {
+      class: 'kbn-link',
+      imgs: [
+        {
+          img: iconBackstage
+        }
+      ],
+      kbnTip: '后台管理平台',
+      title: '后台管理平台',
+      link: 'http://124.223.41.220/view'
+    },
+    {
+      class: 'kbn-link',
+      imgs: [
+        {
+          img: iconBackstage
+        }
+      ],
+      kbnTip: '后台管理平台',
+      title: '后台管理平台',
+      link: 'http://124.223.41.220/view'
+    },
+    {
+      class: 'kbn-link',
+      imgs: [
+        {
+          img: iconBackstage
+        }
+      ],
+      kbnTip: '后台管理平台',
+      title: '后台管理平台',
+      link: 'http://124.223.41.220/view'
+    }
+  ]
+];
 
 const getArticleListFn = () => {
   state.loading = true;
@@ -261,11 +346,6 @@ const getArticleListFn = () => {
 };
 getArticleListFn();
 
-const infoMap = {
-  qq: 'mqqwpa://im/proxy?src_type=web&qq_number=37523953',
-  email: 'mailto:snows_l@163.com'
-};
-
 // 打字效果输出saying
 const inputSaying = () => {
   let index = 0;
@@ -286,6 +366,21 @@ const handleLoadMore = () => {
   getArticleListFn();
 };
 
+// 切换tool
+const handleToggleMove = (type: string) => {
+  if (type === 'next') {
+    state.isToolNext = true;
+  } else {
+    state.isToolNext = false;
+  }
+};
+
+// infoMap
+const infoMap = {
+  qq: 'mqqwpa://im/proxy?src_type=web&qq_number=37523953',
+  email: 'mailto:snows_l@163.com'
+};
+// 跳转到QQ
 const toQQ = () => {
   let system = {};
   const p = navigator.platform;
@@ -300,14 +395,20 @@ const toQQ = () => {
     window.open('mqqwpa://im/chat?chat_type=wpa&uin=37523953&version=1&src_type=web');
   }
 };
-const handleInfo = (type: srting) => {
-  if (type === 'qq') {
-    toQQ();
+// 点击名言下的tool
+const handleInfo = (item: { class: string; imgs: any[]; kbnTip: string; title: string; link: boolean; fnQuery: string }) => {
+  if (item.link) {
+    window.open(item.link, '_blank');
   } else {
-    window.open(infoMap[type]);
+    if (item.fnQuery === 'qq') {
+      toQQ();
+    } else {
+      infoMap[item.fnQuery] && window.open(infoMap[item.fnQuery]);
+    }
   }
 };
 
+// 点击文章详情
 const handleArticle = row => {
   router.push({
     path: '/article/detail',
@@ -317,6 +418,7 @@ const handleArticle = row => {
   });
 };
 
+// 监听localStorage变化 的回调
 const localStorageChangeCallback = (e: StorageEvent) => {
   // 监听需要的键名
   if (e.key === 'isDark') {
@@ -412,15 +514,52 @@ onUnmounted(() => {
       .author-info {
         display: flex;
         margin-top: 30px;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        .info-out-warp-scroll {
+          width: 230px;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          height: 100%;
+          .info-item-out-warp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: left 0.8s ease-in-out;
+            .info-item-warp {
+              width: 230px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+            }
+          }
+          .is-tool-next {
+            left: -240px;
+          }
+        }
         .info-item {
           margin: 0 10px;
           cursor: url('@/assets/images/cursor/pointer.png'), auto;
-          padding: 10px;
+          padding: 8px;
           border-radius: 15px;
           background-color: var(--bg-warp-color);
           display: flex;
           justify-content: center;
           align-items: center;
+          width: 50px;
+          height: 50px;
+        }
+        .tool-btn {
+          background-color: transparent;
         }
         .btn,
         img {
@@ -437,15 +576,15 @@ onUnmounted(() => {
           }
         }
         .weixin-content:hover {
-          width: 80px;
+          width: 80px !important;
           height: 80px;
           .weixin-icon {
             display: none;
           }
           .weinxin-qrcode {
             display: block;
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
           }
         }
       }
