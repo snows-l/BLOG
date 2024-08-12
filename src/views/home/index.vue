@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:53:48
+ * @LastEditTime: 2024-08-12 15:08:51
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -27,7 +27,7 @@
           <div class="info-out-warp-scroll">
             <div class="info-item-out-warp" :class="{ 'is-tool-next': state.isToolNext }">
               <div class="info-item-warp" v-for="(infoitemList, index) in infoList" :key="index">
-                <div v-for="(item, index) in infoitemList" :key="index" class="info-item" :class="item.class" :data-kbn-tip="item.kbnTip" @click="handleInfo(item)">
+                <div v-for="(item, index) in infoitemList" :key="index" class="info-item" :class="item.class" :data-tip="item.kbnTip" @click="handleInfo(item)">
                   <template v-for="img in item.imgs">
                     <img class="img" :class="img.class" :src="img.img" alt="" srcset="" />
                   </template>
@@ -59,7 +59,13 @@
             <h2 class="content-title">Article</h2>
           </div>
           <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-            <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+            <div
+              class="article-item kbn-read pointer"
+              :data-tip="item.title"
+              :title="item.title"
+              v-for="(item, index) in state.articleList"
+              :key="index"
+              @click="handleArticle(item)">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
                   <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
@@ -150,7 +156,13 @@
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
             <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-              <div class="article-item kbn-read pointer" :data-kbn-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+              <div
+                class="article-item kbn-read pointer"
+                :data-tip="item.title"
+                :title="item.title"
+                v-for="(item, index) in state.articleList"
+                :key="index"
+                @click="handleArticle(item)">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
                     <img loading="lazy" class="cover-img" :src="item.cover" alt="" />

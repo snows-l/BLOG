@@ -78,7 +78,6 @@ var Paul_Pio = function (prop) {
     info: modules.create('span', { class: 'pio-info' }),
     night: modules.create('span', { class: 'pio-night' }),
     close: modules.create('span', { class: 'pio-close' }),
-
     show: modules.create('div', { class: 'pio-show' })
   };
 
@@ -138,7 +137,7 @@ var Paul_Pio = function (prop) {
         location.href = prop.content.homeLink || link + port;
       };
       elements.home.onmouseover = function () {
-        modules.render(prop.content.home || '点击这里回到首页！');
+        modules.render(prop.content.home || '点击这里回到 “ 首页 ”');
       };
       current.menu.appendChild(elements.home);
 
@@ -146,11 +145,11 @@ var Paul_Pio = function (prop) {
       elements.skin.onclick = function () {
         that.model = loadlive2d('pio', prop.model[modules.idol()], model => {
           prop.onModelLoad && prop.onModelLoad(model);
-          prop.content.skin && prop.content.skin[1] ? modules.render(prop.content.skin[1]) : modules.render('新衣服真漂亮~');
+          prop.content.skin && prop.content.skin[1] ? modules.render(prop.content.skin[1]) : modules.render('新衣服 真漂亮~');
         });
       };
       elements.skin.onmouseover = function () {
-        prop.content.skin && prop.content.skin[0] ? modules.render(prop.content.skin[0]) : modules.render('想看看我的新衣服吗？');
+        prop.content.skin && prop.content.skin[0] ? modules.render(prop.content.skin[0]) : modules.render('想看看我的 新衣服 吗？');
       };
       if (prop.model.length > 1) current.menu.appendChild(elements.skin);
 
@@ -169,7 +168,7 @@ var Paul_Pio = function (prop) {
           eval(prop.night);
         };
         elements.night.onmouseover = function () {
-          modules.render('夜间点击这里可以保护眼睛呢');
+          modules.render('“ 夜间 ” 点击这里可以保护眼睛呢');
         };
         current.menu.appendChild(elements.night);
       }
@@ -192,23 +191,23 @@ var Paul_Pio = function (prop) {
         if (e.length) {
           for (var j = 0; j < e.length; j++) {
             if (t.type === 'read') {
-              const text = this.title || this.innerText || '这篇文章';
+              const text = this.dataset.tip || this.title || this.innerText || '这篇文章';
               e[j].onmouseover = function () {
                 modules.render('想阅读 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type === 'link') {
               e[j].onmouseover = function () {
-                const text = this.innerText || this.dataset.kbnTip || this.title || '这个链接';
+                const text = this.dataset.tip || this.title || this.innerText || '这个链接';
                 modules.render('想了解一下 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type === 'chart') {
               e[j].onmouseover = function () {
-                const text = this.innerText || this.dataset.kbnTip || this.title;
+                const text = this.dataset.tip || this.title || this.innerText || '';
                 modules.render('想联系我 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type == 'music') {
               e[j].onmouseover = function () {
-                const text = this.title || this.innerText || '这个音乐';
+                const text = this.dataset.tip || this.title || this.innerText || '这个音乐';
                 modules.render('想听听 %t 吗？点击即可播放。'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.text) {

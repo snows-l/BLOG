@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:14:07
+ * @LastEditTime: 2024-08-12 15:03:06
  * @FilePath: /blog/src/views/play/music/index.vue
 -->
 <template>
@@ -19,7 +19,7 @@
     <div class="music-list-content-warp" :class="{ 'm-music-list-content-warp': state.isMobile }">
       <div class="music-list-content" v-if="state.list.length > 0" :class="{ 'm-music-list-content': state.isMobile }">
         <div class="music-list">
-          <div @click="handlePlay(item)" class="music-item pointer kbn-music" :title="item.title" v-for="(item, index) in state.list" :key="index">
+          <div @click="handlePlay(item)" class="music-item pointer kbn-music" :data-tip="item.title" v-for="(item, index) in state.list" :key="index">
             <div class="music-item-warp">
               <div class="cover-warp">
                 <img :src="item.img" alt="" />
