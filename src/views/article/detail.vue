@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 18:32:02
- * @FilePath: /BLOG/src/views/article/detail.vue
+ * @LastEditTime: 2024-08-12 14:15:14
+ * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp">
@@ -87,7 +87,7 @@ const getArticleDetailFn = () => {
       valueHtml.value = state.arcticleDetail.content;
 
       state.arcticleDetail.cover =
-        import.meta.env.MODE == 'development'
+        import.meta.env.VITE_CURRENT_ENV == 'dev'
           ? import.meta.env.VITE_DEV_BASE_SERVER + state.arcticleDetail.cover
           : import.meta.env.VITE_PROD_BASE_SERVER + state.arcticleDetail.cover;
 

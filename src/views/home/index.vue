@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 20:07:57
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-08-12 14:16:30
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -217,6 +217,7 @@ import { getQQAvatar, isMobile, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
+moment.suppressDeprecationWarnings = true;
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
   saying: '',
@@ -241,7 +242,7 @@ const getArticleListFn = () => {
       if (res.code === 200) {
         res.data.forEach(item => {
           item.createTime = moment(item.createTime).format('YYYY-MM-DD');
-          item.cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+          item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
         });
         state.articleList = [...state.articleList, ...res.data];
         state.page.total = res.total;

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 18:46:51
- * @FilePath: /BLOG/src/components/pageTopCover/index.vue
+ * @LastEditTime: 2024-08-12 14:12:31
+ * @FilePath: /blog/src/components/pageTopCover/index.vue
 -->
 <template>
   <div
@@ -107,7 +107,7 @@ const randomNum = (min: number, max: number) => {
       justify-content: center;
       .iconfont {
         margin-right: 20px;
-        color: var(--theme-light-color-3);
+        color: var(--theme-light-color-6);
         font-size: 36px;
       }
       .text {

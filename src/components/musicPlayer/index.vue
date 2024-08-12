@@ -3,14 +3,16 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 19:40:40
- * @FilePath: /BLOG/src/components/musicPlayer/index.vue
+ * @LastEditTime: 2024-08-12 14:21:43
+ * @FilePath: /blog/src/components/musicPlayer/index.vue
 -->
 <template>
   <div class="music-warp">
     <audio ref="audioRef" style="display: none" :src="state.currentMusic.src"></audio>
     <div class="cover-warp">
-      <img class="cover-img" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
+      <div class="cover-img-warp">
+        <img class="cover-img" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
+      </div>
       <div class="paly-pause">
         <i @click="handleControl('pause')" v-if="state.isPlaying" class="pointer iconfont icon-zanting"></i>
         <i @click="handleControl('play')" v-else class="pointer iconfont icon-bofang"></i>
@@ -25,8 +27,6 @@
           <i @click="handleControl('play')" v-else class="pointer iconfont icon-bofang"></i>
           <i @click="handleControl('next')" class="pointer iconfont icon-xiayigexiayiqu"></i>
           <i @click="handleTo('/play/mp3')" class="pointer iconfont icon-a-yinlebofangliebiaoyinle"></i>
-          <!-- <i @click="handleControl('unMute')" v-if="!state.isMute" class="iconfont icon-cancelMute-quxiaojingyin"></i>
-          <i @click="handleControl('mute')" v-else class="iconfont icon-jingyin"></i> -->
         </div>
         <div class="custom-progress">
           <span class="yin">
@@ -96,14 +96,14 @@ const getMusicListFn = () => {
   getMusicList({ isUnPage: false }).then(res => {
     musicList.value = res.data.map(item => {
       let cover = '';
-      if (item.cover) cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+      if (item.cover) cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
       return {
         id: item.id,
         title: item.title,
         artist: item.artist,
         type: item.type,
         img: cover,
-        src: import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
+        src: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
       };
     });
     state.currentMusic = musicList.value.length > 0 && musicList.value[state.currentIndex];
@@ -282,17 +282,24 @@ watch(
     height: 100px;
     width: 80px;
     background-color: var(--bg-warp-light-color);
-    padding: 8px;
+    padding: 10px 6px;
     border-radius: 15px;
-    display: flex;
-    align-items: center;
     position: relative;
     overflow: hidden;
-    .cover-img {
-      border: 4px solid var(--bg-content-color);
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
+    .cover-img-warp {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-content-color);
+      border-radius: 15px;
+      padding: 5px;
+      .cover-img {
+        border: 1px solid var(--text-color);
+        width: 57px;
+        height: 57px;
+        border-radius: 50%;
+      }
     }
     .paly-pause {
       width: 100%;
@@ -306,7 +313,7 @@ watch(
       background-color: transparent;
       .iconfont {
         font-size: 30px;
-        color: var(--text-color);
+        color: #eeeeee;
       }
     }
     .rotate-play {

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-07 10:15:23
+ * @LastEditTime: 2024-08-12 14:08:36
  * @FilePath: /blog/vite.config.ts
  */
 import { fileURLToPath, URL } from 'node:url';
@@ -31,7 +31,7 @@ export default defineConfig(({ mode, command }) => {
       open: true,
       proxy: {
         [config.VITE_DEV_BASE_URL]: {
-          target: config.VITE_DEV_BASE_SERVER,
+          target: config.VITE_CURRENT_ENV == 'dev' ? config.VITE_DEV_BASE_SERVER : config.VITE_PROD_BASE_SERVER,
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, '')
         }

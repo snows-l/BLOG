@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 20:44:18
- * @FilePath: /BLOG/src/views/play/music/index.vue
+ * @LastEditTime: 2024-08-12 14:14:07
+ * @FilePath: /blog/src/views/play/music/index.vue
 -->
 <template>
   <div class="music-warp">
@@ -74,14 +74,14 @@ const getMusicListFn = () => {
     .then(res => {
       state.list = res.data.map(item => {
         let cover = '';
-        if (item.cover) cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+        if (item.cover) cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
         return {
           id: item.id,
           title: item.title,
           artist: item.artist,
           type: item.type,
           img: cover,
-          src: import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
+          src: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
         };
       });
       if (!state.currentMusicId) state.currentMusicId = state.list[0].id;

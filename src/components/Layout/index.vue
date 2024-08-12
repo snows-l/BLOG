@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 18:44:43
- * @FilePath: /BLOG/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-12 14:12:11
+ * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -384,7 +384,7 @@ onUnmounted(() => {
       .title-text {
         font-size: 25px;
         padding: 5px 10px;
-        background-color: var(--theme-light-color-6);
+        background-color: var(--theme-light-color-9);
         border-radius: 5px;
         color: var(--text-color);
       }

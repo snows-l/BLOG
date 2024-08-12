@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 20:35:42
- * @FilePath: /BLOG/src/views/article/index.vue
+ * @LastEditTime: 2024-08-12 14:15:18
+ * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
   <div class="article-detail-warp">
@@ -220,7 +220,7 @@ const getArticleListFn = () => {
       if (res.code === 200) {
         res.data.forEach(item => {
           item.createTime = moment(item.createTime).format('YYYY-MM-DD');
-          item.cover = import.meta.env.MODE == 'development' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+          item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
         });
         state.articleList = [...state.articleList, ...res.data];
         state.page.total = res.total;

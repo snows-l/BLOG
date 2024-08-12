@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:43:46
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 00:04:30
- * @FilePath: /BLOG/src/utils/request.js
+ * @LastEditTime: 2024-08-12 14:14:52
+ * @FilePath: /blog/src/utils/request.js
  */
 import { getToken } from '@/utils/auth';
 import errorCode from '@/utils/errorCode';
@@ -16,12 +16,12 @@ let cancel;
 // 是否显示重新登录
 export let isRelogin = { show: false };
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
-let isDev = import.meta.env.MODE === 'development';
+let isDev = import.meta.env.MODE === 'development'; // 是否开发环境
 
 // 创建axios实例
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
-  baseURL: isDev ? import.meta.env.VITE_DEV_BASE_URL : import.meta.env.VITE_PROP_BASE_URL,
+  baseURL: isDev ? import.meta.env.VITE_DEV_BASE_URL : import.meta.env.VITE_PROD_BASE_URL,
   // 超时
   timeout: 100000
 });
