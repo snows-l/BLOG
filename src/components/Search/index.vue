@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 22:22:46
+ * @LastEditTime: 2024-08-12 23:27:13
  * @FilePath: /BLOG/src/components/Search/index.vue
 -->
 <template>
@@ -56,9 +56,9 @@
                 <div class="article-content-warp" v-if="state.articleList.length > 0">
                   <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
                     <div class="img-left item-warp">
-                      <div class="cover-img-warp">
+                      <!-- <div class="cover-img-warp">
                         <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
-                      </div>
+                      </div> -->
                       <div class="item-content">
                         <div class="create-time">
                           <span>
@@ -227,14 +227,13 @@ watch(
   () => props.show,
   n => {
     if (n) {
-      // state.keyword = '';
-      // state.musicList = [];
-      // state.articleList = [];
       state.loading = false;
       state.isPlaying = localStorage.getItem('isPlaying') == 'true' ? true : false;
-      setTimeout(() => {
-        document.querySelector('.search-warp input')?.focus();
-      }, 100);
+      if (!isMobi.value) {
+        setTimeout(() => {
+          document.querySelector('.search-warp input')?.focus();
+        }, 100);
+      }
     }
   }
 );
@@ -259,7 +258,7 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .search-warp {
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
   position: relative;
   background-image: url('@/assets/images/common/bg1.png');
   padding: 30px 20px;
@@ -313,7 +312,7 @@ onUnmounted(() => {
       width: 100%;
       height: calc(100% - 80px);
       border-radius: 15px;
-      background: var(--bg-warp-color);
+      background: var(--bg-warp-light-color);
       overflow: hidden;
       padding: 20px;
       .serch-content-t {
@@ -390,6 +389,9 @@ onUnmounted(() => {
                   }
                 }
               }
+            }
+            .m-no-music {
+              height: 160px;
             }
           }
           .article-warp {
@@ -487,6 +489,9 @@ onUnmounted(() => {
                 }
               }
             }
+            .m-no-article {
+              height: 160px;
+            }
 
             .item-warp {
               display: flex;
@@ -525,7 +530,7 @@ onUnmounted(() => {
     }
   }
   .m-search-content-warp {
-    max-width: 96%;
+    // max-width: 96%;
   }
   .xiaoren {
     min-width: 284px;
@@ -542,8 +547,8 @@ onUnmounted(() => {
 
 .m-search-warp {
   .xiaoren {
-    min-width: 71px;
-    min-height: 97px;
+    min-width: 91px;
+    min-height: 120px;
     width: 71px !important;
     height: 97px !important;
   }

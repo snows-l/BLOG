@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 22:35:07
+ * @LastEditTime: 2024-08-12 23:19:41
  * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
@@ -663,8 +663,9 @@ onUnmounted(() => {
     height: 100vh;
     top: -100vh;
     left: 0;
-    z-index: 9999;
-    background-color: var(--bg-modal-warp-color);
+    z-index: 999;
+    // background-color: var(--bg-modal-warp-color);
+    background-color: transparent;
     transition: top 0.8s ease;
   }
   .is-show-search {

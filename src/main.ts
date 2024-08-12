@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 15:13:35
- * @FilePath: /blog/src/main.ts
+ * @LastEditTime: 2024-08-12 23:10:33
+ * @FilePath: /BLOG/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
 import { createPinia } from 'pinia';
@@ -28,7 +28,8 @@ app.mount('#app');
 
 // 根据时间 自动切换主题
 autoToggleTheme();
-
+// 重置播放状态
+localStorage.setItem('isPlaying', 'false');
 // 监听是否离开网页
 window.addEventListener('visibilitychange', () => {
   if (!document.hidden) {

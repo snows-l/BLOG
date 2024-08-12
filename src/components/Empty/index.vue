@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-07-08 10:56:57
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 20:23:58
+ * @LastEditTime: 2024-08-12 23:13:30
  * @FilePath: /BLOG/src/components/Empty/index.vue
 -->
 <template>
@@ -55,7 +55,7 @@ const props = defineProps({
     border-radius: 15px;
     height: 100%;
     width: 100%;
-    padding: 40px 0;
+    padding: 20px 0;
     .img-warp,
     .loading-warp {
       height: 100%;
@@ -64,8 +64,12 @@ const props = defineProps({
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      .empty-img {
+        max-height: calc(100% - 36px);
+      }
     }
     .empty-text {
+      height: 36px;
       margin-top: 20px;
       color: var(--empty-text-color);
     }
