@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:15:14
- * @FilePath: /blog/src/views/article/detail.vue
+ * @LastEditTime: 2024-08-12 22:03:23
+ * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp">
@@ -50,11 +50,11 @@ import PageTopCover from '@/components/pageTopCover/index.vue';
 import { isMobile, randomNum } from '@/utils/common';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
-import { onBeforeUnmount, onMounted, reactive, ref, shallowRef } from 'vue';
+import { onBeforeUnmount, onMounted, reactive, ref, shallowRef, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
-const articleId = route.query.id;
+let articleId = route.query.id;
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef();
@@ -110,6 +110,17 @@ const handleAdd = (type: string) => {
   }
   getArticleDetailFn();
 };
+
+// 监听路由变化，重新获取文章详情
+watch(
+  () => route.query.id,
+  id => {
+    if (id) {
+      articleId = id;
+      getArticleDetailFn();
+    }
+  }
+);
 
 // 编辑器创建完成
 const handleCreated = editor => {

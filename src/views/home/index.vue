@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 16:30:27
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-08-12 21:39:45
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -237,11 +237,11 @@ const state = reactive({
   }
 });
 
-import iconQQ from '@/assets/images/common/qq.png';
-import iconWeixin from '@/assets/images/common/weixin.png';
-import iconQrcode from '@/assets/images/common/wechat-qrcode.png';
-import iconEmail from '@/assets/images/common/mail.png';
 import iconBackstage from '@/assets/images/common/icon_snow.png';
+import iconEmail from '@/assets/images/common/mail.png';
+import iconQQ from '@/assets/images/common/qq.png';
+import iconQrcode from '@/assets/images/common/wechat-qrcode.png';
+import iconWeixin from '@/assets/images/common/weixin.png';
 
 const infoList = [
   [
@@ -328,6 +328,7 @@ const getArticleListFn = () => {
         res.data.forEach(item => {
           item.createTime = moment(item.createTime).format('YYYY-MM-DD');
           item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+          item.subTitle = item.subTitle.replace(/&#39;/g, "'");
         });
         state.articleList = [...state.articleList, ...res.data];
         state.page.total = res.total;

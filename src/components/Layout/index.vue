@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 17:57:42
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-12 21:42:52
+ * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -110,8 +110,8 @@
       <MusicPlayer @music-status="handleMusicStatus" :currentMusicId="state.currentMusicId"></MusicPlayer>
     </div>
 
-    <div class="search-home-warp" :class="{ 'is-show-search': state.isShowSearch }" @click="state.isShowSearch = false">
-      <Search @close="state.isShowSearch = false"></Search>
+    <div class="search-home-warp" :class="{ 'is-show-search': state.isShowSearch }" @click="e => handleClickSrearchModal(e)">
+      <Search @close="state.isShowSearch = false" :show="state.isShowSearch"></Search>
     </div>
   </div>
 </template>
@@ -245,6 +245,13 @@ const handleSetShow = () => {
 // 显示/隐藏 搜索
 const handleSearch = () => {
   state.isShowSearch = !state.isShowSearch;
+  if (state.isShowSearch) {
+    // state.mMenuShow = false;
+  }
+};
+
+const handleClickSrearchModal = e => {
+  state.isShowSearch = false;
 };
 
 // 监页面是否滚动
@@ -369,6 +376,7 @@ onUnmounted(() => {
           position: absolute;
           top: 2px;
           right: 10px;
+          color: var(--text-color);
         }
         &:hover {
           border-color: var(--theme-light-color-3);
