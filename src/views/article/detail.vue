@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 22:03:23
+ * @LastEditTime: 2024-08-12 22:48:10
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -187,6 +187,8 @@ onBeforeUnmount(() => {
     height: calc(100vh - 400px);
   }
   .m-no-article {
+    max-width: 96% !important;
+    margin: 0 auto !important;
     height: calc(100vh - 300px) !important;
   }
 }
