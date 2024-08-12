@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 15:08:51
+ * @LastEditTime: 2024-08-12 16:30:27
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -59,13 +59,7 @@
             <h2 class="content-title">Article</h2>
           </div>
           <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-            <div
-              class="article-item kbn-read pointer"
-              :data-tip="item.title"
-              :title="item.title"
-              v-for="(item, index) in state.articleList"
-              :key="index"
-              @click="handleArticle(item)">
+            <div class="article-item kbn-read pointer" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
                   <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
@@ -156,13 +150,7 @@
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
             <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-              <div
-                class="article-item kbn-read pointer"
-                :data-tip="item.title"
-                :title="item.title"
-                v-for="(item, index) in state.articleList"
-                :key="index"
-                @click="handleArticle(item)">
+              <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
                     <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
@@ -349,7 +337,6 @@ const getArticleListFn = () => {
       }
     })
     .catch(() => {
-      console.log('-------- 444 --------');
       state.isMore = false;
     })
     .finally(() => {

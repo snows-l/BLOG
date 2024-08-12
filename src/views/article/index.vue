@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:15:18
+ * @LastEditTime: 2024-08-12 16:30:50
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -18,7 +18,7 @@
     <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': state.isMobile }">
       <div class="other-content" v-if="!state.isMobile">
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" :title="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+          <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
             <div class="img-left item-warp" v-if="index % 2 === 0">
               <div class="cover-img-warp">
                 <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
@@ -104,7 +104,7 @@
       </div>
       <div class="other-content m-other-content" v-else>
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" :title="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+          <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
             <div class="img-left item-warp">
               <div class="cover-img-warp">
                 <img loading="lazy" class="cover-img" :src="item.cover" alt="" />

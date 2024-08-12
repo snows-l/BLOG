@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-09 22:46:07
- * @FilePath: /BLOG/src/main.ts
+ * @LastEditTime: 2024-08-12 15:13:35
+ * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
 import { createPinia } from 'pinia';
@@ -33,8 +33,7 @@ autoToggleTheme();
 window.addEventListener('visibilitychange', () => {
   if (!document.hidden) {
     document.title = " ☂ 被你发现了！｜ snows_l's BLOG";
-    // $message('欢迎您回来！');
   } else {
-    document.title = " ☂ 瓜皮人呢？你还没回来！｜ snows_l's BLOG";
+    document.title = " ☂ 瓜皮人呢？还没回来！｜ snows_l's BLOG";
   }
 });
