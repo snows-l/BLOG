@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 21:18:13
+ * @LastEditTime: 2024-08-13 21:38:30
  * @FilePath: /BLOG/src/components/Comment/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -267,7 +267,7 @@ const handleSubmit = () => {
   }
 }
 .m-comment-warp {
-  width: 96%;
+  // width: 96%;
 
   .info-warp {
     .input {

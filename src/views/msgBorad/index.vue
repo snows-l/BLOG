@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 21:14:30
+ * @LastEditTime: 2024-08-13 21:32:12
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -43,24 +43,23 @@
                         <div class="bozhu" v-if="item.qq === '37523953'">博主</div>
                         <span>{{ item.nickName }}</span>
                         <div class="bozhu level" style="margin-left: 5px; margin-right: 5px">Lv0</div>
-                        <span v-if="item.websiteUrl" style="font-size: 12px">
-                          网站：
-                          <a :href="item.websiteUrl">{{ item.websiteUrl }}</a>
-                        </span>
                       </div>
                       <div class="platform">
                         <div class="pulic-time">发布于：{{ item.time }}</div>
-                        <span v-if="item.browser || item.os">
+                        <span v-if="item.browser || item.os" style="margin-right: 5px; font-size: 12px">
                           {{ isMobi ? '平台：' : '' }}
                           (
                           <span>{{ item.browser }}</span>
                           <span style="margin-left: 20px">{{ item.os }}</span>
                           )
                         </span>
+                        <span v-if="item.websiteUrl" style="font-size: 12px">
+                          网站：
+                          <a :href="item.websiteUrl">{{ item.websiteUrl }}</a>
+                        </span>
                       </div>
                     </div>
                   </div>
-
                   <div class="right-info"></div>
                 </div>
                 <div class="msg">{{ item.comment }}</div>
@@ -288,10 +287,13 @@ const handleComment = () => {
             border-radius: 15px;
             background-color: var(--bg-content-color);
             .info-warp {
+              width: 100%;
               display: flex;
               align-items: center;
               .left-info {
                 display: flex;
+                align-items: center;
+                flex: 1;
                 .img-warp {
                   width: 40px;
                   height: 40px;
