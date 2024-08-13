@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 21:38:30
+ * @LastEditTime: 2024-08-13 22:57:09
  * @FilePath: /BLOG/src/components/Comment/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -31,7 +31,7 @@
     <div class="info-warp">
       <div class="input qq-warp" :class="{ 'no-qq': !localValue.qq }">
         <input type="text" v-model="localValue.qq" placeholder="QQ" @blur="handleGetInfoByQQ" />
-        <label class="input-label">QQ 紧用于获取头像及昵称</label>
+        <label class="input-label">QQ 仅仅用于获取头像及昵称，请放心 「食」 用^ _ ^</label>
         <img class="avatar" :src="localValue.avatar || defaultAvatar" />
       </div>
       <div class="input qq-warp" :class="{ 'no-nick': !localValue.nickName }">
@@ -213,7 +213,7 @@ const handleSubmit = () => {
         top: -20px;
         left: 5px;
         margin: 0 auto;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
         color: var(--theme-light-color-5);
       }
