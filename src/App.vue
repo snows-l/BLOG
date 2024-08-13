@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-10 11:33:38
+ * @LastEditTime: 2024-08-13 20:26:14
  * @FilePath: /BLOG/src/App.vue
 -->
 <script setup lang="ts">
@@ -28,6 +28,10 @@ routes.forEach(item => {
 if (localStorage.getItem('primaryColor')) {
   setPrimaryColor(localStorage.getItem('primaryColor'));
 }
+
+// fetch('/index.html').then(res => {
+//   console.log('-------- res --------', res.text());
+// });
 
 watch(
   () => route.path,

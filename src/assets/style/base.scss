@@ -29,6 +29,7 @@ body {
   --content-max-width: 820px;
   --empty-text-color: #999999;
 
+  --bg-meun-warp-color: #dbdbdbd2;
   --text-title-color: #333333;
   --text-color: #222222;
   --text-color-2: #555555;
@@ -44,6 +45,7 @@ body {
 
 :root.dark {
   --theme: 'dark';
+  --bg-meun-warp-color: #0b0b0bd2;
   --text-title-color: #5c5a5a;
   --text-color: #dddddd;
   --text-color-2: #999999;

@@ -3,12 +3,12 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 17:55:46
- * @FilePath: /blog/src/components/Comment/index.vue
+ * @LastEditTime: 2024-08-13 21:18:13
+ * @FilePath: /BLOG/src/components/Comment/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
  *
- * value: '',
+ *  value: '',
     qq: '',
     nickName: '',
     avatarUrl: '',
@@ -66,9 +66,9 @@
 
 <script lang="ts" setup>
 import defaultAvatar from '@/assets/images/common/default_avatar.png';
+import useResize from '@/hooks/useResize';
 import axios from 'axios';
 import { computed, ref } from 'vue';
-import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 
 const emits = defineEmits(['submit', 'update:modelValue']);
@@ -231,9 +231,8 @@ const handleSubmit = () => {
     }
   }
   .check-warp {
-    margin: 20px 0;
+    margin-top: -40px;
     display: flex;
-    justify-content: space-around;
     .check-item {
       width: 200px;
       input {
@@ -249,7 +248,7 @@ const handleSubmit = () => {
     }
   }
   .btn-warp {
-    margin-top: 40px;
+    margin-top: 60px;
     width: 96%;
     display: flex;
     justify-content: center;
@@ -278,6 +277,9 @@ const handleSubmit = () => {
         margin-bottom: 10px;
       }
     }
+  }
+  .check-warp {
+    margin: 10px 0;
   }
 }
 .is-submit {

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 17:53:47
- * @FilePath: /blog/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-08-13 21:14:30
+ * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -29,7 +29,7 @@
           <p class="thanks-msg">很感谢你能访问该页面，如果你有什么和博主说的或者有什么问题想问的，可以随时在下面评论哦~</p>
         </div>
         <div class="msg-list-content" :class="{ 'm-msg-list-content': isMobi }">
-          <div class="components">Conments {{ state.list.length }} 条留言</div>
+          <div class="components">Conments {{ state.page.total + 2 }} 条留言</div>
           <div class="msg-list-hav" v-if="state.list.length > 0">
             <div class="msg-list" v-for="(item, index) in state.list" :key="index">
               <div class="msg-item">
@@ -41,8 +41,12 @@
                     <div class="r-info">
                       <div class="name">
                         <div class="bozhu" v-if="item.qq === '37523953'">博主</div>
-                        <span>{{ item.nickname }}</span>
-                        <div class="bozhu level" style="margin-left: 5px">Lv0</div>
+                        <span>{{ item.nickName }}</span>
+                        <div class="bozhu level" style="margin-left: 5px; margin-right: 5px">Lv0</div>
+                        <span v-if="item.websiteUrl" style="font-size: 12px">
+                          网站：
+                          <a :href="item.websiteUrl">{{ item.websiteUrl }}</a>
+                        </span>
                       </div>
                       <div class="platform">
                         <div class="pulic-time">发布于：{{ item.time }}</div>
@@ -59,7 +63,7 @@
 
                   <div class="right-info"></div>
                 </div>
-                <div class="msg">{{ item.msg }}</div>
+                <div class="msg">{{ item.comment }}</div>
               </div>
             </div>
           </div>
@@ -67,6 +71,12 @@
             <Empty :text="'暂无留言数据，期待您的留言~'" :loadingText="'留言正在拼命加载中...'" :loading="state.loading"></Empty>
           </div>
         </div>
+        <div class="bottom-loading">
+          <img v-if="state.loading && state.list.length > 0" style="width: 40px; height: 40px; margin-bottom: 20px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
+          <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更多留言</div>
+          <div v-if="!state.isMore && state.list.length > 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
+        </div>
+
         <Comment v-model="state.comment" @submit="handleComment"></Comment>
       </div>
     </div>
@@ -74,41 +84,42 @@
 </template>
 
 <script lang="ts" setup>
-import { getQQAvatar } from '@/utils/common';
+import { addComment, getCommentList } from '@/api/comment';
 import coverImg from '@/assets/images/common/msg-borad.png';
 import useResize from '@/hooks/useResize';
+import { getQQAvatar } from '@/utils/common';
+import axios from 'axios';
+import { reactive } from 'vue';
 const { isMobi } = useResize();
-import { ref, reactive, watch, onMounted, computed } from 'vue';
 
 const state = reactive({
   loading: false,
   list: [
     {
-      nickname: 'snows_l',
+      comment: '来都来了，还不赶紧留言？',
       qq: '37523953',
+      nickName: '',
+      avatarUrl: '',
       email: 'snows_l@163.com',
-      msg: '你好，我是snows_l，很高兴遇见你，我是一名前端工程师，欢迎来到我的博客，有什么问题可以随时在评论区告诉我，祝你在学习道路上越走越远！',
-      time: '2024-08-13 10:04:53',
+      websiteUrl: 'http://124.223.41.220/view',
+      time: '2024-08-12 10:04:53',
       browser: 'Chrome',
-      os: 'Mac OS'
+      os: 'Mac OS',
+      isPrivacy: false,
+      isEmailFeekback: false
     },
     {
-      nickname: '小明',
-      qq: '12345678',
-      email: 'xiaoming@163.com',
-      msg: '你好，我是小明，很高兴遇见你，我是一名前端工程师，欢迎来到我的博客，有什么问题可以随时在评论区告诉我，祝你在学习道路上越走越远！',
-      time: '2024-08-13 10:04:53',
+      comment: '求求你了，留下你的脚印吧！',
+      qq: '37523953',
+      nickName: '',
+      avatarUrl: '',
+      email: 'snows_l@163.com',
+      websiteUrl: 'http://124.223.41.220:30002',
+      time: '2024-08-12 10:04:53',
       browser: 'Chrome',
-      os: 'Mac OS'
-    },
-    {
-      nickname: '小红',
-      qq: '87654321',
-      email: 'xiaohong@163.com',
-      msg: '你好，我是小红，很高兴遇见你，我是一名前端工程师，欢迎来到我的博客，有什么问题可以随时在评论区告诉我，祝你在学习道路上越走越远！',
-      time: '2024-08-13 10:04:53',
-      browser: 'Chrome',
-      os: 'Mac OS'
+      os: 'Mac OS',
+      isPrivacy: false,
+      isEmailFeekback: false
     }
   ],
   comment: {
@@ -120,12 +131,63 @@ const state = reactive({
     websiteUrl: '',
     isPrivacy: false,
     isEmailFeekback: false
+  },
+  isMore: true,
+
+  page: {
+    page: 1,
+    size: 10,
+    total: 0
   }
 });
 
+let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + '37523953' + '&_wpnonce=7ccc55456e';
+axios.get(url).then(res => {
+  if (res.data.code === 200) {
+    state.list[0].nickName = res.data.name;
+    state.list[1].nickName = res.data.name;
+  }
+});
+
+const getCommentListFn = () => {
+  state.loading = true;
+  getCommentList({ ...state.page }).then(res => {
+    if (res.code === 200) {
+      state.list = [...state.list, ...res.data];
+      state.page.total = res.total;
+      if (state.list.length >= res.total) {
+        state.isMore = false; // 已经没有更多数据了
+      }
+      state.loading = false;
+    }
+  });
+};
+getCommentListFn();
+
+// 加在更多
+const handleLoadMore = () => {
+  state.page.page++;
+  getCommentListFn();
+};
+
 // 提交评论
 const handleComment = () => {
-  console.log('------- state.comment -------', state.comment);
+  if (!state.comment.value.trim() || !state.comment.qq.trim() || !state.comment.nickName.trim() || !state.comment.email.trim()) {
+    return false;
+  }
+  addComment({ ...state.comment, comment: state.comment.value }).then(res => {
+    if (res.code === 200) {
+      state.comment.value = '';
+      state.comment.qq = '';
+      state.comment.nickName = '';
+      state.comment.avatarUrl = '';
+      state.comment.email = '';
+      state.comment.websiteUrl = '';
+      state.comment.isPrivacy = false;
+      state.comment.isEmailFeekback = false;
+      getCommentListFn();
+    }
+  });
 };
 </script>
 
@@ -281,7 +343,7 @@ const handleComment = () => {
               }
             }
             .msg {
-              margin-top: 20px;
+              margin-top: 5px;
               font-size: 16px;
               color: var(--text-color);
               line-height: 1.8;
@@ -307,6 +369,23 @@ const handleComment = () => {
       text-indent: 32px;
       line-height: 18px;
     }
+  }
+}
+.bottom-loading {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .btn-more {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: var(--theme-light-color-9);
+    color: var(--theme-color);
+  }
+  .no-more {
+    color: var(--theme-light-color-3);
+    margin-bottom: 20px;
   }
 }
 </style>

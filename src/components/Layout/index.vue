@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 09:38:13
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-13 19:16:02
+ * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -334,7 +334,7 @@ onUnmounted(() => {
       padding: 40px;
       width: var(--m-menu-width);
       height: 100%;
-      background-color: var(--bg-content-color);
+      background-color: var(--bg-meun-warp-color);
       transition: left 0.8s ease;
       .avatar-warp {
         display: flex;
