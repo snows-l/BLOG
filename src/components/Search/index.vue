@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 23:27:13
- * @FilePath: /BLOG/src/components/Search/index.vue
+ * @LastEditTime: 2024-08-13 09:55:12
+ * @FilePath: /blog/src/components/Search/index.vue
 -->
 <template>
   <div class="search-warp" :class="{ 'm-search-warp': isMobi }" @click="handleClickMadel">
@@ -120,7 +120,7 @@ import { getQQAvatar, randomNum } from '@/utils/common';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import useResize from '../../hooks/useResize';
+import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 
 const router = useRouter();

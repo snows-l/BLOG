@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 15:03:06
+ * @LastEditTime: 2024-08-13 09:54:03
  * @FilePath: /blog/src/views/play/music/index.vue
 -->
 <template>
@@ -12,12 +12,12 @@
       :moduleTitle="'音乐'"
       :icon="'icon-a-Sheetmusic'"
       :coverImg="coverImg"
-      :isMobile="state.isMobile"
+      :isMobile="isMobi"
       :mudulDesc="'音乐是一种艺术形式，它是由音符组成的乐曲，旋律、节奏、和音色的组合，是人类创造的声音。'"
       :isArticle="false"></PageTopCover>
 
-    <div class="music-list-content-warp" :class="{ 'm-music-list-content-warp': state.isMobile }">
-      <div class="music-list-content" v-if="state.list.length > 0" :class="{ 'm-music-list-content': state.isMobile }">
+    <div class="music-list-content-warp" :class="{ 'm-music-list-content-warp': isMobi }">
+      <div class="music-list-content" v-if="state.list.length > 0" :class="{ 'm-music-list-content': isMobi }">
         <div class="music-list">
           <div @click="handlePlay(item)" class="music-item pointer kbn-music" :data-tip="item.title" v-for="(item, index) in state.list" :key="index">
             <div class="music-item-warp">
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="no-article" :class="{ 'm-no-article': state.isMobile }" v-else>
+      <div class="no-article" :class="{ 'm-no-article': isMobi }" v-else>
         <Empty :text="'暂无音乐数据，期待您的分享~'" :loadingText="'音乐正在拼命加载中...'" :loading="state.loading" />
       </div>
       <div class="bottom-loading" v-if="!state.loading && state.list.length > 0">
@@ -52,11 +52,14 @@ import { getDict, getMusicList } from '@/api/music';
 import coverImg from '@/assets/images/common/cover-music.png';
 import $bus from '@/bus/index';
 import PageTopCover from '@/components/pageTopCover/index.vue';
-import { isMobile } from '@/utils/common';
+// import { isMobile } from '@/utils/common';
 import { onMounted, onUnmounted, reactive } from 'vue';
 
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
+
 const state = reactive({
-  isMobile: isMobile(),
+  // isMobile: isMobile(),
   loading: false,
   isPlaying: localStorage.getItem('isPlaying') == 'true' ? true : false,
   currentMusicId: localStorage.getItem('currentMusicId') || 0,
@@ -98,13 +101,13 @@ const handlePlay = (item: any) => {
   $bus.emit('playMusic', { id: item.id });
 };
 
-// 监听屏幕大小变化
-const resizeCallback = () => {
-  state.isMobile = isMobile();
-};
+// // 监听屏幕大小变化
+// const resizeCallback = () => {
+//   state.isMobile = isMobile();
+// };
 
 onMounted(() => {
-  window.addEventListener('resize', resizeCallback);
+  // window.addEventListener('resize', resizeCallback);
 
   // 监听 播放器 播放状态变化
   $bus.on('musicPlayerStatusChange', (n: boolean) => {
@@ -117,7 +120,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', resizeCallback);
+  // window.removeEventListener('resize', resizeCallback);
   $bus.off('musicPlayerStatusChange');
   $bus.off('musicPlayerCurrentMusicChange');
 });

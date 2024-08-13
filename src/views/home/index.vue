@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 21:39:45
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-08-13 09:51:57
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -52,7 +52,7 @@
       <div v-if="!state.isDark" class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
-      <div class="other-content" v-if="!state.isMobile">
+      <div class="other-content" v-if="!isMobi">
         <div class="other-content-item">
           <div class="article-title-warp">
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
@@ -192,7 +192,7 @@
               </div>
             </div>
             <div class="m-no-article" v-else>
-              <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+              <Empty :text="'暂无文章，等待作者更新~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
             </div>
           </div>
         </div>
@@ -204,7 +204,7 @@
           src="@/assets/images/common/loading.svg"
           alt=""
           srcset="" />
-        <div v-if="!state.loading && state.isMore" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
+        <div v-if="!state.loading && state.isMore && state.articleList.length != 0" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
         <div v-if="!state.isMore && !state.loading && state.articleList.length != 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
@@ -219,6 +219,9 @@ import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
 moment.suppressDeprecationWarnings = true;
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
+
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
   saying: '',
@@ -227,7 +230,7 @@ const state = reactive({
   loading: false,
   isMore: true,
   isDark: false,
-  isMobile: isMobile(),
+  // isMobile: isMobile(),
   isToolNext: false,
   articleList: [],
   page: {
@@ -425,10 +428,10 @@ const localStorageChangeCallback = (e: StorageEvent) => {
     state.isDark = e.newValue as any;
   }
 };
-// 监听窗口大小变化
-const resizeCallback = () => {
-  state.isMobile = isMobile();
-};
+// // 监听窗口大小变化
+// const resizeCallback = () => {
+//   state.isMobile = isMobile();
+// };
 
 let timer: null | number = null;
 onMounted(() => {
@@ -438,7 +441,7 @@ onMounted(() => {
   }, 200);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
-  window.addEventListener('resize', resizeCallback);
+  // window.addEventListener('resize', resizeCallback);
   state.isDark = getTheme() === 'dark';
 });
 onUnmounted(() => {
@@ -447,7 +450,7 @@ onUnmounted(() => {
     timer = null;
   }
   window.removeEventListener('setItemEvent', localStorageChangeCallback);
-  window.removeEventListener('resize', resizeCallback);
+  // window.removeEventListener('resize', resizeCallback);
 });
 </script>
 

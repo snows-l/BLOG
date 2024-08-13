@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 16:30:50
+ * @LastEditTime: 2024-08-13 09:46:28
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -12,11 +12,11 @@
       :moduleTitle="state.currentModule.moduleTitle"
       :icon="state.currentModule.moduleIcon"
       :coverImg="state.currentModule.muduleCover"
-      :isMobile="state.isMobile"
+      :isMobile="isMobi"
       :mudulDesc="state.currentModule.moduleDesc"
       :isArticle="false"></PageTopCover>
-    <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': state.isMobile }">
-      <div class="other-content" v-if="!state.isMobile">
+    <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': isMobi }">
+      <div class="other-content" v-if="!isMobi">
         <div class="article-content-warp" v-if="state.articleList.length > 0">
           <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
             <div class="img-left item-warp" v-if="index % 2 === 0">
@@ -169,10 +169,13 @@ import houduanCover from '@/assets/images/common/houduan.png';
 import otherCover from '@/assets/images/common/other.png';
 import qianduanCover from '@/assets/images/common/qianduan.png';
 import PageTopCover from '@/components/pageTopCover/index.vue';
-import { getQQAvatar, isMobile, randomNum } from '@/utils/common';
+import { getQQAvatar, randomNum } from '@/utils/common';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
 
 const router = useRouter();
 const route = useRoute();
@@ -199,7 +202,7 @@ const typeMap = {
 };
 
 const state = reactive({
-  isMobile: isMobile(),
+  // isMobile: isMobile(),
   avatar: getQQAvatar(),
   loading: false,
   isMore: true,
@@ -256,10 +259,10 @@ const handleLoadMore = () => {
   getArticleListFn();
 };
 
-// 监听窗口大小变化
-const resizeCallback = () => {
-  state.isMobile = isMobile();
-};
+// // 监听窗口大小变化
+// const resizeCallback = () => {
+//   state.isMobile = isMobile();
+// };
 
 watch(
   () => route.query.type,
@@ -275,11 +278,11 @@ watch(
 );
 
 onMounted(() => {
-  window.addEventListener('resize', resizeCallback);
+  // window.addEventListener('resize', resizeCallback);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', resizeCallback);
+  // window.removeEventListener('resize', resizeCallback);
 });
 </script>
 

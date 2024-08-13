@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 23:19:41
- * @FilePath: /BLOG/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-13 09:38:13
+ * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -24,7 +24,7 @@
     <!-- layout-warp -->
     <div class="layout-content-warp" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
       <!-- mobile header -->
-      <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="state.isMobile">
+      <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
         <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
@@ -125,18 +125,21 @@ import $bus from '@/bus/index';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';
 import { routes } from '@/router';
-import { getQQAvatar, isMobile } from '@/utils/common';
+import { getQQAvatar } from '@/utils/common';
 import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
+
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
 
 const route = useRoute();
 const router = useRouter();
 const layoutRef = ref(null);
 
 const state = reactive({
-  isMobile: isMobile(),
+  // isMobile: isMobile(),
   isFlutter: true,
   scrollTop: 0,
   activeMemu: route.path,
@@ -275,17 +278,17 @@ const scorllCallback = () => {
   }
 };
 
-// 监听窗口大小变化
-const resizeCallback = () => {
-  state.isMobile = isMobile();
-};
+// // 监听窗口大小变化
+// const resizeCallback = () => {
+//   state.isMobile = isMobile();
+// };
 
 onMounted(() => {
   layoutRef.value.addEventListener('scroll', scorllCallback);
   setTimeout(() => {
     state.isMenuShow = true;
   }, 200);
-  window.addEventListener('resize', resizeCallback);
+  // window.addEventListener('resize', resizeCallback);
   $bus.on('playMusic', ({ id }) => {
     state.currentMusicId = id;
     if (!state.isMusicPlayerShow) {
@@ -296,7 +299,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   layoutRef.value && layoutRef.value.removeEventListener('scroll', scorllCallback);
-  window.removeEventListener('resize', resizeCallback);
+  // window.removeEventListener('resize', resizeCallback);
 });
 </script>
 

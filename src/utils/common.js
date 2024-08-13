@@ -3,10 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 13:59:47
- * @FilePath: /BLOG/src/utils/common.js
+ * @LastEditTime: 2024-08-13 09:58:03
+ * @FilePath: /blog/src/utils/common.js
  */
-// 重写 localStorage 的 setItem 方法，派发自定义事件
+
+// 重写 localStorage 的 setItem 方法，派发自定义事件 用于监听  localStorage 的变化
 export const dispatchEventStroage = () => {
   const signSetItem = localStorage.setItem;
   localStorage.setItem = function (key, val) {

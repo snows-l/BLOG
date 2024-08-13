@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 22:48:10
- * @FilePath: /BLOG/src/views/article/detail.vue
+ * @LastEditTime: 2024-08-13 09:44:51
+ * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp">
@@ -12,11 +12,11 @@
       :moduleTitle="'文章详情'"
       :icon="'icon-jiaocheng-3'"
       :coverImg="state.arcticleDetail.cover"
-      :isMobile="state.isMobile"
+      :isMobile="isMobi"
       :mudulDesc="state.arcticleDetail.title"
       :isArticle="false"></PageTopCover>
 
-    <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': state.isMobile }">
+    <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="article-content-warp">
         <div class="article-content">
           <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" />
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="no-article" :class="{ 'm-no-article': state.isMobile }" v-else>
+    <div class="no-article" :class="{ 'm-no-article': isMobi }" v-else>
       <Empty :text="'暂无文章内容，请等待作者更新'" :loadingText="'文章内容正在拼命加载中...'" :loading="state.loading" />
     </div>
   </div>
@@ -47,11 +47,14 @@
 <script lang="ts" setup>
 import { addCommentCount, addShareCount, getArticleDetail } from '@/api/article';
 import PageTopCover from '@/components/pageTopCover/index.vue';
-import { isMobile, randomNum } from '@/utils/common';
+import { randomNum } from '@/utils/common';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, onMounted, reactive, ref, shallowRef, watch } from 'vue';
 import { useRoute } from 'vue-router';
+
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
 
 const route = useRoute();
 let articleId = route.query.id;
@@ -63,7 +66,7 @@ const mode = ref('default'); // simple | default
 const valueHtml = ref('');
 
 const state = reactive({
-  isMobile: isMobile(),
+  // isMobile: isMobile(),
   loading: false,
   arcticleDetail: {}
 });
@@ -184,6 +187,9 @@ onBeforeUnmount(() => {
   }
 
   .no-article {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    text-align: center;
     height: calc(100vh - 400px);
   }
   .m-no-article {
