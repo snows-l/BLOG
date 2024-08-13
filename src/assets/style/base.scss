@@ -35,7 +35,7 @@ body {
   --bg-warp-color: #ffffffed;
   --bg-warp-light-color: #433e3e72;
   --bg-warp-light-color-2: #ffffff72;
-  --bg-content-color: #ffffffef;
+  --bg-content-color: #ffffffa9;
   --bg-image-warp-color: #ffffff5b;
   --bg-modal-color: transparent;
   --bg-modal-warp-color: #403f3f40;
@@ -45,12 +45,12 @@ body {
 :root.dark {
   --theme: 'dark';
   --text-title-color: #5c5a5a;
-  --text-color: #eeeeee;
+  --text-color: #dddddd;
   --text-color-2: #999999;
   --bg-warp-color: #333333b3;
   --bg-warp-light-color: #cbc3c372;
   --bg-warp-light-color-2: #81818172;
-  --bg-content-color: #111111ef;
+  --bg-content-color: #2f2f2fa9;
   --bg-image-warp-color: #333333b3;
   --bg-modal-color: transparent;
   --bg-modal-warp-color: #dad3d381;
@@ -84,8 +84,10 @@ html {
 
 /* 自定义整个滚动条 */
 ::-webkit-scrollbar {
-  width: 2px; /* 设置滚动条的宽度 */
-  height: 2px;
+  // width: 2px; /* 设置滚动条的宽度 */
+  // height: 2px;
+  width: 0;
+  height: 0; /* 隐藏滚动条 */
 }
 
 /* 自定义滚动条轨道 */

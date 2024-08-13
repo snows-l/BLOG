@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 15:37:19
- * @FilePath: /BLOG/src/components/Layout/Menu.vue
+ * @LastEditTime: 2024-08-13 13:11:05
+ * @FilePath: /blog/src/components/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -140,10 +140,10 @@ const handleTo = item => {
       &:before {
         content: '';
         position: absolute;
-        top: -15px;
+        top: -10px;
         left: 50%;
         transform: translateX(-50%);
-        border-width: 10px;
+        border-width: 5px;
         border-style: solid;
         border-color: transparent transparent var(--bg-warp-color) transparent;
       }

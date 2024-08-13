@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 10:10:51
+ * @LastEditTime: 2024-08-13 13:19:57
  * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
@@ -12,6 +12,7 @@ import { createApp } from 'vue';
 import './assets/style/main.css';
 import Empty from './components/Empty/index.vue'; // 暂无数据组件
 import PageTopCover from '@/components/pageTopCover/index.vue'; // 顶部覆盖层组件
+import Comment from '@/components/Comment/index.vue'; // 评论组件
 import { dispatchEventStroage } from './utils/common';
 import { autoToggleTheme } from './utils/theme';
 
@@ -22,6 +23,7 @@ const app = createApp(App);
 
 app.component('Empty', Empty);
 app.component('PageTopCover', PageTopCover);
+app.component('Comment', Comment);
 app.use(dispatchEventStroage);
 app.use(createPinia());
 app.use(router);

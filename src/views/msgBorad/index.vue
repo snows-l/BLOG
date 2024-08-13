@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 12:42:41
+ * @LastEditTime: 2024-08-13 13:23:16
  * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
@@ -47,6 +47,7 @@
                       <div class="platform">
                         <div class="pulic-time">发布于：{{ item.time }}</div>
                         <span v-if="item.browser || item.os">
+                          {{ isMobi ? '平台：' : '' }}
                           (
                           <span>{{ item.browser }}</span>
                           <span style="margin-left: 20px">{{ item.os }}</span>
@@ -66,6 +67,7 @@
             <Empty :text="'暂无留言数据，期待您的留言~'" :loadingText="'留言正在拼命加载中...'" :loading="state.loading"></Empty>
           </div>
         </div>
+        <Comment :isMobi="isMobi"></Comment>
       </div>
     </div>
   </div>
@@ -116,9 +118,8 @@ const state = reactive({
 .msg-borad-warp {
   width: 100vw;
   height: 100vh;
-  background-color: var(--bg-image-warp-color);
-  overflow: auto;
   .msg-list-content-warp {
+    background-color: var(--bg-image-warp-color);
     padding: 20px 0;
     .center-max-width-warp {
       height: 100%;
@@ -171,7 +172,7 @@ const state = reactive({
         }
         .thanks-msg {
           font-size: 16px;
-          color: var(--text-color);
+          color: var(--theme-light-color-3);
         }
       }
       .msg-list-content {
@@ -280,7 +281,25 @@ const state = reactive({
   .m-msg-list-content-warp {
     .center-max-width-warp {
       width: 96% !important;
+      .platform {
+        line-height: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
+    .thanks-msg {
+      text-indent: 32px;
+      line-height: 18px;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.dark {
+  .msg-item:hover {
+    box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
   }
 }
 </style>
