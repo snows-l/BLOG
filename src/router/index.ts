@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 19:57:39
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-08-13 10:28:14
+ * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -125,6 +125,15 @@ export const routes = [
         component: Home
       }
     ]
+  },
+  {
+    path: '/msg-board',
+    name: 'MsgBoard',
+    meta: {
+      title: '留言板',
+      icon: 'icon-liuyanban-xian'
+    },
+    component: () => import('../views/msgBorad/index.vue')
   },
   {
     path: '/about',

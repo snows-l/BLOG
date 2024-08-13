@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 09:46:28
+ * @LastEditTime: 2024-08-13 10:11:50
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -168,7 +168,7 @@ import { getArticleList } from '@/api/article';
 import houduanCover from '@/assets/images/common/houduan.png';
 import otherCover from '@/assets/images/common/other.png';
 import qianduanCover from '@/assets/images/common/qianduan.png';
-import PageTopCover from '@/components/pageTopCover/index.vue';
+// import PageTopCover from '@/components/pageTopCover/index.vue';
 import { getQQAvatar, randomNum } from '@/utils/common';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive, watch } from 'vue';

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:12:31
+ * @LastEditTime: 2024-08-13 10:22:26
  * @FilePath: /blog/src/components/pageTopCover/index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     :class="{ 'm-page-top-cover-warp': isMobile }"
     style="background-size: cover; background-position: center; background-repeat: no-repeat"
     :style="{ backgroundImage: `url(${coverImg})` }">
-    <div class="content-warp">
+    <div class="content-warp" :class="{ 'default-bg-color': !bgColor }">
       <div class="mudule">
         <i class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
@@ -71,6 +71,10 @@ const props = defineProps({
   articleInfo: {
     type: Object,
     default: {}
+  },
+  bgColor: {
+    type: String || Boolean,
+    default: false
   }
 });
 
@@ -97,7 +101,7 @@ const randomNum = (min: number, max: number) => {
     width: 100%;
     padding: 20px;
     border-radius: 20px;
-    background-color: var(--bg-cover-color);
+    background-color: v-bind(bgColor);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,7 +111,7 @@ const randomNum = (min: number, max: number) => {
       justify-content: center;
       .iconfont {
         margin-right: 20px;
-        color: var(--theme-light-color-6);
+        color: var(--text-color);
         font-size: 36px;
       }
       .text {
@@ -158,6 +162,9 @@ const randomNum = (min: number, max: number) => {
         margin-right: 10px;
       }
     }
+  }
+  .default-bg-color {
+    background-color: var(--bg-cover-color);
   }
 }
 .m-page-top-cover-warp {

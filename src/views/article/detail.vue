@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 09:44:51
+ * @LastEditTime: 2024-08-13 10:11:04
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -46,7 +46,6 @@
 
 <script lang="ts" setup>
 import { addCommentCount, addShareCount, getArticleDetail } from '@/api/article';
-import PageTopCover from '@/components/pageTopCover/index.vue';
 import { randomNum } from '@/utils/common';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
