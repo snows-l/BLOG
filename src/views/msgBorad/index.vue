@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 13:23:16
+ * @LastEditTime: 2024-08-13 17:53:47
  * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
@@ -67,7 +67,7 @@
             <Empty :text="'暂无留言数据，期待您的留言~'" :loadingText="'留言正在拼命加载中...'" :loading="state.loading"></Empty>
           </div>
         </div>
-        <Comment :isMobi="isMobi"></Comment>
+        <Comment v-model="state.comment" @submit="handleComment"></Comment>
       </div>
     </div>
   </div>
@@ -110,8 +110,23 @@ const state = reactive({
       browser: 'Chrome',
       os: 'Mac OS'
     }
-  ]
+  ],
+  comment: {
+    value: '',
+    qq: '',
+    nickName: '',
+    avatarUrl: '',
+    email: '',
+    websiteUrl: '',
+    isPrivacy: false,
+    isEmailFeekback: false
+  }
 });
+
+// 提交评论
+const handleComment = () => {
+  console.log('------- state.comment -------', state.comment);
+};
 </script>
 
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 17:16:16
+ * @LastEditTime: 2024-08-13 17:28:41
  * @FilePath: /blog/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -187,7 +187,7 @@ const volumechangeCallback = () => {
 
 // 当前歌曲播放出错回调
 const errorCallback = (err: any) => {
-  console.log('music player errorCallback', err);
+  console.warn('music player errorCallback', err);
 };
 
 // 当前歌曲可以播放回调

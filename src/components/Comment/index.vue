@@ -3,46 +3,63 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 14:56:16
+ * @LastEditTime: 2024-08-13 17:55:46
  * @FilePath: /blog/src/components/Comment/index.vue
+ * @Copyright © 2020-2024 snows_l. All rights reserved.
+ *
+ *
+ * value: '',
+    qq: '',
+    nickName: '',
+    avatarUrl: '',
+    email: '',
+    websiteUrl: '',
+    isPrivacy: false,
+    isEmailFeekback: false
+  *
+
 -->
 <template>
-  <div class="comment-warp" :class="{ 'm-comment-warp': isMobi }">
+  <div class="comment-warp" :class="{ 'm-comment-warp': isMobi, 'is-submit': isSubmit }">
     <div class="top-tip"></div>
     <div class="input-out-warp">
-      <div class="input-warp">
-        <textarea type="textarea" :class="{ 'have-text': state.form.comment }" class="input-text" :rows="5" placeholder="" v-model="state.form.comment" />
+      <div class="input-warp" :class="{ 'no-input-warp': !localValue.value }">
+        <textarea type="textarea" :class="{ 'have-text': localValue.value }" class="input-text" :rows="10" placeholder="" v-model="localValue.value" />
         <label class="input-label">你是我一生只会遇见一次的惊喜 ...</label>
       </div>
     </div>
     <div class="info-warp">
-      <div class="input qq-warp">
-        <input type="text" v-model="state.form.qq" placeholder="昵称或QQ号 (昵称 )" @blur="handleQQinfn" />
+      <div class="input qq-warp" :class="{ 'no-qq': !localValue.qq }">
+        <input type="text" v-model="localValue.qq" placeholder="QQ" @blur="handleGetInfoByQQ" />
         <label class="input-label">QQ 紧用于获取头像及昵称</label>
-        <img class="avatar" :src="state.form.avatar || defaultAvatar" />
+        <img class="avatar" :src="localValue.avatar || defaultAvatar" />
       </div>
-      <div class="input email-warp">
-        <input type="text" v-model="state.form.email" placeholder="邮箱 (必须* )" />
+      <div class="input qq-warp" :class="{ 'no-nick': !localValue.nickName }">
+        <input type="text" v-model="localValue.nickName" placeholder="昵称" />
+        <label class="input-label">昵称</label>
+      </div>
+      <div class="input email-warp" :class="{ 'no-email': !localValue.qq }">
+        <input type="text" v-model="localValue.email" placeholder="邮箱 (必须* )" />
         <label class="input-label">你将收到回复通知</label>
       </div>
       <div class="input url-warp">
-        <input type="text" v-model="state.form.url" placeholder="网站" />
+        <input type="text" v-model="localValue.websiteUrl" placeholder="网站" />
         <label class="input-label">禁止小广告😀</label>
       </div>
     </div>
     <div class="check-warp">
       <div class="check-item">
-        <input type="radio" v-model="state.form.privacy" />
-        <label>私密评论</label>
+        <input type="radio" id="isPrivacy" :value="localValue.isPrivacy" @change="e => update(e, 'isPrivacy')" />
+        <label for="isPrivacy">私密评论</label>
       </div>
       <div class="check-item">
-        <input type="radio" v-model="state.form.back" />
-        <label>邮件通知</label>
+        <input type="radio" id="isEmailFeekback" :value="localValue.isEmailFeekback" @change="e => update(e, 'isEmailFeekback')" />
+        <label for="isEmailFeekback">邮件通知</label>
       </div>
     </div>
 
     <div class="btn-warp">
-      <div class="btn">BiuBiuBiu~</div>
+      <div class="btn" @click="handleSubmit">BiuBiuBiu~</div>
     </div>
   </div>
 </template>
@@ -50,36 +67,53 @@
 <script lang="ts" setup>
 import defaultAvatar from '@/assets/images/common/default_avatar.png';
 import axios from 'axios';
-import { ref, reactive, watch, onMounted, computed } from 'vue';
+import { computed, ref } from 'vue';
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
+
+const emits = defineEmits(['submit', 'update:modelValue']);
 
 const props = defineProps({
-  isMobi: {
-    type: Boolean,
-    default: false
+  modelValue: {
+    type: Object,
+    default: () => ({
+      isPrivacy: false,
+      isEmailFeekback: false
+    })
   }
 });
 
-const state = reactive({
-  form: {
-    comment: '',
-    qq: '',
-    qqback: '',
-    avatar: '',
-    email: '',
-    url: '',
-    privacy: false,
-    back: false
+let isSubmit = ref(false);
+
+const localValue = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emits('update:modelValue', value);
   }
 });
 
-const handleQQinfn = () => {
-  let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + state.form.qq + '&_wpnonce=7ccc55456e';
+//  更新 私密评论 和 邮件通知
+const update = (e, type) => {
+  let n = { ...props.modelValue, [type]: e.target.checked };
+  emits('update:modelValue', n);
+};
+
+// 根据qq获取用户信息 并更新 昵称 头像 邮箱
+const handleGetInfoByQQ = () => {
+  if (!props.modelValue.qq) return;
+  let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + props.modelValue.qq + '&_wpnonce=7ccc55456e';
   axios.get(url).then(res => {
-    state.form.avatar = res.data.avatar;
-    state.form.qqback = state.form.qq;
-    state.form.qq = res.data.name;
-    state.form.email = state.form.qqback + '@qq.com';
+    const n = { ...props.modelValue, avatarUrl: res.data.avatar, nickName: res.data.name, email: props.modelValue.qq + '@qq.com' };
+    emits('update:modelValue', n);
   });
+};
+
+//  提交
+const handleSubmit = () => {
+  isSubmit.value = true;
+  emits('submit', props.modelValue);
 };
 </script>
 
@@ -91,6 +125,7 @@ const handleQQinfn = () => {
   border-radius: 15px;
   background-color: var(--bg-warp-light-color-2);
   .input-out-warp {
+    border-radius: 10px;
     background-color: var(--bg-content-color);
     .input-warp {
       position: relative;
@@ -101,7 +136,10 @@ const handleQQinfn = () => {
       background-repeat: no-repeat;
       background-position: right;
       resize: vertical;
-      border-radius: 5px;
+      border-radius: 10px;
+      &:focus-within {
+        border-color: var(--theme-color);
+      }
       .input-text {
         width: calc(100% - 0px) !important;
         min-height: 60px;
@@ -109,8 +147,9 @@ const handleQQinfn = () => {
         border: none;
         background-color: transparent;
         outline: none;
+        color: var(--text-color);
         &:focus {
-          border-color: var(--primary-color);
+          border-color: var(--theme-color);
           + .input-label {
             top: -6px;
             font-size: 12px;
@@ -149,13 +188,16 @@ const handleQQinfn = () => {
     justify-content: space-between;
     flex-wrap: wrap;
     .input {
-      width: 240px;
+      width: 360px;
       padding: 5px 10px;
       background-color: var(--bg-content-color);
       position: relative;
       border: 1px solid var(--text-color);
       border-radius: 10px;
-
+      margin-bottom: 40px;
+      &:focus-within {
+        border-color: var(--theme-color);
+      }
       input {
         border: 0;
         outline: none;
@@ -195,6 +237,10 @@ const handleQQinfn = () => {
     .check-item {
       width: 200px;
       input {
+        color: var(--theme-color);
+      }
+      input:active {
+        color: var(--theme-color);
       }
       label {
         color: var(--text-color);
@@ -232,6 +278,14 @@ const handleQQinfn = () => {
         margin-bottom: 10px;
       }
     }
+  }
+}
+.is-submit {
+  .no-input-warp,
+  .no-qq,
+  .no-nick,
+  .no-email {
+    border: 1px solid red !important;
   }
 }
 </style>
