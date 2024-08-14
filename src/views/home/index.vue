@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:11:11
+ * @LastEditTime: 2024-08-14 13:35:28
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -62,7 +62,7 @@
             <div class="article-item pointer kbn-read" v-for="(item, index) in state.articleList" :key="index">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
-                  <Img class="cover-img" :src="item.cover" />
+                  <Img class="cover-img" size="100px" :src="item.cover" />
                 </div>
                 <div class="item-content" @click="handleArticle(item)">
                   <div class="create-time">
@@ -133,7 +133,7 @@
                   </div>
                 </div>
                 <div class="cover-img-warp">
-                  <Img class="cover-img" :src="item.cover" />
+                  <Img class="cover-img" size="100px" :src="item.cover" />
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@
               <div class="article-item pointer kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
-                    <Img class="cover-img" :src="item.cover" />
+                    <Img class="cover-img" size="100px" :src="item.cover" />
                   </div>
                   <div class="item-content pointer" @click="handleArticle(item)">
                     <div class="create-time">
