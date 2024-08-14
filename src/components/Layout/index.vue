@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 14:02:20
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-14 22:19:33
+ * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -75,29 +75,29 @@
     <div class="set-warp" :class="{ setShow: state.isSetShow }">
       <div class="theme-warp">
         <div class="theme-item set-item pointer" @click="handleToggerTheme('light')">
-          <img width="30px" height="30px" src="@/assets/images/common/light.png" fit="fill" />
+          <img width="30px" height="30px" src="@/assets/images/icon/light.png" fit="fill" />
         </div>
         <div class="theme-item set-item pointer" @click="handleToggerTheme('dark')">
-          <img width="30px" height="30px" src="@/assets/images/common/night.png" fit="fill" />
+          <img width="30px" height="30px" src="@/assets/images/icon/night.png" fit="fill" />
         </div>
       </div>
       <div class="bg-img-warp">
         <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(0)">
-          <img width="30px" height="30px" src="@/assets/images/common/icon-huahua.png" fit="fill" />
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-huahua.png" fit="fill" />
         </div>
         <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(1)">
-          <img width="30px" height="30px" src="@/assets/images/common/icon-diandian.png" fit="fill" />
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
         </div>
         <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(2)">
-          <img width="30px" height="30px" src="@/assets/images/common/icon-taoxin.png" fit="fill" />
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-taoxin.png" fit="fill" />
         </div>
         <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(3)">
-          <img width="30px" height="30px" src="@/assets/images/common/icon-xigua.png" fit="fill" />
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-xigua.png" fit="fill" />
         </div>
       </div>
       <div class="font-warp">
         <div class="font-item set-item pointer a" @click="handleToggleFont">
-          <img width="25px" height="25px" src="@/assets/images/common/icon-font-toggle.png" fit="fill" />
+          <img width="25px" height="25px" src="@/assets/images/icon/icon-font-toggle.png" fit="fill" />
         </div>
         <div class="font-item set-item pointer b">
           <input :value="state.currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
@@ -117,10 +117,10 @@
 </template>
 
 <script lang="ts" setup>
-import bg1 from '@/assets/images/common/bg1.png';
-import bg2 from '@/assets/images/common/bg2.png';
-import bg3 from '@/assets/images/common/bg3.png';
-import bg4 from '@/assets/images/common/bg4.png';
+import bg1 from '@/assets/images/bg/bg1.png';
+import bg2 from '@/assets/images/bg/bg2.png';
+import bg3 from '@/assets/images/bg/bg3.png';
+import bg4 from '@/assets/images/bg/bg4.png';
 import $bus from '@/bus/index';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';

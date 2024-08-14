@@ -3,14 +3,15 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 21:28:27
+ * @LastEditTime: 2024-08-14 22:23:48
  * @FilePath: /BLOG/src/components/CustomImg/index.vue
 -->
 <template>
   <el-image class="pointer el-img-warp" preview-teleported :src="src" :fit="fit" :previewSrcList="[src]" :lazy="true">
     <template #placeholder>
       <div class="img-loading-warp img-warp" style="width: 100%; height: 100%; background-color: #ffffff">
-        <img :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.jpg" alt="loading" />
+        <img v-if="isSpin" :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.svg" alt="loading" />
+        <img v-else :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.jpg" alt="loading" />
         <span v-if="isText" class="img-loading-text text">{{ loadingText }}</span>
       </div>
     </template>
@@ -27,26 +28,36 @@
 <script lang="ts" setup>
 import { ElImage } from 'element-plus';
 const props = defineProps({
+  // 图片地址
   src: {
     type: String,
     required: true,
     default: ''
   },
+  // 图片缩放类型 默认 fill
   fit: {
     type: String,
     default: 'fill'
   },
-  loadingText: {
-    type: String,
-    default: '加载中...'
-  },
+  // 图片大小 默认 60px
   size: {
     type: String,
     default: '60px'
   },
+  // 加载文字 默认 加载中...
+  loadingText: {
+    type: String,
+    default: '加载中...'
+  },
+  // 是否显示文字 默认 true
   isText: {
     type: Boolean,
     default: true
+  },
+  // 是否为转圈加载 默认 false
+  isSpin: {
+    type: Boolean,
+    default: false
   },
   alt: {
     type: String,

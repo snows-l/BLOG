@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:10:38
+ * @LastEditTime: 2024-08-14 22:17:04
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -22,7 +22,7 @@
         </div>
         <div class="author-info">
           <div class="info-item tool-btn" @click="handleToggleMove('pre')">
-            <img class="btn" src="@/assets/images/common/pre.png" alt="" srcset="" />
+            <img class="btn" src="@/assets/images/icon/pre.png" alt="" srcset="" />
           </div>
           <div class="info-out-warp-scroll">
             <div class="info-item-out-warp" :class="{ 'is-tool-next': state.isToolNext }">
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="info-item tool-btn" @click="handleToggleMove('next')">
-            <img class="btn" src="@/assets/images/common/next.png" alt="" srcset="" />
+            <img class="btn" src="@/assets/images/icon/next.png" alt="" srcset="" />
           </div>
         </div>
       </div>
@@ -239,11 +239,11 @@ const state = reactive({
   }
 });
 
-import iconBackstage from '@/assets/images/common/icon_snow.png';
-import iconEmail from '@/assets/images/common/mail.png';
-import iconQQ from '@/assets/images/common/qq.png';
-import iconQrcode from '@/assets/images/common/wechat-qrcode.png';
-import iconWeixin from '@/assets/images/common/weixin.png';
+import iconBackstage from '@/assets/images/icon/icon_snow.png';
+import iconEmail from '@/assets/images/icon/mail.png';
+import iconQQ from '@/assets/images/icon/qq.png';
+import iconQrcode from '@/assets/images/icon/wechat-qrcode.png';
+import iconWeixin from '@/assets/images/icon/weixin.png';
 
 const infoList = [
   [
