@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 10:28:14
+ * @LastEditTime: 2024-08-14 10:04:13
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
@@ -113,7 +113,7 @@ export const routes = [
           title: '影视',
           icon: 'icon-shipin'
         },
-        component: Home
+        component: () => import('@/views/play/video/index.vue')
       },
       {
         path: '/play/game',
@@ -122,7 +122,7 @@ export const routes = [
           title: '小游戏',
           icon: 'icon-yuleAPP'
         },
-        component: Home
+        component: () => import('@/views/play/game/index.vue')
       }
     ]
   },
