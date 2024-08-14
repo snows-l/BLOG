@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:02:23
+ * @LastEditTime: 2024-08-14 13:22:16
  * @FilePath: /blog/src/components/CustomImg/index.vue
 -->
 <template>
@@ -62,13 +62,14 @@ const props = defineProps({
   height: 100%;
   width: 100%;
   .text {
-    margin-top: 14px;
+    margin-top: 4px;
+    font-size: 10px;
     color: #999;
   }
 }
-.img-error {
-  max-width: 100px;
-  max-height: 100px;
-  font-size: 12px;
+.img-error,
+.img-loading {
+  max-width: 60px;
+  max-height: 60px;
 }
 </style>

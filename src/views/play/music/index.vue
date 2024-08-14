@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:09:31
+ * @LastEditTime: 2024-08-14 13:19:40
  * @FilePath: /blog/src/views/play/music/index.vue
 -->
 <template>
@@ -162,7 +162,7 @@ onUnmounted(() => {
           .cover-warp {
             width: 100px;
             height: 100px;
-            padding: 20px;
+            padding: 10px;
             img {
               width: 100%;
               height: 100%;
