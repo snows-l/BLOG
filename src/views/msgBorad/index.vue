@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 09:24:41
+ * @LastEditTime: 2024-08-14 14:01:20
  * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
@@ -43,7 +43,12 @@
                       <div class="name">
                         <div class="bozhu" v-if="item.qq === '37523953'">博主</div>
                         <span>{{ item.nickName }}</span>
-                        <div class="bozhu level" style="margin-left: 5px; margin-right: 5px">Lv0</div>
+                        <div
+                          class="bozhu level"
+                          :style="{ color: item.qq === '37523953' ? '#ff6600' : '', border: item.qq === '37523953' ? '1px solid #ff6600' : '' }"
+                          style="margin-left: 5px; margin-right: 5px">
+                          Lv{{ item.qq == '37523953' ? '1' : '' }}0
+                        </div>
                       </div>
                       <div class="platform">
                         <div class="pulic-time">发布于：{{ item.time }}</div>
@@ -248,6 +253,7 @@ const handleComment = () => {
           }
         }
         .thanks-msg {
+          line-height: 20px;
           font-size: 16px;
           color: var(--theme-light-color-3);
         }
@@ -262,6 +268,7 @@ const handleComment = () => {
           position: relative;
           width: auto;
           display: inline-block;
+          color: var(--text-color);
           &::after {
             position: absolute;
             left: 0;

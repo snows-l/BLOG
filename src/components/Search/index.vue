@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:10:07
+ * @LastEditTime: 2024-08-14 13:58:09
  * @FilePath: /blog/src/components/Search/index.vue
 -->
 <template>
@@ -96,14 +96,14 @@
                   </div>
                 </div>
                 <div class="m-no-article" v-else>
-                  <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+                  <Empty :text="'暂无文章，等待博主的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
                 </div>
                 <div class="article-list"></div>
               </div>
             </div>
           </div>
           <div class="empry-warp" v-else>
-            <Empty :text="'没有找到相关内容~请重新输入关键字进行搜索！'" :loadingText="'搜索内容加载中...'" :loading="state.loading" />
+            <Empty :text="'没有找到相关内容~请重新搜索！'" :loadingText="'搜索内容加载中...'" :loading="state.loading" />
           </div>
         </div>
       </div>
@@ -368,9 +368,9 @@ onUnmounted(() => {
                   }
                 }
                 .cover-warp {
-                  width: 60px;
-                  height: 60px;
-                  padding: 10px;
+                  width: 74px;
+                  height: 74px;
+                  padding: 3px;
                   img {
                     width: 100%;
                     height: 100%;

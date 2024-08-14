@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 21:59:12
- * @FilePath: /BLOG/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-14 14:02:20
+ * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -669,7 +669,7 @@ onUnmounted(() => {
     z-index: 999;
     // background-color: var(--bg-modal-warp-color);
     background-color: transparent;
-    transition: top 1.2s ease;
+    transition: top 1s ease;
   }
   .is-show-search {
     top: 0 !important;

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:47:44
+ * @LastEditTime: 2024-08-14 13:54:39
  * @FilePath: /blog/src/components/CustomImg/index.vue
 -->
 <template>
@@ -11,14 +11,14 @@
     <template #placeholder>
       <div class="img-loading-warp img-warp">
         <img :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.svg" alt="loading" />
-        <span class="img-loading-text text">{{ loadingText }}</span>
+        <span v-if="isText" class="img-loading-text text">{{ loadingText }}</span>
       </div>
     </template>
 
     <template #error>
       <div class="img-error-warp img-warp">
         <img :style="{ width: size, height: size }" class="img-error" src="@/assets/images/common/error.png" alt="error" />
-        <span class="img-error-text text">😭 加载失败了</span>
+        <span v-if="isText" class="img-error-text text">😭 加载失败了</span>
       </div>
     </template>
   </el-image>
@@ -43,6 +43,10 @@ const props = defineProps({
   size: {
     type: String,
     default: '60px'
+  },
+  isText: {
+    type: Boolean,
+    default: true
   },
   alt: {
     type: String,

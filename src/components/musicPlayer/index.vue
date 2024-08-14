@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 17:28:41
+ * @LastEditTime: 2024-08-14 13:53:30
  * @FilePath: /blog/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -11,7 +11,7 @@
     <audio ref="audioRef" style="display: none" :src="state.currentMusic.src"></audio>
     <div class="cover-warp">
       <div class="cover-img-warp">
-        <img class="cover-img" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
+        <Img class="cover-img" :isText="false" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
       </div>
       <div class="paly-pause">
         <i @click="handleControl('pause')" v-if="state.isPlaying" class="pointer iconfont icon-zanting"></i>
