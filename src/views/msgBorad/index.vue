@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 14:01:20
- * @FilePath: /blog/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-08-14 21:46:52
+ * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -90,7 +90,7 @@
 
 <script lang="ts" setup>
 import { addComment, getCommentList } from '@/api/comment';
-import coverImg from '@/assets/images/common/msg-borad.png';
+import coverImg from '@/assets/images/bg/cover-comment.png';
 import useResize from '@/hooks/useResize';
 import { getQQAvatar } from '@/utils/common';
 import axios from 'axios';

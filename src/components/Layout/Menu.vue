@@ -3,28 +3,31 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 13:11:05
- * @FilePath: /blog/src/components/Layout/Menu.vue
+ * @LastEditTime: 2024-08-14 21:31:38
+ * @FilePath: /BLOG/src/components/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
     <template v-for="menus in menuList" :key="menus.path">
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
-          <span @click="handleTo(menus)">
-            <i class="iconfont" :class="menus.meta.icon"></i>
+          <span @click="handleTo(menus)" class="item-nav-warp">
+            <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img"" />
+            <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="nav-list-sub-contetn">
-            <li class="nav-item-sub nav-item pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
-              <i class="iconfont" :class="menu.meta.icon"></i>
+            <li class="nav-item-sub nav-item item-nav-warp pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
+              <img class="icon-img" v-if="menu.meta.img" :src="'/src/assets/images/icon/' + menu.meta.img" />
+              <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
             </li>
           </ul>
         </li>
       </template>
-      <li v-else class="nav-item one-level" @click="handleTo(menus)">
-        <i class="iconfont" :class="menus.meta.icon"></i>
+      <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
+        <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+        <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
       </li>
     </template>
@@ -33,20 +36,23 @@
     <template v-for="menus in menuList" :key="menus.path">
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
-          <span>
-            <i class="iconfont" :class="menus.meta.icon"></i>
+          <span class="item-nav-warp">
+            <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+            <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="m-nav-list-sub-contetn">
-            <li class="nav-item-sub nav-item pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
-              <i class="iconfont" :class="menu.meta.icon"></i>
+            <li class="nav-item-sub nav-item pointer item-nav-warp" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
+              <img class="icon-img" v-if="menu.meta.img" :src="'/src/assets/images/icon/' + menu.meta.img" />
+              <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
             </li>
           </ul>
         </li>
       </template>
-      <li v-else class="nav-item one-level" @click="handleTo(menus)">
-        <i class="iconfont" :class="menus.meta.icon"></i>
+      <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
+        <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+        <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
       </li>
     </template>
@@ -78,11 +84,16 @@ const state = reactive({
   showPath: ''
 });
 
+// 路由跳转
 const handleTo = item => {
-  router.push({
-    path: item.path || '/',
-    query: item.meta.query || {}
-  });
+  if (item.link) {
+    window.open(item.link, '_blank');
+  } else {
+    router.push({
+      path: item.path || '/',
+      query: item.meta.query || {}
+    });
+  }
   emits('menu-change');
 };
 </script>
@@ -119,7 +130,14 @@ const handleTo = item => {
     font-size: 16px;
     color: var(--text-color);
     transition: color 0.3s ease, dispay 0.3s ease;
+    display: flex;
+    align-items: center;
     .iconfont {
+      margin-right: 10px;
+    }
+    .icon-img {
+      width: 16px;
+      height: 16px;
       margin-right: 10px;
     }
     &:hover {
@@ -163,6 +181,10 @@ const handleTo = item => {
     }
   }
 }
+.item-nav-warp {
+  display: flex;
+  align-items: center;
+}
 
 .m-nav-list-warp {
   display: flex;
@@ -172,6 +194,13 @@ const handleTo = item => {
   .nav-item {
     margin: 15px 0;
     color: var(--text-color);
+    // display: flex;
+    // align-items: center;
+    .icon-img {
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+    }
     &:hover {
       color: var(--theme-color);
     }

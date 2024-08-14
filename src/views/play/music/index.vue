@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:19:40
- * @FilePath: /blog/src/views/play/music/index.vue
+ * @LastEditTime: 2024-08-14 21:42:03
+ * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
   <div class="music-warp">
@@ -49,7 +49,7 @@
 
 <script lang="ts" setup>
 import { getDict, getMusicList } from '@/api/music';
-import coverImg from '@/assets/images/common/cover-music.png';
+import coverImg from '@/assets/images/bg/cover-music.png';
 import $bus from '@/bus/index';
 import { onMounted, onUnmounted, reactive } from 'vue';
 

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 10:04:13
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-08-14 21:50:55
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -27,11 +27,11 @@ export const routes = [
       title: '归档',
       icon: 'icon-guidang'
     },
-    redirect: { name: 'Skill' },
+    redirect: { name: 'FrontEnd', query: { type: '1' } },
     children: [
       {
-        path: '/article/skill',
-        name: 'Skill',
+        path: '/article/share',
+        name: 'FrontEnd',
         meta: {
           title: '前端',
           icon: 'icon-qianduan',
@@ -43,7 +43,7 @@ export const routes = [
       },
       {
         path: '/article/share',
-        name: 'Share',
+        name: 'BackEnd',
         meta: {
           title: '后端',
           icon: 'icon-node-js',
@@ -56,7 +56,7 @@ export const routes = [
       },
       {
         path: '/article/share',
-        name: 'Share',
+        name: 'Other',
         meta: {
           title: '其他分享',
           icon: 'icon-qita',
@@ -143,6 +143,17 @@ export const routes = [
       icon: 'icon-guanyu'
     },
     component: () => import('../views/about/index.vue')
+  },
+  {
+    link: 'http://124.223.41.220/view',
+    path: '',
+    name: 'Backstage',
+    meta: {
+      title: '后台管理',
+      icon: 'icon-guanyu',
+      img: 'backstage.png'
+    },
+    component: null
   }
 ];
 

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:35:28
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-08-14 22:10:38
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -62,7 +62,7 @@
             <div class="article-item pointer kbn-read" v-for="(item, index) in state.articleList" :key="index">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
-                  <Img class="cover-img" size="100px" :src="item.cover" />
+                  <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :fit="isMobi ? 'contain' : ''" />
                 </div>
                 <div class="item-content" @click="handleArticle(item)">
                   <div class="create-time">
@@ -133,7 +133,7 @@
                   </div>
                 </div>
                 <div class="cover-img-warp">
-                  <Img class="cover-img" size="100px" :src="item.cover" />
+                  <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" />
                 </div>
               </div>
             </div>
@@ -153,7 +153,7 @@
               <div class="article-item pointer kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
-                    <Img class="cover-img" size="100px" :src="item.cover" />
+                    <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" />
                   </div>
                   <div class="item-content pointer" @click="handleArticle(item)">
                     <div class="create-time">
@@ -212,15 +212,14 @@
 </template>
 
 <script setup lang="ts">
-import { ElImage } from 'element-plus';
 import { getArticleList } from '@/api/article';
+import useResize from '@/hooks/useResize';
 import router from '@/router';
-import { getQQAvatar, isMobile, randomNum } from '@/utils/common';
+import { getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
 moment.suppressDeprecationWarnings = true;
-import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 
 const saying = '我见众生皆草木，唯你是青山。';
@@ -630,6 +629,7 @@ onUnmounted(() => {
     }
   }
   .other-content-warp {
+    margin-top: -0px;
     background-color: var(--bg-warp-color);
     display: flex;
     flex-direction: column;
