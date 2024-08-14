@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 12:31:38
+ * @LastEditTime: 2024-08-14 14:03:33
  * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
@@ -41,6 +41,6 @@ window.addEventListener('visibilitychange', () => {
   if (!document.hidden) {
     document.title = "☂ 被你发现了！｜ snows_l's BLOG";
   } else {
-    document.title = "☂ 瓜皮人呢？还不回来！｜ snows_l's BLOG";
+    document.title = "☂ 瓜皮人呢！还不回来？｜ snows_l's BLOG";
   }
 });

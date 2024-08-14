@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 20:26:14
- * @FilePath: /BLOG/src/App.vue
+ * @LastEditTime: 2024-08-14 14:03:57
+ * @FilePath: /blog/src/App.vue
 -->
 <script setup lang="ts">
 import { setDocmentTitle } from '@/utils/common';
@@ -29,10 +29,6 @@ if (localStorage.getItem('primaryColor')) {
   setPrimaryColor(localStorage.getItem('primaryColor'));
 }
 
-// fetch('/index.html').then(res => {
-//   console.log('-------- res --------', res.text());
-// });
-
 watch(
   () => route.path,
   n => {
@@ -44,7 +40,7 @@ watch(
       }
     }
     if (title === '') title = '首页';
-    setDocmentTitle(title + ' | ' + import.meta.env.VITE_API_TITLE);
+    setDocmentTitle('☂ ' + title + ' | ' + import.meta.env.VITE_API_TITLE);
   }
 );
 </script>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:07:19
+ * @LastEditTime: 2024-08-14 14:06:46
  * @FilePath: /blog/src/components/pageTopCover/index.vue
 -->
 <template>
@@ -98,11 +98,11 @@ let avatar = getQQAvatar();
       .iconfont {
         margin-right: 20px;
         color: var(--text-color);
-        font-size: 36px;
+        font-size: 24px;
       }
       .text {
         color: var(--text-color);
-        font-size: 36px;
+        font-size: 24px;
       }
     }
     .module-bg-color {
@@ -112,7 +112,7 @@ let avatar = getQQAvatar();
       margin-top: 10px;
       height: 50px;
       line-height: 25px;
-      font-size: 22px;
+      font-size: 18px;
       color: var(--text-color);
       display: -webkit-box;
       -webkit-box-orient: vertical;
