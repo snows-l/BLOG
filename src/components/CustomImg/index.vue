@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:36:39
+ * @LastEditTime: 2024-08-14 13:47:44
  * @FilePath: /blog/src/components/CustomImg/index.vue
 -->
 <template>
@@ -17,7 +17,7 @@
 
     <template #error>
       <div class="img-error-warp img-warp">
-        <img class="img-error" src="@/assets/images/common/error.png" alt="error" />
+        <img :style="{ width: size, height: size }" class="img-error" src="@/assets/images/common/error.png" alt="error" />
         <span class="img-error-text text">😭 加载失败了</span>
       </div>
     </template>
