@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 22:57:09
+ * @LastEditTime: 2024-08-14 19:43:50
  * @FilePath: /BLOG/src/components/Comment/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -35,16 +35,16 @@
         <img class="avatar" :src="localValue.avatar || defaultAvatar" />
       </div>
       <div class="input qq-warp" :class="{ 'no-nick': !localValue.nickName }">
-        <input type="text" v-model="localValue.nickName" placeholder="昵称" />
-        <label class="input-label">昵称</label>
+        <input type="text" v-model="localValue.nickName" placeholder="昵称( * )" />
+        <label class="input-label">昵称 (输入QQ后自动获取)</label>
       </div>
       <div class="input email-warp" :class="{ 'no-email': !localValue.qq }">
-        <input type="text" v-model="localValue.email" placeholder="邮箱 (必须* )" />
-        <label class="input-label">你将收到回复通知</label>
+        <input type="text" v-model="localValue.email" placeholder="邮箱 ( * )" />
+        <label class="input-label">你将收到回复通知 (自动获取)</label>
       </div>
       <div class="input url-warp">
         <input type="text" v-model="localValue.websiteUrl" placeholder="网站" />
-        <label class="input-label">禁止小广告😀</label>
+        <label class="input-label">禁止小广告 😀</label>
       </div>
     </div>
     <div class="check-warp">
