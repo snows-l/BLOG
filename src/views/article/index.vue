@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:36:10
+ * @LastEditTime: 2024-08-14 13:50:20
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -105,11 +105,11 @@
       <div class="other-content m-other-content" v-else>
         <div class="article-content-warp" v-if="state.articleList.length > 0">
           <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
-            <div class="img-left item-warp pointer" @click="handleArticle(item)">
+            <div class="img-left item-warp pointer">
               <div class="cover-img-warp">
                 <Img class="cover-img" :src="item.cover" size="100px" />
               </div>
-              <div class="item-content">
+              <div class="item-content" @click="handleArticle(item)">
                 <div class="create-time">
                   <span>
                     <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
