@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 21:32:12
- * @FilePath: /BLOG/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-08-14 09:24:41
+ * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -15,7 +15,8 @@
       :isMobile="isMobi"
       :mudulDesc="''"
       :isArticle="false"
-      :bgColor="'transparent'"></PageTopCover>
+      :bgColor="''"
+      :moduleBgColor="''"></PageTopCover>
     <div class="msg-list-content-warp" :class="{ 'm-msg-list-content-warp': isMobi }">
       <div class="center-max-width-warp">
         <div class="entry-content">

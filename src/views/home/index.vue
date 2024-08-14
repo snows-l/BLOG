@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 09:51:57
+ * @LastEditTime: 2024-08-14 09:42:21
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -605,7 +605,7 @@ onUnmounted(() => {
       z-index: 4;
       transition-duration: 0.4s, 0.4s;
       animation-name: move2;
-      animation-duration: 240s;
+      animation-duration: 30s;
       animation-fill-mode: backwards;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -619,11 +619,10 @@ onUnmounted(() => {
       opacity: 1;
       transition-duration: 0.4s, 0.4s;
       animation-name: move2;
-      animation-duration: 160s;
+      animation-duration: 20s;
       animation-fill-mode: backwards;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
-      animation-duration: 400s;
       animation-fill-mode: backwards;
       animation-timing-function: linear;
       animation-iteration-count: infinite;

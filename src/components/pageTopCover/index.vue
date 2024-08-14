@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 10:22:26
+ * @LastEditTime: 2024-08-14 09:32:14
  * @FilePath: /blog/src/components/pageTopCover/index.vue
 -->
 <template>
@@ -13,7 +13,7 @@
     style="background-size: cover; background-position: center; background-repeat: no-repeat"
     :style="{ backgroundImage: `url(${coverImg})` }">
     <div class="content-warp" :class="{ 'default-bg-color': !bgColor }">
-      <div class="mudule">
+      <div class="mudule" :class="{ 'module-bg-color': moduleBgColor }">
         <i class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
       </div>
@@ -75,6 +75,10 @@ const props = defineProps({
   bgColor: {
     type: String || Boolean,
     default: false
+  },
+  moduleBgColor: {
+    type: String || Boolean,
+    default: false
   }
 });
 
@@ -91,6 +95,15 @@ const randomNum = (min: number, max: number) => {
   width: 100%;
   height: 400px;
   position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-warp-light-color-2);
+  }
   .content-warp {
     position: absolute;
     left: 50%;
@@ -118,6 +131,9 @@ const randomNum = (min: number, max: number) => {
         color: var(--text-color);
         font-size: 36px;
       }
+    }
+    .module-bg-color {
+      background-color: v-bind(moduleBgColor);
     }
     .title-warp {
       margin-top: 10px;
@@ -164,7 +180,7 @@ const randomNum = (min: number, max: number) => {
     }
   }
   .default-bg-color {
-    background-color: var(--bg-cover-color);
+    // background-color: var(--bg-cover-color);
   }
 }
 .m-page-top-cover-warp {
