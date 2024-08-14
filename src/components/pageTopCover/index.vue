@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 14:06:46
- * @FilePath: /blog/src/components/pageTopCover/index.vue
+ * @LastEditTime: 2024-08-14 23:55:51
+ * @FilePath: /BLOG/src/components/pageTopCover/index.vue
 -->
 <template>
   <div
@@ -12,8 +12,8 @@
     :class="{ 'm-page-top-cover-warp': isMobile }"
     style="background-size: cover; background-position: center; background-repeat: no-repeat"
     :style="{ backgroundImage: `url(${coverImg})` }">
-    <div class="content-warp" :class="{ 'default-bg-color': !bgColor }">
-      <div class="mudule" :class="{ 'module-bg-color': moduleBgColor }">
+    <div class="content-warp">
+      <div class="mudule">
         <i class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
       </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getQQAvatar, randomNum } from '@/utils/common';
+import { getQQAvatar } from '@/utils/common';
 const props = defineProps({
   coverImg: {
     type: String,
@@ -49,14 +49,6 @@ const props = defineProps({
   articleInfo: {
     type: Object,
     default: {}
-  },
-  bgColor: {
-    type: String || Boolean,
-    default: false
-  },
-  moduleBgColor: {
-    type: String || Boolean,
-    default: false
   }
 });
 
@@ -104,9 +96,6 @@ let avatar = getQQAvatar();
         color: var(--text-color);
         font-size: 24px;
       }
-    }
-    .module-bg-color {
-      background-color: v-bind(moduleBgColor);
     }
     .title-warp {
       margin-top: 10px;

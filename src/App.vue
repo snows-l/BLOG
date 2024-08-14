@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 14:03:57
- * @FilePath: /blog/src/App.vue
+ * @LastEditTime: 2024-08-15 01:01:54
+ * @FilePath: /BLOG/src/App.vue
 -->
 <script setup lang="ts">
 import { setDocmentTitle } from '@/utils/common';

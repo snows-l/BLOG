@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:17:04
+ * @LastEditTime: 2024-08-15 00:11:19
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -239,7 +239,7 @@ const state = reactive({
   }
 });
 
-import iconBackstage from '@/assets/images/icon/icon_snow.png';
+import iconBackstage from '@/assets/images/icon/backstage.png';
 import iconEmail from '@/assets/images/icon/mail.png';
 import iconQQ from '@/assets/images/icon/qq.png';
 import iconQrcode from '@/assets/images/icon/wechat-qrcode.png';

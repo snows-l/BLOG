@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:19:33
+ * @LastEditTime: 2024-08-15 01:19:07
  * @FilePath: /BLOG/src/components/Layout/index.vue
 -->
 <template>
@@ -25,7 +25,10 @@
     <div class="layout-content-warp" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
       <!-- mobile header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
-        <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
+        <div class="icon-warp">
+          <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
+          <i class="iconfont icon-sousuo1" style="margin-left: 10px" @click="handleSearch"></i>
+        </div>
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
           <span class="title-sub-text" style="margin: 0 10px 0 5px">の</span>
@@ -52,7 +55,7 @@
       </header>
 
       <!-- main -->
-      <main @click="handleClickMain">
+      <main @click="handleClickMain" id="main">
         <router-view></router-view>
       </main>
     </div>
@@ -295,6 +298,7 @@ onMounted(() => {
       state.isMusicPlayerShow = true;
     }
   });
+  // new Particle('#main');
 });
 
 onUnmounted(() => {
@@ -438,7 +442,7 @@ onUnmounted(() => {
           color: var(--text-color);
         }
         .title-sub-text {
-          color: var(--text-title-color);
+          color: var(--text-color);
         }
         &:hover {
           .title-text {

@@ -1,13 +1,13 @@
 body {
-  cursor: url('@/assets/images/cursor/default.png'), auto; // move cursor to assets/images/cursor/default.png
+  cursor: url('@/assets/images/cursor/default.png'), auto !important; // move cursor to assets/images/cursor/default.png
 }
 .pointer,
 .btn {
-  cursor: url('@/assets/images/cursor/pointer.png'), auto; // clickable cursor to assets/images/cursor/pointer.png
+  cursor: url('@/assets/images/cursor/pointer.png'), auto !important; // clickable cursor to assets/images/cursor/pointer.png
 }
 
 .text {
-  cursor: url('@/assets/images/cursor/text.png'), auto; // text cursor to assets/images/cursor/text.png
+  cursor: url('@/assets/images/cursor/text.png'), auto !important; // text cursor to assets/images/cursor/text.png
 }
 
 :root {

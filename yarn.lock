@@ -967,6 +967,11 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
+jparticles@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jparticles/-/jparticles-3.5.0.tgz#f343d1d13442a9edfbb8b5a4c7fdbe479ab2ff5b"
+  integrity sha512-qUKP56Xqh2G7TqFKHMPDYzfZKkvsbLGJu+xJI4dh0YGZL26zOCUVV31MkkPWmfd6SaST23mhSvvvEArFd8yApQ==
+
 js-cookie@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.5.tgz#0b7e2fd0c01552c58ba86e0841f94dc2557dcdbc"
