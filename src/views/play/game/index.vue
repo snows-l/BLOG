@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 10:04:36
- * @FilePath: /blog/src/views/play/game/index.vue
+ * @LastEditTime: 2024-08-15 01:26:51
+ * @FilePath: /BLOG/src/views/play/game/index.vue
 -->
 <template>
   <div class="contvideo-warpainer-warp">
@@ -13,8 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, watch, onMounted, computed } from 'vue';
-import coverImg from '@/assets/images/common/cover-music.png';
+import coverImg from '@/assets/images/bg/cover-game.png';
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 </script>
