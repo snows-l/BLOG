@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:06:49
+ * @LastEditTime: 2024-08-14 23:06:36
  * @FilePath: /BLOG/src/components/Search/index.vue
 -->
 <template>
@@ -260,7 +260,7 @@ onUnmounted(() => {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-image: url('@/assets/images/common/bg1.png');
+  background-image: url('@/assets/images/bg/bg1.png');
   padding: 30px 20px;
   .search-content-warp {
     height: 100%;
@@ -312,7 +312,7 @@ onUnmounted(() => {
       width: 100%;
       height: calc(100% - 80px);
       border-radius: 15px;
-      background: var(--bg-warp-light-color);
+      background: var(--bg-content-color);
       overflow: hidden;
       padding: 20px;
       .serch-content-t {
@@ -338,7 +338,7 @@ onUnmounted(() => {
               justify-content: space-between;
               padding: 5px 0;
               .music-item {
-                width: 400px;
+                width: 390px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;

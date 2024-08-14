@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 21:50:55
+ * @LastEditTime: 2024-08-14 22:56:31
  * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
@@ -24,7 +24,7 @@ export const routes = [
     path: '/article',
     name: 'Article',
     meta: {
-      title: '归档',
+      title: '文章',
       icon: 'icon-guidang'
     },
     redirect: { name: 'FrontEnd', query: { type: '1' } },

@@ -3,15 +3,15 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 13:08:14
- * @FilePath: /blog/src/views/article/detail.vue
+ * @LastEditTime: 2024-08-14 23:03:14
+ * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp">
     <PageTopCover
       :moduleTitle="'文章详情'"
       :icon="'icon-jiaocheng-3'"
-      :coverImg="state.arcticleDetail.cover"
+      :coverImg="articleCover"
       :isMobile="isMobi"
       :mudulDesc="state.arcticleDetail.title"
       :isArticle="false"></PageTopCover>
@@ -19,6 +19,9 @@
     <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="article-content-warp">
         <div class="article-content">
+          <div class="article-cover-warp" :class="{ 'm-article-cover-warp': isMobi }">
+            <Img :src="state.arcticleDetail.cover" :size="'240px'" />
+          </div>
           <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" />
           <Editor class="editor-content-warp" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
           <div class="article-intfo">
@@ -46,6 +49,7 @@
 
 <script lang="ts" setup>
 import { addCommentCount, addShareCount, getArticleDetail } from '@/api/article';
+import articleCover from '@/assets/images/bg/cover-article.png';
 import { randomNum } from '@/utils/common';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
@@ -150,12 +154,22 @@ onBeforeUnmount(() => {
       max-width: var(--content-max-width);
       margin: 0 auto;
       .article-content {
-        padding: 30px 16px;
+        padding: 20px 16px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
         background-color: var(--bg-content-color);
         color: var(--text-color);
         line-height: 20px !important;
+        .article-cover-warp {
+          width: 100%;
+          height: 350px;
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+          overflow: hidden;
+        }
+        .m-article-cover-warp {
+          height: 240px;
+        }
       }
       .article-intfo {
         margin-top: 20px;

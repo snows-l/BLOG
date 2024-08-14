@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 21:42:03
+ * @LastEditTime: 2024-08-14 23:06:01
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -130,7 +130,7 @@ onUnmounted(() => {
         justify-content: space-between;
         padding: 20px 0;
         .music-item {
-          width: 400px;
+          width: 440px;
           display: flex;
           align-items: center;
           justify-content: space-between;
