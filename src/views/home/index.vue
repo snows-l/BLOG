@@ -3,14 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 09:42:21
+ * @LastEditTime: 2024-08-14 13:11:11
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
     <div class="first-screen">
       <div class="content-warp" :class="{ showContent: state.isShowContent }">
-        <img loading="lazy" class="avatar" :src="state.avatar" alt="" />
+        <img class="avatar" :src="state.avatar" alt="" />
         <div class="saying">
           <div class="saying-text">
             <i class="saying-icon iconfont icon-quotes-left"></i>
@@ -59,12 +59,12 @@
             <h2 class="content-title">Article</h2>
           </div>
           <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-            <div class="article-item kbn-read pointer" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+            <div class="article-item pointer kbn-read" v-for="(item, index) in state.articleList" :key="index">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
-                  <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+                  <Img class="cover-img" :src="item.cover" />
                 </div>
-                <div class="item-content">
+                <div class="item-content" @click="handleArticle(item)">
                   <div class="create-time">
                     <span>
                       <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
@@ -99,7 +99,7 @@
                 </div>
               </div>
               <div class="img-right item-warp" v-else>
-                <div class="item-content">
+                <div class="item-content pointer" @click="handleArticle(item)">
                   <div class="create-time">
                     <span>
                       <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
@@ -133,7 +133,7 @@
                   </div>
                 </div>
                 <div class="cover-img-warp">
-                  <img class="cover-img" :src="item.cover" alt="" />
+                  <Img class="cover-img" :src="item.cover" />
                 </div>
               </div>
             </div>
@@ -150,12 +150,12 @@
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
             <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-              <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+              <div class="article-item pointer kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
-                    <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+                    <Img class="cover-img" :src="item.cover" />
                   </div>
-                  <div class="item-content">
+                  <div class="item-content pointer" @click="handleArticle(item)">
                     <div class="create-time">
                       <span>
                         <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
@@ -168,7 +168,7 @@
                     </div>
                     <div class="auth-info-warp">
                       <div>
-                        <img loading="lazy" :src="state.avatar" vertical-align="middle" alt="" />
+                        <img :src="state.avatar" vertical-align="middle" alt="" />
                         <span>snows_l</span>
                       </div>
                       <div>
@@ -212,6 +212,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElImage } from 'element-plus';
 import { getArticleList } from '@/api/article';
 import router from '@/router';
 import { getQQAvatar, isMobile, randomNum } from '@/utils/common';
@@ -230,7 +231,6 @@ const state = reactive({
   loading: false,
   isMore: true,
   isDark: false,
-  // isMobile: isMobile(),
   isToolNext: false,
   articleList: [],
   page: {
@@ -428,10 +428,6 @@ const localStorageChangeCallback = (e: StorageEvent) => {
     state.isDark = e.newValue as any;
   }
 };
-// // 监听窗口大小变化
-// const resizeCallback = () => {
-//   state.isMobile = isMobile();
-// };
 
 let timer: null | number = null;
 onMounted(() => {
@@ -441,7 +437,6 @@ onMounted(() => {
   }, 200);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
-  // window.addEventListener('resize', resizeCallback);
   state.isDark = getTheme() === 'dark';
 });
 onUnmounted(() => {
@@ -450,7 +445,6 @@ onUnmounted(() => {
     timer = null;
   }
   window.removeEventListener('setItemEvent', localStorageChangeCallback);
-  // window.removeEventListener('resize', resizeCallback);
 });
 </script>
 

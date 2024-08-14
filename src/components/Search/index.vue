@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 09:55:12
+ * @LastEditTime: 2024-08-14 13:10:07
  * @FilePath: /blog/src/components/Search/index.vue
 -->
 <template>
@@ -32,8 +32,8 @@
                 <div class="music-list" v-if="state.musicList.length > 0">
                   <div @click="handlePlay(item)" class="music-item pointer kbn-music" :data-tip="item.title" v-for="(item, index) in state.musicList" :key="index">
                     <div class="music-item-warp">
-                      <div class="cover-warp">
-                        <img :src="item.img" alt="" />
+                      <div class="cover-warp" @click="e => e.stopPropagation()">
+                        <Img :src="item.img" alt="" />
                       </div>
                       <div class="music-info">
                         <div class="info-item text music-title">{{ item.title }}</div>
@@ -57,7 +57,7 @@
                   <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
                     <div class="img-left item-warp">
                       <!-- <div class="cover-img-warp">
-                        <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+                        <Img class="cover-img" :src="item.cover" />
                       </div> -->
                       <div class="item-content">
                         <div class="create-time">
@@ -72,7 +72,7 @@
                         </div>
                         <div class="auth-info-warp">
                           <div>
-                            <img loading="lazy" :src="state.avatar" vertical-align="middle" alt="" />
+                            <img :src="state.avatar" vertical-align="middle" alt="" />
                             <span>snows_l</span>
                           </div>
                           <div>

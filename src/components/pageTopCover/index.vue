@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 09:32:14
+ * @LastEditTime: 2024-08-14 13:07:19
  * @FilePath: /blog/src/components/pageTopCover/index.vue
 -->
 <template>
@@ -18,30 +18,12 @@
         <span class="text">{{ moduleTitle }}</span>
       </div>
       <div class="title-warp" v-if="mudulDesc">{{ mudulDesc }}</div>
-      <div class="article-info" v-if="isArticle">
-        <div>
-          <img :src="avatar" alt="" />
-          <span>snows_l</span>
-        </div>
-        <div>
-          <i class="iconfont icon-yanjing"></i>
-          <span>{{ articleInfo.views || randomNum(99, 99999) }}</span>
-        </div>
-        <div>
-          <i class="iconfont icon-comment"></i>
-          <span>{{ articleInfo.views || randomNum(5, 20) }}</span>
-        </div>
-        <div>
-          <i class="iconfont icon-fenxiang1"></i>
-          <span>{{ articleInfo.views || randomNum(20, 1000) }}</span>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { getQQAvatar } from '@/utils/common';
+import { getQQAvatar, randomNum } from '@/utils/common';
 const props = defineProps({
   coverImg: {
     type: String,
@@ -64,10 +46,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  isArticle: {
-    type: Boolean,
-    default: true
-  },
   articleInfo: {
     type: Object,
     default: {}
@@ -83,11 +61,6 @@ const props = defineProps({
 });
 
 let avatar = getQQAvatar();
-
-// 产生0-99999之间的数据数
-const randomNum = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
 </script>
 
 <style lang="scss" scoped>
@@ -147,36 +120,6 @@ const randomNum = (min: number, max: number) => {
       overflow: hidden;
       text-overflow: ellipsis;
       text-align: left;
-    }
-    .article-info {
-      margin-top: 0px;
-      height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      div {
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-        .iconfont {
-          margin-right: 10px;
-          font-size: 20px;
-          color: var(--theme-color);
-        }
-        .icon-yanjing {
-          font-size: 24px;
-        }
-        span {
-          font-size: 12px;
-          color: var(--text-color);
-        }
-      }
-      img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
     }
   }
   .default-bg-color {

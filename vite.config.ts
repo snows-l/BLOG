@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:08:36
+ * @LastEditTime: 2024-08-14 12:08:16
  * @FilePath: /blog/vite.config.ts
  */
 import { fileURLToPath, URL } from 'node:url';
-
+import ElementPlus from 'unplugin-element-plus/vite'; // 引入ElementPlus插件
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
@@ -15,7 +15,7 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig(({ mode, command }) => {
   const config = loadEnv(mode, process.cwd());
   return {
-    plugins: [vue()],
+    plugins: [vue(), ElementPlus()],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))

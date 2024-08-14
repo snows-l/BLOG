@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 10:11:50
+ * @LastEditTime: 2024-08-14 13:03:48
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -18,12 +18,12 @@
     <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="other-content" v-if="!isMobi">
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
+          <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
             <div class="img-left item-warp" v-if="index % 2 === 0">
               <div class="cover-img-warp">
-                <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+                <Img class="cover-img" :src="item.cover" />
               </div>
-              <div class="item-content">
+              <div class="item-content" @click="handleArticle(item)">
                 <div class="create-time">
                   <span>
                     <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="img-right item-warp" v-else>
-              <div class="item-content">
+              <div class="item-content" @click="handleArticle(item)">
                 <div class="create-time">
                   <span>
                     <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
@@ -92,7 +92,7 @@
                 </div>
               </div>
               <div class="cover-img-warp">
-                <img class="cover-img" :src="item.cover" alt="" />
+                <Img class="cover-img" :src="item.cover" />
               </div>
             </div>
           </div>
@@ -104,10 +104,11 @@
       </div>
       <div class="other-content m-other-content" v-else>
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
-            <div class="img-left item-warp">
+          <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+            <div class="img-left item-warp pointer" @click="handleArticle(item)">
               <div class="cover-img-warp">
-                <img loading="lazy" class="cover-img" :src="item.cover" alt="" />
+                <!-- <img  class="cover-img" :src="item.cover" alt="" /> -->
+                <Img class="cover-img" :src="item.cover" />
               </div>
               <div class="item-content">
                 <div class="create-time">
@@ -122,7 +123,7 @@
                 </div>
                 <div class="auth-info-warp">
                   <div>
-                    <img loading="lazy" :src="state.avatar" vertical-align="middle" alt="" />
+                    <img :src="state.avatar" vertical-align="middle" alt="" />
                     <span>snows_l</span>
                   </div>
                   <div>
@@ -168,10 +169,9 @@ import { getArticleList } from '@/api/article';
 import houduanCover from '@/assets/images/common/houduan.png';
 import otherCover from '@/assets/images/common/other.png';
 import qianduanCover from '@/assets/images/common/qianduan.png';
-// import PageTopCover from '@/components/pageTopCover/index.vue';
 import { getQQAvatar, randomNum } from '@/utils/common';
 import moment from 'moment';
-import { onMounted, onUnmounted, reactive, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import useResize from '@/hooks/useResize';
@@ -202,7 +202,6 @@ const typeMap = {
 };
 
 const state = reactive({
-  // isMobile: isMobile(),
   avatar: getQQAvatar(),
   loading: false,
   isMore: true,
@@ -259,11 +258,6 @@ const handleLoadMore = () => {
   getArticleListFn();
 };
 
-// // 监听窗口大小变化
-// const resizeCallback = () => {
-//   state.isMobile = isMobile();
-// };
-
 watch(
   () => route.query.type,
   n => {
@@ -276,14 +270,6 @@ watch(
     getArticleListFn();
   }
 );
-
-onMounted(() => {
-  // window.addEventListener('resize', resizeCallback);
-});
-
-onUnmounted(() => {
-  // window.removeEventListener('resize', resizeCallback);
-});
 </script>
 
 <style lang="scss" scoped>

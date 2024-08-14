@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 10:11:55
+ * @LastEditTime: 2024-08-14 13:09:31
  * @FilePath: /blog/src/views/play/music/index.vue
 -->
 <template>
@@ -21,8 +21,8 @@
         <div class="music-list">
           <div @click="handlePlay(item)" class="music-item pointer kbn-music" :data-tip="item.title" v-for="(item, index) in state.list" :key="index">
             <div class="music-item-warp">
-              <div class="cover-warp">
-                <img :src="item.img" alt="" />
+              <div class="cover-warp" @click="e => e.stopPropagation()">
+                <Img :src="item.img" alt="" />
               </div>
               <div class="music-info">
                 <div class="info-item text music-title">{{ item.title }}</div>
@@ -32,7 +32,7 @@
             </div>
             <div class="is-playing-current">
               <span class="current-music" v-show="state.currentMusicId == item.id">☑️</span>
-              <img v-show="state.isPlaying && state.currentMusicId == item.id" src="@/assets/images/common/playing.gif" alt="" />
+              <img v-show="state.isPlaying && state.currentMusicId == item.id" src="@/assets/images/common/playing.gif" />
             </div>
           </div>
         </div>
@@ -51,15 +51,12 @@
 import { getDict, getMusicList } from '@/api/music';
 import coverImg from '@/assets/images/common/cover-music.png';
 import $bus from '@/bus/index';
-// import PageTopCover from '@/components/pageTopCover/index.vue';
-// import { isMobile } from '@/utils/common';
 import { onMounted, onUnmounted, reactive } from 'vue';
 
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 
 const state = reactive({
-  // isMobile: isMobile(),
   loading: false,
   isPlaying: localStorage.getItem('isPlaying') == 'true' ? true : false,
   currentMusicId: localStorage.getItem('currentMusicId') || 0,
@@ -101,14 +98,7 @@ const handlePlay = (item: any) => {
   $bus.emit('playMusic', { id: item.id });
 };
 
-// // 监听屏幕大小变化
-// const resizeCallback = () => {
-//   state.isMobile = isMobile();
-// };
-
 onMounted(() => {
-  // window.addEventListener('resize', resizeCallback);
-
   // 监听 播放器 播放状态变化
   $bus.on('musicPlayerStatusChange', (n: boolean) => {
     state.isPlaying = n;
@@ -120,7 +110,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  // window.removeEventListener('resize', resizeCallback);
   $bus.off('musicPlayerStatusChange');
   $bus.off('musicPlayerCurrentMusicChange');
 });

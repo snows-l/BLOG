@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 10:11:04
+ * @LastEditTime: 2024-08-14 13:08:14
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -65,7 +65,6 @@ const mode = ref('default'); // simple | default
 const valueHtml = ref('');
 
 const state = reactive({
-  // isMobile: isMobile(),
   loading: false,
   arcticleDetail: {}
 });
