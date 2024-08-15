@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 16:19:03
+ * @LastEditTime: 2024-08-15 17:40:49
  * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
@@ -228,7 +228,7 @@ const handleToggleFont = () => {
 };
 
 // 设置主要颜色
-const handleToggleColor = e => {
+const handleToggleColor = (e: any) => {
   setPrimaryColor(e.target.value);
   state.currentPrimaryColor = e.target.value;
   localStorage.setItem('primaryColor', state.currentPrimaryColor);
@@ -259,7 +259,7 @@ const handleSearch = () => {
   }
 };
 
-const handleClickSrearchModal = e => {
+const handleClickSrearchModal = () => {
   state.isShowSearch = false;
 };
 
@@ -284,17 +284,12 @@ const scorllCallback = () => {
   }
 };
 
-// // 监听窗口大小变化
-// const resizeCallback = () => {
-//   state.isMobile = isMobile();
-// };
-
 onMounted(() => {
   layoutRef.value.addEventListener('scroll', scorllCallback);
   setTimeout(() => {
     state.isMenuShow = true;
   }, 200);
-  // window.addEventListener('resize', resizeCallback);
+  // 监听播放音乐 更新当前播放音乐id
   $bus.on('playMusic', ({ id }) => {
     state.currentMusicId = id;
     if (!state.isMusicPlayerShow) {
@@ -303,7 +298,7 @@ onMounted(() => {
   });
 
   // 下樱花调用配置
-  new Snow('#snow', { num: isMobi ? 2 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
+  new Snow('#snow', { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
 onUnmounted(() => {
