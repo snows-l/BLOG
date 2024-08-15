@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:56:31
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-08-15 12:34:05
+ * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -59,7 +59,7 @@ export const routes = [
         name: 'Other',
         meta: {
           title: '其他分享',
-          icon: 'icon-qita',
+          icon: 'icon-zonghecaiwu',
           query: {
             type: '3'
           }
@@ -140,9 +140,29 @@ export const routes = [
     name: 'About',
     meta: {
       title: '关于',
-      icon: 'icon-guanyu'
+      icon: 'icon-guanyuwomen'
     },
-    component: () => import('../views/about/index.vue')
+    redirect: { name: 'Me' },
+    children: [
+      {
+        path: '/about/me',
+        name: 'Me',
+        meta: {
+          title: '我',
+          icon: 'icon-guanyu'
+        },
+        component: () => import('../views/about/index.vue')
+      },
+      {
+        path: '/about/friends',
+        name: 'Friends',
+        meta: {
+          title: '友联',
+          icon: 'icon-guanyu1'
+        },
+        component: () => import('../views/about/friends.vue')
+      }
+    ]
   },
   {
     link: 'http://124.223.41.220/view',

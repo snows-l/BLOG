@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 21:31:38
- * @FilePath: /BLOG/src/components/Layout/Menu.vue
+ * @LastEditTime: 2024-08-15 12:40:48
+ * @FilePath: /blog/src/components/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -12,13 +12,13 @@
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
           <span @click="handleTo(menus)" class="item-nav-warp">
-            <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+            <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="nav-list-sub-contetn">
             <li class="nav-item-sub nav-item item-nav-warp pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
-              <img class="icon-img" v-if="menu.meta.img" :src="'/src/assets/images/icon/' + menu.meta.img" />
+              <img class="icon-img" v-if="menu.meta.img" :src="getAssetsImge(menu.meta.img)" />
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
             </li>
@@ -26,7 +26,7 @@
         </li>
       </template>
       <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
-        <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+        <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
       </li>
@@ -37,13 +37,13 @@
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
           <span class="item-nav-warp">
-            <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+            <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="m-nav-list-sub-contetn">
             <li class="nav-item-sub nav-item pointer item-nav-warp" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
-              <img class="icon-img" v-if="menu.meta.img" :src="'/src/assets/images/icon/' + menu.meta.img" />
+              <img class="icon-img" v-if="menu.meta.img" :src="getAssetsImge(menu.meta.img)" />
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
             </li>
@@ -51,7 +51,7 @@
         </li>
       </template>
       <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
-        <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
+        <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
       </li>
@@ -83,6 +83,11 @@ const state = reactive({
   activeMemu: '',
   showPath: ''
 });
+
+// 获取assets静态图片
+const getAssetsImge = name => {
+  return new URL(`../../assets/images/icon/${name}`, import.meta.url).href;
+};
 
 // 路由跳转
 const handleTo = item => {
