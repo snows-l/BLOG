@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 01:19:07
- * @FilePath: /BLOG/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-15 16:04:37
+ * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -117,9 +117,12 @@
       <Search @close="state.isShowSearch = false" :show="state.isShowSearch"></Search>
     </div>
   </div>
+  <div class="snow" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 9; pointer-events: none" id="snow"></div>
 </template>
 
 <script lang="ts" setup>
+import sakura from '@/utils/sakura';
+import { Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import bg1 from '@/assets/images/bg/bg1.png';
 import bg2 from '@/assets/images/bg/bg2.png';
 import bg3 from '@/assets/images/bg/bg3.png';
@@ -298,12 +301,13 @@ onMounted(() => {
       state.isMusicPlayerShow = true;
     }
   });
-  // new Particle('#main');
+
+  // 下樱花调用配置
+  new Snow('#snow', { num: 3, maxR: 3, minR: 20, maxSpeed: 0.1, minSpeed: 0.3, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
 onUnmounted(() => {
   layoutRef.value && layoutRef.value.removeEventListener('scroll', scorllCallback);
-  // window.removeEventListener('resize', resizeCallback);
 });
 </script>
 

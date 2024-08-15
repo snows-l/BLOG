@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 12:34:05
+ * @LastEditTime: 2024-08-15 12:47:40
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/components/Layout/index.vue';
@@ -46,7 +46,7 @@ export const routes = [
         name: 'BackEnd',
         meta: {
           title: '后端',
-          icon: 'icon-node-js',
+          icon: 'icon-Nodejs',
           query: {
             type: '2'
           }
@@ -140,7 +140,7 @@ export const routes = [
     name: 'About',
     meta: {
       title: '关于',
-      icon: 'icon-guanyuwomen'
+      icon: 'icon-guanyu'
     },
     redirect: { name: 'Me' },
     children: [
@@ -149,7 +149,8 @@ export const routes = [
         name: 'Me',
         meta: {
           title: '我',
-          icon: 'icon-guanyu'
+          icon: 'icon-guanyu',
+          img: 'me.png'
         },
         component: () => import('../views/about/index.vue')
       },
