@@ -3,15 +3,15 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:23:48
- * @FilePath: /BLOG/src/components/CustomImg/index.vue
+ * @LastEditTime: 2024-08-15 18:24:35
+ * @FilePath: /blog/src/components/CustomImg/index.vue
 -->
 <template>
   <el-image class="pointer el-img-warp" preview-teleported :src="src" :fit="fit" :previewSrcList="[src]" :lazy="true">
     <template #placeholder>
       <div class="img-loading-warp img-warp" style="width: 100%; height: 100%; background-color: #ffffff">
         <img v-if="isSpin" :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.svg" alt="loading" />
-        <img v-else :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.jpg" alt="loading" />
+        <img v-else :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.gif" alt="loading" />
         <span v-if="isText" class="img-loading-text text">{{ loadingText }}</span>
       </div>
     </template>
