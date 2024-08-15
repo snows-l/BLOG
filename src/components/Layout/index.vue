@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 17:40:49
+ * @LastEditTime: 2024-08-15 17:55:36
  * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
@@ -121,7 +121,7 @@
 </template>
 
 <script lang="ts" setup>
-import sakura from '@/utils/sakura';
+import sakura from '@/assets/images/icon/sakura';
 import { Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import bg1 from '@/assets/images/bg/bg1.png';
 import bg2 from '@/assets/images/bg/bg2.png';

@@ -1,9 +1,9 @@
 /*
- * @Description: ------------ fileDescription -----------
+ * @Description: ------------ Sakura - 花瓣 -----------
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 15:32:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 15:33:24
+ * @LastEditTime: 2024-08-15 17:52:48
  * @FilePath: /blog/src/utils/sakura.js
  */
 export default function sakura() {
