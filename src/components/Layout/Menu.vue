@@ -12,7 +12,7 @@
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
           <span @click="handleTo(menus)" class="item-nav-warp">
-            <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img"" />
+            <img class="icon-img" v-if="menus.meta.img" :src="'/src/assets/images/icon/' + menus.meta.img" />
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
