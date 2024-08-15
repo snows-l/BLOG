@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 22:23:53
+ * @LastEditTime: 2024-08-15 20:49:29
  * @FilePath: /BLOG/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -54,6 +54,7 @@ import { getMusicList } from '@/api/music';
 import defaultCover from '@/assets/images/common/default_cover.png';
 import $bus from '@/bus';
 import router from '@/router';
+import { useAppStore } from '@/store/app';
 import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 
 const emits = defineEmits(['music-status']);
@@ -65,6 +66,7 @@ const props = defineProps({
   }
 });
 
+const store = useAppStore();
 const audioRef = ref();
 const musicList = ref([]);
 
@@ -103,10 +105,18 @@ const getMusicListFn = () => {
         src: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
       };
     });
+    store.SET_MUSIC_LIST(musicList.value);
     state.currentMusic = musicList.value.length > 0 && musicList.value[state.currentIndex];
   });
 };
 getMusicListFn();
+
+if (store.musicList.length > 0) {
+  musicList.value = store.musicList;
+  state.currentMusic = musicList.value.length > 0 && musicList.value[state.currentIndex];
+} else {
+  getMusicListFn();
+}
 
 // 跳转到指定页面
 const handleTo = (path: string) => {

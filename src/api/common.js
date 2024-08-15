@@ -1,17 +1,17 @@
 /*
  * @Description: ------------ fileDescription -----------
  * @Author: snows_l snows_l@163.com
- * @Date: 2024-06-17 12:24:28
+ * @Date: 2024-08-15 20:55:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 21:04:02
- * @FilePath: /BLOG/src/api/music.js
+ * @LastEditTime: 2024-08-15 20:56:18
+ * @FilePath: /BLOG/src/api/common.js
  */
-
 import request from '@/utils/request';
-// 获取音乐
-export function getMusicList(data) {
+
+// 获取字典
+export function getDict(data) {
   return request({
-    url: '/sys/musics/list',
+    url: '/sys/dict/list',
     method: 'get',
     params: data
   });

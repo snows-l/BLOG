@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 00:11:19
+ * @LastEditTime: 2024-08-15 21:13:50
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -66,11 +66,10 @@
                 </div>
                 <div class="item-content" @click="handleArticle(item)">
                   <div class="create-time">
-                    <span>
-                      <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                      <span>发布于：</span>
-                      <span>{{ item.createTime }}</span>
-                    </span>
+                    <i class="iconfont icon-shijian"></i>
+                    <span>发布于：</span>
+                    <span>{{ item.createTime }}</span>
+                    <div class="type">{{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}</div>
                   </div>
                   <div class="article-title">
                     {{ item.title }}
@@ -101,11 +100,10 @@
               <div class="img-right item-warp" v-else>
                 <div class="item-content pointer" @click="handleArticle(item)">
                   <div class="create-time">
-                    <span>
-                      <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                      <span>发布于：</span>
-                      <span>{{ item.createTime }}</span>
-                    </span>
+                    <i class="iconfont icon-shijian"></i>
+                    <span>发布于：</span>
+                    <span>{{ item.createTime }}</span>
+                    <div class="type">{{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}</div>
                   </div>
                   <div class="article-title">
                     {{ item.title }}
@@ -157,11 +155,10 @@
                   </div>
                   <div class="item-content pointer" @click="handleArticle(item)">
                     <div class="create-time">
-                      <span>
-                        <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                        <span>发布于：</span>
-                        <span>{{ item.createTime }}</span>
-                      </span>
+                      <i class="iconfont icon-shijian"></i>
+                      <span>发布于：</span>
+                      <span>{{ item.createTime }}</span>
+                      <div class="type">{{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}</div>
                     </div>
                     <div class="article-title">
                       {{ item.title }}
@@ -213,14 +210,17 @@
 
 <script setup lang="ts">
 import { getArticleList } from '@/api/article';
+import { getDict } from '@/api/common';
 import useResize from '@/hooks/useResize';
 import router from '@/router';
+import { useAppStore } from '@/store/app';
 import { getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
 moment.suppressDeprecationWarnings = true;
 const { isMobi } = useResize();
+const store = useAppStore();
 
 const saying = '我见众生皆草木，唯你是青山。';
 const state = reactive({
@@ -232,6 +232,7 @@ const state = reactive({
   isDark: false,
   isToolNext: false,
   articleList: [],
+  articleTypeList: [],
   page: {
     page: 1,
     size: 5,
@@ -409,6 +410,16 @@ const handleInfo = (item: { class: string; imgs: any[]; kbnTip: string; title: s
     }
   }
 };
+
+// 获取文章类型
+const getArticleTypeList = () => {
+  getDict({ dictType: 'article_type' }).then(res => {
+    state.articleTypeList = res.data;
+    store.SET_ARTICLE_DICT(res.data);
+  });
+};
+
+store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : getArticleTypeList();
 
 // 点击文章详情
 const handleArticle = row => {
@@ -684,13 +695,28 @@ onUnmounted(() => {
             height: 100%;
             padding: 20px;
             background-color: var(--bg-content-color);
+            position: relative;
             .create-time {
-              height: 24px;
-              padding: 2px 8px;
+              display: inline-block;
+              height: 20px;
+              font-size: 12px;
+              padding: 4px 8px;
               background-color: var(--theme-light-color-9);
               border-radius: 5px;
               color: var(--theme-color);
-              width: 210px;
+              .iconfont {
+                font-size: 12px;
+                margin-right: 10px;
+              }
+              .type {
+                border: 1px solid var(--theme-light-color-9);
+                border-radius: 5px;
+                padding: 2px 4px;
+                font-size: 12px;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+              }
             }
             .article-title {
               margin-top: 20px;

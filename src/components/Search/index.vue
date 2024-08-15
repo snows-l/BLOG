@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 23:06:36
+ * @LastEditTime: 2024-08-15 21:14:35
  * @FilePath: /BLOG/src/components/Search/index.vue
 -->
 <template>
@@ -61,11 +61,10 @@
                       </div> -->
                       <div class="item-content">
                         <div class="create-time">
-                          <span>
-                            <i class="iconfont icon-shijian" style="margin-right: 10px; font-size: 20px"></i>
-                            <span>发布于：</span>
-                            <span>{{ item.createTime }}</span>
-                          </span>
+                          <i class="iconfont icon-shijian"></i>
+                          <span>发布于：</span>
+                          <span>{{ item.createTime }}</span>
+                          <div class="type">{{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}</div>
                         </div>
                         <div class="article-title">
                           {{ item.title }}
@@ -114,15 +113,18 @@
 
 <script lang="ts" setup>
 import { getArticleList } from '@/api/article';
-import { getDict, getMusicList } from '@/api/music';
+import { getDict } from '@/api/common';
+import { getMusicList } from '@/api/music';
 import $bus from '@/bus/index';
 import useResize from '@/hooks/useResize';
+import { useAppStore } from '@/store/app';
 import { getQQAvatar, randomNum } from '@/utils/common';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive, watch } from 'vue';
 import { useRouter } from 'vue-router';
 const { isMobi } = useResize();
 
+const store = useAppStore();
 const router = useRouter();
 
 const props = defineProps({
@@ -191,14 +193,24 @@ const handleClose = () => {
 };
 
 // 获取音乐类型
-getDict({ dictType: 'music_type' }).then(res => {
-  state.playList = res.data;
-});
+const getPlayList = () => {
+  getDict({ dictType: 'music_type' }).then(res => {
+    state.playList = res.data;
+    store.SET_MUSIC_DICT(res.data);
+  });
+};
 
 // 获取文章类型
-getDict({ dictType: 'article_type' }).then(res => {
-  state.articleTypeList = res.data;
-});
+const getArticleTypeList = () => {
+  getDict({ dictType: 'article_type' }).then(res => {
+    state.articleTypeList = res.data;
+    store.SET_ARTICLE_DICT(res.data);
+  });
+};
+
+// 获取音乐类型和文章类型
+store.musicDict.length > 0 ? (state.playList = store.musicDict) : getPlayList();
+store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : getArticleTypeList();
 
 // 播放音乐
 const handlePlay = (item: any) => {
@@ -423,13 +435,28 @@ onUnmounted(() => {
                   height: 100%;
                   padding: 20px;
                   background-color: var(--bg-content-color);
+                  position: relative;
                   .create-time {
-                    height: 24px;
-                    padding: 2px 8px;
+                    display: inline-block;
+                    height: 20px;
+                    font-size: 12px;
+                    padding: 4px 8px;
                     background-color: var(--theme-light-color-9);
                     border-radius: 5px;
                     color: var(--theme-color);
-                    width: 210px;
+                    .iconfont {
+                      font-size: 12px;
+                      margin-right: 10px;
+                    }
+                    .type {
+                      border: 1px solid var(--theme-light-color-9);
+                      border-radius: 5px;
+                      padding: 2px 4px;
+                      font-size: 12px;
+                      position: absolute;
+                      top: 20px;
+                      right: 20px;
+                    }
                   }
                   .article-title {
                     margin-top: 20px;

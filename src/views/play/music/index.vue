@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 23:06:01
+ * @LastEditTime: 2024-08-15 20:57:17
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -48,13 +48,16 @@
 </template>
 
 <script lang="ts" setup>
-import { getDict, getMusicList } from '@/api/music';
+import { getDict } from '@/api/common';
+import { getMusicList } from '@/api/music';
 import coverImg from '@/assets/images/bg/cover-music.png';
 import $bus from '@/bus/index';
+import { useAppStore } from '@/store/app';
 import { onMounted, onUnmounted, reactive } from 'vue';
 
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
+const store = useAppStore();
 
 const state = reactive({
   loading: false,
@@ -64,9 +67,15 @@ const state = reactive({
   playList: []
 });
 
-getDict({ dictType: 'music_type' }).then(res => {
-  state.playList = res.data;
-});
+const getPlayList = () => {
+  getDict({ dictType: 'music_type' }).then(res => {
+    state.playList = res.data;
+    store.SET_MUSIC_DICT(res.data);
+  });
+};
+
+// 获取音乐类型和文章类型
+store.musicDict.length > 0 ? (state.playList = store.musicDict) : getPlayList();
 
 const getMusicListFn = () => {
   state.loading = true;
@@ -84,6 +93,7 @@ const getMusicListFn = () => {
           src: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.src : import.meta.env.VITE_PROD_BASE_SERVER + item.src
         };
       });
+      store.SET_MUSIC_LIST(state.list);
       if (!state.currentMusicId) state.currentMusicId = state.list[0].id;
       state.loading = false;
     })
@@ -91,7 +101,12 @@ const getMusicListFn = () => {
       state.loading = false;
     });
 };
-getMusicListFn();
+if (store.musicList.length > 0) {
+  state.list = store.musicList;
+  if (!state.currentMusicId) state.currentMusicId = state.list[0].id;
+} else {
+  getMusicListFn();
+}
 
 const handlePlay = (item: any) => {
   state.currentMusicId = item.id;
