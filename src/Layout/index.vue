@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 14:00:47
+ * @LastEditTime: 2024-08-16 16:40:58
  * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
@@ -57,6 +57,7 @@
       <!-- main -->
       <main @click="handleClickMain" id="main">
         <router-view></router-view>
+        <Footer></Footer>
       </main>
     </div>
 
@@ -124,6 +125,7 @@
 </template>
 
 <script lang="ts" setup>
+import Footer from '@/components/Footer/index.vue';
 import sakura from '@/assets/images/icon/sakura';
 import { Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import bg1 from '@/assets/images/bg/bg1.png';

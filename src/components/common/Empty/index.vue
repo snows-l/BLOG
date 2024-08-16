@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-07-08 10:56:57
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 09:26:40
+ * @LastEditTime: 2024-08-16 16:34:46
  * @FilePath: /blog/src/components/Empty/index.vue
 -->
 <template>
@@ -14,8 +14,8 @@
         <span class="empty-text">{{ loadingText }}</span>
       </div>
       <div class="img-warp" v-else>
-        <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
-        <span v-if="false" class="empty-text">{{ text }}</span>
+        <img class="empty-img" style="max-width: 200px; max-height: 200px" src="@/assets/images/common/empty.png" alt="" />
+        <span v-if="true" class="empty-text">{{ text }}</span>
       </div>
     </div>
   </div>

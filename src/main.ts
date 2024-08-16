@@ -3,17 +3,17 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 20:13:25
- * @FilePath: /BLOG/src/main.ts
+ * @LastEditTime: 2024-08-16 16:43:55
+ * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
-import Comment from '@/components/Comment/index.vue'; // 评论组件
-import CustomImg from '@/components/CustomImg/index.vue'; // 图片组件
-import PageTopCover from '@/components/pageTopCover/index.vue'; // 顶部覆盖层组件
+import Comment from '@/components/common/Comment/index.vue'; // 评论组件
+import CustomImg from '@/components/common/CustomImg/index.vue'; // 图片组件
+import PageTopCover from '@/components/common/pageTopCover/index.vue'; // 顶部覆盖层组件
 import store from '@/store/index';
 import { createApp } from 'vue';
 import './assets/style/main.css';
-import Empty from './components/Empty/index.vue'; // 暂无数据组件
+import Empty from './components/common/Empty/index.vue'; // 暂无数据组件
 import { dispatchEventStroage } from './utils/common';
 import { autoToggleTheme } from './utils/theme';
 

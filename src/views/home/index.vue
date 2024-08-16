@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 14:09:21
+ * @LastEditTime: 2024-08-16 16:35:34
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -56,7 +56,7 @@
         <div class="other-content-item">
           <div class="article-title-warp">
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
-            <h2 class="content-title">Article</h2>
+            <h2 class="content-title">ARTICLE</h2>
           </div>
           <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
             <div class="article-item pointer kbn-read" v-for="(item, index) in state.articleList" :key="index">

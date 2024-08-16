@@ -3,13 +3,13 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 13:22:33
+ * @LastEditTime: 2024-08-16 16:02:44
  * @FilePath: /blog/src/App.vue
 -->
 <script setup lang="ts">
 import { setDocmentTitle } from '@/utils/common';
 import { setPrimaryColor } from '@/utils/theme';
-import { watch } from 'vue';
+import { watch, onMounted } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import { routes } from './router/index';
 
@@ -44,8 +44,10 @@ watch(
   }
 );
 
-// 移除首屏加载动画
-if (document.getElementById('Loading')) document.getElementById('Loading').remove();
+onMounted(() => {
+  // 移除首屏加载动画
+  if (document.getElementById('Loading')) document.getElementById('Loading').remove();
+});
 </script>
 
 <template>

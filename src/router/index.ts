@@ -3,10 +3,10 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 21:19:53
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-08-16 16:41:47
+ * @FilePath: /blog/src/router/index.ts
  */
-import Layout from '@/components/Layout/index.vue';
+import Layout from '@/Layout/index.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/home/index.vue';
 
@@ -159,7 +159,7 @@ export const routes = [
         path: '/about/friends',
         name: 'Friends',
         meta: {
-          title: '友联',
+          title: '友链',
           icon: 'icon-guanyu1'
         },
         component: () => import('../views/about/friends.vue')

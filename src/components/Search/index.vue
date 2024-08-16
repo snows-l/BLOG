@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 21:14:35
- * @FilePath: /BLOG/src/components/Search/index.vue
+ * @LastEditTime: 2024-08-16 16:34:00
+ * @FilePath: /blog/src/components/Search/index.vue
 -->
 <template>
   <div class="search-warp" :class="{ 'm-search-warp': isMobi }" @click="handleClickMadel">
@@ -272,7 +272,7 @@ onUnmounted(() => {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-image: url('@/assets/images/bg/bg1.png');
+  background-image: url('@/assets/images/bg/bg2.png');
   padding: 30px 20px;
   .search-content-warp {
     height: 100%;

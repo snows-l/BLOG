@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 12:40:48
- * @FilePath: /blog/src/components/Layout/Menu.vue
+ * @LastEditTime: 2024-08-16 16:44:43
+ * @FilePath: /blog/src/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -86,7 +86,7 @@ const state = reactive({
 
 // 获取assets静态图片
 const getAssetsImge = name => {
-  return new URL(`../../assets/images/icon/${name}`, import.meta.url).href;
+  return new URL(`../assets/images/icon/${name}`, import.meta.url).href;
 };
 
 // 路由跳转
