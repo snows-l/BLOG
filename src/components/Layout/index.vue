@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 12:20:36
+ * @LastEditTime: 2024-08-16 13:33:06
  * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
@@ -288,7 +288,7 @@ onMounted(() => {
   layoutRef.value.addEventListener('scroll', scorllCallback);
   setTimeout(() => {
     state.isMenuShow = true;
-  }, 600);
+  }, 200);
   // 监听播放音乐 更新当前播放音乐id
   $bus.on('playMusic', ({ id }) => {
     state.currentMusicId = id;

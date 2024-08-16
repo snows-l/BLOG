@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 12:23:54
+ * @LastEditTime: 2024-08-16 13:32:38
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -445,10 +445,10 @@ let timer2: null | number = null;
 onMounted(() => {
   timer = setTimeout(() => {
     state.isShowContent = true;
-  }, 800);
+  }, 400);
   timer2 = setTimeout(() => {
     inputSaying();
-  }, 1600);
+  }, 1200);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';

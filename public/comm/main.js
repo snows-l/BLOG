@@ -1,11 +1,5 @@
-/*
- * @Description: ------------ fileDescription -----------
- * @Author: snows_l snows_l@163.com
- * @Date: 2024-08-16 13:27:18
- * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 13:27:31
- * @FilePath: /blog/public/comm/main.js
- */
+// 光标效果 配置
+
 // new cursoreffects.fairyDustCursor({
 //   colors: ['#ff0000', '#00ff00', '#0000ff']
 // }); // 彩虹光标
