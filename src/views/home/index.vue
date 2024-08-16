@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 13:32:38
+ * @LastEditTime: 2024-08-16 14:09:21
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="bottom-down">
+      <div class="bottom-down" @click="handleMoveToNext">
         <svg t="1682342753354" class="homepage-downicon" viewBox="0 0 1843 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21355" width="80px" height="80px">
           <path
             d="M1221.06136021 284.43250057a100.69380037 100.69380037 0 0 1 130.90169466 153.0543795l-352.4275638 302.08090944a100.69380037 100.69380037 0 0 1-130.90169467 0L516.20574044 437.48688007A100.69380037 100.69380037 0 0 1 647.10792676 284.43250057L934.08439763 530.52766665l286.97696258-246.09516608z"
@@ -323,6 +323,7 @@ const infoList = [
   ]
 ];
 
+// 获取文章列表
 const getArticleListFn = () => {
   state.loading = true;
   getArticleList(state.page)
@@ -349,8 +350,8 @@ const getArticleListFn = () => {
 };
 getArticleListFn();
 
-let intervalTimer: number | null = null;
 // 打字效果输出saying
+let intervalTimer: number | null = null;
 const inputSaying = () => {
   let index = 0;
   intervalTimer = setInterval(() => {
@@ -419,7 +420,7 @@ const getArticleTypeList = () => {
     store.SET_ARTICLE_DICT(res.data);
   });
 };
-
+// perf 先看ster有没有， 没有在请求
 store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : getArticleTypeList();
 
 // 点击文章详情
@@ -430,6 +431,13 @@ const handleArticle = row => {
       id: row.id
     }
   });
+};
+
+// 下一页
+const handleMoveToNext = () => {
+  if (document.getElementById('layout')) {
+    document.getElementById('layout').scrollTop = document.getElementById('layout')?.clientHeight - 60;
+  }
 };
 
 // 监听localStorage变化 的回调
@@ -453,6 +461,8 @@ onMounted(() => {
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';
 });
+
+// 卸载 优化
 onUnmounted(() => {
   if (timer) {
     clearTimeout(timer);

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 13:33:06
+ * @LastEditTime: 2024-08-16 14:00:47
  * @FilePath: /blog/src/components/Layout/index.vue
 -->
 <template>
@@ -22,7 +22,7 @@
     </div>
 
     <!-- layout-warp -->
-    <div class="layout-content-warp" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
+    <div class="layout-content-warp" id="layout" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
       <!-- mobile header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
         <div class="icon-warp">
@@ -113,10 +113,13 @@
       <MusicPlayer @music-status="handleMusicStatus" :currentMusicId="state.currentMusicId"></MusicPlayer>
     </div>
 
+    <!-- 搜索弹窗 -->
     <div class="search-home-warp" :class="{ 'is-show-search': state.isShowSearch }" @click="e => handleClickSrearchModal(e)">
       <Search @close="state.isShowSearch = false" :show="state.isShowSearch"></Search>
     </div>
   </div>
+
+  <!-- 飘 🌸蒙版 -->
   <div class="snow" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 9; pointer-events: none" id="snow"></div>
 </template>
 
