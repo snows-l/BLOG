@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 21:09:23
+ * @LastEditTime: 2024-08-16 21:21:44
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -320,7 +320,7 @@ watch(
         }
         .item-content {
           flex: 1;
-          height: 100%;
+          height: 280px;
           padding: 20px;
           background-color: var(--bg-content-color);
           position: relative;
@@ -423,6 +423,7 @@ watch(
         }
 
         .item-content {
+          height: 180px;
           .article-title {
             margin-top: 10px !important;
             height: 40px !important;

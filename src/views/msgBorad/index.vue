@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 21:46:52
+ * @LastEditTime: 2024-08-16 21:17:27
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -198,8 +198,8 @@ const handleComment = () => {
 
 <style lang="scss" scoped>
 .msg-borad-warp {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   .msg-list-content-warp {
     background-color: var(--bg-image-warp-color);
     padding: 20px 0;

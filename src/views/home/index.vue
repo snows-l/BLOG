@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:35:34
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-08-16 21:21:19
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -456,7 +456,7 @@ onMounted(() => {
   }, 400);
   timer2 = setTimeout(() => {
     inputSaying();
-  }, 1200);
+  }, 800);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';
@@ -714,7 +714,7 @@ onUnmounted(() => {
           }
           .item-content {
             flex: 1;
-            height: 100%;
+            height: 280px;
             padding: 20px;
             background-color: var(--bg-content-color);
             position: relative;
@@ -812,6 +812,7 @@ onUnmounted(() => {
         }
 
         .item-content {
+          height: 180px;
           .article-title {
             margin-top: 10px !important;
             height: 40px !important;

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:34:00
- * @FilePath: /blog/src/components/Search/index.vue
+ * @LastEditTime: 2024-08-16 21:27:58
+ * @FilePath: /BLOG/src/components/Search/index.vue
 -->
 <template>
   <div class="search-warp" :class="{ 'm-search-warp': isMobi }" @click="handleClickMadel">
@@ -556,9 +556,6 @@ onUnmounted(() => {
       }
     }
   }
-  .m-search-content-warp {
-    // max-width: 96%;
-  }
   .xiaoren {
     min-width: 284px;
     min-height: 388px;
@@ -580,14 +577,13 @@ onUnmounted(() => {
     height: 120px !important;
   }
 }
+</style>
 
-.serch-content-t::-webkit-scrollbar {
-  width: 0px;
-}
-.serch-content-t::-webkit-scrollbar-track {
-  background-color: darkgrey;
-}
-.serch-content-t::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.3);
+<style lang="scss">
+.dark {
+  .article-item:hover,
+  .music-item:hover {
+    box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
+  }
 }
 </style>

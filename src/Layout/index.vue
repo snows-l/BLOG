@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:40:58
- * @FilePath: /blog/src/components/Layout/index.vue
+ * @LastEditTime: 2024-08-16 21:39:29
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
@@ -14,7 +14,7 @@
         <div class="avatar-warp">
           <img class="avatar pointer" @click="handleTo('avatar')" :src="state.avatar" alt="" srcset="" />
         </div>
-        <div class="serch-input-warp pointer" @click="handleSearch">
+        <div class="serch-input-warp pointer" @click="handleSearch(false)">
           <i class="iconfont icon-sousuo1"></i>
         </div>
         <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
@@ -27,7 +27,7 @@
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
         <div class="icon-warp">
           <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
-          <i class="iconfont icon-sousuo1" style="margin-left: 10px" @click="handleSearch"></i>
+          <i class="iconfont icon-sousuo1" style="margin-left: 10px" @click="handleSearch(false)"></i>
         </div>
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
@@ -48,7 +48,7 @@
             <Menu :menuList="state.menuList" />
           </div>
           <div class="pointer secrh-warp">
-            <i class="iconfont icon-sousuo1" @click="handleSearch"></i>
+            <i class="iconfont icon-sousuo1" @click="handleSearch(false)"></i>
             <!-- <img style="width: 40px; height: 40px; border-radius: 50%" src="@/assets/images/common/default_avatar.png" alt="" /> -->
           </div>
         </div>
@@ -111,7 +111,7 @@
 
     <!-- 音乐播放器 -->
     <div class="music-player-warp" :class="{ playerShow: state.isMusicPlayerShow }">
-      <MusicPlayer @music-status="handleMusicStatus" :currentMusicId="state.currentMusicId"></MusicPlayer>
+      <MusicPlayer @music-status="handleMusicStatus" :currentMusicId="state.currentMusicId" @clickList="handleSearch(true)"></MusicPlayer>
     </div>
 
     <!-- 搜索弹窗 -->
@@ -125,19 +125,19 @@
 </template>
 
 <script lang="ts" setup>
-import Footer from '@/components/Footer/index.vue';
-import sakura from '@/assets/images/icon/sakura';
-import { Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import bg1 from '@/assets/images/bg/bg1.png';
 import bg2 from '@/assets/images/bg/bg2.png';
 import bg3 from '@/assets/images/bg/bg3.png';
 import bg4 from '@/assets/images/bg/bg4.png';
+import sakura from '@/assets/images/icon/sakura';
 import $bus from '@/bus/index';
+import Footer from '@/components/Footer/index.vue';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';
 import { routes } from '@/router';
 import { getQQAvatar } from '@/utils/common';
 import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
+import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
@@ -198,6 +198,7 @@ const handleTop = () => {
 // 切换主题
 const handleToggerTheme = (theme: string) => {
   setTheme(theme);
+  handleSearch(true);
 };
 
 // 切换背景
@@ -219,6 +220,7 @@ const handleToggleBgImg = (index: number) => {
     default:
       break;
   }
+  handleSearch(true);
 };
 
 const fontFamilys = ['优设标题黑', '华文行楷', 'apple', 'DSDIGI', 'default'];
@@ -230,6 +232,7 @@ const handleToggleFont = () => {
     state.fontFamilyIndex++;
   }
   setFontFamily(fontFamilys[state.fontFamilyIndex]);
+  handleSearch(true);
 };
 
 // 设置主要颜色
@@ -237,6 +240,7 @@ const handleToggleColor = (e: any) => {
   setPrimaryColor(e.target.value);
   state.currentPrimaryColor = e.target.value;
   localStorage.setItem('primaryColor', state.currentPrimaryColor);
+  handleSearch(true);
 };
 
 // 显示/隐藏 音乐播放器
@@ -257,8 +261,12 @@ const handleSetShow = () => {
 };
 
 // 显示/隐藏 搜索
-const handleSearch = () => {
-  state.isShowSearch = !state.isShowSearch;
+const handleSearch = isClose => {
+  if (isClose) {
+    state.isShowSearch = false;
+  } else {
+    state.isShowSearch = !state.isShowSearch;
+  }
   if (state.isShowSearch) {
     state.mMenuShow = false;
   }

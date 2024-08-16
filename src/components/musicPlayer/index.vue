@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 20:49:29
+ * @LastEditTime: 2024-08-16 21:40:53
  * @FilePath: /BLOG/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -57,7 +57,7 @@ import router from '@/router';
 import { useAppStore } from '@/store/app';
 import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 
-const emits = defineEmits(['music-status']);
+const emits = defineEmits(['music-status', 'clickList']);
 
 const props = defineProps({
   currentMusicId: {
@@ -121,6 +121,9 @@ if (store.musicList.length > 0) {
 // 跳转到指定页面
 const handleTo = (path: string) => {
   router.push(path);
+  if (path == '/play/mp3') {
+    emits('clickList');
+  }
 };
 
 // 控制静音/取消静音

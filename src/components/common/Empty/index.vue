@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-07-08 10:56:57
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:34:46
- * @FilePath: /blog/src/components/Empty/index.vue
+ * @LastEditTime: 2024-08-16 21:30:03
+ * @FilePath: /BLOG/src/components/common/Empty/index.vue
 -->
 <template>
   <div class="custom-empty-warp">
@@ -14,7 +14,7 @@
         <span class="empty-text">{{ loadingText }}</span>
       </div>
       <div class="img-warp" v-else>
-        <img class="empty-img" style="max-width: 200px; max-height: 200px" src="@/assets/images/common/empty.png" alt="" />
+        <img class="empty-img" src="@/assets/images/common/empty.png" alt="" />
         <span v-if="true" class="empty-text">{{ text }}</span>
       </div>
     </div>
@@ -65,8 +65,10 @@ const props = defineProps({
       justify-content: center;
       align-items: center;
       .empty-img {
+        max-width: 180px;
+        max-height: 180px;
         width: 100%;
-        max-height: calc(100% - 36px);
+        height: calc(100% - 20px);
       }
     }
     .empty-text {
