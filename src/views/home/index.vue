@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 21:13:50
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-08-16 12:23:54
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -349,12 +349,13 @@ const getArticleListFn = () => {
 };
 getArticleListFn();
 
+let intervalTimer: number | null = null;
 // 打字效果输出saying
 const inputSaying = () => {
   let index = 0;
-  const timer = setInterval(() => {
+  intervalTimer = setInterval(() => {
     if (index === saying.length) {
-      clearInterval(timer);
+      clearInterval(intervalTimer);
       return;
     }
     state.saying += saying[index];
@@ -440,11 +441,14 @@ const localStorageChangeCallback = (e: StorageEvent) => {
 };
 
 let timer: null | number = null;
+let timer2: null | number = null;
 onMounted(() => {
-  inputSaying();
   timer = setTimeout(() => {
     state.isShowContent = true;
-  }, 200);
+  }, 800);
+  timer2 = setTimeout(() => {
+    inputSaying();
+  }, 1600);
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';
@@ -453,6 +457,14 @@ onUnmounted(() => {
   if (timer) {
     clearTimeout(timer);
     timer = null;
+  }
+  if (timer2) {
+    clearTimeout(timer2);
+    timer2 = null;
+  }
+  if (intervalTimer) {
+    clearInterval(intervalTimer);
+    intervalTimer = null;
   }
   window.removeEventListener('setItemEvent', localStorageChangeCallback);
 });

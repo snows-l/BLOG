@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 01:01:54
- * @FilePath: /BLOG/src/App.vue
+ * @LastEditTime: 2024-08-16 13:22:33
+ * @FilePath: /blog/src/App.vue
 -->
 <script setup lang="ts">
 import { setDocmentTitle } from '@/utils/common';
@@ -43,6 +43,9 @@ watch(
     setDocmentTitle('☂ ' + title + ' | ' + import.meta.env.VITE_API_TITLE);
   }
 );
+
+// 移除首屏加载动画
+if (document.getElementById('Loading')) document.getElementById('Loading').remove();
 </script>
 
 <template>
