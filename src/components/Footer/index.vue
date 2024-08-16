@@ -3,14 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-16 16:36:50
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 17:34:22
+ * @LastEditTime: 2024-08-16 17:42:26
  * @FilePath: /blog/src/components/Footer/index.vue
 -->
 <template>
   <div class="footer-container-warp">
     <div class="content-warp" :class="{ 'm-content-warp': isMobi }">
-      <div class="auth">Copyright © 2024- {{ new Date().getFullYear() }} By snows_l</div>
       <div class="saying-warp pointer kbn-custom" :data-tip="'点击即可刷新😊'" @click="handleRefreshSaying">「 {{ state.saying }} 」</div>
+      <div class="auth">Copyright © 2024- {{ new Date().getFullYear() }} By snows_l</div>
     </div>
   </div>
 </template>
