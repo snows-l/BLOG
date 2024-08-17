@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 21:21:19
+ * @LastEditTime: 2024-08-17 11:37:40
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -18,7 +18,7 @@
             <span class="saying-write">|</span>
             <i class="saying-icon iconfont icon-xia"></i>
           </div>
-          <h1 class="text" style="margin-top: 15px">Hello~ I'm snows_l</h1>
+          <h4 class="text" style="margin-top: 15px">Hello~ I'm snows_l</h4>
         </div>
         <div class="author-info">
           <div class="info-item tool-btn" @click="handleToggleMove('pre')">

@@ -198,7 +198,7 @@ var Paul_Pio = function (prop) {
             } else if (t.type === 'link') {
               e[j].onmouseover = function () {
                 const text = (this.dataset && this.dataset.tip) || this.innerText || '这个链接';
-                modules.render('想了解一下 %t 吗？'.replace(/%t/, '“' + text + '”'));
+                modules.render('想前往 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type === 'chart') {
               e[j].onmouseover = function () {
