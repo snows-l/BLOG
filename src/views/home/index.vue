@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-17 11:37:40
+ * @LastEditTime: 2024-08-17 16:08:53
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -212,7 +212,6 @@
 import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
 import useResize from '@/hooks/useResize';
-import router from '@/router';
 import { useAppStore } from '@/store/app';
 import { getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
@@ -425,12 +424,14 @@ store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : get
 
 // 点击文章详情
 const handleArticle = row => {
-  router.push({
-    path: '/article/detail',
-    query: {
-      id: row.id
-    }
-  });
+  // router.push({
+  //   path: '/article/detail',
+  //   query: {
+  //     id: row.id
+  //   }
+  // });
+
+  window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
 };
 
 // 下一页

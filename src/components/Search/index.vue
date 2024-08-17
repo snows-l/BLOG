@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 21:27:58
+ * @LastEditTime: 2024-08-17 16:10:09
  * @FilePath: /BLOG/src/components/Search/index.vue
 -->
 <template>
@@ -226,13 +226,14 @@ const handleClickMadel = (e: any) => {
 
 // 点击文章详情
 const handleArticle = (row: any) => {
-  router.push({
-    path: '/article/detail',
-    query: {
-      id: row.id
-    }
-  });
-  emits('close');
+  // router.push({
+  //   path: '/article/detail',
+  //   query: {
+  //     id: row.id
+  //   }
+  // });
+  window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
+  // emits('close');
 };
 
 watch(
