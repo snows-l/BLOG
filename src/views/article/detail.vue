@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-17 10:58:40
+ * @LastEditTime: 2024-08-17 15:59:50
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -18,12 +18,29 @@
 
     <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="article-content-warp">
+        <div v-if="state.isMobile && tableOfContents.length > 0" class="m-flex-container">
+          <div class="table-of-contents-warp">
+            <div v-if="tableOfContents.length > 0" class="table-of-contents">
+              <div class="toc-title">目录</div>
+              <!-- 目录内容 -->
+              <ul list-none p-l-0>
+                <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }" border-rd mb-5px py-3px>
+                  <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a>
+                </li>
+              </ul>
+            </div>
+            <div v-else class="no-toc">
+              <Empty :text="'暂无目录内容，请在文章中添加标题'" :loadingText="'目录内容正在生成中...'" :loading="state.loading" />
+            </div>
+          </div>
+        </div>
         <div class="article-content">
           <div class="article-cover-warp" :class="{ 'm-article-cover-warp': isMobi }">
-            <Img :src="state.arcticleDetail.cover" :size="'240px'" />
+            <Img class="cover-img" :src="state.arcticleDetail.cover" />
+            <div class="cover-title">COVER</div>
           </div>
-          <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" />
-          <Editor class="editor-content-warp" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
+          <!-- <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" /> -->
+          <Editor id="editor" class="editor-content-warp" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
           <div class="article-intfo">
             <div>
               <i class="iconfont icon-yanjing"></i>
@@ -38,6 +55,21 @@
               <span>{{ state.arcticleDetail.shareCount || randomNum(10, 200) }}</span>
             </div>
           </div>
+          <div v-if="!state.isMobile" class="flex-container">
+            <div class="table-of-contents-warp">
+              <div v-if="tableOfContents.length > 0" class="table-of-contents">
+                <!-- 目录内容 -->
+                <ul list-none p-l-0>
+                  <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }">
+                    <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div v-else class="no-toc">
+                <Empty :text="'暂无目录内容，请在文章中添加标题'" :loadingText="'目录内容正在生成中...'" :loading="state.loading" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,10 +82,10 @@
 <script lang="ts" setup>
 import { addCommentCount, addShareCount, getArticleDetail } from '@/api/article';
 import articleCover from '@/assets/images/bg/cover-article.png';
-import { randomNum } from '@/utils/common';
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import { copy, isMobile, randomNum } from '@/utils/common';
+import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
-import { nextTick, onBeforeUnmount, onMounted, reactive, ref, shallowRef, watch } from 'vue';
+import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import useResize from '@/hooks/useResize';
@@ -61,6 +93,9 @@ const { isMobi } = useResize();
 
 const route = useRoute();
 let articleId = route.query.id;
+const tableOfContents = ref([]);
+const updateCount = ref(0);
+const tocRihgt = ref('20px');
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef();
@@ -70,8 +105,18 @@ const valueHtml = ref('');
 
 const state = reactive({
   loading: false,
-  arcticleDetail: {}
+  arcticleDetail: {},
+  isMobile: isMobile(1580)
 });
+
+// 目录等级映射
+const levelMap = {
+  H1: 1,
+  H2: 1.5,
+  H3: 2,
+  H4: 3,
+  H5: 4
+};
 
 const toolbarConfig = {};
 const editorConfig = {
@@ -106,7 +151,7 @@ const getArticleDetailFn = () => {
 if (articleId) {
   getArticleDetailFn();
 }
-// 增加阅读、评论、分享的点击事件处理函数
+
 const handleAdd = (type: string) => {
   if (type === 'comment') {
     addCommentCount(articleId);
@@ -116,38 +161,39 @@ const handleAdd = (type: string) => {
   getArticleDetailFn();
 };
 
+// 当前高亮的目录项索引
+const activeIndex = ref(0);
+
 // 添加复制按钮的逻辑
 const copyCode = () => {
-  nextTick(() => {
-    const codeBlocks = document.querySelectorAll('#w-e-textarea-1');
-    console.log('-------- codeBlocks --------', codeBlocks);
-    codeBlocks.forEach(codeBlock => {
-      // 创建复制按钮
-      const copyButton = document.createElement('button');
-      copyButton.innerText = '复制';
-      copyButton.classList.add('copy-button');
+  const codeBlocks = document.querySelectorAll('#editor pre > code');
+  codeBlocks.forEach(codeBlock => {
+    // 创建复制按钮
+    const copyButton = document.createElement('button');
+    copyButton.innerText = '复制';
+    copyButton.classList.add('copy-button');
+    copyButton.classList.add('pointer');
 
-      // 为复制按钮添加点击事件处理程序
-      copyButton.addEventListener('click', () => {
-        const codeText = codeBlock.querySelector('span').textContent;
-        copy(codeText, '已复制', false);
-        // 修改按钮文本为 "已复制"
-        copyButton.innerText = '已复制';
-        // 延迟一段时间后恢复按钮文本为 "复制"
-        setTimeout(() => {
-          copyButton.innerText = '复制';
-        }, 3000); // 毫秒为单位，您可以调整时间长度
-      });
-
-      // 将复制按钮添加到代码块的父级元素中
-      codeBlock.appendChild(copyButton);
+    // 为复制按钮添加点击事件处理程序
+    copyButton.addEventListener('click', () => {
+      const codeText = codeBlock.querySelector('span').textContent;
+      copy(codeText);
+      // 修改按钮文本为 "已复制"
+      copyButton.innerText = '已复制';
+      // 延迟一段时间后恢复按钮文本为 "复制"
+      setTimeout(() => {
+        copyButton.innerText = '复制';
+      }, 3000); // 毫秒为单位，您可以调整时间长度
     });
+
+    // 将复制按钮添加到代码块的父级元素中
+    codeBlock.appendChild(copyButton);
   });
 };
 
 // 添加锚点
 const addAnchorLinks = () => {
-  const headings = document.querySelectorAll('.editor h1, .editor h2, .editor h3');
+  const headings = document.querySelectorAll('#editor h2, #editor h3, #editor h4, #editor h5');
   headings.forEach((heading, index) => {
     const anchorLink = document.createElement('a');
     anchorLink.setAttribute('href', `#section-${index + 1}`);
@@ -165,26 +211,25 @@ const addAnchorLinks = () => {
 // 更新目录项点击事件处理函数
 const handleItemClick = (index: number) => {
   activeIndex.value = index;
-
   // 获取目标目录项的锚点链接 href 属性值
   const targetItem = document.querySelector(`.table-of-contents a[href="#section-${index + 1}"]`) as HTMLElement;
-
   // 滚动目录以确保当前点击的目录项可见
-  if (targetItem) {
-    const container = document.querySelector('.table-of-contents') as HTMLElement;
-    const containerRect = container.getBoundingClientRect();
-    const scrollTop = targetItem.offsetTop - containerRect.height / 2;
-    container.scrollTop = scrollTop;
-  }
+  // if (targetItem) {
+  //   const container = document.querySelector('.table-of-contents') as HTMLElement;
+  //   const containerRect = container.getBoundingClientRect();
+  //   const scrollTop = targetItem.offsetTop - containerRect.height / 2;
+  //   container.scrollTop = scrollTop;
+  // }
 };
 
 // 生成目录
 const generateTableOfContents = () => {
-  const headings = document.querySelectorAll('.editor h1, .editor h2, .editor h3');
+  updateCount.value++; // 触发更新
+  const headings = document.querySelectorAll('#editor h1, #editor h2, #editor h3, #editor h4, #editor h5');
   const toc = [];
   headings.forEach((heading, index) => {
     const id = `section-${index + 1}`;
-    const level = heading.tagName === 'H1' ? 1 : heading.tagName === 'H2' ? 2 : 3; // 根据标题等级设置目录项的缩进
+    const level = levelMap[heading.tagName]; // 根据标题等级设置目录项的缩进
     heading.setAttribute('id', id); // 设置标题的id属性
     toc.push({ id: id, text: heading.textContent, level: level, index: index }); // 将标题文本、id和等级添加到目录项中
   });
@@ -222,9 +267,16 @@ const handleScroll = () => {
       const containerRect = container.getBoundingClientRect();
       const activeRect = activeItem.getBoundingClientRect();
       const scrollTop = activeItem.offsetTop - containerRect.height / 2 + activeRect.height / 2;
-      container.scrollTop = scrollTop;
+      container.scrollTop = scrollTop - 60; // 60px 是为了让错过菜单栏
     }
   });
+};
+
+const getTocRight = () => {
+  let width = document.body.getBoundingClientRect().width;
+  if (width > 1580) {
+    tocRihgt.value = `${(width - 920) / 2 + 940}px`;
+  }
 };
 
 // 监听路由变化，重新获取文章详情
@@ -243,11 +295,24 @@ const handleCreated = editor => {
   editorRef.value = editor; // 记录 editor 实例，重要！
 };
 
+const resizeCallback = () => {
+  getTocRight();
+  state.isMobile = isMobile(1580);
+};
+
 // 模拟 ajax 异步获取内容
 onMounted(() => {
+  getTocRight();
+  window.addEventListener('resize', resizeCallback);
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUpdated(() => {
+  if (updateCount.value < 2) {
+    tableOfContents.value = generateTableOfContents();
+  }
   addAnchorLinks();
   copyCode();
-  window.addEventListener('scroll', handleScroll);
 });
 
 // 组件销毁时，也及时销毁编辑器
@@ -256,6 +321,7 @@ onBeforeUnmount(() => {
   if (editor == null) return;
   editor.destroy();
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('resize', resizeCallback);
 });
 </script>
 
@@ -279,9 +345,19 @@ onBeforeUnmount(() => {
         .article-cover-warp {
           width: 100%;
           height: 350px;
-          border-top-left-radius: 15px;
-          border-top-right-radius: 15px;
+          margin-bottom: 40px;
+          // border-top-left-radius: 15px;
+          // border-top-right-radius: 15px;
           overflow: hidden;
+          .cover-img {
+            border-radius: 10px;
+            height: calc(100% - 30px);
+          }
+          .cover-title {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+          }
         }
         .m-article-cover-warp {
           height: 240px;
@@ -324,6 +400,93 @@ onBeforeUnmount(() => {
     max-width: 96% !important;
     margin: 0 auto !important;
     height: calc(100vh - 300px) !important;
+  }
+}
+</style>
+
+<style lang="scss">
+.article-content {
+  pre {
+    position: relative;
+    .copy-button {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      border: 1px solid #333;
+      padding: 2px 8px;
+      color: #333;
+      border-radius: 4px;
+      &:hover {
+        color: var(--theme-color);
+        border: 1px solid var(--theme-color);
+      }
+    }
+    code {
+      cursor: url('@/assets/images/cursor/text.png'), auto !important; // text cursor to assets/images/cursor/text.png
+    }
+  }
+}
+blockquote {
+  border-radius: 2px;
+}
+// 目录样式
+.article-content {
+  position: relative;
+  .flex-container {
+    border-radius: 5px;
+    height: calc(100% - 535px);
+    width: 300px;
+    background-color: var(--bg-warp-color);
+    padding: 20px 10px;
+    position: fixed;
+    top: 430px;
+    left: v-bind(tocRihgt);
+    .table-of-contents-warp {
+      height: 100%;
+      overflow: auto;
+      li {
+        margin: 8px 0;
+        font-size: 12px;
+        a {
+          text-decoration: none;
+          color: var(--text-color);
+          &:hover {
+            color: var(--theme-color);
+          }
+          &.active {
+            font-weight: bold;
+            color: var(--theme-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+.m-flex-container {
+  border-radius: 10px;
+  width: 100%;
+  background-color: var(--bg-warp-color);
+  margin-bottom: 20px;
+  padding: 20px 10px;
+  overflow: hidden;
+  .table-of-contents-warp {
+    height: 100%;
+    li {
+      margin: 8px 0;
+      font-size: 12px;
+      a {
+        text-decoration: none;
+        color: var(--text-color);
+        &:hover {
+          color: var(--theme-color);
+        }
+        &.active {
+          font-weight: bold;
+          color: var(--theme-color);
+        }
+      }
+    }
   }
 }
 </style>

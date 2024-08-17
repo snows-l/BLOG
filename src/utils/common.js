@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-13 09:58:03
- * @FilePath: /blog/src/utils/common.js
+ * @LastEditTime: 2024-08-17 11:58:39
+ * @FilePath: /BLOG/src/utils/common.js
  */
 
 // 重写 localStorage 的 setItem 方法，派发自定义事件 用于监听  localStorage 的变化
@@ -41,4 +41,15 @@ export const setDocmentTitle = title => {
 // 产生0-99999之间的数据数
 export const randomNum = (min = 0, max = 1) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const copy = text => {
+  navigator.clipboard
+    .writeText(text)
+    .then(function () {
+      console.log('Copied to clipboard successfully');
+    })
+    .catch(function (err) {
+      console.error('Unable to copy text to clipboard', err);
+    });
 };
