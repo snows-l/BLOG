@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 23:55:51
- * @FilePath: /BLOG/src/components/pageTopCover/index.vue
+ * @LastEditTime: 2024-08-18 16:18:01
+ * @FilePath: /BLOG/src/components/common/pageTopCover/index.vue
 -->
 <template>
   <div
@@ -14,7 +14,8 @@
     :style="{ backgroundImage: `url(${coverImg})` }">
     <div class="content-warp">
       <div class="mudule">
-        <i class="iconfont" :class="icon"></i>
+        <img class="icon-img" v-if="img" :src="img" alt="" />
+        <i v-else class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
       </div>
       <div class="title-warp" v-if="mudulDesc">{{ mudulDesc }}</div>
@@ -39,6 +40,10 @@ const props = defineProps({
     default: ''
   },
   icon: {
+    type: String,
+    default: ''
+  },
+  img: {
     type: String,
     default: ''
   },
@@ -87,10 +92,16 @@ let avatar = getQQAvatar();
       height: 36px;
       display: flex;
       justify-content: center;
+      align-items: center;
       .iconfont {
         margin-right: 20px;
         color: var(--text-color);
         font-size: 24px;
+      }
+      .icon-img {
+        width: 36px;
+        height: 36px;
+        margin-right: 20px;
       }
       .text {
         color: var(--text-color);

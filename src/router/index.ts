@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:41:47
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-08-18 16:18:49
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -115,16 +115,16 @@ export const routes = [
           icon: 'icon-shipin'
         },
         component: () => import('@/views/play/video/index.vue')
-      },
-      {
-        path: '/play/game',
-        name: 'Game',
-        meta: {
-          title: '小游戏',
-          icon: 'icon-yuleAPP'
-        },
-        component: () => import('@/views/play/game/index.vue')
       }
+      // {
+      //   path: '/play/game',
+      //   name: 'Game',
+      //   meta: {
+      //     title: '小游戏',
+      //     icon: 'icon-yuleAPP'
+      //   },
+      //   component: () => import('@/views/play/game/index.vue')
+      // }
     ]
   },
   {
@@ -153,7 +153,17 @@ export const routes = [
           icon: 'icon-guanyu',
           img: 'me.png'
         },
-        component: () => import('../views/about/index.vue')
+        component: () => import('../views/about/me/index.vue')
+      },
+      {
+        path: '/about/zone',
+        name: 'Zone',
+        meta: {
+          title: '朋友圈',
+          icon: 'icon-guanyu',
+          img: 'pengyouquan.png'
+        },
+        component: () => import('../views/about/zone/index.vue')
       },
       {
         path: '/about/friends',
@@ -162,7 +172,7 @@ export const routes = [
           title: '友链',
           icon: 'icon-guanyu1'
         },
-        component: () => import('../views/about/friends.vue')
+        component: () => import('../views/about/friends/index.vue')
       }
     ]
   },

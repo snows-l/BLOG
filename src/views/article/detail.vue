@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-17 15:59:50
+ * @LastEditTime: 2024-08-18 14:22:11
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -25,7 +25,17 @@
               <!-- 目录内容 -->
               <ul list-none p-l-0>
                 <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }" border-rd mb-5px py-3px>
-                  <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a>
+                  <!-- <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a> -->
+                  <a
+                    :class="{ active: activeIndex === index }"
+                    @click="
+                      e => {
+                        e.preventDefault();
+                        handleItemClick(item, index);
+                      }
+                    ">
+                    {{ item.text }}
+                  </a>
                 </li>
               </ul>
             </div>
@@ -61,7 +71,17 @@
                 <!-- 目录内容 -->
                 <ul list-none p-l-0>
                   <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }">
-                    <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a>
+                    <!-- <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a> -->
+                    <a
+                      :class="{ active: activeIndex === index }"
+                      @click="
+                        e => {
+                          e.preventDefault();
+                          handleItemClick(item, index);
+                        }
+                      ">
+                      {{ item.text }}
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -97,6 +117,8 @@ const tableOfContents = ref([]);
 const updateCount = ref(0);
 const tocRihgt = ref('20px');
 
+let scorllContainer: Element | null = null;
+
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef();
 // 编辑模式
@@ -116,6 +138,14 @@ const levelMap = {
   H3: 2,
   H4: 3,
   H5: 4
+};
+// 目录等级反向映射
+const levelReverseMap = {
+  1: 'H1',
+  1.5: 'H2',
+  2: 'H3',
+  3: 'H4',
+  4: 'H5'
 };
 
 const toolbarConfig = {};
@@ -209,13 +239,19 @@ const addAnchorLinks = () => {
 };
 
 // 更新目录项点击事件处理函数
-const handleItemClick = (index: number) => {
+const handleItemClick = (item, index: number) => {
+  const container = document.querySelector('.table-of-contents-warp') as HTMLElement;
+  const containerRect = container.getBoundingClientRect();
   activeIndex.value = index;
-  // 获取目标目录项的锚点链接 href 属性值
-  const targetItem = document.querySelector(`.table-of-contents a[href="#section-${index + 1}"]`) as HTMLElement;
-  // 滚动目录以确保当前点击的目录项可见
+  const element = document.querySelector(`#section-${index + 1}`);
+  const offsetTop = element.offsetTop;
+  scorllContainer.scrollTop = offsetTop + (state.isMobile ? containerRect.height : -60) + document.documentElement.scrollHeight - 220;
+
+  // // 获取目标目录项的锚点链接 href 属性值
+  // const targetItem = document.querySelector(`.table-of-contents a[href="#section-${index + 1}"]`) as HTMLElement;
+  // // 滚动目录以确保当前点击的目录项可见
   // if (targetItem) {
-  //   const container = document.querySelector('.table-of-contents') as HTMLElement;
+  //   const container = document.querySelector('.table-of-contents-warp') as HTMLElement;
   //   const containerRect = container.getBoundingClientRect();
   //   const scrollTop = targetItem.offsetTop - containerRect.height / 2;
   //   container.scrollTop = scrollTop;
@@ -236,13 +272,14 @@ const generateTableOfContents = () => {
   return toc;
 };
 
+// 监听滚动事件，更新目录项高亮状态
 const handleScroll = () => {
   requestAnimationFrame(() => {
-    const sections = document.querySelectorAll('.editor h1, .editor h2, .editor h3');
-    const scrollY = window.scrollY || window.pageYOffset;
+    const sections = document.querySelectorAll('#editor h1, #editor h2, #editor h3, #editor h4, #editor h5');
+    const scrollY = scorllContainer.scrollTop || scorllContainer.offsetHeight;
     let currentIndex = 0;
     for (let i = 0; i < sections.length; i++) {
-      const sectionTop = (sections[i] as HTMLElement).offsetTop;
+      const sectionTop = (sections[i] as HTMLElement).offsetTop + (document.documentElement.scrollHeight - 300);
       if (scrollY >= sectionTop) {
         currentIndex = i;
       }
@@ -257,17 +294,16 @@ const handleScroll = () => {
     if (visibleSections.length > 0) {
       currentIndex = Array.from(sections).indexOf(visibleSections[visibleSections.length - 1]);
     }
-
     activeIndex.value = currentIndex;
 
-    // 滚动目录以确保当前高亮的目录项可见
+    // 滚动目录以确保当前高亮的目录项可见;
     const activeItem = document.querySelector('.table-of-contents .active') as HTMLElement;
     if (activeItem) {
-      const container = document.querySelector('.table-of-contents');
+      const container = document.querySelector('.table-of-contents-warp');
       const containerRect = container.getBoundingClientRect();
       const activeRect = activeItem.getBoundingClientRect();
       const scrollTop = activeItem.offsetTop - containerRect.height / 2 + activeRect.height / 2;
-      container.scrollTop = scrollTop - 60; // 60px 是为了让错过菜单栏
+      container.scrollTop = scrollTop;
     }
   });
 };
@@ -304,7 +340,8 @@ const resizeCallback = () => {
 onMounted(() => {
   getTocRight();
   window.addEventListener('resize', resizeCallback);
-  window.addEventListener('scroll', handleScroll);
+  scorllContainer = document.querySelector('#layout') as HTMLElement;
+  scorllContainer.addEventListener('scroll', handleScroll);
 });
 
 onUpdated(() => {
@@ -320,8 +357,8 @@ onBeforeUnmount(() => {
   const editor = editorRef.value;
   if (editor == null) return;
   editor.destroy();
-  window.removeEventListener('scroll', handleScroll);
   window.removeEventListener('resize', resizeCallback);
+  scorllContainer.removeEventListener('scroll', handleScroll);
 });
 </script>
 
@@ -472,6 +509,9 @@ blockquote {
   overflow: hidden;
   .table-of-contents-warp {
     height: 100%;
+    .toc-title {
+      color: var(--text-color);
+    }
     li {
       margin: 8px 0;
       font-size: 12px;

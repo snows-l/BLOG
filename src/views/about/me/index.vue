@@ -1,19 +1,19 @@
 <!--
  * @Description: ------------ fileDescription -----------
  * @Author: snows_l snows_l@163.com
- * @Date: 2024-08-15 12:22:30
+ * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 12:25:50
- * @FilePath: /blog/src/views/about/friends.vue
+ * @LastEditTime: 2024-08-18 14:26:36
+ * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
-  <div class="friends-container-warp">
-    <PageTopCover :moduleTitle="'友联'" :icon="'icon-guanyu'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
+  <div class="contvideo-warpainer-warp">
+    <PageTopCover :moduleTitle="'我'" :icon="'icon-guanyu'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
   </div>
 </template>
 
 <script lang="ts" setup>
-import coverImg from '@/assets/images/bg/cover-friends.png';
+import coverImg from '@/assets/images/bg/cover-about.png';
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 </script>
