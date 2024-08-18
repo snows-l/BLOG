@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 19:21:49
+ * @LastEditTime: 2024-08-18 19:55:40
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     <div class="zone-container" :class="{ 'm-zone-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1">欢迎👏来到我朋友圈！</div>
+          <div class="item-1 text">欢迎👏来到我朋友圈！</div>
         </div>
 
         <div class="zone-list-warp">
@@ -125,6 +125,7 @@ const handleLoadMore = () => {
         font-size: 16px;
         margin: 10px 0;
         div {
+          color: var(--text-color);
           line-height: 40px;
           text-align: center;
         }
