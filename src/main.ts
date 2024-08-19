@@ -3,13 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:43:55
- * @FilePath: /blog/src/main.ts
+ * @LastEditTime: 2024-08-19 13:47:08
+ * @FilePath: /BLOG/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
 import Comment from '@/components/common/Comment/index.vue'; // 评论组件
 import CustomImg from '@/components/common/CustomImg/index.vue'; // 图片组件
 import PageTopCover from '@/components/common/pageTopCover/index.vue'; // 顶部覆盖层组件
+import ToolTip from '@/components/common/ToolTip/index.vue'; // 提示组件
 import store from '@/store/index';
 import { createApp } from 'vue';
 import './assets/style/main.css';
@@ -26,6 +27,7 @@ app.component('Empty', Empty);
 app.component('PageTopCover', PageTopCover);
 app.component('Comment', Comment);
 app.component('Img', CustomImg);
+app.component('ToolTip', ToolTip);
 app.use(dispatchEventStroage);
 app.use(store);
 app.use(router);

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 19:55:40
+ * @LastEditTime: 2024-08-19 11:41:00
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -29,7 +29,15 @@
                     {{ item.city }}
                   </div>
                 </div>
-                <div class="item local">({{ item.os }} {{ item.browser }})</div>
+                <div class="item local">
+                  (
+                  <!-- <img class="icon-img" src="@/assets/images/icon/icon-os.png" /> -->
+                  <i class="iconfont icon-caozuoxitong"></i>
+                  {{ item.os }} /
+                  <!-- <img class="icon-img" style="margin-left: 10px" src="@/assets/images/icon/icon-browser.png" /> -->
+                  <i class="iconfont icon-icon__dakailiulanqi" style="margin-left: 10px"></i>
+                  {{ item.browser }})
+                </div>
               </div>
               <div class="zone-item-content">{{ item.text }}</div>
               <div class="zone-item-img-warp">
@@ -83,7 +91,6 @@ const getZoneListFn = () => {
             item.imgs.split(',').map(img => (import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + img : import.meta.env.VITE_PROD_BASE_SERVER + img));
         });
         state.zoneList = [...state.zoneList, ...res.data];
-        console.log('--------tate.zoneList  --------', state.zoneList);
         state.page.total = res.total;
         if (state.zoneList.length >= res.total) {
           state.isMore = false; // 已经没有更多数据了
@@ -171,7 +178,7 @@ const handleLoadMore = () => {
             }
             .zone-item-content {
               font-size: 16px;
-              line-height: 18px;
+              line-height: 20px;
               font-weight: bold;
               margin-top: 10px;
               color: var(--text-color);
@@ -218,5 +225,15 @@ const handleLoadMore = () => {
     color: var(--theme-light-color-3);
     margin-bottom: 20px;
   }
+}
+
+.icon-img {
+  width: 12px;
+  height: 12px;
+  margin: 0 10px 0 0;
+}
+.iconfont {
+  color: var(--theme-color);
+  font-size: 12px;
 }
 </style>

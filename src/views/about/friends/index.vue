@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 15:41:55
+ * @LastEditTime: 2024-08-19 11:24:38
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -25,11 +25,12 @@
             </div>
             <div class="wecom-item">
               <label for="">地址：</label>
-              <span>http://124.223.41.220/</span>
+              <span>http://124.223.41.220/view</span>
             </div>
             <div class="wecom-item">
               <label for="">LOGO：</label>
               <span>http://124.223.41.220/logo.png</span>
+              <span style="margin-left: 5px; color: #ccc">（qq号将同步qq头像）</span>
             </div>
           </div>
         </div>
@@ -45,6 +46,7 @@
               <div class="friend-item-img">
                 <img :src="item.logo" alt="" />
               </div>
+              <div class="friend-item-title">{{ item.name }}</div>
               <div class="friend-item-content">{{ item.desc }}</div>
             </div>
           </div>
@@ -64,10 +66,10 @@ const { isMobi } = useResize();
 const state = reactive({
   friendList: [
     {
-      name: 'Snows_l',
+      name: "Snows_l's Blog",
       desc: '渔得鱼心满意足，樵得樵眼笑眉舒！',
       logo: getQQAvatar(),
-      link: 'http://124.223.41.220/'
+      link: 'http://124.223.41.220/view'
     }
   ]
 });
@@ -130,7 +132,7 @@ const handleTo = item => {
           .friend-item {
             border-radius: 10px;
             width: 160px;
-            padding: 20px;
+            padding: 8px 20px;
             background-color: var(--bg-content-color);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin: 10px 8px;
@@ -150,6 +152,18 @@ const handleTo = item => {
                 border: 1px solid var(--theme-color);
                 transform: rotate(360deg);
               }
+            }
+            .friend-item-title {
+              font-size: 16px;
+              font-weight: bold;
+              margin-top: 10px;
+              text-align: center;
+              color: var(--text-color);
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1; /* 定义文本的行数 */
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             .friend-item-content {
               font-size: 12px;
