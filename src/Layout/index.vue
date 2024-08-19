@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 17:05:05
+ * @LastEditTime: 2024-08-19 17:53:40
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -121,7 +121,7 @@
   </div>
 
   <!-- 飘 🌸蒙版 -->
-  <div class="snow" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 9; pointer-events: none" id="snow"></div>
+  <div class="snow" v-show="state.isShowSnow" style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 9; pointer-events: none" id="snow"></div>
 </template>
 
 <script lang="ts" setup>
@@ -157,6 +157,7 @@ const state = reactive({
   isMenuShow: false,
   mMenuShow: false,
   isSetShow: false,
+  isShowSnow: true,
   currentPrimaryColor: localStorage.getItem('primaryColor') || '#18a058',
   isMusicPlayerShow: false,
   isMusicPlaying: false,
@@ -297,6 +298,17 @@ const scorllCallback = () => {
   }
 };
 
+// 要展示樱花背景的路由
+let isShowSnow = ['', '/', '', '/play/mp3', '/play/mp4', '/msg-board', '/about/zone', '/about/friends', '/about/me'];
+watch(
+  () => route.path,
+  n => {
+    n.includes('article') ? (state.isShowSnow = false) : (state.isShowSnow = true);
+    // isShowSnow.includes(n) ? (state.isShowSnow = true) : (state.isShowSnow = false);
+  },
+  { immediate: true }
+);
+
 onMounted(() => {
   layoutRef.value.addEventListener('scroll', scorllCallback);
   setTimeout(() => {
@@ -309,8 +321,6 @@ onMounted(() => {
       state.isMusicPlayerShow = true;
     }
   });
-
-  // 下樱花调用配置
   new Snow('#snow', { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
