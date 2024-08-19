@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 17:17:38
+ * @LastEditTime: 2024-08-19 21:34:50
  * @FilePath: /BLOG/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
@@ -47,4 +47,15 @@ window.addEventListener('visibilitychange', () => {
   } else {
     document.title = "☂ 瓜皮人呢！还不回来？｜ snows_l's BLOG";
   }
+});
+
+// android点击手机物理返回键退出app bug解决
+document.addEventListener('plusready', function () {
+  plus.key.addEventListener(
+    'backbutton',
+    function () {
+      window.history.go(-1);
+    },
+    false
+  );
 });
