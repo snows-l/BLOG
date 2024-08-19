@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 14:22:11
+ * @LastEditTime: 2024-08-19 19:04:30
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -453,6 +453,7 @@ onBeforeUnmount(() => {
       padding: 2px 8px;
       color: #333;
       border-radius: 4px;
+      opacity: 0;
       &:hover {
         color: var(--theme-color);
         border: 1px solid var(--theme-color);
@@ -460,6 +461,11 @@ onBeforeUnmount(() => {
     }
     code {
       cursor: url('@/assets/images/cursor/text.png'), auto !important; // text cursor to assets/images/cursor/text.png
+    }
+    &:hover {
+      .copy-button {
+        opacity: 1;
+      }
     }
   }
 }

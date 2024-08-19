@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 18:41:28
+ * @LastEditTime: 2024-08-19 18:55:09
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -89,7 +89,7 @@ const state = reactive({
     },
     {
       name: "Miraitowa's Blog",
-      desc: "Miraitowa's的个人博客",
+      desc: '消极懈怠，只会与机会擦肩而过；积极主动，生活才会一路向上。',
       logo: getQQAvatar('1835110799'),
       link: 'http://124.223.41.220:30003'
     }
