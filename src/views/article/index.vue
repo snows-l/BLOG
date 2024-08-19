@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-17 16:09:44
+ * @LastEditTime: 2024-08-19 18:20:34
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -184,19 +184,19 @@ const typeMap = {
     moduleTitle: '前端-文章列表',
     moduleIcon: 'icon-qianduan',
     muduleCover: qianduanCover,
-    moduleDesc: '这里是文章列表页面的描述'
+    moduleDesc: ''
   },
   2: {
     moduleTitle: '后端-文章列表',
     moduleIcon: 'icon-node-js',
     muduleCover: houduanCover,
-    moduleDesc: '这里是文章列表页面的描述'
+    moduleDesc: ''
   },
   3: {
     moduleTitle: '其他-文章列表',
     moduleIcon: 'icon-jiaocheng-3',
     muduleCover: otherCover,
-    moduleDesc: '这里是文章列表页面的描述'
+    moduleDesc: ''
   }
 };
 

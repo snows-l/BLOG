@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 11:24:38
+ * @LastEditTime: 2024-08-19 18:34:39
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -46,8 +46,12 @@
               <div class="friend-item-img">
                 <img :src="item.logo" alt="" />
               </div>
-              <div class="friend-item-title">{{ item.name }}</div>
-              <div class="friend-item-content">{{ item.desc }}</div>
+              <div class="friend-item-title">
+                <ToolTip :content="item.name">{{ item.name }}</ToolTip>
+              </div>
+              <div class="friend-item-content">
+                <ToolTip :content="item.desc">{{ item.desc }}</ToolTip>
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +73,19 @@ const state = reactive({
       name: "Snows_l's Blog",
       desc: '渔得鱼心满意足，樵得樵眼笑眉舒！',
       logo: getQQAvatar(),
+      link: 'http://124.223.41.220:30002'
+    },
+    {
+      name: "Snows_l's 后台管理",
+      desc: '划船不用浆、一生全靠浪!',
+      logo: 'http://124.223.41.220:3333/imgs/avatars/avatar_20240620112452.png',
       link: 'http://124.223.41.220/view'
+    },
+    {
+      name: 'zs.duan的个人博客',
+      desc: '一个不止会前端的瘦子!',
+      logo: getQQAvatar('1637833822'),
+      link: 'https://anran233.com/'
     }
   ]
 });
