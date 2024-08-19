@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 16:55:02
+ * @LastEditTime: 2024-08-19 17:00:06
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -66,7 +66,9 @@
                   <span>前端（vue3）</span>
                   <span>后端（node.js）</span>
                   <span>数据库（mysql）</span>
-                  端分离的博客系统，在我不断地复制粘贴、复制粘贴，又复制粘贴的努力下，它（snows_l's BLOG）终于问世啦~~~~~~~
+                  原生程度达
+                  <span>99%，基本没有用UI框架</span>
+                  的前端分离的个人技术博客网站，在我不断地复制粘贴、复制粘贴，又复制粘贴的努力下，它（snows_l's BLOG）终于问世啦~~~~~~~
                 </div>
                 <div class="scrolling-text">小伙伴们大家好，我是snows_l，喜欢复制、粘贴，在今后的日子中，我还会将此博客继续完善、改进，期待的话可以互换友联，或者收藏博客。</div>
               </div>
