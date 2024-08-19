@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 17:02:15
+ * @LastEditTime: 2024-08-19 17:18:54
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -103,19 +103,23 @@
             <div class="visit-item-warp">
               <div class="visit-item">
                 <div class="visit-item-title">今日访问</div>
-                <div class="visit-item-num">19</div>
+                <CountTo class="visit-item-num" :startVal="0" :endVal="19" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <!-- <div class="visit-item-num">19</div> -->
               </div>
               <div class="visit-item">
                 <div class="visit-item-title">昨日访问</div>
-                <div class="visit-item-num">15</div>
+                <CountTo class="visit-item-num" :startVal="0" :endVal="15" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <!-- <div class="visit-item-num">15</div> -->
               </div>
               <div class="visit-item">
                 <div class="visit-item-title">本月访问</div>
-                <div class="visit-item-num">1295</div>
+                <CountTo class="visit-item-num" :startVal="0" :endVal="1295" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <!-- <div class="visit-item-num">1295</div> -->
               </div>
               <div class="visit-item">
                 <div class="visit-item-title">总访问</div>
-                <div class="visit-item-num">5499</div>
+                <CountTo class="visit-item-num" :startVal="0" :endVal="5499" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <!-- <div class="visit-item-num">5499</div> -->
               </div>
             </div>
           </div>
@@ -170,13 +174,14 @@ const state = reactive({
     { img: '', text: 'JWT', color: getRandomColor() },
     { img: iconElement, text: 'ElImage', color: getRandomColor() },
     { img: iconElement, text: 'ElToolTip', color: getRandomColor() },
+    { img: iconElement, text: 'ElCarousel', color: getRandomColor() },
     { img: '', text: 'vue3-flip-clock', color: getRandomColor() },
+    { img: '', text: 'vue3-count-to', color: getRandomColor() },
     { img: '', text: 'jparticles', color: getRandomColor() },
     { img: '', text: 'moment', color: getRandomColor() },
     { img: '', text: 'pinia', color: getRandomColor() },
     { img: '', text: 'mitt', color: getRandomColor() },
-    { img: '', text: '@wangeditor/editor', color: getRandomColor() },
-    { img: '', text: '@wangeditor/editor-for-vue', color: getRandomColor() }
+    { img: '', text: '@wangeditor/editor', color: getRandomColor() }
   ],
   hobbyList: [
     { img: hobbyQx, name: '骑行' },
@@ -440,7 +445,7 @@ const state = reactive({
         margin-top: 10px;
         display: flex;
         .visit-warp {
-          height: 200px;
+          height: 200px !important;
           height: 100%;
           background-color: var(--bg-content-color);
           padding: 20px;
@@ -469,6 +474,7 @@ const state = reactive({
             .visit-item-num {
               font-size: 24px;
               color: var(--text-color);
+              font-family: 'DSDIGI';
             }
           }
         }

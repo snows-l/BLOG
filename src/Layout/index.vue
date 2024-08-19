@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 21:39:29
+ * @LastEditTime: 2024-08-19 17:05:05
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -223,7 +223,7 @@ const handleToggleBgImg = (index: number) => {
   handleSearch(true);
 };
 
-const fontFamilys = ['优设标题黑', '华文行楷', 'apple', 'DSDIGI', 'default'];
+const fontFamilys = ['default', '优设标题黑', '华文行楷', 'apple', 'DSDIGI'];
 // 切换字体
 const handleToggleFont = () => {
   if (state.fontFamilyIndex === fontFamilys.length - 1) {
