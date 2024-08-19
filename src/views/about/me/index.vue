@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 17:00:06
+ * @LastEditTime: 2024-08-19 17:02:15
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -120,7 +120,7 @@
             </div>
           </div>
           <div class="hobby-warp">
-            <el-carousel height="160px" :cardScale="0.9" type="card" :interval="2000" :loop="true">
+            <el-carousel height="160px" :cardScale="0.9" :type="!isMobi ? 'card' : ''" :interval="2000" :loop="true">
               <el-carousel-item v-for="item in state.hobbyList" :key="item.name">
                 <div class="hobby-item-item">
                   <div class="text">{{ item.name }}</div>
