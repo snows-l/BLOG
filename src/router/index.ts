@@ -3,10 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 16:18:49
+ * @LastEditTime: 2024-08-19 20:17:22
  * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
+import { getBackstageurl } from '@/utils/common';
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/home/index.vue';
 
@@ -177,7 +178,7 @@ export const routes = [
     ]
   },
   {
-    link: 'http://124.223.41.220/view',
+    link: getBackstageurl(),
     path: '',
     name: 'Backstage',
     meta: {

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 21:17:27
+ * @LastEditTime: 2024-08-19 20:20:18
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -92,7 +92,7 @@
 import { addComment, getCommentList } from '@/api/comment';
 import coverImg from '@/assets/images/bg/cover-comment.png';
 import useResize from '@/hooks/useResize';
-import { getQQAvatar } from '@/utils/common';
+import { getBackstageurl, getQQAvatar } from '@/utils/common';
 import axios from 'axios';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
@@ -106,7 +106,7 @@ const state = reactive({
       nickName: '',
       avatarUrl: '',
       email: 'snows_l@163.com',
-      websiteUrl: 'http://124.223.41.220/view',
+      websiteUrl: getBackstageurl(),
       time: '2024-08-12 10:04:53',
       browser: 'Chrome',
       os: 'Mac OS',
@@ -119,7 +119,7 @@ const state = reactive({
       nickName: '',
       avatarUrl: '',
       email: 'snows_l@163.com',
-      websiteUrl: 'http://124.223.41.220:30002',
+      websiteUrl: 'http://124.223.41.220',
       time: '2024-08-12 10:04:53',
       browser: 'Chrome',
       os: 'Mac OS',

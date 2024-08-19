@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 19:56:00
+ * @LastEditTime: 2024-08-19 20:19:27
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -213,7 +213,7 @@ import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
-import { getQQAvatar, randomNum } from '@/utils/common';
+import { getBackstageurl, getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
@@ -295,7 +295,7 @@ const infoList = [
       ],
       kbnTip: '后台管理平台',
       title: '后台管理平台',
-      link: 'http://124.223.41.220/view'
+      link: getBackstageurl()
     },
     {
       class: 'kbn-link',
@@ -306,7 +306,7 @@ const infoList = [
       ],
       kbnTip: '后台管理平台',
       title: '后台管理平台',
-      link: 'http://124.223.41.220/view'
+      link: getBackstageurl()
     },
     {
       class: 'kbn-link',
@@ -317,7 +317,7 @@ const infoList = [
       ],
       kbnTip: '后台管理平台',
       title: '后台管理平台',
-      link: 'http://124.223.41.220/view'
+      link: getBackstageurl()
     }
   ]
 ];

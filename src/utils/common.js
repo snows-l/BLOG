@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 19:00:43
+ * @LastEditTime: 2024-08-19 20:15:50
  * @FilePath: /BLOG/src/utils/common.js
  */
 
@@ -84,4 +84,9 @@ export const copy = text => {
         console.error('Unable to copy text to clipboard', err);
       });
   }
+};
+
+// 获取后台管理
+export const getBackstageurl = () => {
+  return import.meta.env.VITE_BACKSTAGE_URL;
 };

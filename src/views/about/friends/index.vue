@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 18:55:09
+ * @LastEditTime: 2024-08-19 20:21:48
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -25,7 +25,7 @@
             </div>
             <div class="wecom-item">
               <label for="">地址：</label>
-              <span>http://124.223.41.220/view</span>
+              <span>http://124.223.41.220</span>
             </div>
             <div class="wecom-item">
               <label for="">LOGO：</label>
@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import coverImg from '@/assets/images/bg/cover-friends.png';
 import useResize from '@/hooks/useResize';
-import { getQQAvatar } from '@/utils/common';
+import { getBackstageurl, getQQAvatar } from '@/utils/common';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
 
@@ -73,13 +73,13 @@ const state = reactive({
       name: "Snows_l's Blog",
       desc: '渔得鱼心满意足，樵得樵眼笑眉舒！',
       logo: getQQAvatar(),
-      link: 'http://124.223.41.220:30002'
+      link: 'http://124.223.41.220'
     },
     {
       name: "Snows_l's 后台管理",
       desc: '划船不用浆、一生全靠浪!',
       logo: 'http://124.223.41.220:3333/imgs/avatars/avatar_20240620112452.png',
-      link: 'http://124.223.41.220/view'
+      link: getBackstageurl()
     },
     {
       name: 'zs.duan的个人博客',
