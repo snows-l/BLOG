@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 16:43:22
+ * @LastEditTime: 2024-08-19 16:55:02
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -50,6 +50,7 @@
               一名
               <div class="name">前端开发程序员 🧑‍💻</div>
             </div>
+
             <div class="weizhi">
               <ToolTip content="现居：浙江杭州">
                 <img style="width: 40px; height: 40px" src="@/assets/images/icon/icon-dingwei.svg" />
@@ -117,7 +118,7 @@
             </div>
           </div>
           <div class="hobby-warp">
-            <el-carousel height="160px" type="card" :interval="2000" :loop="true">
+            <el-carousel height="160px" :cardScale="0.9" type="card" :interval="2000" :loop="true">
               <el-carousel-item v-for="item in state.hobbyList" :key="item.name">
                 <div class="hobby-item-item">
                   <div class="text">{{ item.name }}</div>
@@ -316,7 +317,7 @@ const state = reactive({
           position: relative;
           background-color: var(--bg-content-color);
           margin: 10px 0;
-          width: 420px;
+          width: 446px;
           height: 200px;
           border-radius: 15px;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -443,6 +444,7 @@ const state = reactive({
           padding: 20px;
           border-radius: 15px;
           width: 300px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           .title {
             font-size: 22px;
             color: var(--text-color);
@@ -475,6 +477,7 @@ const state = reactive({
           padding: 20px;
           flex: 1;
           height: 200px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           .hobby-item-item {
             width: 100%;
             height: 100%;
