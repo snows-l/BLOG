@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 17:21:29
+ * @LastEditTime: 2024-08-19 18:10:16
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -124,11 +124,12 @@
             </div>
           </div>
           <div class="hobby-warp">
-            <el-carousel height="160px" :cardScale="0.9" :type="!isMobi ? 'card' : ''" :interval="2000" :loop="true">
+            <div class="title">HOBBY</div>
+            <el-carousel style="margin-top: 20px" height="140px" :type="!isMobi ? 'card' : ''" :interval="2000" :loop="true">
               <el-carousel-item v-for="item in state.hobbyList" :key="item.name">
                 <div class="hobby-item-item">
                   <div class="text">{{ item.name }}</div>
-                  <img style="width: 100%; height: 100%" :src="item.img" fit="contain" />
+                  <Img style="width: 100%; height: 100%" :src="item.img" />
                 </div>
               </el-carousel-item>
             </el-carousel>
@@ -486,6 +487,15 @@ const state = reactive({
           flex: 1;
           height: 200px;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          position: relative;
+          .title {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            height: 20px;
+            line-height: 20px;
+            color: var(--text-color);
+          }
           .hobby-item-item {
             width: 100%;
             height: 100%;
@@ -494,6 +504,7 @@ const state = reactive({
               position: absolute;
               top: 5px;
               right: 5px;
+              z-index: 9;
               // transform: translate(-50%, -50%);
               font-size: 12px;
               color: #fff;
