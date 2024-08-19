@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 18:34:39
+ * @LastEditTime: 2024-08-19 18:41:28
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -86,6 +86,12 @@ const state = reactive({
       desc: '一个不止会前端的瘦子!',
       logo: getQQAvatar('1637833822'),
       link: 'https://anran233.com/'
+    },
+    {
+      name: "Miraitowa's Blog",
+      desc: "Miraitowa's的个人博客",
+      logo: getQQAvatar('1835110799'),
+      link: 'http://124.223.41.220:30003'
     }
   ]
 });
