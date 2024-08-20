@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-14 19:43:50
- * @FilePath: /BLOG/src/components/Comment/index.vue
+ * @LastEditTime: 2024-08-20 15:47:48
+ * @FilePath: /BLOG/src/components/common/Comment/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
  *
@@ -67,7 +67,6 @@
 <script lang="ts" setup>
 import defaultAvatar from '@/assets/images/common/default_avatar.png';
 import useResize from '@/hooks/useResize';
-import axios from 'axios';
 import { computed, ref } from 'vue';
 const { isMobi } = useResize();
 
@@ -104,7 +103,7 @@ const update = (e, type) => {
 const handleGetInfoByQQ = () => {
   if (!props.modelValue.qq) return;
   let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + props.modelValue.qq + '&_wpnonce=7ccc55456e';
-  axios.get(url).then(res => {
+  fetch(url).then(res => {
     const n = { ...props.modelValue, avatarUrl: res.data.avatar, nickName: res.data.name, email: props.modelValue.qq + '@qq.com' };
     emits('update:modelValue', n);
   });

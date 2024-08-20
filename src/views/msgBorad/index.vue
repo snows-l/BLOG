@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 20:20:18
+ * @LastEditTime: 2024-08-20 16:05:03
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -61,7 +61,7 @@
                         </span>
                         <span v-if="item.websiteUrl" style="font-size: 12px">
                           网站：
-                          <a :href="item.websiteUrl">{{ item.websiteUrl }}</a>
+                          <a :href="item.websiteUrl" @click="e => e.stopPropagation()" target="_blank">{{ item.websiteUrl }}</a>
                         </span>
                       </div>
                     </div>
