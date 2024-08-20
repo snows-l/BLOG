@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-16 21:12:54
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 09:57:32
+ * @LastEditTime: 2024-08-20 22:05:54
  * @FilePath: /BLOG/public/comm/main.js
  */
 // 光标效果 配置
@@ -11,7 +11,7 @@
 // new cursoreffects.fairyDustCursor({
 //   colors: ['#ff0000', '#00ff00', '#0000ff']
 // }); // 彩虹光标
-new cursoreffects.clockCursor(); // 时钟光标
+window.custorEffect = new cursoreffects.clockCursor(); // 时钟光标
 // new cursoreffects.bubbleCursor(); // 气泡光标
 // new cursoreffects.ghostCursor(); // 幽灵光标
 // new cursoreffects.snowflakeCursor(); // 雪花光标

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 14:23:39
+ * @LastEditTime: 2024-08-20 21:37:09
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="friend-list-warp">
-          <div class="friend-list">
+          <div class="friend-list" v-if="state.friendList.length > 0">
             <div class="friend-item pointer" @click="handleTo(item)" v-for="(item, index) in state.friendList" :key="index">
               <div class="friend-item-img">
                 <img :src="item.logo" alt="" />
@@ -66,6 +66,9 @@
                 <ToolTip :content="item.profile">{{ item.profile }}</ToolTip>
               </div>
             </div>
+          </div>
+          <div class="friend-list-empty" v-else>
+            <Empty :text="'暂无友链，请等待管理员审核或联系博主添加'" :loadingText="'正在加载中...'" :loading="state.loading"></Empty>
           </div>
         </div>
       </div>
@@ -82,25 +85,29 @@ import { reactive } from 'vue';
 const { isMobi } = useResize();
 
 const state = reactive({
-  friendList: [
-    {
-      name: "Snows_l's Blog",
-      profile: '渔得鱼心满意足，樵得樵眼笑眉舒！',
-      logo: getQQAvatar(),
-      url: 'http://124.223.41.220'
-    }
-  ]
+  loading: false,
+  friendList: []
 });
 
 const getFriendLindListFn = () => {
-  getFriendLindList().then(res => {
-    if (res.code === 200) {
-      res.data.forEach(item => {
-        item.logo = item.isQQ == 1 ? getQQAvatar(item.logo) : item.logo;
+  state.loading = true;
+  getFriendLindList()
+    .then(res => {
+      if (res.code === 200) {
+        res.data.forEach(item => {
+          item.logo = item.isQQ == 1 ? getQQAvatar(item.logo) : item.logo;
+        });
+        state.friendList = [...state.friendList, ...res.data];
+      }
+    })
+    .finally(() => {
+      state.friendList.unshift({
+        name: "Snows_l's Blog",
+        profile: '渔得鱼心满意足，樵得樵眼笑眉舒！',
+        logo: getQQAvatar(),
+        url: 'http://124.223.41.220'
       });
-      state.friendList = [...state.friendList, ...res.data];
-    }
-  });
+    });
 };
 
 getFriendLindListFn();
@@ -170,10 +177,13 @@ const handleTo = item => {
           .friend-item {
             border-radius: 10px;
             width: 160px;
-            padding: 8px 20px;
+            padding: 10px 20px;
             background-color: var(--bg-content-color);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin: 10px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             .friend-item-img {
               width: 120px;
               height: 120px;

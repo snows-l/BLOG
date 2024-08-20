@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 10:17:45
+ * @LastEditTime: 2024-08-20 22:56:40
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -90,22 +90,19 @@
         </div>
       </div>
       <div class="bg-img-warp">
-        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(0)">
-          <img width="30px" height="30px" src="@/assets/images/icon/icon-huahua.png" fit="fill" />
+        <div class="bg-img-item set-item pointer" @click="handleToggleCursor">
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-cursor.svg" fit="fill" />
         </div>
-        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(1)">
-          <img width="30px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
+        <div class="bg-img-item set-item pointer" @click="handleToggleBgEffect">
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-bgeffect.svg" fit="fill" />
         </div>
-        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(2)">
-          <img width="30px" height="30px" src="@/assets/images/icon/icon-taoxin.png" fit="fill" />
-        </div>
-        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg(3)">
-          <img width="30px" height="30px" src="@/assets/images/icon/icon-xigua.png" fit="fill" />
+        <div class="cursor-effect set-item pointer" @click="handleToggleBgImg">
+          <img width="80px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
         </div>
       </div>
       <div class="font-warp">
         <div class="font-item set-item pointer a" @click="handleToggleFont">
-          <img width="25px" height="25px" src="@/assets/images/icon/icon-font-toggle.png" fit="fill" />
+          <img width="25px" height="25px" src="@/assets/images/icon/icon-fontToggle.svg" fit="fill" />
         </div>
         <div class="font-item set-item pointer b">
           <input :value="state.currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
@@ -139,9 +136,10 @@ import Footer from '@/components/Footer/index.vue';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';
 import { routes } from '@/router';
+import { removeEffect } from '@/utils/bgEffect';
 import { getQQAvatar } from '@/utils/common';
 import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
-import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
+import { Line, Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
@@ -154,7 +152,6 @@ const router = useRouter();
 const layoutRef = ref(null);
 
 const state = reactive({
-  // isMobile: isMobile(),
   isFlutter: true,
   scrollTop: 0,
   activeMemu: route.path,
@@ -169,6 +166,9 @@ const state = reactive({
   currentMusicId: 0,
   bgImg: bg1,
   fontFamilyIndex: 0,
+  bgImgIndex: 0,
+  bgEffectIndex: 0,
+  cursorIndex: 0,
   avatar: getQQAvatar(),
   menuList: routes.filter(item => !item.isHidden).map(item => (item.children ? { ...item, children: item.children.filter(child => !child.isHidden) } : item))
 });
@@ -207,25 +207,74 @@ const handleToggerTheme = (theme: string) => {
 };
 
 // 切换背景
-const handleToggleBgImg = (index: number) => {
-  switch (index) {
-    case 0:
-      state.bgImg = bg1;
-      break;
-    case 1:
-      state.bgImg = bg2;
-      break;
-    case 2:
-      state.bgImg = bg3;
-      break;
-
-    case 3:
-      state.bgImg = bg4;
-      break;
-    default:
-      break;
+const bgSet = [bg1, bg2, bg3, bg4];
+const handleToggleBgImg = () => {
+  if (state.bgImgIndex == bgSet.length - 1) {
+    state.bgImgIndex = 0;
+  } else {
+    state.bgImgIndex++;
   }
-  handleSearch(true);
+  state.bgImg = bgSet[state.bgImgIndex];
+  // 确认关闭搜索
+  if (state.isShowSearch) {
+    handleSearch(true);
+  }
+};
+
+// 切换背景特效
+const effects = [
+  { class: Snow, playload: { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() } },
+  { class: Snow, playload: {} },
+  { class: Particle, playload: { proximity: 90, range: 100 } },
+  { class: Line, playload: { reservedLines: 12, maxDegree: 70, minDegree: 70 } }
+];
+const handleToggleBgEffect = () => {
+  if (state.bgEffectIndex == effects.length - 1) {
+    state.bgEffectIndex = 0;
+  } else {
+    state.bgEffectIndex++;
+  }
+  removeEffect();
+  new effects[state.bgEffectIndex].class('#snow', effects[state.bgEffectIndex].playload);
+};
+
+// 切换光标样式
+const cursorSet = [
+  {
+    class: window.cursoreffects.clockCursor,
+    playload: {}
+  },
+  {
+    class: window.cursoreffects.textFlag,
+    playload: { text: 'snows_l', color: '#ff0000' }
+  },
+  {
+    class: window.cursoreffects.springyEmojiCursor,
+    playload: { emoji: '🤷‍♂️' }
+  },
+  {
+    class: window.cursoreffects.bubbleCursor,
+    playload: {}
+  },
+  {
+    class: window.cursoreffects.emojiCursor,
+    playload: { emoji: ['🔥', '🐬', '🦆'] }
+  },
+  {
+    class: window.cursoreffects.rainbowCursor,
+    playload: { length: 3, color: ['#ff0000', '#00ff00', '#0000ff'] }
+  }
+];
+const handleToggleCursor = () => {
+  if (state.cursorIndex == cursorSet.length - 1) {
+    state.cursorIndex = 0;
+  } else {
+    state.cursorIndex++;
+  }
+  if (window.custorEffect) {
+    window.custorEffect.destroy();
+  }
+  window.custorEffect = new cursorSet[state.cursorIndex].class(cursorSet[state.cursorIndex].playload);
 };
 
 const fontFamilys = ['default', '优设标题黑', '华文行楷', 'apple', 'DSDIGI'];
@@ -663,6 +712,10 @@ onUnmounted(() => {
         text-align: center;
         line-height: 40px;
         margin: 5px;
+      }
+      .cursor-effect {
+        width: 90px;
+        margin-left: 5px;
       }
     }
     .font-warp {
