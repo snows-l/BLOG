@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 18:20:34
+ * @LastEditTime: 2024-08-20 10:00:26
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -253,13 +253,16 @@ store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : get
 
 // 点击文章详情
 const handleArticle = row => {
-  // router.push({
-  //   path: '/article/detail',
-  //   query: {
-  //     id: row.id
-  //   }
-  // });
-  window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
+  if (isMobi) {
+    router.push({
+      path: '/article/detail',
+      query: {
+        id: row.id
+      }
+    });
+  } else {
+    window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
+  }
 };
 
 // 加在更多

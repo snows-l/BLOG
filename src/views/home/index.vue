@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 20:19:27
+ * @LastEditTime: 2024-08-20 10:24:55
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -217,8 +217,10 @@ import { getBackstageurl, getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
-moment.suppressDeprecationWarnings = true;
+import { useRouter } from 'vue-router';
+
 const { isMobi } = useResize();
+const router = useRouter();
 const store = useAppStore();
 
 const saying = '我见众生皆草木，唯你是青山。';
@@ -424,14 +426,16 @@ store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : get
 
 // 点击文章详情
 const handleArticle = row => {
-  // router.push({
-  //   path: '/article/detail',
-  //   query: {
-  //     id: row.id
-  //   }
-  // });
-
-  window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
+  if (isMobi) {
+    router.push({
+      path: '/article/detail',
+      query: {
+        id: row.id
+      }
+    });
+  } else {
+    window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
+  }
 };
 
 // 下一页

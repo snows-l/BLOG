@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 17:53:40
+ * @LastEditTime: 2024-08-20 10:17:45
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -11,13 +11,15 @@
     <!-- 移动端 菜单 -->
     <div class="mobile-menu-warp" :class="{ mMenuShow: state.mMenuShow }">
       <div class="mobile-menu">
-        <div class="avatar-warp">
-          <img class="avatar pointer" @click="handleTo('avatar')" :src="state.avatar" alt="" srcset="" />
+        <div class="scorll-warp">
+          <div class="avatar-warp">
+            <img class="avatar pointer" @click="handleTo('avatar')" :src="state.avatar" alt="" srcset="" />
+          </div>
+          <div class="serch-input-warp pointer" @click="handleSearch(false)">
+            <i class="iconfont icon-sousuo1"></i>
+          </div>
+          <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
         </div>
-        <div class="serch-input-warp pointer" @click="handleSearch(false)">
-          <i class="iconfont icon-sousuo1"></i>
-        </div>
-        <Menu :menuList="state.menuList" :isMobile="true" @menu-change="state.mMenuShow = false" />
       </div>
     </div>
 
@@ -27,7 +29,6 @@
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
         <div class="icon-warp">
           <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
-          <i class="iconfont icon-sousuo1" style="margin-left: 10px" @click="handleSearch(false)"></i>
         </div>
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
@@ -36,7 +37,7 @@
         </div>
       </header>
 
-      <!-- 悬浮菜单 -->
+      <!-- pc header -->
       <header v-else class="header-warp" :class="state.isFlutter ? 'flutter' : ''">
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
@@ -65,6 +66,9 @@
     <div class="top-set">
       <div class="top pointer" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
         <i class="iconfont icon-yooxi"></i>
+      </div>
+      <div class="set pointer" @click="handleSearch(false)" v-if="isMobi">
+        <i class="iconfont icon-sousuo1"></i>
       </div>
       <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
@@ -357,60 +361,65 @@ onUnmounted(() => {
     z-index: 9999;
     transition: left 0.8s ease;
     .mobile-menu {
-      padding: 40px;
+      padding: 20px;
       width: var(--m-menu-width);
       height: 100%;
       background-color: var(--bg-meun-warp-color);
       transition: left 0.8s ease;
-      .avatar-warp {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 25px;
-        img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          border: 2px solid #ccc;
-          transition: all 1.2s ease;
-          &:hover {
-            transform: rotate(360deg);
-            border-color: var(--theme-color);
+      .scorll-warp {
+        height: 100%;
+        overflow-y: auto;
+        padding: 20px;
+        .avatar-warp {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 25px;
+          img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            transition: all 1.2s ease;
+            &:hover {
+              transform: rotate(360deg);
+              border-color: var(--theme-color);
+            }
           }
         }
-      }
-      .top-close {
-        position: absolute;
-        top: 10px;
-        left: calc(var(--m-menu-width) + 10px);
-        background-color: var(--bg-content-color);
-        padding: 10px;
-        border-radius: 10px;
-        .iconfont {
-          font-size: 14px;
-          color: var(--text-color);
-          &:hover {
-            color: var(--theme-color);
-          }
-        }
-      }
-      .serch-input-warp {
-        height: 25px;
-        border-radius: 5px;
-        border: 1px solid var(--text-color);
-        margin-bottom: 20px;
-        position: relative;
-        .iconfont {
-          font-size: 20px;
+        .top-close {
           position: absolute;
-          top: 2px;
-          right: 10px;
-          color: var(--text-color);
-        }
-        &:hover {
-          border-color: var(--theme-light-color-3);
+          top: 10px;
+          left: calc(var(--m-menu-width) + 10px);
+          background-color: var(--bg-content-color);
+          padding: 10px;
+          border-radius: 10px;
           .iconfont {
-            color: var(--theme-light-color-3);
+            font-size: 14px;
+            color: var(--text-color);
+            &:hover {
+              color: var(--theme-color);
+            }
+          }
+        }
+        .serch-input-warp {
+          height: 25px;
+          border-radius: 5px;
+          border: 1px solid var(--text-color);
+          margin-bottom: 20px;
+          position: relative;
+          .iconfont {
+            font-size: 20px;
+            position: absolute;
+            top: 2px;
+            right: 10px;
+            color: var(--text-color);
+          }
+          &:hover {
+            border-color: var(--theme-light-color-3);
+            .iconfont {
+              color: var(--theme-light-color-3);
+            }
           }
         }
       }

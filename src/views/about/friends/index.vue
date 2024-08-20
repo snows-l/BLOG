@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 20:21:48
+ * @LastEditTime: 2024-08-20 14:23:39
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -36,7 +36,20 @@
         </div>
 
         <div class="shengming-warp">
-          <div class="item-1" style="margin-bottom: 20px">❌经常宕机 ❌不合法规 ❌插边球站 ❌红标报毒 ✅原创优先 ✅技术优先</div>
+          <div class="item-1" style="margin-bottom: 20px">
+            <span style="margin-left: 0">❌</span>
+            经常宕机
+            <span>❌</span>
+            不合法规
+            <span>❌</span>
+            插边球站
+            <span>❌</span>
+            红标报毒
+            <span>✅</span>
+            原创优先
+            <span>✅</span>
+            技术优先
+          </div>
           <div class="item-2">欢迎👏来到我的博客，这里是我的友情链接，你可以在这里找到我感兴趣的网站，欢迎交换友链，共同进步！</div>
         </div>
 
@@ -50,7 +63,7 @@
                 <ToolTip :content="item.name">{{ item.name }}</ToolTip>
               </div>
               <div class="friend-item-content">
-                <ToolTip :content="item.desc">{{ item.desc }}</ToolTip>
+                <ToolTip :content="item.profile">{{ item.profile }}</ToolTip>
               </div>
             </div>
           </div>
@@ -61,9 +74,10 @@
 </template>
 
 <script lang="ts" setup>
+import { getFriendLindList } from '@/api/friend';
 import coverImg from '@/assets/images/bg/cover-friends.png';
 import useResize from '@/hooks/useResize';
-import { getBackstageurl, getQQAvatar } from '@/utils/common';
+import { getQQAvatar } from '@/utils/common';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
 
@@ -71,33 +85,28 @@ const state = reactive({
   friendList: [
     {
       name: "Snows_l's Blog",
-      desc: '渔得鱼心满意足，樵得樵眼笑眉舒！',
+      profile: '渔得鱼心满意足，樵得樵眼笑眉舒！',
       logo: getQQAvatar(),
-      link: 'http://124.223.41.220'
-    },
-    {
-      name: "Snows_l's 后台管理",
-      desc: '划船不用浆、一生全靠浪!',
-      logo: 'http://124.223.41.220:3333/imgs/avatars/avatar_20240620112452.png',
-      link: getBackstageurl()
-    },
-    {
-      name: 'zs.duan的个人博客',
-      desc: '一个不止会前端的瘦子!',
-      logo: getQQAvatar('1637833822'),
-      link: 'https://anran233.com/'
-    },
-    {
-      name: "Miraitowa's Blog",
-      desc: '消极懈怠，只会与机会擦肩而过；积极主动，生活才会一路向上。',
-      logo: getQQAvatar('1835110799'),
-      link: 'http://124.223.41.220:30003'
+      url: 'http://124.223.41.220'
     }
   ]
 });
 
+const getFriendLindListFn = () => {
+  getFriendLindList().then(res => {
+    if (res.code === 200) {
+      res.data.forEach(item => {
+        item.logo = item.isQQ == 1 ? getQQAvatar(item.logo) : item.logo;
+      });
+      state.friendList = [...state.friendList, ...res.data];
+    }
+  });
+};
+
+getFriendLindListFn();
+
 const handleTo = item => {
-  window.open(item.link, '_blank');
+  window.open(item.url, '_blank');
 };
 </script>
 
@@ -136,11 +145,18 @@ const handleTo = item => {
         }
       }
       .shengming-warp {
+        padding: 20px;
         font-size: 16px;
         margin: 26px 0;
         div {
           line-height: 24px;
           color: var(--text-color);
+        }
+        .item-1 {
+          span {
+            margin-left: 20px;
+            margin-right: 10px;
+          }
         }
       }
       .friend-list-warp {
@@ -207,8 +223,15 @@ const handleTo = item => {
   .m-friends-container {
     .center-max-width-warp {
       width: 96% !important;
-      .friend-list {
-        justify-content: space-between !important;
+      .friend-list-warp {
+        padding: 10px !important;
+        .friend-list {
+          justify-content: space-between !important;
+          .friend-item {
+            width: 48% !important;
+            margin: 10px 2px !important;
+          }
+        }
       }
     }
   }

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 20:17:22
+ * @LastEditTime: 2024-08-20 14:30:55
  * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
@@ -107,16 +107,16 @@ export const routes = [
           icon: 'icon-a-Sheetmusic'
         },
         component: () => import('@/views/play/music/index.vue')
-      },
-      {
-        path: '/play/mp4',
-        name: 'Mp4',
-        meta: {
-          title: '影视',
-          icon: 'icon-shipin'
-        },
-        component: () => import('@/views/play/video/index.vue')
       }
+      // {
+      //   path: '/play/mp4',
+      //   name: 'Mp4',
+      //   meta: {
+      //     title: '影视',
+      //     icon: 'icon-shipin'
+      //   },
+      //   component: () => import('@/views/play/video/index.vue')
+      // }
       // {
       //   path: '/play/game',
       //   name: 'Game',
@@ -150,7 +150,7 @@ export const routes = [
         path: '/about/me',
         name: 'Me',
         meta: {
-          title: '我',
+          title: '本博主',
           icon: 'icon-guanyu',
           img: 'me.png'
         },
