@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 22:56:40
+ * @LastEditTime: 2024-08-21 19:00:28
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
-  <div class="layout-warp" :style="{ backgroundImage: `url(${state.bgImg})` }">
+  <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
     <!-- 移动端 菜单 -->
     <div class="mobile-menu-warp" :class="{ mMenuShow: state.mMenuShow }">
       <div class="mobile-menu">
@@ -105,7 +105,7 @@
           <img width="25px" height="25px" src="@/assets/images/icon/icon-fontToggle.svg" fit="fill" />
         </div>
         <div class="font-item set-item pointer b">
-          <input :value="state.currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
+          <input :value="currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
         </div>
       </div>
     </div>
@@ -126,27 +126,20 @@
 </template>
 
 <script lang="ts" setup>
-import bg1 from '@/assets/images/bg/bg1.png';
-import bg2 from '@/assets/images/bg/bg2.png';
-import bg3 from '@/assets/images/bg/bg3.png';
-import bg4 from '@/assets/images/bg/bg4.png';
 import sakura from '@/assets/images/icon/sakura';
 import $bus from '@/bus/index';
 import Footer from '@/components/Footer/index.vue';
 import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';
+import useResize from '@/hooks/useResize';
 import { routes } from '@/router';
-import { removeEffect } from '@/utils/bgEffect';
 import { getQQAvatar } from '@/utils/common';
-import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
-import { Line, Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
+import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
 
-import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
-
 const route = useRoute();
 const router = useRouter();
 const layoutRef = ref(null);
@@ -159,16 +152,10 @@ const state = reactive({
   mMenuShow: false,
   isSetShow: false,
   isShowSnow: true,
-  currentPrimaryColor: localStorage.getItem('primaryColor') || '#18a058',
   isMusicPlayerShow: false,
   isMusicPlaying: false,
   isShowSearch: false,
   currentMusicId: 0,
-  bgImg: bg1,
-  fontFamilyIndex: 0,
-  bgImgIndex: 0,
-  bgEffectIndex: 0,
-  cursorIndex: 0,
   avatar: getQQAvatar(),
   menuList: routes.filter(item => !item.isHidden).map(item => (item.children ? { ...item, children: item.children.filter(child => !child.isHidden) } : item))
 });
@@ -198,103 +185,6 @@ const handleMMenuShow = (falg: boolean) => {
 // 置顶
 const handleTop = () => {
   layoutRef.value.scrollTop = 0;
-};
-
-// 切换主题
-const handleToggerTheme = (theme: string) => {
-  setTheme(theme);
-  handleSearch(true);
-};
-
-// 切换背景
-const bgSet = [bg1, bg2, bg3, bg4];
-const handleToggleBgImg = () => {
-  if (state.bgImgIndex == bgSet.length - 1) {
-    state.bgImgIndex = 0;
-  } else {
-    state.bgImgIndex++;
-  }
-  state.bgImg = bgSet[state.bgImgIndex];
-  // 确认关闭搜索
-  if (state.isShowSearch) {
-    handleSearch(true);
-  }
-};
-
-// 切换背景特效
-const effects = [
-  { class: Snow, playload: { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() } },
-  { class: Snow, playload: {} },
-  { class: Particle, playload: { proximity: 90, range: 100 } },
-  { class: Line, playload: { reservedLines: 12, maxDegree: 70, minDegree: 70 } }
-];
-const handleToggleBgEffect = () => {
-  if (state.bgEffectIndex == effects.length - 1) {
-    state.bgEffectIndex = 0;
-  } else {
-    state.bgEffectIndex++;
-  }
-  removeEffect();
-  new effects[state.bgEffectIndex].class('#snow', effects[state.bgEffectIndex].playload);
-};
-
-// 切换光标样式
-const cursorSet = [
-  {
-    class: window.cursoreffects.clockCursor,
-    playload: {}
-  },
-  {
-    class: window.cursoreffects.textFlag,
-    playload: { text: 'snows_l', color: '#ff0000' }
-  },
-  {
-    class: window.cursoreffects.springyEmojiCursor,
-    playload: { emoji: '🤷‍♂️' }
-  },
-  {
-    class: window.cursoreffects.bubbleCursor,
-    playload: {}
-  },
-  {
-    class: window.cursoreffects.emojiCursor,
-    playload: { emoji: ['🔥', '🐬', '🦆'] }
-  },
-  {
-    class: window.cursoreffects.rainbowCursor,
-    playload: { length: 3, color: ['#ff0000', '#00ff00', '#0000ff'] }
-  }
-];
-const handleToggleCursor = () => {
-  if (state.cursorIndex == cursorSet.length - 1) {
-    state.cursorIndex = 0;
-  } else {
-    state.cursorIndex++;
-  }
-  if (window.custorEffect) {
-    window.custorEffect.destroy();
-  }
-  window.custorEffect = new cursorSet[state.cursorIndex].class(cursorSet[state.cursorIndex].playload);
-};
-
-const fontFamilys = ['default', '优设标题黑', '华文行楷', 'apple', 'DSDIGI'];
-// 切换字体
-const handleToggleFont = () => {
-  if (state.fontFamilyIndex === fontFamilys.length - 1) {
-    state.fontFamilyIndex = 0;
-  } else {
-    state.fontFamilyIndex++;
-  }
-  setFontFamily(fontFamilys[state.fontFamilyIndex]);
-  handleSearch(true);
-};
-
-// 设置主要颜色
-const handleToggleColor = (e: any) => {
-  setPrimaryColor(e.target.value);
-  state.currentPrimaryColor = e.target.value;
-  localStorage.setItem('primaryColor', state.currentPrimaryColor);
-  handleSearch(true);
 };
 
 // 显示/隐藏 音乐播放器
@@ -329,6 +219,9 @@ const handleSearch = isClose => {
 const handleClickSrearchModal = () => {
   state.isShowSearch = false;
 };
+
+import { useLayout } from './useLayout';
+const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handleToggleColor, currentPrimaryColor, handleToggerTheme, handleToggleCursor } = useLayout(handleSearch);
 
 // 监页面是否滚动
 watch(
