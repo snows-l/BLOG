@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-22 12:33:23
+ * @LastEditTime: 2024-08-22 12:59:52
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -710,6 +710,11 @@ a {
   a,
   .iconfont {
     color: var(--theme-color) !important;
+  }
+}
+.dark {
+  .header-warp {
+    background-image: none !important;
   }
 }
 </style>
