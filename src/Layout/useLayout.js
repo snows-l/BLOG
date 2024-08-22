@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-21 19:01:23
+ * @LastEditTime: 2024-08-22 12:47:54
  * @FilePath: /BLOG/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.png';
@@ -35,8 +35,8 @@ export const useLayout = handleSearch => {
   // 切换背景特效
   const effects = [
     { class: Snow, playload: { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() } },
-    { class: Snow, playload: { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: false, swingProbability: 0.1, spin: true, shape: RmbImg() } },
-    { class: Snow, playload: { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: snowImg() } },
+    { class: Snow, playload: { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: false, swingProbability: 0, spin: false, shape: RmbImg() } },
+    { class: Snow, playload: { num: isMobi ? 1 : 5, maxR: 3, minR: 12, maxSpeed: 0.3, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: snowImg() } },
     { class: Particle, playload: { proximity: 90, range: 100 } },
     { class: Line, playload: { reservedLines: 12, maxDegree: 70, minDegree: 70 } }
   ];
