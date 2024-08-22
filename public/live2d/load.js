@@ -24,7 +24,7 @@ var 引流 = [
 function toggleNightMode() {
   const html = document.querySelector('html');
   html.classList.toggle('dark');
-  localStorage.setItem('isDark', html.classList.contains('dark'));
+  localStorage.setItem('isDark', html.classList.contains('dark')); // contains 方法判断是否包含某个类名
 }
 
 const initConfig = {

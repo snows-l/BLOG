@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 09:30:47
- * @FilePath: /blog/src/components/CustomImg/index.vue
+ * @LastEditTime: 2024-08-22 10:15:40
+ * @FilePath: /BLOG/src/components/common/CustomImg/index.vue
 -->
 <template>
-  <el-image class="pointer el-img-warp" preview-teleported hide-on-click-modal :src="src" :fit="fit" :previewSrcList="[src]" :lazy="true">
+  <el-image class="pointer el-img-warp" preview-teleported hide-on-click-modal :src="src" :fit="fit" :previewSrcList="isUnPreview ? [] : [src]" :lazy="true">
     <template #placeholder>
       <div class="img-loading-warp img-warp" style="width: 100%; height: 100%; background-color: #ffffff">
         <img v-if="isSpin" :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.svg" alt="loading" />
@@ -43,6 +43,10 @@ const props = defineProps({
   size: {
     type: String,
     default: '60px'
+  },
+  isUnPreview: {
+    type: Boolean,
+    default: false
   },
   // 加载文字 默认 加载中...
   loadingText: {

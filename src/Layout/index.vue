@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-21 19:00:28
+ * @LastEditTime: 2024-08-21 20:10:59
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -42,7 +42,7 @@
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
           <span class="title-sub-text" style="margin: 0 10px 0 5px">の</span>
-          <span class="title-sub-text">BLOG</span>
+          <span class="title-sub-text" @click="handleToggleLive2d">BLOG</span>
         </div>
         <div class="right-nav-info">
           <div class="menu-warp" :class="{ menuShow: state.isMenuShow }">
@@ -196,6 +196,17 @@ const handleShowMusicPlayer = () => {
 // 音乐播放状态更新
 const handleMusicStatus = (n: boolean) => {
   state.isMusicPlaying = n;
+};
+
+const handleToggleLive2d = () => {
+  // const live2d = window.pio_reference;
+  // console.log('-------- live2d --------', live2d);
+  // if (live2d) {
+  //   // live2d.modules.destroy();
+  //   live2d.init();
+  //   // localStorage.getItem('posterGirl') == 0 ? live2d.init() : live2d.initHidden();
+  //   // localStorage.setItem('posterGirl', localStorage.getItem('posterGirl') == 0 ? 1 : 0);
+  // }
 };
 
 // 显示/隐藏 设置

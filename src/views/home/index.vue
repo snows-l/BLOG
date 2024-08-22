@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 10:24:55
+ * @LastEditTime: 2024-08-22 10:24:17
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -59,12 +59,12 @@
             <h2 class="content-title">ARTICLE</h2>
           </div>
           <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-            <div class="article-item pointer kbn-read" v-for="(item, index) in state.articleList" :key="index">
+            <div class="article-item pointer kbn-read" @click="handleArticle(item)" v-for="(item, index) in state.articleList" :key="index">
               <div class="img-left item-warp" v-if="index % 2 === 0">
                 <div class="cover-img-warp">
-                  <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :fit="isMobi ? 'contain' : ''" />
+                  <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :fit="isMobi ? 'contain' : ''" :isUnPreview="true" />
                 </div>
-                <div class="item-content" @click="handleArticle(item)">
+                <div class="item-content">
                   <div class="create-time">
                     <i class="iconfont icon-shijian"></i>
                     <span>发布于：</span>
@@ -98,7 +98,7 @@
                 </div>
               </div>
               <div class="img-right item-warp" v-else>
-                <div class="item-content pointer" @click="handleArticle(item)">
+                <div class="item-content">
                   <div class="create-time">
                     <i class="iconfont icon-shijian"></i>
                     <span>发布于：</span>
@@ -131,7 +131,7 @@
                   </div>
                 </div>
                 <div class="cover-img-warp">
-                  <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" />
+                  <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :isUnPreview="true" />
                 </div>
               </div>
             </div>
@@ -148,12 +148,12 @@
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
             <h2 class="content-title">Article</h2>
             <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-              <div class="article-item pointer kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+              <div class="article-item pointer kbn-read" @click="handleArticle(item)" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
                 <div class="img-left item-warp">
                   <div class="cover-img-warp">
-                    <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" />
+                    <Img class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :isUnPreview="true" />
                   </div>
-                  <div class="item-content pointer" @click="handleArticle(item)">
+                  <div class="item-content">
                     <div class="create-time">
                       <i class="iconfont icon-shijian"></i>
                       <span>发布于：</span>
@@ -426,7 +426,7 @@ store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : get
 
 // 点击文章详情
 const handleArticle = row => {
-  if (isMobi) {
+  if (isMobi.value) {
     router.push({
       path: '/article/detail',
       query: {
