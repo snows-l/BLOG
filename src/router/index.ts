@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 14:30:55
+ * @LastEditTime: 2024-08-22 12:14:53
  * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
@@ -150,7 +150,7 @@ export const routes = [
         path: '/about/me',
         name: 'Me',
         meta: {
-          title: '本博主',
+          title: '本大大',
           icon: 'icon-guanyu',
           img: 'me.png'
         },

@@ -3,12 +3,12 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 18:10:16
+ * @LastEditTime: 2024-08-22 12:16:35
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
-    <PageTopCover :moduleTitle="'我'" :icon="'icon-guanyu'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
+    <PageTopCover :moduleTitle="'本大大'" :icon="'icon-guanyu'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
     <div class="me-container-warp" :class="{ 'm-me-container-warp': isMobi }">
       <div class="max-width-warp">
         <div class="avatar-saying-warp">
@@ -161,8 +161,8 @@ const { isMobi } = useResize();
 
 const state = reactive({
   avatar: getQQAvatar(),
-  leftSayings: ['不想被束缚 自由自在地去追求', '热爱生活', '内向', '渴望健康，平平安安才是真'],
-  rightSayings: ['就活这一次 下次不来了', '不喜欢被忽视', '逃跑吧 跑出这满是世俗的生活', '有追求'],
+  leftSayings: ['不想被束缚 自由自在地去追求', '平平淡淡，简简单单', '内向', '渴望健康，平平安安才是真'],
+  rightSayings: ['就活这一次 下次不来了', '身体才是革命的本钱', '逃跑吧 跑出这满是世俗的生活', '不求大富大贵 但求健健康康'],
   skillList: [
     { img: iconVue, text: 'VUE3', color: getRandomColor() },
     { img: iconCSS, text: 'CSS3', color: getRandomColor() },
