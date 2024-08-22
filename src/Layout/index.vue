@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-21 20:10:59
+ * @LastEditTime: 2024-08-22 12:34:33
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -46,7 +46,7 @@
         </div>
         <div class="right-nav-info">
           <div class="menu-warp" :class="{ menuShow: state.isMenuShow }">
-            <Menu :menuList="state.menuList" />
+            <Menu class="menu" :menuList="state.menuList" />
           </div>
           <div class="pointer secrh-warp">
             <i class="iconfont icon-sousuo1" @click="handleSearch(false)"></i>
@@ -404,7 +404,7 @@ onUnmounted(() => {
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
-      background: var(--bg-warp-color);
+      background: var(--bg-warp-light-color-2);
       border-bottom: 1px solid var(--theme-light-color-3);
       transition: left 0.8s ease, width 0.8s ease, top 0.8s ease;
       position: fixed;
@@ -413,6 +413,12 @@ onUnmounted(() => {
       z-index: 999;
       border-radius: 0px;
       font-weight: 600;
+      background-image: radial-gradient(transparent 1px, #ffffff 1px);
+      background-size: 4px 4px;
+      backdrop-filter: saturate(50%) blur(4px);
+      .menu {
+        // background: var(--bg-warp-light-color-2);
+      }
       .title-text {
         font-size: 25px;
         padding: 5px 10px;
