@@ -3,15 +3,18 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-23 20:12:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-23 21:28:38
+ * @LastEditTime: 2024-08-23 21:59:27
  * @FilePath: /BLOG/src/views/article/preview.vue
 -->
 <template>
   <div class="perview-warp">
     <PageTopCover :moduleTitle="'预览'" :icon="'icon-jiaocheng-3'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
     <div class="preview-container-warp" :class="{ 'm-preview-container-warp': isMobi }">
-      <div class="max-width-warp">
+      <div class="max-width-warp" v-if="state.previewContent">
         <div id="perview" class="perview-content" :loading="state.loading"></div>
+      </div>
+      <div class="max-width-warp" v-else>
+        <Empty :text="'暂无获取代码内容'" :loadingText="'数据正在生成中...'" :loading="state.loading" />
       </div>
     </div>
   </div>
