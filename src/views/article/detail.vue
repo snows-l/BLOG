@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 19:04:30
+ * @LastEditTime: 2024-08-23 21:38:09
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -52,17 +52,21 @@
           <!-- <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" /> -->
           <Editor id="editor" class="editor-content-warp" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
           <div class="article-intfo">
-            <div>
+            <div class="pointer">
               <i class="iconfont icon-yanjing"></i>
               <span>{{ state.arcticleDetail.readCount || randomNum(30, 500) }}</span>
             </div>
-            <div>
-              <i class="iconfont icon-comment" @click="handleAdd('comment')"></i>
+            <div class="pointer" @click="handleAdd('comment')">
+              <i class="iconfont icon-comment"></i>
               <span>{{ state.arcticleDetail.commentCount || randomNum(5, 20) }}</span>
             </div>
-            <div>
-              <i class="iconfont icon-fenxiang1" @click="handleAdd('share')"></i>
+            <div class="pointer" @click="handleAdd('share')">
+              <i class="iconfont icon-fenxiang1"></i>
               <span>{{ state.arcticleDetail.shareCount || randomNum(10, 200) }}</span>
+            </div>
+            <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
+              <i class="iconfont icon-yanjing"></i>
+              <span class="iconfont" style="font-size: 12px">预览</span>
             </div>
           </div>
           <div v-if="!state.isMobile" class="flex-container">
@@ -109,6 +113,7 @@ import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch
 import { useRoute } from 'vue-router';
 
 import useResize from '@/hooks/useResize';
+import router from '@/router';
 const { isMobi } = useResize();
 
 const route = useRoute();
@@ -313,6 +318,11 @@ const getTocRight = () => {
   if (width > 1580) {
     tocRihgt.value = `${(width - 920) / 2 + 940}px`;
   }
+};
+
+// 点击阅览
+const handleView = async () => {
+  router.push({ path: '/article/preview', query: { id: articleId } });
 };
 
 // 监听路由变化，重新获取文章详情
