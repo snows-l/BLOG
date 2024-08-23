@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-22 12:59:52
+ * @LastEditTime: 2024-08-23 12:19:31
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -424,7 +424,7 @@ onUnmounted(() => {
         padding: 5px 10px;
         background-color: var(--theme-light-color-9);
         border-radius: 5px;
-        color: var(--text-color);
+        color: var(--theme-color);
       }
       .app-title {
         cursor: url('@/assets/images/cursor/pointer.png'), auto;
