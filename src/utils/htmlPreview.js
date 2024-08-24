@@ -21,7 +21,8 @@ export const importHtmls = async html => {
     const module = { exports: {} };
     const exports = module.exports;
     scripts.forEach(script => {
-      eval(script);
+      // eval(script);
+      setTimeout(script, 0);
     });
     return module.exports;
   }

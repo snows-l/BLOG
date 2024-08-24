@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-23 20:12:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-23 21:59:27
+ * @LastEditTime: 2024-08-23 22:47:16
  * @FilePath: /BLOG/src/views/article/preview.vue
 -->
 <template>
@@ -61,7 +61,7 @@ const getArticleDetailFn = () => {
 };
 
 const initPreview = async () => {
-  console.log('-------- state.previewContent --------', state.previewContent);
+  // console.log('-------- state.previewContent --------', state.previewContent);
   let { template, getExternalScripts, execScripts } = await importHtmls(state.previewContent);
   const perview = document.getElementById('perview');
   perview?.appendChild(template);
