@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-22 10:24:17
+ * @LastEditTime: 2024-08-27 20:03:19
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -251,38 +251,25 @@ const infoList = [
   [
     {
       class: 'kbn-qq',
-      imgs: [
-        {
-          img: iconQQ
-        }
-      ],
-      kbnTip: 'QQ',
-      title: 'QQ: 37523953',
+      imgs: [{ img: iconQQ }],
+      kbnTip: 'QQ: 37523953',
       link: false,
       fnQuery: 'qq'
     },
     {
       class: 'weixin-content kbn-weixin',
       imgs: [
-        {
-          class: 'weixin-icon',
-          img: iconWeixin
-        },
-        {
-          class: 'weinxin-qrcode',
-          img: iconQrcode
-        }
+        { class: 'weixin-icon', img: iconWeixin },
+        { class: 'weinxin-qrcode', img: iconQrcode }
       ],
-      kbnTip: 'WeChat',
-      title: 'WeChat: snows__l',
+      kbnTip: 'WeChat: snows__l',
       link: false,
       fnQuery: 'weixin'
     },
     {
       class: 'kbn-email',
       imgs: [{ img: iconEmail }],
-      kbnTip: 'Email',
-      title: 'Email: snows_l@163.com',
+      kbnTip: 'Email: snows_l@163.com',
       link: true,
       fnQuery: 'email'
     }
@@ -290,35 +277,8 @@ const infoList = [
   [
     {
       class: 'kbn-link',
-      imgs: [
-        {
-          img: iconBackstage
-        }
-      ],
+      imgs: [{ img: iconBackstage }],
       kbnTip: '后台管理平台',
-      title: '后台管理平台',
-      link: getBackstageurl()
-    },
-    {
-      class: 'kbn-link',
-      imgs: [
-        {
-          img: iconBackstage
-        }
-      ],
-      kbnTip: '后台管理平台',
-      title: '后台管理平台',
-      link: getBackstageurl()
-    },
-    {
-      class: 'kbn-link',
-      imgs: [
-        {
-          img: iconBackstage
-        }
-      ],
-      kbnTip: '后台管理平台',
-      title: '后台管理平台',
       link: getBackstageurl()
     }
   ]
@@ -577,7 +537,7 @@ onUnmounted(() => {
             }
           }
           .is-tool-next {
-            left: -240px;
+            left: -230px;
           }
         }
         .info-item {
