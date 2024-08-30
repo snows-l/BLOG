@@ -11,7 +11,7 @@ import request from '@/utils/request';
 // 获取评论列表
 export function getCommentList(data) {
   return request({
-    url: '/sys/comment/list',
+    url: '/comment/list',
     method: 'get',
     params: data
   });
@@ -20,7 +20,7 @@ export function getCommentList(data) {
 // 新增留言板
 export function addComment(data) {
   return request({
-    url: '/sys/comment/add',
+    url: '/comment/add',
     method: 'post',
     data
   });

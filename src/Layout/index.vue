@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-23 12:19:31
+ * @LastEditTime: 2024-08-31 00:04:07
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -135,6 +135,7 @@ import Search from '@/components/Search/index.vue';
 import useResize from '@/hooks/useResize';
 import { routes } from '@/router';
 import { getQQAvatar } from '@/utils/common';
+import { ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -235,9 +236,16 @@ const handleClickSrearchModal = () => {
 import { useLayout } from './useLayout';
 const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handleToggleColor, currentPrimaryColor, handleToggerTheme, handleToggleCursor } = useLayout(handleSearch);
 
+// 统计访问量，统一ip只会新增一次访问量
 addBlogVisit().then(res => {
   if (res.code == 200) {
-    console.log('-------- addBlogVisit --------', res);
+    if (res.msg.includes('success')) {
+      ElNotification({
+        title: '',
+        message: '欢迎来自「 ' + res.data.city + ' 」的朋友！',
+        offset: 90
+      });
+    }
   }
 });
 

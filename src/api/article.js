@@ -11,7 +11,7 @@ import request from '@/utils/request';
 // 获取文章列表
 export function getArticleList(data) {
   return request({
-    url: '/sys/article/list',
+    url: '/article/list',
     method: 'get',
     params: data
   });
@@ -20,7 +20,7 @@ export function getArticleList(data) {
 // 获取文章详情
 export function getArticleDetail(id) {
   return request({
-    url: '/sys/article/detail/' + id,
+    url: '/article/detail/' + id,
     method: 'get'
   });
 }
@@ -28,7 +28,7 @@ export function getArticleDetail(id) {
 // 新增评论数量
 export function addCommentCount(id) {
   return request({
-    url: '/sys/article/commentCount',
+    url: '/article/commentCount',
     data: {
       id: id
     },
@@ -39,7 +39,7 @@ export function addCommentCount(id) {
 // 新增分享次数
 export function addShareCount(id) {
   return request({
-    url: '/sys/article/shareCount',
+    url: '/article/shareCount',
     data: {
       id: id
     },
