@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-22 12:16:35
+ * @LastEditTime: 2024-08-30 18:57:50
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -103,22 +103,58 @@
             <div class="visit-item-warp">
               <div class="visit-item">
                 <div class="visit-item-title">今日访问</div>
-                <CountTo class="visit-item-num" :startVal="0" :endVal="19" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <CountTo
+                  class="visit-item-num"
+                  :startVal="0"
+                  :endVal="state.blogVisitTotal.today * 1"
+                  :duration="1000"
+                  :prefix="''"
+                  :suffix="''"
+                  :decimals="2"
+                  :decimal="'.'"
+                  :separator="','"></CountTo>
                 <!-- <div class="visit-item-num">19</div> -->
               </div>
               <div class="visit-item">
                 <div class="visit-item-title">昨日访问</div>
-                <CountTo class="visit-item-num" :startVal="0" :endVal="15" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <CountTo
+                  class="visit-item-num"
+                  :startVal="0"
+                  :endVal="state.blogVisitTotal.yeasterday * 1"
+                  :duration="1000"
+                  :prefix="''"
+                  :suffix="''"
+                  :decimals="2"
+                  :decimal="'.'"
+                  :separator="','"></CountTo>
                 <!-- <div class="visit-item-num">15</div> -->
               </div>
               <div class="visit-item">
                 <div class="visit-item-title">本月访问</div>
-                <CountTo class="visit-item-num" :startVal="0" :endVal="1295" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <CountTo
+                  class="visit-item-num"
+                  :startVal="0"
+                  :endVal="state.blogVisitTotal.currentMonth * 1"
+                  :duration="1000"
+                  :prefix="''"
+                  :suffix="''"
+                  :decimals="2"
+                  :decimal="'.'"
+                  :separator="','"></CountTo>
                 <!-- <div class="visit-item-num">1295</div> -->
               </div>
               <div class="visit-item">
                 <div class="visit-item-title">总访问</div>
-                <CountTo class="visit-item-num" :startVal="0" :endVal="5499" :duration="1000" :prefix="''" :suffix="''" :decimals="2" :decimal="'.'" :separator="','"></CountTo>
+                <CountTo
+                  class="visit-item-num"
+                  :startVal="0"
+                  :endVal="state.blogVisitTotal.sum * 1"
+                  :duration="1000"
+                  :prefix="''"
+                  :suffix="''"
+                  :decimals="2"
+                  :decimal="'.'"
+                  :separator="','"></CountTo>
                 <!-- <div class="visit-item-num">5499</div> -->
               </div>
             </div>
@@ -141,6 +177,7 @@
 </template>
 
 <script lang="ts" setup>
+import { getBlogVisit } from '@/api/common';
 import coverImg from '@/assets/images/bg/cover-about.png';
 import hobbyChiji from '@/assets/images/bg/hobby-chiji.jpg';
 import hobbyQx from '@/assets/images/bg/hobby-qixing.jpg';
@@ -184,12 +221,27 @@ const state = reactive({
     { img: '', text: 'mitt', color: getRandomColor() },
     { img: '', text: '@wangeditor/editor', color: getRandomColor() }
   ],
+  blogVisitTotal: {
+    today: 0,
+    yeasterday: 0,
+    currentMonth: 0,
+    sum: 0
+  },
   hobbyList: [
     { img: hobbyQx, name: '骑行' },
     { img: hobbyWangzhe, name: '王者荣耀' },
     { img: hobbyChiji, name: '和平精英' }
   ]
 });
+
+const getBlogVisitFn = () => {
+  getBlogVisit().then(res => {
+    if (res.code === 200) {
+      state.blogVisitTotal = res.data;
+    }
+  });
+};
+getBlogVisitFn();
 </script>
 
 <style lang="scss" scoped>
@@ -463,6 +515,8 @@ const state = reactive({
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
+            padding: 0 15px;
+            border-radius: 15px;
             .visit-item {
               width: 48%;
               margin: 10px 0;

@@ -126,6 +126,7 @@
 </template>
 
 <script lang="ts" setup>
+import { addBlogVisit } from '@/api/common';
 import sakura from '@/assets/images/icon/sakura';
 import $bus from '@/bus/index';
 import Footer from '@/components/Footer/index.vue';
@@ -233,6 +234,12 @@ const handleClickSrearchModal = () => {
 
 import { useLayout } from './useLayout';
 const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handleToggleColor, currentPrimaryColor, handleToggerTheme, handleToggleCursor } = useLayout(handleSearch);
+
+addBlogVisit().then(res => {
+  if (res.code == 200) {
+    console.log('-------- addBlogVisit --------', res);
+  }
+});
 
 // 监页面是否滚动
 watch(
