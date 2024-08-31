@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-22 10:22:58
+ * @LastEditTime: 2024-09-01 00:03:20
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -40,15 +40,15 @@
                   </div>
                   <div>
                     <i class="iconfont icon-yanjing"></i>
-                    <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                    <span>{{ item.readCount || 0 }}</span>
                   </div>
                   <div>
                     <i class="iconfont icon-comment"></i>
-                    <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                    <span>{{ item.commentCount || 0 }}</span>
                   </div>
                   <div>
                     <i class="iconfont icon-fenxiang1"></i>
-                    <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                    <span>{{ item.shareCount || 0 }}</span>
                   </div>
                 </div>
                 <div class="article-des text">
@@ -74,15 +74,15 @@
                   </div>
                   <div>
                     <i class="iconfont icon-yanjing"></i>
-                    <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                    <span>{{ item.readCount || 0 }}</span>
                   </div>
                   <div>
                     <i class="iconfont icon-comment"></i>
-                    <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                    <span>{{ item.commentCount || 0 }}</span>
                   </div>
                   <div>
                     <i class="iconfont icon-fenxiang1"></i>
-                    <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                    <span>{{ item.shareCount || 0 }}</span>
                   </div>
                 </div>
                 <div class="article-des text">
@@ -124,15 +124,15 @@
                   </div>
                   <div>
                     <i class="iconfont icon-yanjing"></i>
-                    <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                    <span>{{ item.readCount || 0 }}</span>
                   </div>
                   <div>
                     <i class="iconfont icon-comment"></i>
-                    <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                    <span>{{ item.commentCount || 0 }}</span>
                   </div>
                   <div>
                     <i class="iconfont icon-fenxiang1"></i>
-                    <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                    <span>{{ item.shareCount || 0 }}</span>
                   </div>
                 </div>
                 <div class="article-des text">
@@ -167,7 +167,7 @@ import houduanCover from '@/assets/images/bg/cover-houduan.png';
 import otherCover from '@/assets/images/bg/cover-other.png';
 import qianduanCover from '@/assets/images/bg/cover-qianduan.png';
 import { useAppStore } from '@/store/app';
-import { getQQAvatar, randomNum } from '@/utils/common';
+import { getQQAvatar } from '@/utils/common';
 import moment from 'moment';
 import { reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';

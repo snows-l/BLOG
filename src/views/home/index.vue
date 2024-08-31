@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-27 20:03:19
+ * @LastEditTime: 2024-09-01 00:04:59
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -81,15 +81,15 @@
                     </div>
                     <div>
                       <i class="iconfont icon-yanjing"></i>
-                      <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                      <span>{{ item.readCount || 0 }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-comment"></i>
-                      <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                      <span>{{ item.commentCount || 0 }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-fenxiang1"></i>
-                      <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                      <span>{{ item.shareCount || 0 }}</span>
                     </div>
                   </div>
                   <div class="article-des text">
@@ -115,15 +115,15 @@
                     </div>
                     <div>
                       <i class="iconfont icon-yanjing"></i>
-                      <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                      <span>{{ item.readCount || 0 }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-comment"></i>
-                      <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                      <span>{{ item.commentCount || 0 }}</span>
                     </div>
                     <div>
                       <i class="iconfont icon-fenxiang1"></i>
-                      <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                      <span>{{ item.shareCount || 0 }}</span>
                     </div>
                   </div>
                   <div class="article-des text">
@@ -170,15 +170,15 @@
                       </div>
                       <div>
                         <i class="iconfont icon-yanjing"></i>
-                        <span>{{ item.readCount || randomNum(30, 500) }}</span>
+                        <span>{{ item.readCount || 0 }}</span>
                       </div>
                       <div>
                         <i class="iconfont icon-comment"></i>
-                        <span>{{ item.commentCount || randomNum(5, 20) }}</span>
+                        <span>{{ item.commentCount || 0 }}</span>
                       </div>
                       <div>
                         <i class="iconfont icon-fenxiang1"></i>
-                        <span>{{ item.shareCount || randomNum(10, 200) }}</span>
+                        <span>{{ item.shareCount || 0 }}</span>
                       </div>
                     </div>
                     <div class="article-des text">
@@ -213,7 +213,7 @@ import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
-import { getBackstageurl, getQQAvatar, randomNum } from '@/utils/common';
+import { getBackstageurl, getQQAvatar } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
