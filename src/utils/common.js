@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 13:43:31
+ * @LastEditTime: 2024-08-31 20:18:11
  * @FilePath: /BLOG/src/utils/common.js
  */
 
@@ -97,3 +97,55 @@ export const getBackstageurl = () => {
 export const getTime = time => {
   return moment(time).format('MM月DD日 HH:mm');
 };
+
+/**
+ * @description 构造树型结构数据
+ * @param { Array } data 数据源
+ * @param { String } id id字段 默认 'id'
+ * @param { String } parentId 父节点字段 默认 'parentId'
+ * @param { String } children 孩子节点字段 默认 'children'
+ */
+export function tranListToTree(data, id, parentId, children) {
+  let config = {
+    id: id || 'id',
+    parentId: parentId || 'parentId',
+    childrenList: children || 'children'
+  };
+  var childrenListMap = {};
+  var nodeIds = {};
+  var tree = [];
+  for (let d of data) {
+    let parentId = d[config.parentId];
+    if (childrenListMap[parentId] == null) {
+      childrenListMap[parentId] = [];
+    }
+    nodeIds[d[config.id]] = d;
+    childrenListMap[parentId].push(d);
+  }
+  for (let d of data) {
+    let parentId = d[config.parentId];
+    if (nodeIds[parentId] == null) {
+      tree.push(d);
+    }
+  }
+  for (let t of tree) {
+    adaptToChildrenList(t);
+  }
+  function adaptToChildrenList(o) {
+    if (childrenListMap[o[config.id]] !== null) {
+      o[config.childrenList] = childrenListMap[o[config.id]];
+    }
+    if (o[config.childrenList]) {
+      for (let c of o[config.childrenList]) {
+        adaptToChildrenList(c);
+      }
+    }
+  }
+  function setLevel(t, level) {
+    t.__level__ = level;
+    if (!t.children || !t.children.length) return;
+    t.children.forEach(t => setLevel(t, level + 1));
+  }
+  tree.forEach(t => setLevel(t, 0));
+  return tree;
+}

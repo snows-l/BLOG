@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 12:40:22
+ * @LastEditTime: 2024-08-31 20:14:42
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -180,7 +180,7 @@ const handleComment = () => {
   if (!state.comment.value.trim() || !state.comment.qq.trim() || !state.comment.nickName.trim() || !state.comment.email.trim()) {
     return false;
   }
-  addComment({ ...state.comment, comment: state.comment.value }).then(res => {
+  addComment({ ...state.comment, comment: state.comment.value, type: 0 }).then(res => {
     if (res.code === 200) {
       state.comment.value = '';
       state.comment.qq = '';

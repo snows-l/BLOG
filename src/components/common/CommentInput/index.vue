@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 12:39:59
+ * @LastEditTime: 2024-08-31 21:05:56
  * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -38,7 +38,7 @@
         <input type="text" v-model="localValue.nickName" placeholder="昵称( * )" />
         <label class="input-label">昵称 (输入QQ后自动获取)</label>
       </div>
-      <div class="input email-warp" :class="{ 'no-email': !localValue.qq }">
+      <div class="input email-warp">
         <input type="text" v-model="localValue.email" placeholder="邮箱 ( * )" />
         <label class="input-label">你将收到回复通知 (自动获取)</label>
       </div>
@@ -67,6 +67,7 @@
 <script lang="ts" setup>
 import defaultAvatar from '@/assets/images/common/default_avatar.png';
 import useResize from '@/hooks/useResize';
+import { ElMessage } from 'element-plus';
 import { computed, ref } from 'vue';
 const { isMobi } = useResize();
 
@@ -112,7 +113,11 @@ const handleGetInfoByQQ = () => {
 //  提交
 const handleSubmit = () => {
   isSubmit.value = true;
-  emits('submit', props.modelValue);
+  if (!localValue.value || !localValue.qq || !localValue.nickName) {
+    ElMessage.error('评论内容、QQ、昵称 不能为空');
+  } else {
+    emits('submit', props.modelValue);
+  }
 };
 </script>
 

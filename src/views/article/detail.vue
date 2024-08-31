@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 14:23:37
+ * @LastEditTime: 2024-08-31 20:49:21
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -96,7 +96,7 @@
           </div>
         </div>
       </div>
-      <CommentView></CommentView>
+      <CommentView ref="commentViewRef" :articleId="state.arcticleDetail.id" :list="state.commentList" @submit="handleGetCommentFn"></CommentView>
     </div>
     <div class="no-article" :class="{ 'm-no-article': isMobi }" v-else>
       <Empty :text="'暂无文章内容，请等待作者更新'" :loadingText="'文章内容正在拼命加载中...'" :loading="state.loading" />
@@ -105,9 +105,10 @@
 </template>
 
 <script lang="ts" setup>
-import { addCommentCount, addShareCount, getArticleDetail } from '@/api/article';
+import { addShareCount, getArticleDetail } from '@/api/article';
+import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
-import { copy, isMobile, randomNum } from '@/utils/common';
+import { copy, isMobile, randomNum, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
@@ -117,6 +118,7 @@ import useResize from '@/hooks/useResize';
 import router from '@/router';
 const { isMobi } = useResize();
 
+const commentViewRef = ref(null);
 const route = useRoute();
 let articleId = route.query.id;
 const tableOfContents = ref([]);
@@ -134,7 +136,8 @@ const valueHtml = ref('');
 const state = reactive({
   loading: false,
   arcticleDetail: {},
-  isMobile: isMobile(1580)
+  isMobile: isMobile(1580),
+  commentList: []
 });
 
 // 目录等级映射
@@ -184,13 +187,26 @@ const getArticleDetailFn = () => {
     });
 };
 
+const handleGetCommentFn = () => {
+  let params = {
+    articleId: articleId
+  };
+  getCommentList2(params).then(res => {
+    if (res.code == 200) {
+      state.commentList = tranListToTree(res.data, 'id', 'pId', 'children');
+    }
+  });
+};
+
 if (articleId) {
   getArticleDetailFn();
+  handleGetCommentFn();
 }
 
 const handleAdd = (type: string) => {
   if (type === 'comment') {
-    addCommentCount(articleId);
+    // addCommentCount(articleId);
+    commentViewRef.value.clearTO();
   } else if (type === 'share') {
     addShareCount(articleId);
   }
