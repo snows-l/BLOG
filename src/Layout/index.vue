@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 00:19:56
+ * @LastEditTime: 2024-08-31 12:17:24
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -135,7 +135,7 @@ import Search from '@/components/Search/index.vue';
 import useResize from '@/hooks/useResize';
 import { routes } from '@/router';
 import { getQQAvatar } from '@/utils/common';
-import { ElNotification } from 'element-plus';
+import { ElMessage, ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -240,11 +240,21 @@ const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handle
 addBlogVisit().then(res => {
   if (res.code == 200) {
     // if (res.msg.includes('success')) {
-    ElNotification({
-      title: '',
-      message: '欢迎来自「 ' + res.data.city + ' 」的朋友！',
-      offset: 90
-    });
+    if (!isMobi.value) {
+      ElNotification({
+        title: '',
+        message: '欢迎来自「 ' + res.data.city + ' 」的朋友！',
+        offset: 80
+      });
+    } else {
+      ElMessage({
+        message: '欢迎来自「 ' + res.data.city + ' 」的朋友！ ',
+        offset: 100,
+        center: true,
+        icon: 'null',
+        customClass: 'welcome-toast'
+      });
+    }
     // }
   }
 });
@@ -420,7 +430,7 @@ onUnmounted(() => {
       align-items: center;
       padding: 0 20px;
       background: var(--bg-warp-light-color-2);
-      border-bottom: 1px solid var(--theme-light-color-3);
+      border-bottom: 1px solid var(--theme-light-color-5);
       transition: left 0.8s ease, width 0.8s ease, top 0.8s ease;
       position: fixed;
       left: 0;
@@ -503,17 +513,17 @@ onUnmounted(() => {
     }
 
     .flutter {
-      width: 95%;
+      width: calc(100% - 36px);
       -webkit-transition: all 0.8s ease !important;
       transition: all 0.8s ease !important;
       background: transparent;
       position: fixed;
-      left: 2.5%;
-      top: 2.5%;
+      left: 18px;
+      top: 20px;
       z-index: 999;
       border-radius: 10px;
       word-break: keep-all;
-      border: 1px solid var(--text-color);
+      border: 1px solid var(--text-color-2);
       &:hover {
         background: var(--bg-warp-color);
         border: 1px solid var(--theme-light-color);
@@ -731,5 +741,9 @@ a {
   .header-warp {
     background-image: none !important;
   }
+}
+.welcome-toast {
+  font-size: 12px;
+  text-wrap: nowrap;
 }
 </style>
