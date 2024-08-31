@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:34:26
+ * @LastEditTime: 2024-09-01 01:53:25
  * @FilePath: /BLOG/src/components/common/CommentView/index.vue
 -->
 <template>
@@ -18,10 +18,10 @@
             <div class="info">
               <div class="nick-name">
                 <div class="bozhu" v-if="item.qq === '37523953'">博主</div>
-                <span>{{ item.nickName }}</span>
+                <span style="margin: 0 4px">{{ item.nickName }}</span>
                 <div
                   class="bozhu level"
-                  :style="{ color: item.qq === '37523953' ? '#ff6600' : '', border: item.qq === '37523953' ? '1px solid #ff6600' : '' }"
+                  :style="{ color: item.qq === '37523953' ? '#ff6600' : '#d3a833', border: item.qq === '37523953' ? '1px solid #ff6600' : '1px solid #d3a833' }"
                   style="margin-left: 5px; margin-right: 5px">
                   Lv{{ item.qq == '37523953' ? '10' : '2' }}
                 </div>
@@ -40,7 +40,7 @@
               <div class="sub-comment-item pointer" @click="handleComent(item.id, subItem)" v-for="subItem in item.children" :key="subItem.id">
                 <div class="title">
                   <span>{{ subItem.nickName }}</span>
-                  回复
+                  <span style="margin: 0 6px; color: var(--theme-light-color-4)">回复</span>
                   <span>{{ subItem.toNickName }}：</span>
                 </div>
                 <div class="sub-content">{{ subItem.comment }}</div>
@@ -148,17 +148,27 @@ defineExpose({
   margin-top: 20px;
   width: 100%;
   .max-width-center {
+    padding: 15px;
+    background-color: var(--bg-content-color);
     border-radius: 15px;
     height: 100%;
     max-width: var(--content-max-width);
     margin: 0 auto;
     .comment-view-content {
       .comment-item {
-        border-radius: 15px;
         background-color: var(--bg-warp-light-color-2);
         padding: 15px;
         padding-bottom: 30px;
-        margin: 15px 0;
+        border-bottom: 1px solid var(--bg-content-color);
+        &:last-child {
+          margin-bottom: 0;
+          border-bottom-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+        }
+        &:first-child {
+          border-top-left-radius: 15px;
+          border-top-right-radius: 15px;
+        }
         .info-warp {
           display: flex;
           padding: 10px;

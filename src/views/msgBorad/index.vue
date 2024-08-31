@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:30:24
+ * @LastEditTime: 2024-09-01 01:56:14
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -42,10 +42,10 @@
                     <div class="r-info">
                       <div class="name">
                         <div class="bozhu" v-if="item.qq === '37523953'">博主</div>
-                        <span>{{ item.nickName }}</span>
+                        <span style="margin: 0 4px">{{ item.nickName }}</span>
                         <div
                           class="bozhu level"
-                          :style="{ color: item.qq === '37523953' ? '#ff6600' : '', border: item.qq === '37523953' ? '1px solid #ff6600' : '' }"
+                          :style="{ color: item.qq === '37523953' ? '#ff6600' : '#d3a833', border: item.qq === '37523953' ? '1px solid #ff6600' : '1px solid #d3a833' }"
                           style="margin-left: 5px; margin-right: 5px">
                           Lv{{ item.qq == '37523953' ? '1' : '' }}0
                         </div>
@@ -103,7 +103,7 @@ const state = reactive({
     {
       comment: '来都来了，还不赶紧留言？',
       qq: '37523953',
-      nickName: '',
+      nickName: 'snows_l',
       avatarUrl: '',
       email: 'snows_l@163.com',
       websiteUrl: getBackstageurl(),
@@ -116,7 +116,7 @@ const state = reactive({
     {
       comment: '求求你了，留下你的脚印吧！',
       qq: '37523953',
-      nickName: '',
+      nickName: 'snows_l',
       avatarUrl: '',
       email: 'snows_l@163.com',
       websiteUrl: 'http://124.223.41.220',
