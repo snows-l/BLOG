@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:43:46
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-12 14:14:52
- * @FilePath: /blog/src/utils/request.js
+ * @LastEditTime: 2024-08-31 23:23:15
+ * @FilePath: /BLOG/src/utils/request.js
  */
 import { getToken } from '@/utils/auth';
 import errorCode from '@/utils/errorCode';
@@ -33,24 +33,37 @@ service.interceptors.request.use(
       cancel = c;
     });
 
-    const userInfo = JSON.parse(localStorage.getItem('__LOCAL__USER_INFO')) || {};
-    // 无权限访问的接口
-    let noAuthPath = ['add', 'edit', 'delete', 'del', '/favors/export', '/wages/export'];
-    if (userInfo?.user?.role_key == 'snow' && noAuthPath.some(item => config.url.includes(item))) {
-      // 取消请求
-      if (cancel) {
-        cancel();
-        cancel = null;
-      }
-      return Promise.reject({ message: '您是访客角色，没有权限进行此操作！' });
-    }
-
     // 是否需要设置 token
     const isToken = (config.headers || {}).isToken === false;
     // 是否需要防止数据重复提交
     const isRepeatSubmit = (config.headers || {}).repeatSubmit === false;
     if (getToken() && !isToken) {
       config.headers['Authorization'] = 'Bearer ' + getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
+    }
+    if (!isRepeatSubmit && (config.method === 'post' || config.method === 'put')) {
+      const requestObj = {
+        url: config.url,
+        data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
+        time: new Date().getTime()
+      };
+      const sessionObj = session.get('QUERY_PARAMS');
+      if (sessionObj === undefined || sessionObj === null || sessionObj === '') {
+        session.set('QUERY_PARAMS', requestObj);
+      } else {
+        const s_url = sessionObj.url; // 请求地址
+        const s_data = sessionObj.data; // 请求数据
+        const s_time = sessionObj.time; // 请求时间
+        const interval = 1000 * 2; // 间隔时间(ms)，小于此时间视为重复提交
+        // 判断是否是重复提交
+        if (s_data === requestObj.data && requestObj.time - s_time < interval && s_url === requestObj.url) {
+          const message = '数据正在处理，请勿重复提交';
+          console.warn(`[${s_url}]: ` + message);
+          return Promise.reject(new Error(message));
+        } else {
+          // 不是重复提交，更新缓存
+          session.set('QUERY_PARAMS', requestObj);
+        }
+      }
     }
     return config;
   },
