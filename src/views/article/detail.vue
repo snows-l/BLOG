@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 20:49:21
+ * @LastEditTime: 2024-08-31 21:38:59
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -54,15 +54,15 @@
           <div class="article-intfo">
             <div class="pointer">
               <i class="iconfont icon-yanjing"></i>
-              <span>{{ state.arcticleDetail.readCount || randomNum(30, 500) }}</span>
+              <span>{{ state.arcticleDetail.readCount || 0 }}</span>
             </div>
             <div class="pointer" @click="handleAdd('comment')">
               <i class="iconfont icon-comment"></i>
-              <span>{{ state.arcticleDetail.commentCount || randomNum(5, 20) }}</span>
+              <span>{{ state.arcticleDetail.commentCount || 0 }}</span>
             </div>
             <div class="pointer" @click="handleAdd('share')">
               <i class="iconfont icon-fenxiang1"></i>
-              <span>{{ state.arcticleDetail.shareCount || randomNum(10, 200) }}</span>
+              <span>{{ state.arcticleDetail.shareCount || 0 }}</span>
             </div>
             <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
               <i class="iconfont icon-yanjing"></i>
@@ -108,7 +108,7 @@
 import { addShareCount, getArticleDetail } from '@/api/article';
 import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
-import { copy, isMobile, randomNum, tranListToTree } from '@/utils/common';
+import { copy, isMobile, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
@@ -187,6 +187,7 @@ const getArticleDetailFn = () => {
     });
 };
 
+// 获取评论列表
 const handleGetCommentFn = () => {
   let params = {
     articleId: articleId
@@ -205,12 +206,10 @@ if (articleId) {
 
 const handleAdd = (type: string) => {
   if (type === 'comment') {
-    // addCommentCount(articleId);
     commentViewRef.value.clearTO();
   } else if (type === 'share') {
     addShareCount(articleId);
   }
-  getArticleDetailFn();
 };
 
 // 当前高亮的目录项索引
