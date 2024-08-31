@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 12:17:24
+ * @LastEditTime: 2024-08-31 12:34:35
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -251,6 +251,7 @@ addBlogVisit().then(res => {
         message: '欢迎来自「 ' + res.data.city + ' 」的朋友！ ',
         offset: 100,
         center: true,
+        plain: true,
         icon: 'null',
         customClass: 'welcome-toast'
       });

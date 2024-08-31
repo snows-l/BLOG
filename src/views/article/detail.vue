@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-23 21:38:09
+ * @LastEditTime: 2024-08-31 14:23:37
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -96,6 +96,7 @@
           </div>
         </div>
       </div>
+      <CommentView></CommentView>
     </div>
     <div class="no-article" :class="{ 'm-no-article': isMobi }" v-else>
       <Empty :text="'暂无文章内容，请等待作者更新'" :loadingText="'文章内容正在拼命加载中...'" :loading="state.loading" />

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 16:05:03
+ * @LastEditTime: 2024-08-31 12:40:22
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -82,7 +82,7 @@
           <div v-if="!state.isMore && state.list.length > 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
         </div>
 
-        <Comment v-model="state.comment" @submit="handleComment"></Comment>
+        <CommentInput v-model="state.comment" @submit="handleComment"></CommentInput>
       </div>
     </div>
   </div>

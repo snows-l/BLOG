@@ -3,9 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-19 20:15:50
+ * @LastEditTime: 2024-08-31 13:43:31
  * @FilePath: /BLOG/src/utils/common.js
  */
+
+import moment from 'moment';
 
 // 重写 localStorage 的 setItem 方法，派发自定义事件 用于监听  localStorage 的变化
 export const dispatchEventStroage = () => {
@@ -89,4 +91,9 @@ export const copy = text => {
 // 获取后台管理
 export const getBackstageurl = () => {
   return import.meta.env.VITE_BACKSTAGE_URL;
+};
+
+// 获取 时间
+export const getTime = time => {
+  return moment(time).format('MM月DD日 HH:mm');
 };

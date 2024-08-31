@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 15:47:48
- * @FilePath: /BLOG/src/components/common/Comment/index.vue
+ * @LastEditTime: 2024-08-31 12:39:59
+ * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
  *
