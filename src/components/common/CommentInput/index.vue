@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 21:05:56
+ * @LastEditTime: 2024-08-31 21:49:34
  * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -112,11 +112,12 @@ const handleGetInfoByQQ = () => {
 
 //  提交
 const handleSubmit = () => {
-  isSubmit.value = true;
-  if (!localValue.value || !localValue.qq || !localValue.nickName) {
+  if (!props.modelValue.value || !props.modelValue.qq || !props.modelValue.nickName) {
+    isSubmit.value = true;
     ElMessage.error('评论内容、QQ、昵称 不能为空');
   } else {
     emits('submit', props.modelValue);
+    isSubmit.value = false;
   }
 };
 </script>
