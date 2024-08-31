@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 21:38:59
+ * @LastEditTime: 2024-09-01 00:26:05
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -111,6 +111,7 @@ import articleCover from '@/assets/images/bg/cover-article.png';
 import { copy, isMobile, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
+import { ElMessageBox } from 'element-plus';
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -208,7 +209,20 @@ const handleAdd = (type: string) => {
   if (type === 'comment') {
     commentViewRef.value.clearTO();
   } else if (type === 'share') {
-    addShareCount(articleId);
+    addShareCount(articleId).then(res => {
+      if (res.code == 200) {
+        copy(window.location.href);
+        ElMessageBox({
+          type: 'success',
+          message: '链接已复制，请到微信、QQ、邮箱等平台粘贴分享！',
+          center: true,
+          showConfirmButton: true,
+          confirmButtonText: '确定',
+          roundButton: true,
+          buttonSize: 'small'
+        });
+      }
+    });
   }
 };
 
