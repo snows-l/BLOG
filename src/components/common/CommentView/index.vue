@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 21:01:02
+ * @LastEditTime: 2024-09-01 01:34:26
  * @FilePath: /BLOG/src/components/common/CommentView/index.vue
 -->
 <template>
@@ -16,7 +16,16 @@
               <img :src="getQQAvatar(item.qq)" />
             </div>
             <div class="info">
-              <div class="nick-name">{{ item.nickName }}</div>
+              <div class="nick-name">
+                <div class="bozhu" v-if="item.qq === '37523953'">博主</div>
+                <span>{{ item.nickName }}</span>
+                <div
+                  class="bozhu level"
+                  :style="{ color: item.qq === '37523953' ? '#ff6600' : '', border: item.qq === '37523953' ? '1px solid #ff6600' : '' }"
+                  style="margin-left: 5px; margin-right: 5px">
+                  Lv{{ item.qq == '37523953' ? '10' : '2' }}
+                </div>
+              </div>
               <div class="time-add">
                 <span>{{ getTime(item.time) }}</span>
                 <span style="margin-left: 10px">归属地：{{ item.city }}</span>
@@ -170,6 +179,24 @@ defineExpose({
             flex-direction: column;
             justify-content: space-around;
             font-size: 12px;
+            .nick-name {
+              display: flex;
+              align-items: center;
+              margin-bottom: 4px;
+              .bozhu {
+                padding: 2px 5px;
+                font-size: 12px;
+                border: 1px solid var(--theme-light-color-5);
+                color: var(--theme-color);
+                margin-right: 5px;
+                border-radius: 5px;
+              }
+              .level {
+                border: 1px solid #ddd;
+                color: var(--text-color);
+                font-family: 优设标题黑 !important;
+              }
+            }
           }
         }
         .content {

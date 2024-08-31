@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 20:14:42
+ * @LastEditTime: 2024-09-01 01:30:24
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -156,7 +156,7 @@ axios.get(url).then(res => {
 
 const getCommentListFn = () => {
   state.loading = true;
-  getCommentList({ ...state.page }).then(res => {
+  getCommentList({ ...state.page, type: 0 }).then(res => {
     if (res.code === 200) {
       state.list = [...state.list, ...res.data];
       state.page.total = res.total;
