@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 12:34:35
+ * @LastEditTime: 2024-08-31 23:32:35
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -249,7 +249,7 @@ addBlogVisit().then(res => {
     } else {
       ElMessage({
         message: '欢迎来自「 ' + res.data.city + ' 」的朋友！ ',
-        offset: 100,
+        offset: 31,
         center: true,
         plain: true,
         icon: 'null',

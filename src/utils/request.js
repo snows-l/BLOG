@@ -3,10 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:43:46
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 23:23:15
+ * @LastEditTime: 2024-08-31 23:29:24
  * @FilePath: /BLOG/src/utils/request.js
  */
 import { getToken } from '@/utils/auth';
+import { session } from '@/utils/cache';
 import errorCode from '@/utils/errorCode';
 import axios from 'axios';
 // 创建取消令牌
