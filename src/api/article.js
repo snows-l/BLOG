@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-11 12:04:39
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-11 12:56:33
+ * @LastEditTime: 2024-09-01 15:10:29
  * @FilePath: /BLOG/src/api/article.js
  */
 import request from '@/utils/request';
@@ -44,5 +44,13 @@ export function addShareCount(id) {
       id: id
     },
     method: 'put'
+  });
+}
+
+// 预览文章的html代码
+export function previewArticleCodeToHtml(id) {
+  return request({
+    url: '/article/preview/' + id,
+    method: 'get'
   });
 }

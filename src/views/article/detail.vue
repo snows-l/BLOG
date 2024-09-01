@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:42:36
+ * @LastEditTime: 2024-09-01 15:38:29
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -105,18 +105,17 @@
 </template>
 
 <script lang="ts" setup>
-import { addShareCount, getArticleDetail } from '@/api/article';
+import { addShareCount, getArticleDetail, previewArticleCodeToHtml } from '@/api/article';
 import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
 import { copy, isMobile, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
-import { ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import useResize from '@/hooks/useResize';
-import router from '@/router';
 const { isMobi } = useResize();
 
 const commentViewRef = ref(null);
@@ -352,7 +351,16 @@ const getTocRight = () => {
 
 // 点击阅览
 const handleView = async () => {
-  router.push({ path: '/article/preview', query: { id: articleId } });
+  previewArticleCodeToHtml(articleId).then(res => {
+    if (res.code == 200) {
+      window.open(res.data, '_blank');
+    } else {
+      ElMessage({
+        type: 'error',
+        message: '预览失败，请稍后再试！'
+      });
+    }
+  });
 };
 
 // 监听路由变化，重新获取文章详情
