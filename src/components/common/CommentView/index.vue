@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:53:25
+ * @LastEditTime: 2024-09-01 11:48:10
  * @FilePath: /BLOG/src/components/common/CommentView/index.vue
 -->
 <template>
@@ -149,17 +149,21 @@ defineExpose({
   width: 100%;
   .max-width-center {
     padding: 15px;
-    background-color: var(--bg-content-color);
+    background-color: var(--bg-warp-color);
     border-radius: 15px;
     height: 100%;
     max-width: var(--content-max-width);
     margin: 0 auto;
     .comment-view-content {
+      background-color: var(--bg-content-color);
+      border: 1px solid var(--border-color);
+      border-radius: 15px;
+      overflow: hidden;
       .comment-item {
         background-color: var(--bg-warp-light-color-2);
         padding: 15px;
         padding-bottom: 30px;
-        border-bottom: 1px solid var(--bg-content-color);
+        border-bottom: 1px solid var(--border-color);
         &:last-child {
           margin-bottom: 0;
           border-bottom-left-radius: 15px;
@@ -218,7 +222,7 @@ defineExpose({
           margin-top: 10px;
           padding-left: 60px;
           .sub-padding {
-            background-color: var(--bg-warp-color);
+            background-color: var(--bg-content-color-2);
             border-radius: 5px;
             padding: 10px 20px;
             .sub-comment-item {

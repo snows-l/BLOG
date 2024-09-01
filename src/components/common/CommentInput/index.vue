@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:58:00
+ * @LastEditTime: 2024-09-01 11:31:32
  * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -126,7 +126,7 @@ const handleSubmit = () => {
 .comment-warp {
   width: 100%;
   padding: 20px;
-  border: 1px solid var(--bg-warp-light-color-2);
+  border: 1px solid var(--border-color);
   border-radius: 15px;
   background-color: var(--bg-warp-light-color-2);
   .input-out-warp {

@@ -37,10 +37,12 @@ body {
   --bg-warp-light-color: #433e3e72;
   --bg-warp-light-color-2: #ffffff90;
   --bg-content-color: #ffffffa9;
+  --bg-content-color-2: #e7e4e4a9;
   --bg-image-warp-color: #ffffff64;
   --bg-modal-color: transparent;
   --bg-modal-warp-color: #403f3f40;
   --bg-cover-color: #f9f4f48a;
+  --border-color: #ece8e6;
 }
 
 :root.dark {
@@ -53,10 +55,12 @@ body {
   --bg-warp-light-color: #cbc3c372;
   --bg-warp-light-color-2: #81818172;
   --bg-content-color: #2f2f2fa9;
+  --bg-content-color-2: #2f2f2fa9;
   --bg-image-warp-color: #333333b3;
   --bg-modal-color: transparent;
   --bg-modal-warp-color: #dad3d381;
   --bg-cover-color: #1e1e1e67;
+  --border-color: #cbc3c372;
 }
 
 // 定义（在全局样式中定义）

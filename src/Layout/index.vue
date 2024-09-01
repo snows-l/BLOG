@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 23:32:35
+ * @LastEditTime: 2024-09-01 12:01:35
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -239,24 +239,24 @@ const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handle
 // 统计访问量，统一ip只会新增一次访问量
 addBlogVisit().then(res => {
   if (res.code == 200) {
-    // if (res.msg.includes('success')) {
-    if (!isMobi.value) {
-      ElNotification({
-        title: '',
-        message: '欢迎来自「 ' + res.data.city + ' 」的朋友！',
-        offset: 80
-      });
-    } else {
-      ElMessage({
-        message: '欢迎来自「 ' + res.data.city + ' 」的朋友！ ',
-        offset: 31,
-        center: true,
-        plain: true,
-        icon: 'null',
-        customClass: 'welcome-toast'
-      });
+    if (route.path == '/' || route.path == '') {
+      if (!isMobi.value) {
+        ElNotification({
+          title: '',
+          message: '欢迎来自「 ' + res.data.city + ' 」的朋友！',
+          offset: 80
+        });
+      } else {
+        ElMessage({
+          message: '欢迎来自「 ' + res.data.city + ' 」的朋友！ ',
+          offset: 31,
+          center: true,
+          plain: true,
+          icon: 'null',
+          customClass: 'welcome-toast'
+        });
+      }
     }
-    // }
   }
 });
 
@@ -304,7 +304,7 @@ onMounted(() => {
       state.isMusicPlayerShow = true;
     }
   });
-  new Snow('#snow', { num: isMobi ? 1 : 4, maxR: 3, minR: 16, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
+  new Snow('#snow', { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
 onUnmounted(() => {

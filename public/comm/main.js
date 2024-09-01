@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-16 21:12:54
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 22:05:54
+ * @LastEditTime: 2024-09-01 11:57:08
  * @FilePath: /BLOG/public/comm/main.js
  */
 // 光标效果 配置
@@ -11,14 +11,14 @@
 // new cursoreffects.fairyDustCursor({
 //   colors: ['#ff0000', '#00ff00', '#0000ff']
 // }); // 彩虹光标
-window.custorEffect = new cursoreffects.clockCursor(); // 时钟光标
-// new cursoreffects.bubbleCursor(); // 气泡光标
+// window.custorEffect = new cursoreffects.clockCursor(); // 时钟光标
+window.custorEffect = new cursoreffects.bubbleCursor(); // 气泡光标
 // new cursoreffects.ghostCursor(); // 幽灵光标
 // new cursoreffects.snowflakeCursor(); // 雪花光标
 // new cursoreffects.emojiCursor({ emoji: ['🔥', '🐬', '🦆'] }); // 表情光标
 // new cursoreffects.springyEmojiCursor({ emoji: '🤷‍♂️' }); // 弹性的表情光标
 // new cursoreffects.followingDotCursor({ color: ['#323232a6'] }); // 跟随鼠标移动的小圆点
-// new cursoreffects.textFlag({ text: 'snows_l', color: '#ff0000' }); // 文字旗帜
+// window.custorEffect = new cursoreffects.textFlag({ text: 'snows_l', color: '#ff0000' }); // 文字旗帜
 // new cursoreffects.trailingCursor({ color: '#ff0000' }); // 尾随光标
 // new cursoreffects.rainbowCursor({
 //   length: 3,
