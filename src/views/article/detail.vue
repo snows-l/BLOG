@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 15:38:29
+ * @LastEditTime: 2024-09-02 20:52:21
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
-  <div class="article-detail-warp">
+  <div class="article-detail-warp" id="layout-content">
     <PageTopCover
       :moduleTitle="'文章详情'"
       :icon="'icon-jiaocheng-3'"
@@ -18,14 +18,12 @@
 
     <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="article-content-warp">
-        <div v-if="state.isMobile && tableOfContents.length > 0" class="m-flex-container">
+        <!-- <div v-if="state.isMobile && tableOfContents.length > 0" class="m-flex-container">
           <div class="table-of-contents-warp">
             <div v-if="tableOfContents.length > 0" class="table-of-contents">
               <div class="toc-title">目录</div>
-              <!-- 目录内容 -->
               <ul list-none p-l-0>
                 <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }" border-rd mb-5px py-3px>
-                  <!-- <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a> -->
                   <a
                     :class="{ active: activeIndex === index }"
                     @click="
@@ -43,7 +41,7 @@
               <Empty :text="'暂无目录内容，请在文章中添加标题'" :loadingText="'目录内容正在生成中...'" :loading="state.loading" />
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="article-content">
           <div class="article-cover-warp" :class="{ 'm-article-cover-warp': isMobi }">
             <Img class="cover-img" :src="state.arcticleDetail.cover" />
@@ -278,18 +276,8 @@ const handleItemClick = (item, index: number) => {
   const containerRect = container.getBoundingClientRect();
   activeIndex.value = index;
   const element = document.querySelector(`#section-${index + 1}`);
-  const offsetTop = element.offsetTop;
-  scorllContainer.scrollTop = offsetTop + (state.isMobile ? containerRect.height : -60) + document.documentElement.scrollHeight - 220;
-
-  // // 获取目标目录项的锚点链接 href 属性值
-  // const targetItem = document.querySelector(`.table-of-contents a[href="#section-${index + 1}"]`) as HTMLElement;
-  // // 滚动目录以确保当前点击的目录项可见
-  // if (targetItem) {
-  //   const container = document.querySelector('.table-of-contents-warp') as HTMLElement;
-  //   const containerRect = container.getBoundingClientRect();
-  //   const scrollTop = targetItem.offsetTop - containerRect.height / 2;
-  //   container.scrollTop = scrollTop;
-  // }
+  const offsetTop = element.offsetTop + 770; // 770 顶部封面 + COVER的高度
+  scorllContainer.scrollTop = offsetTop;
 };
 
 // 生成目录
@@ -313,21 +301,13 @@ const handleScroll = () => {
     const scrollY = scorllContainer.scrollTop || scorllContainer.offsetHeight;
     let currentIndex = 0;
     for (let i = 0; i < sections.length; i++) {
-      const sectionTop = (sections[i] as HTMLElement).offsetTop + (document.documentElement.scrollHeight - 300);
-      if (scrollY >= sectionTop) {
+      // 加上浏览器 视口 的高度
+      const sectionTop = (sections[i] as HTMLElement).getBoundingClientRect().top - 90;
+      if (sectionTop <= 0) {
         currentIndex = i;
       }
     }
 
-    // 检查当前视图中是否有标题元素，如果有，将其索引赋给 currentIndex
-    const visibleSections = Array.from(sections).filter(section => {
-      const sectionTop = (section as HTMLElement).offsetTop;
-      const sectionBottom = sectionTop + (section as HTMLElement).offsetHeight;
-      return scrollY >= sectionTop && scrollY <= sectionBottom;
-    });
-    if (visibleSections.length > 0) {
-      currentIndex = Array.from(sections).indexOf(visibleSections[visibleSections.length - 1]);
-    }
     activeIndex.value = currentIndex;
 
     // 滚动目录以确保当前高亮的目录项可见;
@@ -562,7 +542,8 @@ blockquote {
   padding: 20px 10px;
   overflow: hidden;
   .table-of-contents-warp {
-    height: 100%;
+    height: 140px;
+    overflow-y: auto;
     .toc-title {
       color: var(--text-color);
     }
