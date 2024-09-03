@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 12:56:48
+ * @LastEditTime: 2024-09-02 21:23:52
  * @FilePath: /BLOG/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
@@ -39,6 +39,19 @@ app.use(store);
 app.use(router);
 
 app.mount('#app');
+
+// 打印一些信息
+// console.log('-------- navigator --------', navigator);
+// console.log('-------- 当前设备 品牌 --------', navigator.vendor);
+// console.log('-------- 当前设备 型号 --------', navigator.product);
+// console.log('-------- 当前设备 系统 --------', navigator.platform);
+// console.log('-------- 当前设备 网络类型 --------', navigator.connection.effectiveType);
+// console.log('-------- 当前电脑 CPU 核心数 --------', navigator.hardwareConcurrency);
+// console.log('-------- 当前设备 语言 --------', navigator.language);
+// console.log('-------- 当前设备 浏览器版本 --------', navigator.appVersion);
+// console.log('-------- 当前设备 浏览器名称 --------', navigator.appName);
+// console.log('-------- 当前 用户代理 --------', navigator.userAgent);
+// console.log('-------- 当前 屏幕分辨率 --------', screen.width + 'x' + screen.height);
 
 // 根据时间 自动切换主题
 autoToggleTheme();

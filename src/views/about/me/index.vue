@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-30 18:57:50
+ * @LastEditTime: 2024-09-03 20:06:29
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -49,6 +49,20 @@
             <div class="me-3">
               一名
               <div class="name">前端开发程序员 🧑‍💻</div>
+            </div>
+            <div class="me-4">
+              <div class="chart qq">
+                <img :src="iconQQ" />
+                <span>37523953</span>
+              </div>
+              <div class="chart wx">
+                <img :src="iconWeixin" />
+                <span>snows__l</span>
+              </div>
+              <div class="chart email">
+                <img :src="iconEmail" />
+                <span>snows_l@163.com</span>
+              </div>
             </div>
 
             <div class="weizhi">
@@ -187,8 +201,11 @@ import iconCSS from '@/assets/images/icon/CSS3.svg';
 import iconElement from '@/assets/images/icon/element-plus.svg';
 import iconHtml from '@/assets/images/icon/html5.svg';
 import iconLodash from '@/assets/images/icon/lodash.png';
+import iconEmail from '@/assets/images/icon/mail.png';
 import iconNode from '@/assets/images/icon/Nodejs.png';
+import iconQQ from '@/assets/images/icon/qq.png';
 import iconVue from '@/assets/images/icon/Vue.svg';
+import iconWeixin from '@/assets/images/icon/weixin.png';
 import useResize from '@/hooks/useResize';
 import { getQQAvatar } from '@/utils/common';
 import { getRandomColor } from '@/utils/theme';
@@ -403,8 +420,24 @@ getBlogVisitFn();
           .me-3 {
             font-size: 16px;
             color: var(--text-color);
-            margin-top: 10px;
             display: flex;
+            align-items: center;
+          }
+          .me-4 {
+            margin-top: 10px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            .chart {
+              display: flex;
+              align-items: center;
+              margin-right: 20px;
+              img {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+              }
+            }
           }
           .name {
             margin-left: 10px;
@@ -416,7 +449,7 @@ getBlogVisitFn();
             position: absolute;
             right: 20px;
             animation: swing 2s ease-in-out infinite alternate;
-            bottom: 20px;
+            top: 20px;
           }
         }
         .site-warp {
