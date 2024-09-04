@@ -3,15 +3,15 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 14:12:34
- * @FilePath: /blog/src/components/common/CommentInput/index.vue
+ * @LastEditTime: 2024-09-04 20:48:11
+ * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
  *
  *  value: '',
     qq: '',
     nickName: '',
-    avatarUrl: '',
+    avatar: '',
     email: '',
     websiteUrl: '',
     isPrivacy: false,
@@ -68,6 +68,7 @@
 <script lang="ts" setup>
 import defaultAvatar from '@/assets/images/common/default_avatar.png';
 import useResize from '@/hooks/useResize';
+import { getQQAvatar } from '@/utils/common';
 import { ElMessage } from 'element-plus';
 import { computed, ref } from 'vue';
 const { isMobi } = useResize();
@@ -104,8 +105,13 @@ const handleGetInfoByQQ = () => {
   if (!props.modelValue.qq) return;
   let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + props.modelValue.qq + '&_wpnonce=7ccc55456e';
   fetch(url).then(res => {
-    const n = { ...props.modelValue, avatarUrl: res.data.avatar, nickName: res.data.name, email: props.modelValue.qq + '@qq.com' };
-    emits('update:modelValue', n);
+    if (res.formData.status !== 200) {
+      const n = { ...props.modelValue, email: props.modelValue.qq + '@qq.com', avatar: getQQAvatar(props.modelValue.qq) };
+      emits('update:modelValue', n);
+    } else {
+      const n = { ...props.modelValue, avatar: res.data.avatar, nickName: res.data.name, email: props.modelValue.qq + '@qq.com' };
+      emits('update:modelValue', n);
+    }
   });
 };
 

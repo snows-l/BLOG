@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-31 20:18:11
+ * @LastEditTime: 2024-09-04 20:41:03
  * @FilePath: /BLOG/src/utils/common.js
  */
 
@@ -30,17 +30,17 @@ export const getQQAvatar = (qq = '37523953') => {
 
 // 根据QQ号获取QQ 昵称
 export const getQQNickname = (qq = '37523953') => {
-  let url = 'https://users.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=' + encodeURIComponent(qq);
-  fetch(url)
+  let url = 'https://api.oioweb.cn/api/qq/info';
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: `qq=${encodeURIComponent(qq)}`
+  })
     .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      return data.data.portrait.nickname;
-    })
-    .catch(error => {
-      console.log(error);
-      return '未获取到昵称';
-    });
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
 };
 
 // 判断当前 视口 是否小于 w 像素
