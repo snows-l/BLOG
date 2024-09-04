@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 22:28:05
+ * @LastEditTime: 2024-09-04 22:56:10
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -52,8 +52,11 @@
       <!-- v-if="!state.isDark" -->
       <div class="bottom-bg"></div>
       <div class="bottom-bg1 bottom-bg"></div>
+      <div class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
+      <div v-if="state.isDark" class="bottom-bg"></div>
+      <div v-if="state.isDark" class="bottom-bg1 bottom-bg"></div>
       <div class="other-content" v-if="!isMobi">
         <div class="other-content-item">
           <div class="article-title-warp">
@@ -616,7 +619,7 @@ onUnmounted(() => {
       z-index: 4;
       transition-duration: 0.4s, 0.4s;
       animation-name: move2;
-      animation-duration: 30s;
+      animation-duration: 20s;
       animation-fill-mode: backwards;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -630,7 +633,7 @@ onUnmounted(() => {
       opacity: 1;
       transition-duration: 0.4s, 0.4s;
       animation-name: move2;
-      animation-duration: 20s;
+      animation-duration: 40s;
       animation-fill-mode: backwards;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
@@ -647,12 +650,51 @@ onUnmounted(() => {
     }
   }
   .other-content-warp {
+    position: relative;
     margin-top: -0px;
     background-color: var(--bg-warp-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .bottom-bg {
+      height: 65px;
+      position: absolute;
+      top: 0;
+      width: 400%;
+      left: -236px;
+      background-image: url('@/assets/images/common/wave2.png');
+      z-index: 3;
+      transform: rotateX(180deg);
+      opacity: 1;
+      transition-duration: 0.4s, 0.4s;
+      animation-name: move2;
+      animation-duration: 20s;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .bottom-bg1 {
+      height: 80px;
+      width: 400%;
+      left: 0;
+      z-index: 3;
+      opacity: 1;
+      transition-duration: 0.4s, 0.4s;
+      animation-name: move2;
+      animation-duration: 40s;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-fill-mode: backwards;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      background-image: url('@/assets/images/common/wave2.png');
+      transform: rotateX(180deg);
+    }
 
     .other-content {
       margin-top: 30px;
