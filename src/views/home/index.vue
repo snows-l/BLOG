@@ -3,12 +3,13 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 11:55:27
+ * @LastEditTime: 2024-09-04 22:28:05
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
-    <div class="first-screen">
+    <div class="first-screen" :style="{ backgroundImage: `url(${state.bgImg})` }">
+      <img :src="state.bgImgUrl" style="width: 100%; height: 100%; object-fit: cover" />
       <div class="content-warp" :class="{ showContent: state.isShowContent }">
         <img class="avatar" :src="state.avatar" alt="" />
         <div class="saying">
@@ -48,8 +49,9 @@
             p-id="21356"></path>
         </svg>
       </div>
-      <div v-if="!state.isDark" class="bottom-bg"></div>
-      <div v-if="!state.isDark" class="bottom-bg1 bottom-bg"></div>
+      <!-- v-if="!state.isDark" -->
+      <div class="bottom-bg"></div>
+      <div class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
       <div class="other-content" v-if="!isMobi">
@@ -213,7 +215,7 @@ import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
-import { getBackstageurl, getQQAvatar } from '@/utils/common';
+import { getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
@@ -234,6 +236,8 @@ const state = reactive({
   isToolNext: false,
   articleList: [],
   articleTypeList: [],
+  bgImg: '',
+  bgImgUrl: '',
   page: {
     page: 1,
     size: 5,
@@ -241,7 +245,6 @@ const state = reactive({
   }
 });
 
-import iconBackstage from '@/assets/images/icon/backstage.png';
 import iconEmail from '@/assets/images/icon/mail.png';
 import iconQQ from '@/assets/images/icon/qq.png';
 import iconQrcode from '@/assets/images/icon/wechat-qrcode.png';
@@ -273,15 +276,15 @@ const infoList = [
       link: true,
       fnQuery: 'email'
     }
-  ],
-  [
-    {
-      class: 'kbn-link',
-      imgs: [{ img: iconBackstage }],
-      kbnTip: '后台管理平台',
-      link: getBackstageurl()
-    }
   ]
+  // [
+  //   {
+  //     class: 'kbn-link',
+  //     imgs: [{ img: iconBackstage }],
+  //     kbnTip: '后台管理平台',
+  //     link: getBackstageurl()
+  //   }
+  // ]
 ];
 
 // 获取文章列表
@@ -334,12 +337,29 @@ const handleLoadMore = () => {
 
 // 切换tool
 const handleToggleMove = (type: string) => {
-  if (type === 'next') {
-    state.isToolNext = true;
-  } else {
-    state.isToolNext = false;
-  }
+  // if (type === 'next') {
+  //   state.isToolNext = true;
+  // } else {
+  //   state.isToolNext = false;
+  // }
+  handleToggleHomeBg();
 };
+
+// 切换首页背景
+const handleToggleHomeBg = () => {
+  state.bgImgUrl = 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg';
+  // axios
+  //   .get('/bg/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg', {
+  //     headers: {
+  //       'Content-Type': 'application/octet-stream;charset=utf-8'
+  //     },
+  //     responseType: 'blob'
+  //   })
+  //   .then(res => {
+  //     state.bgImg = new URL(window.URL.createObjectURL(res.data)).href;
+  //   });
+};
+handleToggleHomeBg();
 
 // infoMap
 const infoMap = {

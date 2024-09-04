@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 20:41:03
+ * @LastEditTime: 2024-09-04 21:58:24
  * @FilePath: /BLOG/src/utils/common.js
  */
 
@@ -55,9 +55,9 @@ export const setDocmentTitle = title => {
   document.title = title;
 };
 
-// 产生0-99999之间的数据数
-export const randomNum = (min = 0, max = 1) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+// 产生min~max之间的随机数
+export const randomNum = (min = 1, max = 1) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 // 复制文本到剪贴板
