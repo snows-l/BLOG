@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 14:13:17
+ * @LastEditTime: 2024-09-04 15:53:57
  * @FilePath: /blog/src/components/common/CommentView/index.vue
 -->
 <template>
@@ -95,19 +95,15 @@ const state = reactive({
   form: {
     articleId: props.articleId,
     pId: 0,
-    toQQ: '',
-    toNickName: '',
-    toEmail: '',
-    toisEmailFeekback: false
+    toId: 0,
+    toNickName: ''
   }
 });
 
 const handleComent = (pid, row) => {
   state.form.pId = pid;
-  state.form.toQQ = row.qq;
+  state.form.toId = row.id;
   state.form.toNickName = row.nickName;
-  state.form.toEmail = row.email;
-  state.form.toisEmailFeekback = row.isEmailFeekback;
 };
 
 // 处理评论
@@ -121,10 +117,7 @@ const handleComment = () => {
   addComment(params).then(res => {
     if (res.code === 200) {
       state.form.pId = 0;
-      state.form.toQQ = '';
       state.form.toNickName = '';
-      state.form.toEmail = '';
-      state.form.toisEmailFeekback = false;
 
       state.comment.value = '';
       state.comment.qq = '';
@@ -133,14 +126,14 @@ const handleComment = () => {
       state.comment.email = '';
       state.comment.websiteUrl = '';
       state.comment.isPrivacy = false;
-      state.comment.isEmailFeekback = false;
+      state.comment.isEmailFeekback = true;
       emits('submit');
     }
   });
 };
 const clearTO = () => {
   state.form.pId = 0;
-  state.form.toQQ = '';
+  state.form.toId = 0;
   state.form.toNickName = '';
 };
 
