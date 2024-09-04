@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:56:14
- * @FilePath: /BLOG/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-09-04 16:34:49
+ * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -177,7 +177,7 @@ const handleLoadMore = () => {
 
 // 提交评论
 const handleComment = () => {
-  if (!state.comment.value.trim() || !state.comment.qq.trim() || !state.comment.nickName.trim() || !state.comment.email.trim()) {
+  if (!state.comment.value.trim() || !state.comment.qq.trim() || !state.comment.nickName.trim()) {
     return false;
   }
   addComment({ ...state.comment, comment: state.comment.value, type: 0 }).then(res => {
@@ -189,7 +189,7 @@ const handleComment = () => {
       state.comment.email = '';
       state.comment.websiteUrl = '';
       state.comment.isPrivacy = false;
-      state.comment.isEmailFeekback = false;
+      state.comment.isEmailFeekback = true;
       getCommentListFn();
     }
   });
