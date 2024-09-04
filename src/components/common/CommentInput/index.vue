@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 11:31:32
- * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
+ * @LastEditTime: 2024-09-04 14:12:34
+ * @FilePath: /blog/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
  *
@@ -49,12 +49,13 @@
     </div>
     <div class="check-warp">
       <div class="check-item">
-        <input type="radio" id="isPrivacy" :value="localValue.isPrivacy" @change="e => update(e, 'isPrivacy')" />
-        <label for="isPrivacy">私密评论</label>
-      </div>
-      <div class="check-item">
-        <input type="radio" id="isEmailFeekback" :value="localValue.isEmailFeekback" @change="e => update(e, 'isEmailFeekback')" />
+        <input type="checkbox" id="isEmailFeekback" v-model="localValue.isEmailFeekback" />
         <label for="isEmailFeekback">邮件通知</label>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" id="isPrivacy" v-model="localValue.isPrivacy" />
+        <label for="isPrivacy">私密评论</label>
       </div>
     </div>
 
@@ -76,10 +77,7 @@ const emits = defineEmits(['submit', 'update:modelValue']);
 const props = defineProps({
   modelValue: {
     type: Object,
-    default: () => ({
-      isPrivacy: false,
-      isEmailFeekback: false
-    })
+    default: () => ({})
   }
 });
 
@@ -95,6 +93,7 @@ const localValue = computed({
 });
 
 //  更新 私密评论 和 邮件通知
+// @change="e => update(e, 'isEmailFeekback')"
 const update = (e, type) => {
   let n = { ...props.modelValue, [type]: e.target.checked };
   emits('update:modelValue', n);

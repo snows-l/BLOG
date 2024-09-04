@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 11:48:10
- * @FilePath: /BLOG/src/components/common/CommentView/index.vue
+ * @LastEditTime: 2024-09-04 14:13:17
+ * @FilePath: /blog/src/components/common/CommentView/index.vue
 -->
 <template>
   <div class="comment-view-container" :class="{ 'm-comment-view-container': isMobi }">
@@ -90,13 +90,15 @@ const state = reactive({
     email: '',
     websiteUrl: '',
     isPrivacy: false,
-    isEmailFeekback: false
+    isEmailFeekback: true
   },
   form: {
     articleId: props.articleId,
     pId: 0,
     toQQ: '',
-    toNickName: ''
+    toNickName: '',
+    toEmail: '',
+    toisEmailFeekback: false
   }
 });
 
@@ -104,6 +106,8 @@ const handleComent = (pid, row) => {
   state.form.pId = pid;
   state.form.toQQ = row.qq;
   state.form.toNickName = row.nickName;
+  state.form.toEmail = row.email;
+  state.form.toisEmailFeekback = row.isEmailFeekback;
 };
 
 // 处理评论
@@ -119,6 +123,8 @@ const handleComment = () => {
       state.form.pId = 0;
       state.form.toQQ = '';
       state.form.toNickName = '';
+      state.form.toEmail = '';
+      state.form.toisEmailFeekback = false;
 
       state.comment.value = '';
       state.comment.qq = '';

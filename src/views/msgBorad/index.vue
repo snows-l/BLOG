@@ -135,7 +135,7 @@ const state = reactive({
     email: '',
     websiteUrl: '',
     isPrivacy: false,
-    isEmailFeekback: false
+    isEmailFeekback: true
   },
   isMore: true,
 
