@@ -457,9 +457,6 @@ onUnmounted(() => {
         .title-sub-text {
           color: var(--text-color);
         }
-        .title-sub-text {
-          color: var(--text-color);
-        }
         &:hover {
           .title-text {
             color: #fff;

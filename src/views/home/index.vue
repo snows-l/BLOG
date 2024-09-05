@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 22:45:18
+ * @LastEditTime: 2024-09-05 23:01:59
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -94,7 +94,7 @@
                       <span>{{ item.readCount || 0 }}</span>
                     </div>
                     <div>
-                      <IconComment size="18" class="iconfont"></IconComment>
+                      <IconComment :size="18" class="iconfont"></IconComment>
                       <span>{{ item.commentCount || 0 }}</span>
                     </div>
                     <div>
@@ -133,7 +133,7 @@
                       <span>{{ item.readCount || 0 }}</span>
                     </div>
                     <div>
-                      <IconComment size="18" class="iconfont"></IconComment>
+                      <IconComment :size="18" class="iconfont"></IconComment>
                       <span>{{ item.commentCount || 0 }}</span>
                     </div>
                     <div>
@@ -193,7 +193,7 @@
                         <span>{{ item.readCount || 0 }}</span>
                       </div>
                       <div>
-                        <IconComment size="18" class="iconfont"></IconComment>
+                        <IconComment :size="18" class="iconfont"></IconComment>
                         <span>{{ item.commentCount || 0 }}</span>
                       </div>
                       <div>

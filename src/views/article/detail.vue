@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:35:04
+ * @LastEditTime: 2024-09-05 23:07:34
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -51,11 +51,11 @@
           <Editor id="editor" class="editor-content-warp" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
           <div class="article-intfo">
             <div class="pointer">
-              <i class="iconfont icon-yanjing"></i>
+              <IconHot class="iconfont"></IconHot>
               <span>{{ state.arcticleDetail.readCount || 0 }}</span>
             </div>
             <div class="pointer" @click="handleAdd('comment')">
-              <i class="iconfont icon-comment"></i>
+              <IconComment :size="18" class="iconfont"></IconComment>
               <span>{{ state.arcticleDetail.commentCount || 0 }}</span>
             </div>
             <div class="pointer" @click="handleAdd('share')">
@@ -63,7 +63,7 @@
               <span>{{ state.arcticleDetail.shareCount || 0 }}</span>
             </div>
             <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
-              <i class="iconfont icon-yanjing"></i>
+              <i class="iconfont">💡</i>
               <span class="iconfont" style="font-size: 12px">预览</span>
             </div>
           </div>

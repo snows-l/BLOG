@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:54:21
+ * @LastEditTime: 2024-09-05 23:01:03
  * @FilePath: /BLOG/src/Layout/Menu.vue
 -->
 <template>
@@ -135,7 +135,7 @@ const handleTo = item => {
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    color: var(--text-color);
+    // color: var(--text-color);
     transition: color 0.3s ease, dispay 0.3s ease;
     display: flex;
     align-items: center;
