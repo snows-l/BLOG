@@ -3,15 +3,21 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 12:42:54
- * @FilePath: /blog/src/main.ts
+ * @LastEditTime: 2024-09-05 22:20:44
+ * @FilePath: /BLOG/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
 import CommentInput from '@/components/common/CommentInput/index.vue'; // 评论 输入 组件
 import CommentView from '@/components/common/CommentView/index.vue'; // 评论 展示 组件
-import CustomImg from '@/components/common/CustomImg/index.vue'; // 图片组件
+import Img from '@/components/common/Img/index.vue'; // 图片组件
 import PageTopCover from '@/components/common/pageTopCover/index.vue'; // 顶部覆盖层组件
 import ToolTip from '@/components/common/ToolTip/index.vue'; // 提示组件
+
+import IconCalendar from '@/components/icon/Calendar/index.vue'; // 日历 图标 组件
+import IconComment from '@/components/icon/Comment/index.vue'; // 评论 图标 组件
+import IconHot from '@/components/icon/Hot/index.vue'; // 热门 图标 组件
+import IconLabel from '@/components/icon/Label/index.vue'; // 标签 图标 组件
+
 import store from '@/store/index';
 import moment from 'moment';
 import { createApp } from 'vue';
@@ -19,7 +25,7 @@ import { CountTo } from 'vue3-count-to'; // 滚动数字插件
 import './assets/style/main.css';
 import Empty from './components/common/Empty/index.vue'; // 暂无数据组件
 import { dispatchEventStroage } from './utils/common';
-import { autoToggleTheme } from './utils/theme';
+// import regIcons from './utils/reg';
 moment.suppressDeprecationWarnings = true;
 
 import App from './App.vue';
@@ -31,10 +37,16 @@ app.component('Empty', Empty);
 app.component('PageTopCover', PageTopCover);
 app.component('CommentInput', CommentInput);
 app.component('CommentView', CommentView);
-app.component('Img', CustomImg);
+app.component('Img', Img);
 app.component('ToolTip', ToolTip);
-app.use(dispatchEventStroage);
 app.component('CountTo', CountTo);
+app.component('IconComment', IconComment);
+app.component('IconLabel', IconLabel);
+app.component('IconCalendar', IconCalendar);
+app.component('IconHot', IconHot);
+
+// app.use(regIcons);
+app.use(dispatchEventStroage);
 app.use(store);
 app.use(router);
 
