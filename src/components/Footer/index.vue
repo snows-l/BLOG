@@ -72,7 +72,7 @@ const handleRefreshSaying = () => {
     }
   }
   .m-content-warp {
-    width: 96%;
+    width: var(--content-max-width-m);
     .saying-warp {
       width: 100%;
       border-radius: 5px;

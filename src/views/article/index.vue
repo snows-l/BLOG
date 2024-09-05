@@ -415,7 +415,7 @@ watch(
   }
   .m-article-content-warp-out {
     .other-content {
-      max-width: 96%;
+      max-width: var(--content-max-width-m);
       margin: 0 auto;
       .item-warp {
         display: flex;

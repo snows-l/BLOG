@@ -607,7 +607,7 @@ getBlogVisitFn();
   }
   .m-me-container-warp {
     .max-width-warp {
-      width: 96% !important;
+      width: var(--content-max-width-m) !important;
       .avatar-warp {
         width: 100px !important;
         height: 100px !important;

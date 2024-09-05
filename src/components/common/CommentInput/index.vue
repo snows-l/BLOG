@@ -259,7 +259,7 @@ const handleSubmit = () => {
   }
   .btn-warp {
     margin-top: 60px;
-    width: 96%;
+    width: var(--content-max-width-m);
     display: flex;
     justify-content: center;
     .btn {
@@ -277,7 +277,7 @@ const handleSubmit = () => {
   }
 }
 .m-comment-warp {
-  // width: 96%;
+  // width: var(--content-max-width-m);
 
   .info-warp {
     .input {

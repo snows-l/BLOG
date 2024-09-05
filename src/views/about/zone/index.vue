@@ -191,7 +191,7 @@ const handleLoadMore = () => {
   }
   .m-zone-container {
     .center-max-width-warp {
-      width: 96% !important;
+      width: var(--content-max-width-m) !important;
       .zone-list-warp {
         padding: 10px 0px !important;
       }

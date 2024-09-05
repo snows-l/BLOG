@@ -367,7 +367,7 @@ const handleComment = () => {
   }
   .m-msg-list-content-warp {
     .center-max-width-warp {
-      width: 96% !important;
+      width: var(--content-max-width-m) !important;
       .platform {
         line-height: 14px;
         display: flex;

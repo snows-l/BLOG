@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 13:24:26
+ * @LastEditTime: 2024-09-05 16:48:02
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -15,7 +15,7 @@
         <div class="saying">
           <div class="saying-text">
             <i class="saying-icon iconfont icon-quotes-left"></i>
-            <span class="saying-words">{{ state.saying }}</span>
+            <span class="saying-words text">{{ state.saying }}</span>
             <span class="saying-write">|</span>
             <i class="saying-icon iconfont icon-xia"></i>
           </div>
@@ -55,8 +55,8 @@
       <div class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
-      <div v-if="state.isDark" class="bottom-bg"></div>
-      <div v-if="state.isDark" class="bottom-bg1 bottom-bg"></div>
+      <!-- <div v-if="state.isDark" class="bottom-bg"></div>
+      <div v-if="state.isDark" class="bottom-bg1 bottom-bg"></div> -->
       <div class="other-content" v-if="!isMobi">
         <div class="other-content-item">
           <div class="article-title-warp">
@@ -531,19 +531,20 @@ onUnmounted(() => {
         align-items: center;
         .saying-icon {
           margin: 0 10px;
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
         }
         .saying-write {
+          font-size: 16px;
           margin: 0 3px;
           font-weight: 600;
           animation: blink 1s infinite;
         }
         .saying-words {
+          font-size: 16px;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          cursor: url('@/assets/images/cursor/text.png'), auto;
         }
       }
       .author-info {
@@ -846,7 +847,7 @@ onUnmounted(() => {
     }
 
     .m-other-content {
-      max-width: 96%;
+      max-width: var(--content-max-width-m);
       .item-warp {
         display: flex;
         flex-direction: column;

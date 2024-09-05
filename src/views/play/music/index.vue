@@ -204,12 +204,12 @@ onUnmounted(() => {
       height: calc(100vh - 400px);
     }
     .m-no-article {
-      max-width: 96%;
+      max-width: var(--content-max-width-m);
       margin: 0 auto;
       height: calc(100vh - 300px) !important;
     }
     .m-music-list-content {
-      width: 96% !important;
+      width: var(--content-max-width-m) !important;
       .music-item {
         width: 100% !important;
       }

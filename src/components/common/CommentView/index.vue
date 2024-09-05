@@ -249,7 +249,7 @@ defineExpose({
   }
 }
 .m-comment-view-container {
-  width: 96%;
+  width: var(--content-max-width-m);
   margin: 0 auto;
 }
 </style>

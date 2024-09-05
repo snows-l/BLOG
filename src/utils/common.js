@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 21:58:24
- * @FilePath: /BLOG/src/utils/common.js
+ * @LastEditTime: 2024-09-05 16:24:45
+ * @FilePath: /blog/src/utils/common.js
  */
 
 import moment from 'moment';
@@ -45,7 +45,7 @@ export const getQQNickname = (qq = '37523953') => {
 
 // 判断当前 视口 是否小于 w 像素
 const { body } = document;
-export const isMobile = (w = 860) => {
+export const isMobile = (w = 920) => {
   const rect = body.getBoundingClientRect();
   return rect.width - 1 <= w;
 };

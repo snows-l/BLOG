@@ -232,7 +232,7 @@ const handleTo = item => {
   }
   .m-friends-container {
     .center-max-width-warp {
-      width: 96% !important;
+      width: var(--content-max-width-m) !important;
       .friend-list-warp {
         padding: 10px !important;
         .friend-list {

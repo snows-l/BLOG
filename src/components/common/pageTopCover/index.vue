@@ -138,7 +138,7 @@ let avatar = getQQAvatar();
   height: 300px !important;
   .content-warp {
     top: 100px !important;
-    max-width: 96% !important;
+    max-width: var(--content-max-width-m) !important;
   }
 }
 </style>

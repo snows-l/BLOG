@@ -100,7 +100,7 @@ if (articleId) {
   .m-preview-container-warp {
     min-height: 350px !important;
     .max-width-warp {
-      width: 96% !important;
+      width: var(--content-max-width-m) !important;
       min-height: 350px !important;
       .max-width-warp {
         min-height: 350px !important;
