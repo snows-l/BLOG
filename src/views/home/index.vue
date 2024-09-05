@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 16:48:02
+ * @LastEditTime: 2024-09-05 17:50:18
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -86,7 +86,7 @@
                     </div>
                     <div>
                       <!-- <i class="iconfont icon-yanjing"></i> -->
-                      <svg class="iconfont" viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px">
+                      <svg class="iconfont" viewBox="0 0 1024 1024" width="16" height="16" style="vertical-align: -2px">
                         <path d="M14.656 512a497.344 497.344 0 1 0 994.688 0 497.344 497.344 0 1 0-994.688 0z" fill="#FF0000"></path>
                         <path
                           d="M374.976 872.64c-48.299-100.032-22.592-157.44 14.421-211.37 40.448-58.966 51.115-117.611 51.115-117.611s31.659 41.386 19.115 106.005c56.149-62.72 66.816-162.133 58.325-200.405 127.317 88.746 181.59 281.002 108.181 423.381C1016 652.501 723.093 323.2 672.277 285.867c16.939 37.333 20.054 100.032-14.101 130.474-58.027-219.84-201.664-265.002-201.664-265.002 16.96 113.536-61.781 237.397-137.344 330.24-2.816-45.163-5.632-76.544-29.483-119.808-5.333 82.176-68.373 149.269-85.29 231.445-22.912 111.637 17.237 193.173 170.581 279.424z"
@@ -126,7 +126,7 @@
                     </div>
                     <div>
                       <!-- <i class="iconfont icon-yanjing"></i> -->
-                      <svg class="iconfont" viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px">
+                      <svg class="iconfont" viewBox="0 0 1024 1024" width="16" height="16" style="vertical-align: -2px">
                         <path d="M14.656 512a497.344 497.344 0 1 0 994.688 0 497.344 497.344 0 1 0-994.688 0z" fill="#FF0000"></path>
                         <path
                           d="M374.976 872.64c-48.299-100.032-22.592-157.44 14.421-211.37 40.448-58.966 51.115-117.611 51.115-117.611s31.659 41.386 19.115 106.005c56.149-62.72 66.816-162.133 58.325-200.405 127.317 88.746 181.59 281.002 108.181 423.381C1016 652.501 723.093 323.2 672.277 285.867c16.939 37.333 20.054 100.032-14.101 130.474-58.027-219.84-201.664-265.002-201.664-265.002 16.96 113.536-61.781 237.397-137.344 330.24-2.816-45.163-5.632-76.544-29.483-119.808-5.333 82.176-68.373 149.269-85.29 231.445-22.912 111.637 17.237 193.173 170.581 279.424z"
@@ -187,7 +187,7 @@
                       </div>
                       <div>
                         <!-- <i class="iconfont icon-yanjing"></i> -->
-                        <svg class="iconfont" viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px">
+                        <svg class="iconfont" viewBox="0 0 1024 1024" width="16" height="16" style="vertical-align: -2px">
                           <path d="M14.656 512a497.344 497.344 0 1 0 994.688 0 497.344 497.344 0 1 0-994.688 0z" fill="#FF0000"></path>
                           <path
                             d="M374.976 872.64c-48.299-100.032-22.592-157.44 14.421-211.37 40.448-58.966 51.115-117.611 51.115-117.611s31.659 41.386 19.115 106.005c56.149-62.72 66.816-162.133 58.325-200.405 127.317 88.746 181.59 281.002 108.181 423.381C1016 652.501 723.093 323.2 672.277 285.867c16.939 37.333 20.054 100.032-14.101 130.474-58.027-219.84-201.664-265.002-201.664-265.002 16.96 113.536-61.781 237.397-137.344 330.24-2.816-45.163-5.632-76.544-29.483-119.808-5.333 82.176-68.373 149.269-85.29 231.445-22.912 111.637 17.237 193.173 170.581 279.424z"
@@ -735,7 +735,7 @@ onUnmounted(() => {
           }
         }
         .article-item {
-          margin: 40px 0;
+          margin: 24px 0;
           border-radius: 15px;
           width: 100%;
           height: 100%;
@@ -761,7 +761,7 @@ onUnmounted(() => {
           .item-content {
             flex: 1;
             height: 280px;
-            padding: 20px;
+            padding: 48px 30px;
             background-color: var(--bg-content-color);
             position: relative;
             .create-time {
@@ -782,19 +782,19 @@ onUnmounted(() => {
                 padding: 2px 4px;
                 font-size: 12px;
                 position: absolute;
-                top: 20px;
+                top: 48px;
                 right: 20px;
               }
             }
             .article-title {
               margin-top: 20px;
-              height: 60px;
+              height: 30px;
               font-size: 20px;
               line-height: 30px;
               cursor: url('@/assets/images/cursor/text.png'), auto;
               display: -webkit-box;
               -webkit-box-orient: vertical;
-              -webkit-line-clamp: 2;
+              -webkit-line-clamp: 1;
               overflow: hidden;
               text-overflow: ellipsis;
               text-align: left;
@@ -813,7 +813,7 @@ onUnmounted(() => {
                 align-items: center;
                 .iconfont {
                   margin-right: 10px;
-                  font-size: 20px;
+                  font-size: 18px;
                   color: var(--theme-color);
                 }
                 .icon-yanjing {
@@ -832,11 +832,11 @@ onUnmounted(() => {
               }
             }
             .article-des {
-              height: 86px;
+              height: 64px;
               line-height: 21px;
               display: -webkit-box;
               -webkit-box-orient: vertical;
-              -webkit-line-clamp: 4;
+              -webkit-line-clamp: 3;
               overflow: hidden;
               text-overflow: ellipsis;
               color: var(--text-color-2);
@@ -858,11 +858,12 @@ onUnmounted(() => {
         }
 
         .item-content {
-          height: 180px;
+          height: 180px !important;
+          padding: 20px 30px !important;
           .article-title {
             margin-top: 10px !important;
-            height: 40px !important;
-            line-height: 20px !important;
+            height: 30px !important;
+            line-height: 30px !important;
             font-size: 16px !important;
           }
         }

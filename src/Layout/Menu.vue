@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 13:02:47
+ * @LastEditTime: 2024-09-05 17:38:00
  * @FilePath: /blog/src/Layout/Menu.vue
 -->
 <template>
@@ -164,7 +164,7 @@ const handleTo = item => {
       transform: translateX(-50%);
       background-color: #fff;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-      background-color: var(--bg-warp-light-color-2);
+      background-color: var(--bg-warp-light-color);
       transition: display 0.3s ease;
       &:before {
         content: '';
@@ -174,7 +174,7 @@ const handleTo = item => {
         transform: translateX(-50%);
         border-width: 5px;
         border-style: solid;
-        border-color: transparent transparent var(--bg-warp-light-color-2) transparent;
+        border-color: transparent transparent var(--bg-warp-light-color) transparent;
       }
 
       .nav-item-sub {
