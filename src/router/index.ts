@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-23 20:14:32
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-09-05 13:15:39
+ * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -17,7 +17,8 @@ export const routes = [
     name: 'home',
     meta: {
       title: '首页',
-      icon: 'icon-shouye'
+      icon: 'icon-shouye',
+      textIcon: '🏡'
     },
     component: Home
   },
@@ -26,7 +27,8 @@ export const routes = [
     name: 'Article',
     meta: {
       title: '文章',
-      icon: 'icon-guidang'
+      icon: 'icon-guidang',
+      textIcon: '📝'
     },
     redirect: { name: 'FrontEnd', query: { type: '1' } },
     children: [
@@ -36,6 +38,7 @@ export const routes = [
         meta: {
           title: '前端',
           icon: 'icon-qianduan',
+          textIcon: '🎨',
           query: {
             type: '1'
           }
@@ -62,6 +65,7 @@ export const routes = [
         meta: {
           title: '其他分享',
           icon: 'icon-zonghecaiwu',
+          textIcon: '📚',
           query: {
             type: '3'
           }
@@ -73,7 +77,8 @@ export const routes = [
         name: 'Detail',
         meta: {
           title: '详情',
-          icon: 'icon-fenxiang'
+          icon: 'icon-fenxiang',
+          textIcon: '🔗'
         },
         isHidden: true,
         component: () => import('../views/article/detail.vue')
@@ -83,7 +88,8 @@ export const routes = [
         name: 'View',
         meta: {
           title: '预览',
-          icon: 'icon-fenxiang'
+          icon: 'icon-fenxiang',
+          textIcon: '🔗'
         },
         isHidden: true,
         component: () => import('../views/article/preview.vue')
@@ -93,7 +99,8 @@ export const routes = [
         name: 'Write',
         meta: {
           title: '写作',
-          icon: 'icon-fenxiang'
+          icon: 'icon-fenxiang',
+          textIcon: '✍️'
         },
         isHidden: true,
         component: Home
@@ -105,7 +112,8 @@ export const routes = [
     name: 'List',
     meta: {
       title: '娱乐',
-      icon: 'icon-yule'
+      icon: 'icon-yule',
+      textIcon: '🏖️'
     },
     redirect: { name: 'Mp3' },
     children: [
@@ -114,7 +122,8 @@ export const routes = [
         name: 'Mp3',
         meta: {
           title: '音乐',
-          icon: 'icon-a-Sheetmusic'
+          icon: 'icon-a-Sheetmusic',
+          textIcon: '🎧'
         },
         component: () => import('@/views/play/music/index.vue')
       }
@@ -143,7 +152,8 @@ export const routes = [
     name: 'MsgBoard',
     meta: {
       title: '留言板',
-      icon: 'icon-liuyanban-xian'
+      icon: 'icon-liuyanban-xian',
+      textIcon: '📪'
     },
     component: () => import('../views/msgBorad/index.vue')
   },
@@ -152,7 +162,8 @@ export const routes = [
     name: 'About',
     meta: {
       title: '关于',
-      icon: 'icon-guanyu'
+      icon: 'icon-guanyu',
+      textIcon: '👪'
     },
     redirect: { name: 'Me' },
     children: [
@@ -170,9 +181,10 @@ export const routes = [
         path: '/about/zone',
         name: 'Zone',
         meta: {
-          title: '朋友圈',
+          title: '随笔',
           icon: 'icon-guanyu',
-          img: 'pengyouquan.png'
+          // img: 'pengyouquan.png',
+          textIcon: '📒'
         },
         component: () => import('../views/about/zone/index.vue')
       },
@@ -180,8 +192,9 @@ export const routes = [
         path: '/about/friends',
         name: 'Friends',
         meta: {
-          title: '友链',
-          icon: 'icon-guanyu1'
+          title: '友情链接',
+          icon: 'icon-guanyu1',
+          textIcon: '🔗'
         },
         component: () => import('../views/about/friends/index.vue')
       }
@@ -194,7 +207,8 @@ export const routes = [
     meta: {
       title: '后台管理',
       icon: 'icon-guanyu',
-      img: 'backstage.png'
+      textIcon: '🍀'
+      // img: 'backstage.png'
     },
     component: null
   }

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 01:30:06
- * @FilePath: /BLOG/src/views/about/zone/index.vue
+ * @LastEditTime: 2024-09-05 12:35:00
+ * @FilePath: /blog/src/views/about/zone/index.vue
 -->
 <template>
   <div class="zone-container-warp">
@@ -58,7 +58,7 @@
 
 <script lang="ts" setup>
 import { getZoneList } from '@/api/zone';
-import coverImg from '@/assets/images/bg/cover-friends.png';
+import coverImg from '@/assets/images/bg/cover-zone.png';
 import IconImg from '@/assets/images/icon/pengyouquan.png';
 import useResize from '@/hooks/useResize';
 import { reactive } from 'vue';

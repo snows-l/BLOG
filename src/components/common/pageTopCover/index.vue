@@ -3,15 +3,12 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-18 16:18:01
- * @FilePath: /BLOG/src/components/common/pageTopCover/index.vue
+ * @LastEditTime: 2024-09-05 12:44:03
+ * @FilePath: /blog/src/components/common/pageTopCover/index.vue
 -->
 <template>
-  <div
-    class="page-top-cover-warp"
-    :class="{ 'm-page-top-cover-warp': isMobile }"
-    style="background-size: cover; background-position: center; background-repeat: no-repeat"
-    :style="{ backgroundImage: `url(${coverImg})` }">
+  <div class="page-top-cover-warp" :class="{ 'm-page-top-cover-warp': isMobile }" style="background-size: cover; background-position: center; background-repeat: no-repeat">
+    <img class="cover-img" :src="coverImg" />
     <div class="content-warp">
       <div class="mudule">
         <img class="icon-img" v-if="img" :src="img" alt="" />
@@ -24,7 +21,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getQQAvatar } from '@/utils/common';
+import { reactive } from 'vue';
+import { getQQAvatar, randomNum } from '@/utils/common';
 const props = defineProps({
   coverImg: {
     type: String,
@@ -74,6 +72,14 @@ let avatar = getQQAvatar();
     height: 100%;
     background-color: var(--bg-warp-light-color-2);
   }
+  .cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
   .content-warp {
     position: absolute;
     left: 50%;
@@ -95,7 +101,8 @@ let avatar = getQQAvatar();
       align-items: center;
       .iconfont {
         margin-right: 20px;
-        color: var(--text-color);
+        // color: var(--text-color);
+        color: #fff;
         font-size: 24px;
       }
       .icon-img {
@@ -104,7 +111,8 @@ let avatar = getQQAvatar();
         margin-right: 20px;
       }
       .text {
-        color: var(--text-color);
+        // color: var(--text-color);
+        color: #fff;
         font-size: 24px;
       }
     }

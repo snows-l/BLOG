@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 16:44:43
+ * @LastEditTime: 2024-09-05 13:02:47
  * @FilePath: /blog/src/Layout/Menu.vue
 -->
 <template>
@@ -13,12 +13,14 @@
         <li class="nav-item pointer one-level">
           <span @click="handleTo(menus)" class="item-nav-warp">
             <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+            <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="nav-list-sub-contetn">
             <li class="nav-item-sub nav-item item-nav-warp pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
               <img class="icon-img" v-if="menu.meta.img" :src="getAssetsImge(menu.meta.img)" />
+              <span class="iconfont" v-else-if="menu.meta.textIcon">{{ menu.meta.textIcon }}</span>
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
             </li>
@@ -27,6 +29,7 @@
       </template>
       <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
         <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+        <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
       </li>
@@ -38,12 +41,14 @@
         <li class="nav-item pointer one-level">
           <span class="item-nav-warp">
             <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+            <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="m-nav-list-sub-contetn">
             <li class="nav-item-sub nav-item pointer item-nav-warp" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
               <img class="icon-img" v-if="menu.meta.img" :src="getAssetsImge(menu.meta.img)" />
+              <span class="iconfont" v-else-if="menu.meta.textIcon">{{ menu.meta.textIcon }}</span>
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
             </li>
@@ -52,6 +57,7 @@
       </template>
       <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
         <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+        <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
       </li>
@@ -138,18 +144,18 @@ const handleTo = item => {
     display: flex;
     align-items: center;
     .iconfont {
-      margin-right: 10px;
+      margin-right: 6px;
     }
     .icon-img {
       width: 16px;
       height: 16px;
-      margin-right: 10px;
+      margin-right: 6px;
     }
     &:hover {
       color: var(--theme-color);
     }
     .nav-list-sub-contetn {
-      padding: 10px 0;
+      padding: 5px 5px;
       border-radius: 5px;
       position: absolute;
       display: none;
@@ -158,7 +164,7 @@ const handleTo = item => {
       transform: translateX(-50%);
       background-color: #fff;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-      background-color: var(--bg-warp-color);
+      background-color: var(--bg-warp-light-color-2);
       transition: display 0.3s ease;
       &:before {
         content: '';
@@ -168,11 +174,14 @@ const handleTo = item => {
         transform: translateX(-50%);
         border-width: 5px;
         border-style: solid;
-        border-color: transparent transparent var(--bg-warp-color) transparent;
+        border-color: transparent transparent var(--bg-warp-light-color-2) transparent;
       }
 
       .nav-item-sub {
         padding: 10px 15px;
+        background-color: var(--bg-warp-color);
+        border-radius: 5px;
+        margin: 5px 0;
         color: var(--text-color);
         &:hover {
           color: var(--theme-color);
@@ -204,13 +213,13 @@ const handleTo = item => {
     .icon-img {
       width: 16px;
       height: 16px;
-      margin-right: 10px;
+      margin-right: 6px;
     }
     &:hover {
       color: var(--theme-color);
     }
     .iconfont {
-      margin-right: 10px;
+      margin-right: 6px;
     }
   }
   .nav-item-sub {

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-02 21:23:52
- * @FilePath: /BLOG/src/main.ts
+ * @LastEditTime: 2024-09-05 12:42:54
+ * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
 import CommentInput from '@/components/common/CommentInput/index.vue'; // 评论 输入 组件
@@ -54,7 +54,7 @@ app.mount('#app');
 // console.log('-------- 当前 屏幕分辨率 --------', screen.width + 'x' + screen.height);
 
 // 根据时间 自动切换主题
-autoToggleTheme();
+// autoToggleTheme();
 // 重置播放状态
 localStorage.setItem('isPlaying', 'false');
 // 监听是否离开网页
