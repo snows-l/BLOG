@@ -3,12 +3,12 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-20 21:37:09
+ * @LastEditTime: 2024-09-05 20:02:00
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
   <div class="friends-container-warp">
-    <PageTopCover :moduleTitle="'友情链接'" :icon="'icon-guanyu'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
+    <PageTopCover :moduleTitle="'友情链接'" :textIcon="'🔗'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
     <div class="friends-container" :class="{ 'm-friends-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="wecom">
@@ -204,7 +204,7 @@ const handleTo = item => {
             .friend-item-title {
               font-size: 16px;
               font-weight: bold;
-              margin-top: 10px;
+              margin-top: 20px;
               text-align: center;
               color: var(--text-color);
               display: -webkit-box;
@@ -218,6 +218,7 @@ const handleTo = item => {
               line-height: 18px;
               font-weight: bold;
               margin-top: 10px;
+              text-align: center;
               color: var(--text-color);
               display: -webkit-box;
               -webkit-box-orient: vertical;

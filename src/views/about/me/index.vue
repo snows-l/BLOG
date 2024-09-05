@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="me-out-warp">
-    <PageTopCover :moduleTitle="'本大大'" :icon="'icon-guanyu'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
+    <PageTopCover :moduleTitle="'本大大'" :imgIcon="'me.png'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
     <div class="me-container-warp" :class="{ 'm-me-container-warp': isMobi }">
       <div class="max-width-warp">
         <div class="avatar-saying-warp">

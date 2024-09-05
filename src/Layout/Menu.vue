@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 17:38:00
- * @FilePath: /blog/src/Layout/Menu.vue
+ * @LastEditTime: 2024-09-05 19:54:21
+ * @FilePath: /BLOG/src/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -12,14 +12,14 @@
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
           <span @click="handleTo(menus)" class="item-nav-warp">
-            <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+            <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
             <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="nav-list-sub-contetn">
             <li class="nav-item-sub nav-item item-nav-warp pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
-              <img class="icon-img" v-if="menu.meta.img" :src="getAssetsImge(menu.meta.img)" />
+              <img class="icon-img" v-if="menu.meta.img" :src="getImgIcon(menu.meta.img)" />
               <span class="iconfont" v-else-if="menu.meta.textIcon">{{ menu.meta.textIcon }}</span>
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
@@ -28,7 +28,7 @@
         </li>
       </template>
       <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
-        <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+        <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
         <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
@@ -40,14 +40,14 @@
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
           <span class="item-nav-warp">
-            <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+            <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
             <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
             <span>{{ menus.meta.title }}</span>
           </span>
           <ul class="m-nav-list-sub-contetn">
             <li class="nav-item-sub nav-item pointer item-nav-warp" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
-              <img class="icon-img" v-if="menu.meta.img" :src="getAssetsImge(menu.meta.img)" />
+              <img class="icon-img" v-if="menu.meta.img" :src="getImgIcon(menu.meta.img)" />
               <span class="iconfont" v-else-if="menu.meta.textIcon">{{ menu.meta.textIcon }}</span>
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
               <span>{{ menu.meta.title }}</span>
@@ -56,7 +56,7 @@
         </li>
       </template>
       <li v-else class="nav-item one-level item-nav-warp" @click="handleTo(menus)">
-        <img class="icon-img" v-if="menus.meta.img" :src="getAssetsImge(menus.meta.img)" />
+        <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
         <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
         <span>{{ menus.meta.title }}</span>
@@ -66,6 +66,7 @@
 </template>
 
 <script lang="ts" setup>
+import { getImgIcon } from '@/utils/common';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -89,11 +90,6 @@ const state = reactive({
   activeMemu: '',
   showPath: ''
 });
-
-// 获取assets静态图片
-const getAssetsImge = name => {
-  return new URL(`../assets/images/icon/${name}`, import.meta.url).href;
-};
 
 // 路由跳转
 const handleTo = item => {

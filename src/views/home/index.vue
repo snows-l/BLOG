@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 17:50:18
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-09-05 19:30:13
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -783,7 +783,7 @@ onUnmounted(() => {
                 font-size: 12px;
                 position: absolute;
                 top: 48px;
-                right: 20px;
+                right: 30px;
               }
             }
             .article-title {
@@ -859,12 +859,16 @@ onUnmounted(() => {
 
         .item-content {
           height: 180px !important;
-          padding: 20px 30px !important;
+          padding: 20px 20px !important;
           .article-title {
             margin-top: 10px !important;
             height: 30px !important;
             line-height: 30px !important;
             font-size: 16px !important;
+          }
+          .type {
+            top: 10px !important;
+            right: 20px !important;
           }
         }
         .auth-info-warp {

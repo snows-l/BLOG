@@ -3,14 +3,14 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 16:34:49
- * @FilePath: /blog/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-09-05 19:58:54
+ * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
     <PageTopCover
       :moduleTitle="'留言板'"
-      :icon="'icon-liuyanban-xian'"
+      :textIcon="'📪'"
       :coverImg="coverImg"
       :isMobile="isMobi"
       :mudulDesc="''"

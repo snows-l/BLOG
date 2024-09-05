@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-02 20:52:21
+ * @LastEditTime: 2024-09-05 19:35:04
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -94,7 +94,7 @@
           </div>
         </div>
       </div>
-      <CommentView ref="commentViewRef" :articleId="state.arcticleDetail.id" :list="state.commentList" @submit="handleGetCommentFn"></CommentView>
+      <CommentView style="margin-top: 15px" ref="commentViewRef" :articleId="state.arcticleDetail.id" :list="state.commentList" @submit="handleGetCommentFn"></CommentView>
     </div>
     <div class="no-article" :class="{ 'm-no-article': isMobi }" v-else>
       <Empty :text="'暂无文章内容，请等待作者更新'" :loadingText="'文章内容正在拼命加载中...'" :loading="state.loading" />
@@ -401,7 +401,7 @@ onBeforeUnmount(() => {
       max-width: var(--content-max-width);
       margin: 0 auto;
       .article-content {
-        padding: 20px 16px;
+        padding: 20px 0px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
         background-color: var(--bg-content-color);
@@ -409,7 +409,7 @@ onBeforeUnmount(() => {
         line-height: 20px !important;
         .article-cover-warp {
           width: 100%;
-          height: 350px;
+          height: 240px;
           margin-bottom: 40px;
           // border-top-left-radius: 15px;
           // border-top-right-radius: 15px;

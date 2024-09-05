@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 20:48:11
+ * @LastEditTime: 2024-09-05 19:38:47
  * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
  *
@@ -259,13 +259,13 @@ const handleSubmit = () => {
   }
   .btn-warp {
     margin-top: 60px;
-    width: var(--content-max-width-m);
     display: flex;
     justify-content: center;
     .btn {
       border: 1px solid var(--text-color);
       border-radius: 15px;
-      min-width: 300px;
+      width: 100%;
+      max-width: 350px;
       line-height: 30px;
       text-align: center;
       height: 40px;

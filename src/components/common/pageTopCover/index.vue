@@ -3,15 +3,16 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 12:44:03
- * @FilePath: /blog/src/components/common/pageTopCover/index.vue
+ * @LastEditTime: 2024-09-05 19:56:41
+ * @FilePath: /BLOG/src/components/common/pageTopCover/index.vue
 -->
 <template>
   <div class="page-top-cover-warp" :class="{ 'm-page-top-cover-warp': isMobile }" style="background-size: cover; background-position: center; background-repeat: no-repeat">
     <img class="cover-img" :src="coverImg" />
     <div class="content-warp">
       <div class="mudule">
-        <img class="icon-img" v-if="img" :src="img" alt="" />
+        <img class="icon-img" v-if="imgIcon" :src="getImgIcon(imgIcon)" alt="" />
+        <span v-else-if="textIcon" class="iconfont">{{ textIcon }}</span>
         <i v-else class="iconfont" :class="icon"></i>
         <span class="text">{{ moduleTitle }}</span>
       </div>
@@ -21,8 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
-import { getQQAvatar, randomNum } from '@/utils/common';
+import { getImgIcon, getQQAvatar } from '@/utils/common';
 const props = defineProps({
   coverImg: {
     type: String,
@@ -41,7 +41,11 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  img: {
+  imgIcon: {
+    type: String,
+    default: ''
+  },
+  textIcon: {
     type: String,
     default: ''
   },
@@ -127,7 +131,8 @@ let avatar = getQQAvatar();
       -webkit-line-clamp: 2;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-align: left;
+      text-align: center;
+      color: #fff;
     }
   }
   .default-bg-color {

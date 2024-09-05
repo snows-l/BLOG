@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-15 20:57:17
+ * @LastEditTime: 2024-09-05 19:58:11
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -11,6 +11,7 @@
     <PageTopCover
       :moduleTitle="'音乐'"
       :icon="'icon-a-Sheetmusic'"
+      :textIcon="'🎧'"
       :coverImg="coverImg"
       :isMobile="isMobi"
       :mudulDesc="'音乐是一种艺术形式，它是由音符组成的乐曲，旋律、节奏、和音色的组合，是人类创造的声音。'"
