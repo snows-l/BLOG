@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 14:04:55
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-09-06 20:35:32
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -28,7 +28,8 @@
       <!-- mobile header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
         <div class="icon-warp">
-          <i class="iconfont" :class="state.mMenuShow ? 'icon-cc-close-crude' : 'icon-caidan'" @click="handleMMenuShow"></i>
+          <img style="width: 30px; height: 30px" v-if="state.mMenuShow" :src="getImgIcon('icon-close.svg')" @click="handleMMenuShow" />
+          <img style="width: 30px; height: 30px" v-else :src="getImgIcon('icon-menu.svg')" @click="handleMMenuShow" />
         </div>
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
@@ -135,7 +136,7 @@ import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';
 import useResize from '@/hooks/useResize';
 import { routes } from '@/router';
-import { getQQAvatar, getImgIcon } from '@/utils/common';
+import { getImgIcon, getQQAvatar } from '@/utils/common';
 import { ElMessage, ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
@@ -433,7 +434,7 @@ onUnmounted(() => {
       padding: 0 20px;
       background: var(--bg-warp-light-color-2);
       border-bottom: 1px solid var(--theme-light-color-5);
-      transition: left 0.8s ease, width 0.8s ease, top 0.8s ease;
+      transition: all 0.8s ease;
       position: fixed;
       left: 0;
       top: 0;
@@ -535,6 +536,7 @@ onUnmounted(() => {
     }
 
     .mobile-header-warp {
+      padding-left: 14px;
       .iconfont {
         font-size: 25px;
         color: var(--text-color);
