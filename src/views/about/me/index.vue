@@ -24,10 +24,7 @@
           </div>
           <div class="avatar-warp">
             <div class="bg-warp">
-              <div class="line-rote">
-                <!-- <div class="top"></div>
-                <div class="bottom"></div> -->
-              </div>
+              <div class="line-rote" v-if="!isMobi"></div>
               <img :src="state.avatar" class="avatar-img" />
             </div>
           </div>
