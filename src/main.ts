@@ -8,22 +8,22 @@
  */
 import '@/assets/font/iconfont/iconfont.css';
 // 全局组件
-import Empty from './components/common/Empty.vue'; // 暂无数据组件
 import CommentInput from '@/components/common/CommentInput.vue'; // 评论 输入 组件
 import CommentView from '@/components/common/CommentView.vue'; // 评论 展示 组件
 import Img from '@/components/common/Img.vue'; // 图片组件
 import PageTopCover from '@/components/common/PageTopCover.vue'; // 顶部覆盖层组件
 import ToolTip from '@/components/common/ToolTip.vue'; // 提示组件
+import Empty from './components/common/Empty.vue'; // 暂无数据组件
 
 // 全局图标
 import IconCalendar from '@/components/icon/Calendar.vue'; // 日历 图标 组件
 import IconComment from '@/components/icon/Comment.vue'; // 评论 图标 组件
-import IconHot from '@/components/icon/Hot.vue'; // 热门 图标 组件
-import IconLabel from '@/components/icon/Label.vue'; // 标签 图标 组件
 import IconDown from '@/components/icon/Down.vue'; // 下拉 图标 组件
-import IconShare from '@/components/icon/Share.vue'; // 分享 图标 组件
-import IconPreview from '@/components/icon/Preview.vue'; // 预览 图标 组件
+import IconHot from '@/components/icon/Hot.vue'; // 热门 图标 组件
 import IconHour24 from '@/components/icon/Hour24.vue'; // 24小时 图标 组件
+import IconLabel from '@/components/icon/Label.vue'; // 标签 图标 组件
+import IconPreview from '@/components/icon/Preview.vue'; // 预览 图标 组件
+import IconShare from '@/components/icon/Share.vue'; // 分享 图标 组件
 
 import store from '@/store/index';
 import moment from 'moment';
