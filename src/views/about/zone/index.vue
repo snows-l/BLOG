@@ -3,16 +3,16 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 20:01:37
- * @FilePath: /BLOG/src/views/about/zone/index.vue
+ * @LastEditTime: 2024-09-06 13:43:11
+ * @FilePath: /blog/src/views/about/zone/index.vue
 -->
 <template>
   <div class="zone-container-warp">
-    <PageTopCover :moduleTitle="'我的朋友圈'" :textIcon="'📒'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
+    <PageTopCover :moduleTitle="'随笔'" :textIcon="'📒'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
     <div class="zone-container" :class="{ 'm-zone-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">欢迎👏来到我朋友圈！</div>
+          <div class="item-1 text">欢迎👏来到我的博客，这里是关于我的随笔！</div>
         </div>
 
         <div class="zone-list-warp">
@@ -21,22 +21,19 @@
               <div class="time-loacl-warp">
                 <div style="display: flex; align-items: center">
                   <div class="item time">
-                    <i class="iconfont icon-shijian"></i>
+                    <IconCalendar class="icon-img"></IconCalendar>
                     {{ item.createTime }}
                   </div>
                   <div class="item local">
-                    <i class="iconfont icon-dingxiang"></i>
+                    <img class="icon-img" :src="getImgIcon('icon-dingwei.svg')" alt="" />
                     {{ item.city }}
                   </div>
                 </div>
-                <div class="item local">
-                  (
-                  <!-- <img class="icon-img" src="@/assets/images/icon/icon-os.png" /> -->
+                <div class="item local" v-if="!isMobi">
                   <i class="iconfont icon-caozuoxitong"></i>
-                  {{ item.os }} /
-                  <!-- <img class="icon-img" style="margin-left: 10px" src="@/assets/images/icon/icon-browser.png" /> -->
+                  {{ item.os }}
                   <i class="iconfont icon-icon__dakailiulanqi" style="margin-left: 10px"></i>
-                  {{ item.browser }})
+                  {{ item.browser }}
                 </div>
               </div>
               <div class="zone-item-content">{{ item.text }}</div>
@@ -60,6 +57,7 @@
 import { getZoneList } from '@/api/zone';
 import coverImg from '@/assets/images/bg/cover-zone.png';
 import useResize from '@/hooks/useResize';
+import { getImgIcon, getQQAvatar } from '@/utils/common';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
 

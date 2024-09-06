@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-03 20:06:29
- * @FilePath: /BLOG/src/views/about/me/index.vue
+ * @LastEditTime: 2024-09-06 13:49:57
+ * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
@@ -427,15 +427,19 @@ getBlogVisitFn();
             margin-top: 10px;
             height: 30px;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             .chart {
               display: flex;
               align-items: center;
               margin-right: 20px;
               img {
-                width: 20px;
-                height: 20px;
-                margin-right: 10px;
+                width: 18px;
+                height: 18px;
+                margin-right: 5px;
+              }
+              span {
+                font-size: 14px;
               }
             }
           }

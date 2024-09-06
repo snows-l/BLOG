@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 13:04:37
+ * @LastEditTime: 2024-09-06 14:04:55
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -64,18 +64,19 @@
 
     <!-- 置顶 / 音乐 / 设置 -->
     <div class="top-set">
-      <div class="top pointer" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
+      <div class="top pointer" style="padding: 5px 0" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
         <i class="iconfont icon-yooxi"></i>
       </div>
       <div class="set pointer" @click="handleSearch(false)" v-if="isMobi">
-        <i class="iconfont icon-sousuo1"></i>
+        <img width="25px" height="25px" :src="getImgIcon('icon-search.svg')" />
       </div>
       <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
-        <i v-else class="icon iconfont icon-a-yinlebofangliebiaoyinle"></i>
+        <!-- <i v-else class="icon iconfont icon-a-yinlebofangliebiaoyinle"></i> -->
+        <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
       </div>
       <div class="set pointer" @click="handleSetShow">
-        <i class="icon iconfont icon-shezhi"></i>
+        <img width="25px" height="25px" :src="getImgIcon('icon-set.svg')" />
       </div>
     </div>
 
@@ -134,7 +135,7 @@ import MusicPlayer from '@/components/musicPlayer/index.vue';
 import Search from '@/components/Search/index.vue';
 import useResize from '@/hooks/useResize';
 import { routes } from '@/router';
-import { getQQAvatar } from '@/utils/common';
+import { getQQAvatar, getImgIcon } from '@/utils/common';
 import { ElMessage, ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
@@ -554,11 +555,14 @@ onUnmounted(() => {
     width: 40px;
     .top,
     .set {
-      padding: 5px 12px;
+      // padding: 5px 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background-color: var(--bg-warp-color);
       color: var(--theme-color);
       border-radius: 5px;
-      border: 1px solid var(--theme-light-color-3);
+      border: 1px solid var(--theme-light-color-9);
       box-shadow: 0 1px 20px 10px rgba(255, 255, 255, 0.394);
     }
     .top {
