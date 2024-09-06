@@ -4,7 +4,7 @@
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
  * @LastEditTime: 2024-09-06 12:50:30
- * @FilePath: /blog/src/components/common/Img.vue
+ * @FilePath: /blog/src/components/common/LImg.vue
 -->
 
 <!--

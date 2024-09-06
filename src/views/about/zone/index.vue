@@ -38,7 +38,7 @@
               </div>
               <div class="zone-item-content">{{ item.text }}</div>
               <div class="zone-item-img-warp">
-                <Img class="img" v-for="img in item.imgs" :src="img" alt="" />
+                <LImg class="img" v-for="img in item.imgs" :src="img" alt="" />
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
 import { getZoneList } from '@/api/zone';
 import coverImg from '@/assets/images/bg/cover-zone.png';
 import useResize from '@/hooks/useResize';
-import { getImgIcon, getQQAvatar } from '@/utils/common';
+import { getImgIcon } from '@/utils/common';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
 

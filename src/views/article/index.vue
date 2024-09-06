@@ -23,7 +23,7 @@
           <div class="article-item kbn-read pointer" @click="handleArticle(item)" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
             <div class="img-left item-warp" v-if="index % 2 === 0">
               <div class="cover-img-warp">
-                <Img class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
+                <LImg class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
               </div>
               <div class="item-content">
                 <div class="create-time">
@@ -102,7 +102,7 @@
                 </div>
               </div>
               <div class="cover-img-warp">
-                <Img class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
+                <LImg class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@
           <div class="article-item kbn-read" @click="handleArticle(item)" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
             <div class="img-left item-warp pointer">
               <div class="cover-img-warp">
-                <Img class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
+                <LImg class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
               </div>
               <div class="item-content">
                 <div class="create-time">

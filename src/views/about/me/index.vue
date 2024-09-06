@@ -166,7 +166,7 @@
               <el-carousel-item v-for="item in state.hobbyList" :key="item.name">
                 <div class="hobby-item-item">
                   <div class="text">{{ item.name }}</div>
-                  <Img style="width: 100%; height: 100%" :src="item.img" />
+                  <LImg style="width: 100%; height: 100%" :src="item.img" />
                 </div>
               </el-carousel-item>
             </el-carousel>

@@ -33,7 +33,7 @@
                   <div @click="handlePlay(item)" class="music-item pointer kbn-music" :data-tip="item.title" v-for="(item, index) in state.musicList" :key="index">
                     <div class="music-item-warp">
                       <div class="cover-warp" @click="e => e.stopPropagation()">
-                        <Img :src="item.img" alt="" />
+                        <LImg :src="item.img" alt="" />
                       </div>
                       <div class="music-info">
                         <div class="info-item text music-title">{{ item.title }}</div>
@@ -57,7 +57,7 @@
                   <div class="article-item kbn-read pointer" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index" @click="handleArticle(item)">
                     <div class="img-left item-warp">
                       <!-- <div class="cover-img-warp">
-                        <Img class="cover-img" :src="item.cover" />
+                        <LImg class="cover-img" :src="item.cover" />
                       </div> -->
                       <div class="item-content">
                         <div class="create-time">

@@ -11,7 +11,7 @@
     <audio ref="audioRef" style="display: none" :src="state.currentMusic.src"></audio>
     <div class="cover-warp">
       <div class="cover-img-warp">
-        <Img class="cover-img" isSpin :isText="false" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
+        <LImg class="cover-img" isSpin :isText="false" :class="{ 'rotate-play': state.isPlaying }" :src="state.currentMusic.img || defaultCover" alt="" />
       </div>
       <div class="paly-pause">
         <i @click="handleControl('pause')" v-if="state.isPlaying" class="pointer iconfont icon-zanting"></i>

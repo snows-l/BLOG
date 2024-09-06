@@ -15,7 +15,7 @@
         <div class="article-content">
           <div class="article-cover-warp" :class="{ 'm-article-cover-warp': isMobi }">
             <div class="cover-warp">
-              <Img class="cover-img" :src="state.arcticleDetail.cover" />
+              <LImg class="cover-img" :src="state.arcticleDetail.cover" />
             </div>
             <div class="cover-title">COVER</div>
           </div>

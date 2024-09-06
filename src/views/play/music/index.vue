@@ -23,7 +23,7 @@
           <div @click="handlePlay(item)" class="music-item pointer kbn-music" :data-tip="item.title" v-for="(item, index) in state.list" :key="index">
             <div class="music-item-warp">
               <div class="cover-warp" @click="e => e.stopPropagation()">
-                <Img :src="item.img" alt="" />
+                <LImg :src="item.img" alt="" />
               </div>
               <div class="music-info">
                 <div class="info-item text music-title">{{ item.title }}</div>
