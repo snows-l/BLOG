@@ -3,9 +3,22 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-22 10:15:40
- * @FilePath: /BLOG/src/components/common/CustomImg/index.vue
+ * @LastEditTime: 2024-09-06 12:50:30
+ * @FilePath: /blog/src/components/common/Img.vue
 -->
+
+<!--
+  * @Description: 图片展示组件
+  *props:
+  * src: 图片地址
+  * fit: 图片缩放类型 默认 fill
+  * size: 图片大小 默认 60px
+  * isUnPreview: 是否不显示预览 默认 false
+  * loadingText: 加载文字 默认 加载中...
+  * isText: 是否显示文字 默认 true
+  * isSpin: 是否为转圈加载 默认 false
+  * alt: 图片alt属性 默认 ''
+ -->
 <template>
   <el-image class="pointer el-img-warp" preview-teleported hide-on-click-modal :src="src" :fit="fit" :previewSrcList="isUnPreview ? [] : [src]" :lazy="true">
     <template #placeholder>

@@ -3,8 +3,21 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:56:41
- * @FilePath: /BLOG/src/components/common/pageTopCover/index.vue
+ * @LastEditTime: 2024-09-06 12:48:38
+ * @FilePath: /blog/src/components/common/pageTopCover.vue
+-->
+
+<!--
+  * @Description: 页面top封面组件
+  *props:
+  * coverImg: 封面图片地址
+  * moduleTitle: 模块标题
+  * mudulDesc: 模块描述
+  * imgIcon: 图标图片地址 优先级 imgIcon > textIcon > icon
+  * textIcon: 图标文字
+  * icon: 图标类名
+  * isMobile: 是否是移动端
+  * articleInfo: 文章信息
 -->
 <template>
   <div class="page-top-cover-warp" :class="{ 'm-page-top-cover-warp': isMobile }" style="background-size: cover; background-position: center; background-repeat: no-repeat">

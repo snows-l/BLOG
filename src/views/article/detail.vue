@@ -3,51 +3,22 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 23:07:34
- * @FilePath: /BLOG/src/views/article/detail.vue
+ * @LastEditTime: 2024-09-06 12:38:46
+ * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp" id="layout-content">
-    <PageTopCover
-      :moduleTitle="'文章详情'"
-      :icon="'icon-jiaocheng-3'"
-      :coverImg="articleCover"
-      :isMobile="isMobi"
-      :mudulDesc="state.arcticleDetail.title"
-      :isArticle="false"></PageTopCover>
+    <PageTopCover :moduleTitle="'文章详情'" :textIcon="'📝'" :coverImg="articleCover" :isMobile="isMobi" :mudulDesc="state.arcticleDetail.title" :isArticle="false"></PageTopCover>
 
     <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="article-content-warp">
-        <!-- <div v-if="state.isMobile && tableOfContents.length > 0" class="m-flex-container">
-          <div class="table-of-contents-warp">
-            <div v-if="tableOfContents.length > 0" class="table-of-contents">
-              <div class="toc-title">目录</div>
-              <ul list-none p-l-0>
-                <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }" border-rd mb-5px py-3px>
-                  <a
-                    :class="{ active: activeIndex === index }"
-                    @click="
-                      e => {
-                        e.preventDefault();
-                        handleItemClick(item, index);
-                      }
-                    ">
-                    {{ item.text }}
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div v-else class="no-toc">
-              <Empty :text="'暂无目录内容，请在文章中添加标题'" :loadingText="'目录内容正在生成中...'" :loading="state.loading" />
-            </div>
-          </div>
-        </div> -->
         <div class="article-content">
           <div class="article-cover-warp" :class="{ 'm-article-cover-warp': isMobi }">
-            <Img class="cover-img" :src="state.arcticleDetail.cover" />
+            <div class="cover-warp">
+              <Img class="cover-img" :src="state.arcticleDetail.cover" />
+            </div>
             <div class="cover-title">COVER</div>
           </div>
-          <!-- <Toolbar class="editor-toolbar" style="border: 1px solid #ccc; display: none" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" /> -->
           <Editor id="editor" class="editor-content-warp" v-model="valueHtml" :defaultConfig="editorConfig" :mode="mode" @onCreated="handleCreated" />
           <div class="article-intfo">
             <div class="pointer">
@@ -59,12 +30,12 @@
               <span>{{ state.arcticleDetail.commentCount || 0 }}</span>
             </div>
             <div class="pointer" @click="handleAdd('share')">
-              <i class="iconfont icon-fenxiang1"></i>
+              <IconShare class="iconfont" :size="20"></IconShare>
               <span>{{ state.arcticleDetail.shareCount || 0 }}</span>
             </div>
             <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
-              <i class="iconfont">💡</i>
-              <span class="iconfont" style="font-size: 12px">预览</span>
+              <IconPreview class="iconfont" :size="18"></IconPreview>
+              <span class="" style="font-size: 12px">预览</span>
             </div>
           </div>
           <div v-if="!state.isMobile" class="flex-container">
@@ -410,13 +381,13 @@ onBeforeUnmount(() => {
         .article-cover-warp {
           width: 100%;
           height: 240px;
+          padding: 0 10px;
           margin-bottom: 40px;
-          // border-top-left-radius: 15px;
-          // border-top-right-radius: 15px;
           overflow: hidden;
-          .cover-img {
+          .cover-warp {
             border-radius: 10px;
             height: calc(100% - 30px);
+            overflow: hidden;
           }
           .cover-title {
             height: 30px;

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 13:15:39
+ * @LastEditTime: 2024-09-06 12:51:37
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
@@ -11,6 +11,20 @@ import { getBackstageurl } from '@/utils/common';
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/home/index.vue';
 
+/**
+ *  @description: 路由对象参数说明
+ *  path: 路由路径，必填
+ *  name: 路由名称，必填
+ *  meta: 路由元信息，必填
+ *  meta.title: 路由标题，必填
+ *  meta.img: 路由图片，非必填 优先级 1
+ *  meta.textIcon: 路由文字图标，非必填 优先级 2
+ *  meta.icon: 路由图标，非必填 优先级 3
+ *  meta.isHidden: 是否隐藏路由，非必填 默认 false
+ *  component: 路由组件，必填
+ *  redirect: 重定向，非必填
+ *  children: 子路由，非必填
+ */
 export const routes = [
   {
     path: '',
@@ -37,8 +51,9 @@ export const routes = [
         name: 'FrontEnd',
         meta: {
           title: '前端',
-          icon: 'icon-qianduan',
+          img: 'html5.svg',
           textIcon: '🎨',
+          icon: 'icon-qianduan',
           query: {
             type: '1'
           }
@@ -163,7 +178,7 @@ export const routes = [
     meta: {
       title: '关于',
       icon: 'icon-guanyu',
-      textIcon: '👪'
+      img: 'about.svg'
     },
     redirect: { name: 'Me' },
     children: [

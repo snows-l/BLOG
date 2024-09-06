@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:53:45
- * @FilePath: /BLOG/src/utils/common.js
+ * @LastEditTime: 2024-09-06 12:53:06
+ * @FilePath: /blog/src/utils/common.js
  */
 
 import moment from 'moment';
@@ -150,7 +150,7 @@ export function tranListToTree(data, id, parentId, children) {
   return tree;
 }
 
-// 获取assets静态图片
+// 获取 图片Icon
 export const getImgIcon = name => {
   return new URL(`../assets/images/icon/${name}`, import.meta.url).href;
 };

@@ -3,21 +3,24 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:38:47
- * @FilePath: /BLOG/src/components/common/CommentInput/index.vue
+ * @LastEditTime: 2024-09-06 12:43:04
+ * @FilePath: /blog/src/components/common/CommentInput.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
- *
- *
- *  value: '',
+-->
+
+<!--
+ * @Description props说明
+ * 数据双向绑定
+ * modelValue: {
+    value: '',
     qq: '',
     nickName: '',
-    avatar: '',
     email: '',
     websiteUrl: '',
     isPrivacy: false,
     isEmailFeekback: false
-  *
-
+  }
+ *
 -->
 <template>
   <div class="comment-warp" :class="{ 'm-comment-warp': isMobi, 'is-submit': isSubmit }">

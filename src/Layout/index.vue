@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 12:01:35
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-06 13:04:37
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -439,12 +439,9 @@ onUnmounted(() => {
       z-index: 999;
       border-radius: 0px;
       font-weight: 600;
-      background-image: radial-gradient(transparent 1px, #ffffff 1px);
-      background-size: 4px 4px;
-      backdrop-filter: saturate(50%) blur(4px);
-      .menu {
-        // background: var(--bg-warp-light-color-2);
-      }
+      // background-image: radial-gradient(transparent 1px, #ffffff8c 1px);
+      // background-size: 6px 6px;
+      // backdrop-filter: saturate(50%) blur(2px);
       .title-text {
         font-size: 25px;
         padding: 5px 10px;
@@ -512,9 +509,9 @@ onUnmounted(() => {
 
     .flutter {
       width: calc(100% - 36px);
-      -webkit-transition: all 0.8s ease !important;
       transition: all 0.8s ease !important;
-      background: transparent;
+      background-color: var(--bg-menu-flutter-color);
+      background-image: none;
       position: fixed;
       left: 18px;
       top: 20px;
@@ -522,6 +519,7 @@ onUnmounted(() => {
       border-radius: 10px;
       word-break: keep-all;
       border: 1px solid var(--text-color-2);
+      -webkit-transition: all 0.8s ease !important;
       &:hover {
         background: var(--bg-warp-color);
         border: 1px solid var(--theme-light-color);

@@ -3,9 +3,17 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-04 15:53:57
- * @FilePath: /blog/src/components/common/CommentView/index.vue
+ * @LastEditTime: 2024-09-06 12:44:11
+ * @FilePath: /blog/src/components/common/CommentView.vue
 -->
+<!--
+  * @Description: 评论展示组件
+  *props:
+  *  articleId: 文章id
+  *  list: 评论列表
+  *emits:
+  *  submit: 评论提交
+ -->
 <template>
   <div class="comment-view-container" :class="{ 'm-comment-view-container': isMobi }">
     <div class="max-width-center">

@@ -3,8 +3,16 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-07-08 10:56:57
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 21:30:03
- * @FilePath: /BLOG/src/components/common/Empty/index.vue
+ * @LastEditTime: 2024-09-06 12:46:06
+ * @FilePath: /blog/src/components/common/Empty.vue
+-->
+
+<!--
+  * @Description: 空状态组件
+  *props:
+  * text: 显示的文字 默认为'暂无数据'
+  * loading: 是否显示加载中 默认为false
+  * loadingText: 加载中文字 默认为'加载中...'
 -->
 <template>
   <div class="custom-empty-warp">

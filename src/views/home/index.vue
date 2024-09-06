@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 23:01:59
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-09-06 12:29:36
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -22,7 +22,7 @@
           <h5 class="text" style="margin-top: 15px">Hello~ I'm snows_l</h5>
         </div>
         <div class="author-info">
-          <div class="info-item tool-btn" @click="handleToggleMove('pre')">
+          <div class="info-item tool-btn" :class="{ 'm-tool-btn': isMobi }" @click="handleToggleMove('pre')">
             <img class="btn" src="@/assets/images/icon/pre.png" alt="" srcset="" />
           </div>
           <div class="info-out-warp-scroll">
@@ -36,27 +36,19 @@
               </div>
             </div>
           </div>
-          <div class="info-item tool-btn" @click="handleToggleMove('next')">
+          <div class="info-item tool-btn" :class="{ 'm-tool-btn': isMobi }" @click="handleToggleMove('next')">
             <img class="btn" src="@/assets/images/icon/next.png" alt="" srcset="" />
           </div>
         </div>
       </div>
       <div class="bottom-down" @click="handleMoveToNext">
-        <svg t="1682342753354" class="homepage-downicon" viewBox="0 0 1843 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="21355" width="80px" height="80px">
-          <path
-            d="M1221.06136021 284.43250057a100.69380037 100.69380037 0 0 1 130.90169466 153.0543795l-352.4275638 302.08090944a100.69380037 100.69380037 0 0 1-130.90169467 0L516.20574044 437.48688007A100.69380037 100.69380037 0 0 1 647.10792676 284.43250057L934.08439763 530.52766665l286.97696258-246.09516608z"
-            fill="rgba(255,255,255,0.8)"
-            p-id="21356"></path>
-        </svg>
+        <IconDown></IconDown>
       </div>
-      <!-- v-if="!state.isDark" -->
       <div class="bottom-bg"></div>
       <div class="bottom-bg1 bottom-bg"></div>
       <div class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
-      <!-- <div v-if="state.isDark" class="bottom-bg"></div>
-      <div v-if="state.isDark" class="bottom-bg1 bottom-bg"></div> -->
       <div class="other-content" v-if="!isMobi">
         <div class="other-content-item">
           <div class="article-title-warp">
@@ -98,7 +90,7 @@
                       <span>{{ item.commentCount || 0 }}</span>
                     </div>
                     <div>
-                      <i class="iconfont icon-fenxiang1"></i>
+                      <IconShare class="iconfont" :size="20"></IconShare>
                       <span>{{ item.shareCount || 0 }}</span>
                     </div>
                   </div>
@@ -137,7 +129,8 @@
                       <span>{{ item.commentCount || 0 }}</span>
                     </div>
                     <div>
-                      <i class="iconfont icon-fenxiang1"></i>
+                      <IconShare class="iconfont" :size="20"></IconShare>
+
                       <span>{{ item.shareCount || 0 }}</span>
                     </div>
                   </div>
@@ -197,7 +190,7 @@
                         <span>{{ item.commentCount || 0 }}</span>
                       </div>
                       <div>
-                        <i class="iconfont icon-fenxiang1"></i>
+                        <IconShare class="iconfont" :size="20"></IconShare>
                         <span>{{ item.shareCount || 0 }}</span>
                       </div>
                     </div>
@@ -593,7 +586,10 @@ onUnmounted(() => {
         }
         .tool-btn {
           margin: 0 5px;
-          // background-color: transparent;
+        }
+        .m-tool-btn {
+          background-color: transparent;
+          width: 30px !important;
         }
         .btn,
         img {
