@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:32:17
+ * @LastEditTime: 2024-09-06 15:33:32
  * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
@@ -23,6 +23,7 @@ import IconLabel from '@/components/icon/Label.vue'; // 标签 图标 组件
 import IconDown from '@/components/icon/Down.vue'; // 下拉 图标 组件
 import IconShare from '@/components/icon/Share.vue'; // 分享 图标 组件
 import IconPreview from '@/components/icon/Preview.vue'; // 预览 图标 组件
+import IconHour24 from '@/components/icon/Hour24.vue'; // 24小时 图标 组件
 
 import store from '@/store/index';
 import moment from 'moment';
@@ -53,6 +54,7 @@ app.component('IconHot', IconHot);
 app.component('IconDown', IconDown);
 app.component('IconShare', IconShare);
 app.component('IconPreview', IconPreview);
+app.component('IconHour24', IconHour24);
 
 // app.use(regIcons);
 app.use(dispatchEventStroage);
