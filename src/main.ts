@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 15:33:32
+ * @LastEditTime: 2024-09-06 18:04:12
  * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
@@ -12,7 +12,7 @@ import Empty from './components/common/Empty.vue'; // 暂无数据组件
 import CommentInput from '@/components/common/CommentInput.vue'; // 评论 输入 组件
 import CommentView from '@/components/common/CommentView.vue'; // 评论 展示 组件
 import Img from '@/components/common/Img.vue'; // 图片组件
-import PageTopCover from '@/components/common/pageTopCover.vue'; // 顶部覆盖层组件
+import PageTopCover from '@/components/common/PageTopCover.vue'; // 顶部覆盖层组件
 import ToolTip from '@/components/common/ToolTip.vue'; // 提示组件
 
 // 全局图标
@@ -33,12 +33,29 @@ import './assets/style/main.css';
 
 import { dispatchEventStroage } from './utils/common';
 import { autoToggleTheme } from './utils/theme';
-// import regIcons from './utils/reg';
+// import { globalIcon, globalComponent } from './utils/regGlobalComponent';
 moment.suppressDeprecationWarnings = true;
 
 import App from './App.vue';
 import router from './router';
 const app = createApp(App);
+
+// const requireComponent = import.meta.glob('./components/icon/*.vue');
+// for (const path in requireComponent) {
+//   requireComponent[path]().then(module => {
+//     // 获取组件配置
+//     const component = module.default;
+//     // 使用组件的文件名（去掉路径和扩展名）作为组件名
+//     const componentName =
+//       'Icon' +
+//       path
+//         .split('/')
+//         .pop()
+//         .replace(/\.\w+$/, '');
+//     // 注册为全局组件
+//     app.component(componentName, component);
+//   });
+// }
 
 app.component('Empty', Empty);
 app.component('PageTopCover', PageTopCover);
@@ -56,7 +73,8 @@ app.component('IconShare', IconShare);
 app.component('IconPreview', IconPreview);
 app.component('IconHour24', IconHour24);
 
-// app.use(regIcons);
+// app.use(globalIcon);
+// app.use(globalComponent);
 app.use(dispatchEventStroage);
 app.use(store);
 app.use(router);

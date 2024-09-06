@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 16:10:56
+ * @LastEditTime: 2024-09-06 17:48:35
  * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
@@ -52,6 +52,10 @@
               <div class="name">前端开发程序员 🧑‍💻</div>
             </div>
             <div class="me-4">
+              <div class="chart email">
+                <img :src="iconEmail" />
+                <span>snows_l@163.com</span>
+              </div>
               <div class="chart qq">
                 <img :src="iconQQ" />
                 <span>37523953</span>
@@ -59,10 +63,6 @@
               <div class="chart wx">
                 <img :src="iconWeixin" />
                 <span>snows__l</span>
-              </div>
-              <div class="chart email">
-                <img :src="iconEmail" />
-                <span>snows_l@163.com</span>
               </div>
             </div>
 
@@ -434,6 +434,7 @@ getBlogVisitFn();
               display: flex;
               align-items: center;
               margin-right: 20px;
+              margin-top: 5px;
               img {
                 width: 18px;
                 height: 18px;
@@ -491,6 +492,7 @@ getBlogVisitFn();
               color: var(--text-color);
               text-indent: 28px;
               font-size: 14px;
+              height: 126px;
               span {
                 color: var(--theme-color);
               }
@@ -573,8 +575,9 @@ getBlogVisitFn();
               margin-bottom: 8px;
             }
             .visit-item-num {
-              font-size: 24px;
+              font-size: 28px;
               color: var(--text-color);
+              font-weight: 500;
               font-family: 'DSDIGI';
             }
           }
