@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 13:49:57
+ * @LastEditTime: 2024-09-06 14:18:43
  * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
@@ -484,7 +484,7 @@ getBlogVisitFn();
               line-height: 24px;
               color: var(--text-color);
               text-indent: 28px;
-              font-size: 15px;
+              font-size: 14px;
               span {
                 color: var(--theme-color);
               }
@@ -501,6 +501,9 @@ getBlogVisitFn();
           .background {
             display: none;
             transition: all 0.8s ease-in-out;
+            overflow-y: auto;
+            width: 100%;
+            height: 100%;
             .back-warp {
               display: flex;
               flex-wrap: wrap;
