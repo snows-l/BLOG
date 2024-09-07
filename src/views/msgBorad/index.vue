@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 17:08:58
+ * @LastEditTime: 2024-09-07 17:11:16
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -419,7 +419,7 @@ const handleComment = () => {
             background-color: var(--bg-content-color-2);
             .sub-comment-item {
               width: 100%;
-              padding: 10px 5px 10px 10x;
+              padding: 10px 5px 10px 10px;
               .sub-content {
                 margin-top: 5px;
                 font-size: 14px;
