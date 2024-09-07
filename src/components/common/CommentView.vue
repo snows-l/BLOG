@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-31 12:42:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:44:11
- * @FilePath: /blog/src/components/common/CommentView.vue
+ * @LastEditTime: 2024-09-07 15:55:11
+ * @FilePath: /BLOG/src/components/common/CommentView.vue
 -->
 <!--
   * @Description: 评论展示组件
@@ -182,11 +182,11 @@ defineExpose({
         }
         .info-warp {
           display: flex;
-          padding: 10px;
+          padding: 10px 0;
           align-items: space-around;
           .avatar-warp {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             overflow: hidden;
             img {
@@ -221,17 +221,17 @@ defineExpose({
           }
         }
         .content {
-          padding-left: 60px;
+          text-indent: 30px;
           line-height: 20px;
           font-size: 14px;
         }
         .sub-comment {
           margin-top: 10px;
-          padding-left: 60px;
+          padding-left: 30px;
           .sub-padding {
             background-color: var(--bg-content-color-2);
             border-radius: 5px;
-            padding: 10px 20px;
+            padding: 10px 10px;
             .sub-comment-item {
               margin: 5px 0;
               .title {

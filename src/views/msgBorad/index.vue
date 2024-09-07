@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:58:54
+ * @LastEditTime: 2024-09-07 15:56:22
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -19,7 +19,7 @@
       :moduleBgColor="''"></PageTopCover>
     <div class="msg-list-content-warp" :class="{ 'm-msg-list-content-warp': isMobi }">
       <div class="center-max-width-warp">
-        <div class="entry-content">
+        <div class="entry-content" @click="handleTome">
           <div class="poem-wrap">
             <div class="poem-border poem-left"></div>
             <div class="poem-border poem-right"></div>
@@ -27,14 +27,14 @@
             <div class="poem-content">江南好，风景旧曾谙。</div>
             <div class="poem-author">【唐代】白居易《忆江南·江南好》</div>
           </div>
-          <p class="thanks-msg">很感谢你能访问该页面，如果你有什么和博主说的或者有什么问题想问的，可以随时在下面评论哦~</p>
+          <p @click="handleTome" class="thanks-msg">很感谢你能访问该页面，如果你有什么和博主说的或者有什么问题想问的，可以随时在下面评论哦~</p>
         </div>
         <div class="msg-list-content" :class="{ 'm-msg-list-content': isMobi }">
           <div class="components">Conments {{ state.page.total + 2 }} 条留言</div>
           <div class="msg-list-hav" v-if="state.list.length > 0">
             <div class="msg-list" v-for="(item, index) in state.list" :key="index">
               <div class="msg-item">
-                <div class="info-warp">
+                <div class="info-warp" @click="handleComent(item.id, item)">
                   <div class="left-info">
                     <div class="img-warp">
                       <img :src="getQQAvatar(item.qq)" alt="" />
@@ -52,23 +52,34 @@
                       </div>
                       <div class="platform">
                         <div class="pulic-time">发布于：{{ item.time }}</div>
-                        <span v-if="item.browser || item.os" style="margin-right: 5px; font-size: 12px">
+                        <span v-if="(item.browser || item.os) && !isMobi" style="margin-right: 5px; font-size: 12px">
                           {{ isMobi ? '平台：' : '' }}
                           (
                           <span>{{ item.browser }}</span>
                           <span style="margin-left: 20px">{{ item.os }}</span>
                           )
                         </span>
-                        <span v-if="item.websiteUrl" style="font-size: 12px">
+                        <span v-if="item.websiteUrl && !isMobi" style="font-size: 12px">
                           网站：
                           <a :href="item.websiteUrl" @click="e => e.stopPropagation()" target="_blank">{{ item.websiteUrl }}</a>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div class="right-info"></div>
                 </div>
-                <div class="msg">{{ item.comment }}</div>
+                <div class="msg" @click="handleComent(item.id, item)">{{ item.comment }}</div>
+                <div class="sub-commen-warp">
+                  <div class="sub-comment-padding">
+                    <div class="sub-comment-item pointer" @click="handleComent(item.id, subItem)" v-for="subItem in item.children" :key="subItem.id">
+                      <div class="title">
+                        <span>{{ subItem.nickName }}</span>
+                        <span style="margin: 0 6px; color: var(--theme-light-color-4)">回复</span>
+                        <span>{{ subItem.toNickName }}：</span>
+                      </div>
+                      <div class="sub-content">{{ subItem.comment }}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +93,13 @@
           <div v-if="!state.isMore && state.list.length > 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
         </div>
 
-        <CommentInput v-model="state.comment" @submit="handleComment"></CommentInput>
+        <div class="comment-input-warp">
+          <div class="ttt">
+            <div class="back-title" v-if="state.form.pId">回复 {{ state.form.toNickName }}</div>
+            <div class="back-title back-me pointer" @click="handleTome">给我留言</div>
+          </div>
+          <CommentInput v-model="state.comment" @submit="handleComment"></CommentInput>
+        </div>
       </div>
     </div>
   </div>
@@ -92,7 +109,7 @@
 import { addComment, getCommentList } from '@/api/comment';
 import coverImg from '@/assets/images/bg/cover-comment.png';
 import useResize from '@/hooks/useResize';
-import { getBackstageurl, getQQAvatar } from '@/utils/common';
+import { getBackstageurl, getQQAvatar, tranListToTree } from '@/utils/common';
 import axios from 'axios';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
@@ -101,6 +118,8 @@ const state = reactive({
   loading: false,
   list: [
     {
+      id: 1,
+      pid: 0,
       comment: '来都来了，还不赶紧留言？',
       qq: '37523953',
       nickName: 'snows_l',
@@ -114,6 +133,8 @@ const state = reactive({
       isEmailFeekback: false
     },
     {
+      id: 2,
+      pid: 0,
       comment: '求求你了，留下你的脚印吧！',
       qq: '37523953',
       nickName: 'snows_l',
@@ -137,11 +158,16 @@ const state = reactive({
     isPrivacy: false,
     isEmailFeekback: true
   },
+  form: {
+    pId: '',
+    toId: '',
+    toNickName: ''
+  },
   isMore: true,
 
   page: {
     page: 1,
-    size: 10,
+    size: 50,
     total: 0
   }
 });
@@ -158,7 +184,7 @@ const getCommentListFn = () => {
   state.loading = true;
   getCommentList({ ...state.page, type: 0 }).then(res => {
     if (res.code === 200) {
-      state.list = [...state.list, ...res.data];
+      state.list = tranListToTree([...state.list, ...res.data], 'id', 'pId', 'children');
       state.page.total = res.total;
       if (state.list.length >= res.total) {
         state.isMore = false; // 已经没有更多数据了
@@ -168,6 +194,19 @@ const getCommentListFn = () => {
   });
 };
 getCommentListFn();
+
+const handleComent = (pid, row) => {
+  state.form.pId = pid;
+  state.form.toId = row.id;
+  state.form.toNickName = row.nickName;
+};
+
+// 给博主留言
+const handleTome = () => {
+  state.form.pId = '';
+  state.form.toId = '';
+  state.form.toNickName = '';
+};
 
 // 加在更多
 const handleLoadMore = () => {
@@ -180,7 +219,13 @@ const handleComment = () => {
   if (!state.comment.value.trim() || !state.comment.qq.trim() || !state.comment.nickName.trim()) {
     return false;
   }
-  addComment({ ...state.comment, comment: state.comment.value, type: 0 }).then(res => {
+  let params = {
+    ...state.comment,
+    comment: state.comment.value,
+    ...state.form,
+    type: 0
+  };
+  addComment(params).then(res => {
     if (res.code === 200) {
       state.comment.value = '';
       state.comment.qq = '';
@@ -190,6 +235,9 @@ const handleComment = () => {
       state.comment.websiteUrl = '';
       state.comment.isPrivacy = false;
       state.comment.isEmailFeekback = true;
+      state.form.pId = '';
+      state.form.toId = '';
+      state.form.toNickName = '';
       getCommentListFn();
     }
   });
@@ -303,8 +351,8 @@ const handleComment = () => {
                 align-items: center;
                 flex: 1;
                 .img-warp {
-                  width: 40px;
-                  height: 40px;
+                  width: 30px;
+                  height: 30px;
                   border-radius: 50%;
                   overflow: hidden;
                   margin-right: 10px;
@@ -353,13 +401,52 @@ const handleComment = () => {
               }
             }
             .msg {
-              margin-top: 5px;
-              font-size: 16px;
+              margin-top: 10px;
+              font-size: 14px;
               color: var(--text-color);
-              line-height: 1.8;
+              line-height: 1.6;
               word-break: break-all;
-              text-indent: 32px;
+              text-indent: 30px;
             }
+          }
+        }
+        .sub-commen-warp {
+          width: 100%;
+          padding: 0 0 0 30px;
+          margin-top: 10px;
+          .sub-comment-padding {
+            border-radius: 10px;
+            background-color: var(--bg-content-color-2);
+            .sub-comment-item {
+              width: 100%;
+              padding: 10px 5px;
+
+              .sub-content {
+                margin-top: 5px;
+                font-size: 14px;
+                color: var(--text-color);
+                line-height: 1.6;
+                word-break: break-all;
+              }
+            }
+          }
+        }
+      }
+      .comment-input-warp {
+        .ttt {
+          padding: 0 5px;
+          height: 40px;
+          display: flex;
+          justify-content: space-between;
+          position: relative;
+          .back-title {
+            font-size: 14px;
+            line-height: 40px;
+          }
+          .back-me {
+            position: absolute;
+            top: 0;
+            right: 0;
           }
         }
       }
@@ -382,7 +469,7 @@ const handleComment = () => {
   }
 }
 .bottom-loading {
-  margin: 20px 0;
+  margin: 20px 0 0px 0;
   display: flex;
   align-items: center;
   justify-content: center;
