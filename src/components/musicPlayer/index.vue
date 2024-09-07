@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 15:52:19
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 21:40:53
+ * @LastEditTime: 2024-09-07 09:57:42
  * @FilePath: /BLOG/src/components/musicPlayer/index.vue
 -->
 <template>
@@ -109,7 +109,6 @@ const getMusicListFn = () => {
     state.currentMusic = musicList.value.length > 0 && musicList.value[state.currentIndex];
   });
 };
-getMusicListFn();
 
 if (store.musicList.length > 0) {
   musicList.value = store.musicList;

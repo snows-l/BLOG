@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:29:36
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-09-07 10:15:29
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -288,14 +288,6 @@ const infoList = [
       fnQuery: 'email'
     }
   ]
-  // [
-  //   {
-  //     class: 'kbn-link',
-  //     imgs: [{ img: iconBackstage }],
-  //     kbnTip: '后台管理平台',
-  //     link: getBackstageurl()
-  //   }
-  // ]
 ];
 
 // 获取文章列表
@@ -408,11 +400,13 @@ const handleInfo = (item: { class: string; imgs: any[]; kbnTip: string; title: s
 // 获取文章类型
 const getArticleTypeList = () => {
   getDict({ dictType: 'article_type' }).then(res => {
-    state.articleTypeList = res.data;
-    store.SET_ARTICLE_DICT(res.data);
+    if (res.code === 200) {
+      state.articleTypeList = res.data;
+      store.SET_ARTICLE_DICT(res.data);
+    }
   });
 };
-// perf 先看ster有没有， 没有在请求
+// perf 先看store有没有， 没有在请求
 store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : getArticleTypeList();
 
 // 点击文章详情

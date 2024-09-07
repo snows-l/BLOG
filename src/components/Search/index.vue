@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-12 16:58:22
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-17 16:10:09
+ * @LastEditTime: 2024-09-07 10:07:41
  * @FilePath: /BLOG/src/components/Search/index.vue
 -->
 <template>
@@ -208,10 +208,6 @@ const getArticleTypeList = () => {
   });
 };
 
-// 获取音乐类型和文章类型
-store.musicDict.length > 0 ? (state.playList = store.musicDict) : getPlayList();
-store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : getArticleTypeList();
-
 // 播放音乐
 const handlePlay = (item: any) => {
   state.currentMusicId = item.id;
@@ -240,6 +236,10 @@ watch(
   () => props.show,
   n => {
     if (n) {
+      console.log('-------- store --------', store.articleDict, store.musicDict);
+      // 获取音乐类型和文章类型
+      store.musicDict.length > 0 ? (state.playList = store.musicDict) : getPlayList();
+      store.articleDict.length > 0 ? (state.articleTypeList = store.articleDict) : getArticleTypeList();
       state.loading = false;
       state.isPlaying = localStorage.getItem('isPlaying') == 'true' ? true : false;
       if (!isMobi.value) {

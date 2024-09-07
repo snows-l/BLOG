@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 20:35:32
+ * @LastEditTime: 2024-09-07 09:56:23
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -73,7 +73,6 @@
       </div>
       <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
-        <!-- <i v-else class="icon iconfont icon-a-yinlebofangliebiaoyinle"></i> -->
         <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
       </div>
       <div class="set pointer" @click="handleSetShow">
