@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 15:56:22
+ * @LastEditTime: 2024-09-07 16:01:23
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -203,7 +203,7 @@ const handleComent = (pid, row) => {
 
 // 给博主留言
 const handleTome = () => {
-  state.form.pId = '';
+  state.form.pId = '0';
   state.form.toId = '';
   state.form.toNickName = '';
 };
