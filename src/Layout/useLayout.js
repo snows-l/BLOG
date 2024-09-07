@@ -3,10 +3,10 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 20:38:00
+ * @LastEditTime: 2024-09-07 09:28:21
  * @FilePath: /BLOG/src/Layout/useLayout.js
  */
-import bg1 from '@/assets/images/bg/bg1.png';
+import bg1 from '@/assets/images/bg/bg1.avif';
 import bg2 from '@/assets/images/bg/bg2.png';
 import bg3 from '@/assets/images/bg/bg3.png';
 import bg4 from '@/assets/images/bg/bg4.png';

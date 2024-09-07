@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 17:48:35
- * @FilePath: /blog/src/views/about/me/index.vue
+ * @LastEditTime: 2024-09-07 09:32:56
+ * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
@@ -180,9 +180,9 @@
 <script lang="ts" setup>
 import { getBlogVisit } from '@/api/common';
 import coverImg from '@/assets/images/bg/cover-about.png';
-import hobbyChiji from '@/assets/images/bg/hobby-chiji.jpg';
-import hobbyQx from '@/assets/images/bg/hobby-qixing.jpg';
-import hobbyWangzhe from '@/assets/images/bg/hobby-wangzhe.jpg';
+import hobbyChiji from '@/assets/images/bg/hobby-chiji.avif';
+import hobbyQx from '@/assets/images/bg/hobby-qixing.avif';
+import hobbyWangzhe from '@/assets/images/bg/hobby-wangzhe.avif';
 import iconAxios from '@/assets/images/icon/axios.svg';
 import iconCSS from '@/assets/images/icon/CSS3.svg';
 import iconElement from '@/assets/images/icon/element-plus.svg';

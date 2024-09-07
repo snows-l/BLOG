@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 20:02:00
+ * @LastEditTime: 2024-09-07 09:30:35
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -78,7 +78,7 @@
 
 <script lang="ts" setup>
 import { getFriendLindList } from '@/api/friend';
-import coverImg from '@/assets/images/bg/cover-friends.png';
+import coverImg from '@/assets/images/bg/cover-friends.avif';
 import useResize from '@/hooks/useResize';
 import { getQQAvatar } from '@/utils/common';
 import { reactive } from 'vue';

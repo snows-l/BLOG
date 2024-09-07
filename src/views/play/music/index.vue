@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 19:58:11
+ * @LastEditTime: 2024-09-07 09:22:36
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import { getDict } from '@/api/common';
 import { getMusicList } from '@/api/music';
-import coverImg from '@/assets/images/bg/cover-music.png';
+import coverImg from '@/assets/images/bg/cover-music.avif';
 import $bus from '@/bus/index';
 import { useAppStore } from '@/store/app';
 import { onMounted, onUnmounted, reactive } from 'vue';

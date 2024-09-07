@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 23:02:08
+ * @LastEditTime: 2024-09-07 09:29:32
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -182,7 +182,7 @@ import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
 import houduanCover from '@/assets/images/bg/cover-houduan.png';
 import otherCover from '@/assets/images/bg/cover-other.png';
-import qianduanCover from '@/assets/images/bg/cover-qianduan.png';
+import qianduanCover from '@/assets/images/bg/cover-qianduan.avif';
 import { useAppStore } from '@/store/app';
 import { getQQAvatar } from '@/utils/common';
 import moment from 'moment';
