@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-16 16:36:50
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-16 17:44:08
- * @FilePath: /blog/src/components/Footer/index.vue
+ * @LastEditTime: 2024-09-07 11:21:26
+ * @FilePath: /BLOG/src/components/Footer/index.vue
 -->
 <template>
   <div class="footer-container-warp">
@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import axios from 'axios';
 import useResize from '@/hooks/useResize';
+import axios from 'axios';
+import { reactive } from 'vue';
 const { isMobi } = useResize();
-import { ref, reactive, watch, onMounted, computed } from 'vue';
 const state = reactive({
   saying: '渔得鱼心满意足，樵得樵眼笑眉舒！'
 });

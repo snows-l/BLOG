@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 09:32:56
+ * @LastEditTime: 2024-09-07 12:09:46
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -76,6 +76,7 @@
             <div class="before">
               <div class="before-warp">
                 <div class="tltle">关于本网站</div>
+
                 <div class="content">
                   一款基于
                   <span>前端（vue3）</span>
@@ -96,8 +97,12 @@
                 </div>
               </div>
             </div>
-            <div class="time-warp">
-              <IconHour24 class="time-24" />
+            <div class="run-warp">
+              <div class="text run">已运行</div>
+              <div class="time-warp">
+                <IconHour24 class="time-24" />
+              </div>
+              <div class="text day">天</div>
             </div>
           </div>
         </div>
@@ -462,17 +467,33 @@ getBlogVisitFn();
           padding: 20px;
           overflow: hidden;
           position: relative;
-          .time-warp {
-            width: 60px;
-            height: 120px;
+          .run-warp {
             position: absolute;
             top: -60px;
             right: 10px;
-            padding: 60px 0 0 0;
-            animation: swing 1.3s ease-in-out infinite alternate;
-            .time-24 {
+            display: flex;
+            align-items: flex-end;
+            .time-warp {
               width: 60px;
+              height: 120px;
+              padding: 60px 0 0 0;
+              animation: swing 1.3s ease-in-out infinite alternate;
+              display: flex;
+              .time-24 {
+                width: 60px;
+                height: 60px;
+              }
+            }
+            .text {
               height: 60px;
+              line-height: 80px;
+              font-weight: 600;
+            }
+            .run {
+              margin-right: 20px;
+            }
+            .day {
+              margin-left: 20px;
             }
           }
           .before {
@@ -485,6 +506,11 @@ getBlogVisitFn();
               font-size: 22px;
               color: var(--text-color);
               margin-bottom: 10px;
+              .running-time {
+                font-size: 12px;
+                color: #28c3c3;
+                margin-left: 5px;
+              }
             }
             .content {
               padding: 6px 0;
