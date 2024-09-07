@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 16:01:23
+ * @LastEditTime: 2024-09-07 17:08:58
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -159,8 +159,8 @@ const state = reactive({
     isEmailFeekback: true
   },
   form: {
-    pId: '',
-    toId: '',
+    pId: 0,
+    toId: 0,
     toNickName: ''
   },
   isMore: true,
@@ -203,8 +203,8 @@ const handleComent = (pid, row) => {
 
 // 给博主留言
 const handleTome = () => {
-  state.form.pId = '0';
-  state.form.toId = '';
+  state.form.pId = 0;
+  state.form.toId = 0;
   state.form.toNickName = '';
 };
 
@@ -419,8 +419,7 @@ const handleComment = () => {
             background-color: var(--bg-content-color-2);
             .sub-comment-item {
               width: 100%;
-              padding: 10px 5px;
-
+              padding: 10px 5px 10px 10x;
               .sub-content {
                 margin-top: 5px;
                 font-size: 14px;
