@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-08 17:27:54
+ * @LastEditTime: 2024-09-08 17:32:40
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -800,7 +800,7 @@ onUnmounted(() => {
               // }
             }
             .article-title {
-              margin-top: 20px;
+              margin: 10px 0;
               height: 30px;
               font-size: 20px;
               line-height: 30px;
@@ -899,7 +899,7 @@ onUnmounted(() => {
           height: 180px !important;
           padding: 20px 20px !important;
           .article-title {
-            margin-top: 10px !important;
+            margin: 5px 0 !important;
             height: 30px !important;
             line-height: 30px !important;
             font-size: 16px !important;

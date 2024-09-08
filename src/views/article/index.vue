@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-08 17:28:50
+ * @LastEditTime: 2024-09-08 17:33:15
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -395,7 +395,7 @@ watch(
             }
           }
           .article-title {
-            margin-top: 20px;
+            margin: 10px 0;
             height: 30px;
             font-size: 20px;
             line-height: 30px;
@@ -499,7 +499,7 @@ watch(
           height: 180px;
           padding: 10px 20px !important;
           .article-title {
-            margin-top: 10px !important;
+            margin: 5px 0 !important;
             height: 30px !important;
             line-height: 30px !important;
             font-size: 16px !important;
