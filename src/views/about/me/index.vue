@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 12:09:46
+ * @LastEditTime: 2024-09-08 17:10:08
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -177,13 +177,23 @@
             </el-carousel>
           </div>
         </div>
+
+        <div class="my-label-warp">
+          <div class="title">我的标签</div>
+          <div class="content-warp">
+            <div class="my-label-item" :style="{ 'background-color': item.color }" v-for="item in state.labelList" :key="item.label">
+              <IconLabel style="margin-right: 10px" />
+              {{ item.label }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { getBlogVisit } from '@/api/common';
+import { getBlogVisit, getDict } from '@/api/common';
 import coverImg from '@/assets/images/bg/cover-about.png';
 import hobbyChiji from '@/assets/images/bg/hobby-chiji.avif';
 import hobbyQx from '@/assets/images/bg/hobby-qixing.avif';
@@ -240,7 +250,8 @@ const state = reactive({
     { img: hobbyQx, name: '骑行' },
     { img: hobbyWangzhe, name: '王者荣耀' },
     { img: hobbyChiji, name: '和平精英' }
-  ]
+  ],
+  labelList: []
 });
 
 const getBlogVisitFn = () => {
@@ -251,6 +262,20 @@ const getBlogVisitFn = () => {
   });
 };
 getBlogVisitFn();
+
+const getDictFn = () => {
+  getDict({ dictType: 'blog_label' }).then(res => {
+    if (res.code === 200) {
+      state.labelList = res.data.map(item => {
+        return {
+          label: item.label,
+          color: getRandomColor()
+        };
+      });
+    }
+  });
+};
+getDictFn();
 </script>
 
 <style lang="scss" scoped>
@@ -642,6 +667,30 @@ getBlogVisitFn();
               border: 1px solid #fff;
               padding: 4px 8px;
             }
+          }
+        }
+      }
+      .my-label-warp {
+        margin-top: 20px;
+        background-color: var(--bg-content-color);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        .title {
+          font-size: 22px;
+          color: var(--text-color);
+          margin-bottom: 10px;
+        }
+        .content-warp {
+          display: flex;
+          flex-wrap: wrap;
+          .my-label-item {
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin: 5px;
+            border: 1px solid var(--text-color);
+            display: flex;
+            align-items: center;
           }
         }
       }

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 10:15:29
+ * @LastEditTime: 2024-09-08 16:52:51
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -68,10 +68,6 @@
                       <span>发布于：</span>
                       <span class="time">{{ item.createTime }}</span>
                     </div>
-                    <div class="type">
-                      <IconLabel class="iconfont"></IconLabel>
-                      {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                    </div>
                   </div>
                   <div class="article-title">
                     {{ item.title }}
@@ -97,6 +93,16 @@
                   <div class="article-des text">
                     {{ item.subTitle }}
                   </div>
+                  <div class="label-warp">
+                    <div class="type">
+                      <IconType class="iconfont"></IconType>
+                      {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                    </div>
+                    <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                      <IconLabel class="iconfont"></IconLabel>
+                      <span class="label">{{ label }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="img-right item-warp" v-else>
@@ -106,10 +112,6 @@
                       <IconCalendar class="iconfont"></IconCalendar>
                       <span>发布于：</span>
                       <span class="time">{{ item.createTime }}</span>
-                    </div>
-                    <div class="type">
-                      <IconLabel class="iconfont"></IconLabel>
-                      {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
                     </div>
                   </div>
                   <div class="article-title">
@@ -136,6 +138,16 @@
                   </div>
                   <div class="article-des text">
                     {{ item.subTitle }}
+                  </div>
+                  <div class="label-warp">
+                    <div class="type">
+                      <IconType class="iconfont"></IconType>
+                      {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                    </div>
+                    <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                      <IconLabel class="iconfont"></IconLabel>
+                      <span class="label">{{ label }}</span>
+                    </div>
                   </div>
                 </div>
                 <div class="cover-img-warp">
@@ -168,10 +180,6 @@
                         <span>发布于：</span>
                         <span class="time">{{ item.createTime }}</span>
                       </div>
-                      <div class="type">
-                        <IconLabel class="iconfont"></IconLabel>
-                        {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                      </div>
                     </div>
                     <div class="article-title">
                       {{ item.title }}
@@ -196,6 +204,16 @@
                     </div>
                     <div class="article-des text">
                       {{ item.subTitle }}
+                    </div>
+                    <div class="label-warp">
+                      <div class="type">
+                        <IconType class="iconfont"></IconType>
+                        {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                      </div>
+                      <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                        <IconLabel class="iconfont"></IconLabel>
+                        <span class="label">{{ label }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -300,6 +318,7 @@ const getArticleListFn = () => {
           item.createTime = moment(item.createTime).format('YYYY-MM-DD');
           item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
           item.subTitle = item.subTitle.replace(/&#39;/g, "'");
+          item.labels = item.labels && item.labels.split(',');
         });
         state.articleList = [...state.articleList, ...res.data];
         state.page.total = res.total;
@@ -749,7 +768,7 @@ onUnmounted(() => {
           .item-content {
             flex: 1;
             height: 280px;
-            padding: 48px 30px;
+            padding: 33px 30px;
             background-color: var(--bg-content-color);
             position: relative;
             .create-time {
@@ -770,16 +789,15 @@ onUnmounted(() => {
                   margin-right: 10px;
                 }
               }
-              .type {
-                height: 22px;
-                // border: 1px solid var(--theme-light-color-9);
-                border-radius: 5px;
-                padding: 2px 4px;
-                font-size: 12px;
-                position: absolute;
-                top: 48px;
-                right: 30px;
-              }
+              // .type {
+              //   height: 22px;
+              //   border-radius: 5px;
+              //   padding: 2px 4px;
+              //   font-size: 12px;
+              //   position: absolute;
+              //   top: 48px;
+              //   right: 30px;
+              // }
             }
             .article-title {
               margin-top: 20px;
@@ -835,6 +853,31 @@ onUnmounted(() => {
               overflow: hidden;
               text-overflow: ellipsis;
               color: var(--text-color-2);
+            }
+          }
+          .label-warp {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 10px;
+            .type {
+              font-size: 12px;
+              color: var(--text-color);
+              background-color: #dfdddd;
+              border-radius: 5px;
+              padding: 2px 4px;
+              margin-right: 10px;
+            }
+            .label-item {
+              margin-right: 10px;
+              font-size: 12px;
+              color: var(--theme-color);
+              background-color: #dfdddd;
+              border-radius: 5px;
+              padding: 2px 6px;
+              .label {
+                margin-left: 5px;
+              }
             }
           }
         }
