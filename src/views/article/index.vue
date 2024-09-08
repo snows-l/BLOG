@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 09:29:32
+ * @LastEditTime: 2024-09-08 17:28:50
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -32,10 +32,6 @@
                     <span>发布于：</span>
                     <span class="time">{{ item.createTime }}</span>
                   </div>
-                  <div class="type">
-                    <IconLabel class="iconfont"></IconLabel>
-                    {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                  </div>
                 </div>
                 <div class="article-title">
                   {{ item.title }}
@@ -60,6 +56,16 @@
                 </div>
                 <div class="article-des text">
                   {{ item.subTitle }}
+                </div>
+                <div class="label-warp">
+                  <div class="type">
+                    <IconType class="iconfont"></IconType>
+                    {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                  </div>
+                  <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                    <IconLabel class="iconfont"></IconLabel>
+                    <span class="label">{{ label }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,10 +77,6 @@
                     <span>发布于：</span>
                     <span class="time">{{ item.createTime }}</span>
                   </div>
-                  <div class="type">
-                    <IconLabel class="iconfont"></IconLabel>
-                    {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                  </div>
                 </div>
                 <div class="article-title">
                   {{ item.title }}
@@ -99,6 +101,16 @@
                 </div>
                 <div class="article-des text">
                   {{ item.subTitle }}
+                </div>
+                <div class="label-warp">
+                  <div class="type">
+                    <IconType class="iconfont"></IconType>
+                    {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                  </div>
+                  <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                    <IconLabel class="iconfont"></IconLabel>
+                    <span class="label">{{ label }}</span>
+                  </div>
                 </div>
               </div>
               <div class="cover-img-warp">
@@ -126,10 +138,6 @@
                     <span>发布于：</span>
                     <span class="time">{{ item.createTime }}</span>
                   </div>
-                  <div class="type">
-                    <IconLabel class="iconfont"></IconLabel>
-                    {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                  </div>
                 </div>
                 <div class="article-title">
                   {{ item.title }}
@@ -154,6 +162,16 @@
                 </div>
                 <div class="article-des text">
                   {{ item.subTitle }}
+                </div>
+                <div class="label-warp">
+                  <div class="type">
+                    <IconType class="iconfont"></IconType>
+                    {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                  </div>
+                  <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                    <IconLabel class="iconfont"></IconLabel>
+                    <span class="label">{{ label }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -238,8 +256,9 @@ const getArticleListFn = () => {
     .then(res => {
       if (res.code === 200) {
         res.data.forEach(item => {
-          item.createTime = moment(item.createTime).format('YYYY-MM-DD');
+          item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss');
           item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+          item.labels = item.labels ? item.labels.split(',') : [];
         });
         state.articleList = [...state.articleList, ...res.data];
         state.page.total = res.total;
@@ -342,7 +361,7 @@ watch(
         .item-content {
           flex: 1;
           height: 280px;
-          padding: 48px 30px;
+          padding: 33px 30px;
           background-color: var(--bg-content-color);
           position: relative;
           .create-time {
@@ -350,8 +369,8 @@ watch(
             align-items: center;
             height: 24px;
             font-size: 12px;
-            padding: 2px 8px;
-            background-color: var(--theme-light-color-9);
+            padding: 2px 0px;
+            // background-color: var(--theme-light-color-9);
             border-radius: 5px;
             color: var(--theme-color);
             .time-warp {
@@ -429,6 +448,31 @@ watch(
             overflow: hidden;
             text-overflow: ellipsis;
             color: var(--text-color-2);
+          }
+          .label-warp {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 10px;
+            .type {
+              font-size: 12px;
+              color: var(--text-color);
+              background-color: #dfdddd;
+              border-radius: 5px;
+              padding: 2px 6px;
+              margin-right: 15px;
+            }
+            .label-item {
+              margin-right: 10px;
+              font-size: 12px;
+              color: var(--theme-color);
+              background-color: #dfdddd;
+              border-radius: 5px;
+              padding: 2px 6px;
+              .label {
+                margin-left: 5px;
+              }
+            }
           }
         }
       }

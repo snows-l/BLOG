@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-08 16:52:51
+ * @LastEditTime: 2024-09-08 17:27:54
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -315,7 +315,7 @@ const getArticleListFn = () => {
     .then(res => {
       if (res.code === 200) {
         res.data.forEach(item => {
-          item.createTime = moment(item.createTime).format('YYYY-MM-DD');
+          item.createTime = moment(item.createTime).format('YYYY-MM-DD HH:mm:ss');
           item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
           item.subTitle = item.subTitle.replace(/&#39;/g, "'");
           item.labels = item.labels && item.labels.split(',');
@@ -776,8 +776,8 @@ onUnmounted(() => {
               align-items: center;
               height: 24px;
               font-size: 12px;
-              padding: 2px 8px;
-              background-color: var(--theme-light-color-9);
+              padding: 2px 0px;
+              // background-color: var(--theme-light-color-9);
               border-radius: 5px;
               color: var(--theme-color);
               .time-warp {
@@ -865,8 +865,8 @@ onUnmounted(() => {
               color: var(--text-color);
               background-color: #dfdddd;
               border-radius: 5px;
-              padding: 2px 4px;
-              margin-right: 10px;
+              padding: 2px 6px;
+              margin-right: 15px;
             }
             .label-item {
               margin-right: 10px;
@@ -903,10 +903,6 @@ onUnmounted(() => {
             height: 30px !important;
             line-height: 30px !important;
             font-size: 16px !important;
-          }
-          .type {
-            top: 20px !important;
-            right: 20px !important;
           }
         }
         .auth-info-warp {

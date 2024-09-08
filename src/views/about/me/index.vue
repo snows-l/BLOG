@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-08 17:10:08
+ * @LastEditTime: 2024-09-08 17:29:23
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -575,7 +575,8 @@ getDictFn();
                 align-items: center;
                 span {
                   font-size: 12px;
-                  color: var(--text-color);
+                  // color: var(--text-color);
+                  color: #fff;
                   margin-left: 5px;
                 }
               }
@@ -688,7 +689,8 @@ getDictFn();
             padding: 4px 10px;
             border-radius: 20px;
             margin: 5px;
-            border: 1px solid var(--text-color);
+            color: #fff;
+            border: 1px solid var(--text-color-2);
             display: flex;
             align-items: center;
           }
