@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-08 17:32:40
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-09-09 12:28:20
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -82,12 +82,12 @@
                       <span>{{ item.readCount || 0 }}</span>
                     </div>
                     <div>
-                      <IconComment :size="18" class="iconfont"></IconComment>
-                      <span>{{ item.commentCount || 0 }}</span>
+                      <IconLike :size="18" class="iconfont" />
+                      <span>{{ item.shareCount || 0 }}</span>
                     </div>
                     <div>
-                      <IconShare class="iconfont" :size="20"></IconShare>
-                      <span>{{ item.shareCount || 0 }}</span>
+                      <IconComment :size="19" class="iconfont"></IconComment>
+                      <span>{{ item.commentCount || 0 }}</span>
                     </div>
                   </div>
                   <div class="article-des text">
@@ -127,13 +127,12 @@
                       <span>{{ item.readCount || 0 }}</span>
                     </div>
                     <div>
-                      <IconComment :size="18" class="iconfont"></IconComment>
-                      <span>{{ item.commentCount || 0 }}</span>
+                      <IconLike :size="18" class="iconfont" />
+                      <span>{{ item.shareCount || 0 }}</span>
                     </div>
                     <div>
-                      <IconShare class="iconfont" :size="20"></IconShare>
-
-                      <span>{{ item.shareCount || 0 }}</span>
+                      <IconComment :size="19" class="iconfont"></IconComment>
+                      <span>{{ item.commentCount || 0 }}</span>
                     </div>
                   </div>
                   <div class="article-des text">
@@ -194,12 +193,12 @@
                         <span>{{ item.readCount || 0 }}</span>
                       </div>
                       <div>
-                        <IconComment :size="18" class="iconfont"></IconComment>
-                        <span>{{ item.commentCount || 0 }}</span>
+                        <IconLike :size="18" class="iconfont" />
+                        <span>{{ item.shareCount || 0 }}</span>
                       </div>
                       <div>
-                        <IconShare class="iconfont" :size="20"></IconShare>
-                        <span>{{ item.shareCount || 0 }}</span>
+                        <IconComment :size="18" class="iconfont"></IconComment>
+                        <span>{{ item.commentCount || 0 }}</span>
                       </div>
                     </div>
                     <div class="article-des text">
@@ -800,7 +799,7 @@ onUnmounted(() => {
               // }
             }
             .article-title {
-              margin: 10px 0;
+              margin-top: 10px;
               height: 30px;
               font-size: 20px;
               line-height: 30px;
@@ -863,7 +862,7 @@ onUnmounted(() => {
             .type {
               font-size: 12px;
               color: var(--text-color);
-              background-color: #dfdddd;
+              background-color: var(--theme-light-color-9);
               border-radius: 5px;
               padding: 2px 6px;
               margin-right: 15px;
@@ -899,7 +898,7 @@ onUnmounted(() => {
           height: 180px !important;
           padding: 20px 20px !important;
           .article-title {
-            margin: 5px 0 !important;
+            margin-top: 5px !important;
             height: 30px !important;
             line-height: 30px !important;
             font-size: 16px !important;

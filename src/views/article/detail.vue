@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:38:46
+ * @LastEditTime: 2024-09-09 12:24:53
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -30,7 +30,7 @@
               <span>{{ state.arcticleDetail.commentCount || 0 }}</span>
             </div>
             <div class="pointer" @click="handleAdd('share')">
-              <IconShare class="iconfont" :size="20"></IconShare>
+              <IconLike :size="18" class="iconfont" />
               <span>{{ state.arcticleDetail.shareCount || 0 }}</span>
             </div>
             <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
@@ -179,16 +179,17 @@ const handleAdd = (type: string) => {
   } else if (type === 'share') {
     addShareCount(articleId).then(res => {
       if (res.code == 200) {
-        copy(window.location.href);
-        ElMessageBox({
-          type: 'success',
-          message: '链接已复制，请到微信、QQ、邮箱等平台粘贴分享！',
-          center: true,
-          showConfirmButton: true,
-          confirmButtonText: '确定',
-          roundButton: true,
-          buttonSize: 'small'
-        });
+        getArticleDetailFn();
+        // copy(window.location.href);
+        // ElMessageBox({
+        //   type: 'success',
+        //   message: '链接已复制，请到微信、QQ、邮箱等平台粘贴分享！',
+        //   center: true,
+        //   showConfirmButton: true,
+        //   confirmButtonText: '确定',
+        //   roundButton: true,
+        //   buttonSize: 'small'
+        // });
       }
     });
   }

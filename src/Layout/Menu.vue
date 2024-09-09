@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-05 23:01:03
- * @FilePath: /BLOG/src/Layout/Menu.vue
+ * @LastEditTime: 2024-09-09 13:16:00
+ * @FilePath: /blog/src/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -151,7 +151,7 @@ const handleTo = item => {
       color: var(--theme-color);
     }
     .nav-list-sub-contetn {
-      padding: 5px 5px;
+      padding: 0px 5px;
       border-radius: 5px;
       position: absolute;
       display: none;
@@ -172,11 +172,20 @@ const handleTo = item => {
         border-style: solid;
         border-color: transparent transparent var(--bg-warp-light-color) transparent;
       }
+      &:after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        height: 10px;
+        width: 100%;
+        background: transparent;
+      }
 
       .nav-item-sub {
         padding: 10px 15px;
         background-color: var(--bg-warp-color);
-        border-radius: 5px;
+        border-radius: 4px;
         margin: 5px 0;
         color: var(--text-color);
         &:hover {

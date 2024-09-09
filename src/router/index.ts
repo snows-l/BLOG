@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:51:37
+ * @LastEditTime: 2024-09-09 13:09:53
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
@@ -34,7 +34,19 @@ export const routes = [
       icon: 'icon-shouye',
       textIcon: '🏡'
     },
-    component: Home
+    component: Home,
+    children: [
+      {
+        link: getBackstageurl() + '/view',
+        path: '',
+        name: 'View',
+        meta: {
+          title: '起始页',
+          textIcon: '🚀'
+        },
+        component: null
+      }
+    ]
   },
   {
     path: '/article',
@@ -216,14 +228,13 @@ export const routes = [
     ]
   },
   {
-    link: getBackstageurl(),
+    link: getBackstageurl() + '/view',
     path: '',
     name: 'Backstage',
     meta: {
       title: '后台管理',
       icon: 'icon-guanyu',
       textIcon: '🍀'
-      // img: 'backstage.png'
     },
     component: null
   }
