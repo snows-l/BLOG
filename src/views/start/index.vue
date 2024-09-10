@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 22:38:12
+ * @LastEditTime: 2024-09-10 23:04:46
  * @FilePath: /BLOG/src/views/start/index.vue
 -->
 <template>
@@ -26,8 +26,13 @@
             </div>
 
             <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
-              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 42px; font-size: 42px">🏡</text>
-              <img class="to pointer kbn-link" data-tip="后台管理" @click="handleToBack" style="width: 42px; height: 42px" src="@/assets/images/icon/backstage.png" />
+              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px; font-size: 40px">🏡</text>
+              <img
+                class="to pointer kbn-link"
+                data-tip="后台管理"
+                @click="handleToBack"
+                style="width: 40px; height: 40px; margin-top: 4px"
+                src="@/assets/images/icon/backstage.png" />
             </div>
           </div>
         </div>
@@ -101,14 +106,32 @@ const handleToBack = () => {
 
 // 全屏/退出全屏 兼容性处理
 const handleFullScreen = () => {
-  if (state.isScreenFull) {
-    document.exitFullscreen();
-    state.clockSize = isMobi.value ? 0.5 : 0.8;
+  if (!document.fullscreenElement) {
+    // 进入全屏
+    var requestMethod =
+      document.documentElement.requestFullScreen || //W3C
+      document.documentElement.webkitRequestFullScreen || //Chrome等
+      document.documentElement.mozRequestFullScreen || //FireFox
+      document.documentElement.msRequestFullscreen; //IE11
+
+    if (requestMethod) {
+      requestMethod.call(document.documentElement);
+      state.clockSize = isMobi.value ? 0.7 : 1.2;
+      state.isScreenFull = true;
+    } else if (typeof window.ActiveXObject !== 'undefined') {
+      var wscript = new ActiveXObject('WScript.Shell');
+      if (wscript !== null) {
+        wscript.SendKeys('{F11}');
+      }
+    }
   } else {
-    document.documentElement.requestFullscreen();
-    state.clockSize = isMobi.value ? 0.7 : 1.2;
+    // 退出全屏
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+      state.clockSize = isMobi.value ? 0.5 : 0.8;
+      state.isScreenFull = false;
+    }
   }
-  state.isScreenFull = !state.isScreenFull;
 };
 </script>
 
