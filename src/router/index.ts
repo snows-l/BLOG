@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-09 13:09:53
+ * @LastEditTime: 2024-09-10 10:41:09
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
@@ -37,8 +37,7 @@ export const routes = [
     component: Home,
     children: [
       {
-        link: getBackstageurl() + '/view',
-        path: '',
+        path: '/start',
         name: 'View',
         meta: {
           title: '起始页',
@@ -248,6 +247,15 @@ const router = createRouter({
       name: 'Layout',
       component: Layout,
       children: [...routes]
+    },
+    {
+      path: '/start',
+      name: 'Start',
+      meta: {
+        title: '起始页',
+        textIcon: '🚀'
+      },
+      component: () => import('../views/start/index.vue')
     }
   ]
 });

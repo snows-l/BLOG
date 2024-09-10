@@ -1,0 +1,227 @@
+<!--
+ * @Description: ------------ fileDescription -----------
+ * @Author: snows_l snows_l@163.com
+ * @Date: 2024-03-24 17:51:09
+ * @LastEditors: snows_l snows_l@163.com
+ * @LastEditTime: 2024-09-10 11:29:56
+ * @FilePath: /blog/src/views/start/index.vue
+-->
+<template>
+  <div class="content-container" style="width: 100vw">
+    <img :src="state.bgImgUrl" style="width: 100%; height: 100%; object-fit: cover" />
+    <div class="container-warp">
+      <div class="header"></div>
+      <div class="main">
+        <div class="content-container-center">
+          <div class="time-select">
+            <div class="clock-warp" @click="handleFullScreen">
+              <Vue3FlipClock :size="state.clockSize"></Vue3FlipClock>
+            </div>
+            <div class="date" :style="{ marginTop: state.isScreenFull ? '40px' : '20px', fontSize: state.isScreenFull ? '24px' : '16px' }">
+              <span>{{ state.currentDate }}</span>
+              <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
+              <span>{{ state.lunar }}</span>
+            </div>
+          </div>
+
+          <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 30px; align-items: center">
+            <text class="to pointer" @click="handleBlog" style="width: 20px; height: 20px; font-size: 20px; margin-right: 20px">🏡</text>
+            <img class="to pointer" @click="handleToBack" style="width: 20px; height: 20px" src="@/assets/images/icon/backstage.png" />
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="sub-title" @click="handleRefreshSaying">
+          {{ state.saying }}
+        </span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import useResize from '@/hooks/useResize';
+import axios from 'axios';
+import moment from 'moment';
+import { getLunar, getBackstageurl, randomNum } from '@/utils/common';
+import { reactive, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+
+const { isMobi } = useResize();
+const router = useRouter();
+
+const weekConfig = {
+  1: '星期一',
+  2: '星期二',
+  3: '星期三',
+  4: '星期四',
+  5: '星期五',
+  6: '星期六',
+  7: '星期天'
+};
+
+let state = reactive({
+  timer: 0,
+  currentTime: moment().format('HH:mm:ss'),
+  currentDate: moment().format('MM月DD日'),
+  week: moment().day(),
+  lunar: getLunar(moment().format('YYYY-MM-DD')),
+  keyword: '',
+  type: 1,
+  isScreenFull: false,
+  clockSize: isMobi.value ? 0.5 : 0.8,
+  saying: '',
+  bgImgUrl: 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg'
+});
+
+// 获取名言名句
+const getSaying = () => {
+  axios.get('https://api.xygeng.cn/one', {}).then(response => {
+    let res = response.data;
+    if (res.code == 200) {
+      state.saying = res.data.content;
+    }
+  });
+};
+// 刷新名言名句
+getSaying();
+const handleRefreshSaying = () => {
+  getSaying();
+};
+
+// 跳转到博客
+const handleBlog = () => {
+  router.push('/');
+};
+
+// 跳转到后台管理
+const handleToBack = () => {
+  window.open(getBackstageurl() + '/index', '_blank');
+};
+
+// 全屏/退出全屏 兼容性处理
+const handleFullScreen = () => {
+  if (state.isScreenFull) {
+    document.exitFullscreen();
+    state.clockSize = isMobi.value ? 0.5 : 0.8;
+  } else {
+    document.documentElement.requestFullscreen();
+    state.clockSize = isMobi.value ? 0.8 : 1.2;
+  }
+  state.isScreenFull = !state.isScreenFull;
+};
+</script>
+
+<style lang="scss" scoped>
+.content-container {
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  position: relative;
+  .container-warp {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    .main {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      position: relative;
+      .content-container-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+      }
+      .time-select {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        .clock-warp {
+          cursor: pointer;
+        }
+        .time {
+          font-family: DSDIGI;
+          font-size: 60px;
+          font-weight: 900;
+        }
+        .date {
+          margin-top: 10px;
+          font-size: 16px;
+          font-weight: 500;
+          font-family: DSDIGI;
+          text-shadow: 1px 1px 1px #000;
+        }
+      }
+      .to-warp {
+        display: flex;
+        align-items: center;
+        .to:hover {
+          color: var(--theme-color);
+        }
+      }
+      .select-warp {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        padding: 0 20px;
+        .el-input {
+          max-width: 350px;
+        }
+      }
+    }
+    .footer {
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .sub-title {
+        padding: 2px 5px;
+        font-size: 12px;
+        background-color: #fcffff2d;
+        text-align: center;
+        border-radius: 2px;
+      }
+    }
+  }
+}
+.pc,
+.mobile {
+  margin-left: 20px;
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.mobile {
+  margin-left: 10px;
+}
+
+.qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
+
+<style lang="scss">
+.select-warp {
+  .el-input-group__prepend {
+    width: 60px;
+    position: relative;
+    padding: 0 30px !important;
+    .select-type-warp {
+      position: absolute;
+      left: 5px;
+    }
+  }
+}
+</style>
