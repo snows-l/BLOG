@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 15:37:05
+ * @LastEditTime: 2024-09-10 15:47:57
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -13,20 +13,22 @@
       <div class="header"></div>
       <div class="main">
         <div class="content-container-center">
-          <div class="time-select">
-            <div class="clock-warp" @click="handleFullScreen">
-              <Vue3FlipClock :size="state.clockSize"></Vue3FlipClock>
+          <div class="scale-warp" :style="{ transform: `scale(${state.clockSize})` }">
+            <div class="time-select">
+              <div class="clock-warp" @click="handleFullScreen">
+                <Vue3FlipClock></Vue3FlipClock>
+              </div>
+              <div class="date" :style="{ marginTop: state.isScreenFull ? '40px' : '40px', fontSize: state.isScreenFull ? '24px' : '20px' }">
+                <span>{{ state.currentDate }}</span>
+                <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
+                <span>{{ state.lunar }}</span>
+              </div>
             </div>
-            <div class="date" :style="{ marginTop: state.isScreenFull ? '40px' : '20px', fontSize: state.isScreenFull ? '24px' : '16px' }">
-              <span>{{ state.currentDate }}</span>
-              <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
-              <span>{{ state.lunar }}</span>
-            </div>
-          </div>
 
-          <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 30px; align-items: center">
-            <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="width: 20px; height: 20px; font-size: 20px; margin-right: 20px">🏡</text>
-            <img class="to pointer kbn-link" data-tip="后台管理" @click="handleToBack" style="width: 20px; height: 20px" src="@/assets/images/icon/backstage.png" />
+            <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 30px; align-items: center">
+              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="width: 30px; height: 30px; font-size: 28px; margin-right: 40px">🏡</text>
+              <img class="to pointer kbn-link" data-tip="后台管理" @click="handleToBack" style="width: 30px; height: 30px" src="@/assets/images/icon/backstage.png" />
+            </div>
           </div>
         </div>
       </div>
@@ -159,6 +161,7 @@ const handleFullScreen = () => {
         }
       }
       .to-warp {
+        margin-top: 30px;
         display: flex;
         align-items: center;
         .to:hover {
