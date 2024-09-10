@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 11:29:56
+ * @LastEditTime: 2024-09-10 15:27:57
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -31,9 +31,7 @@
         </div>
       </div>
       <div class="footer">
-        <span class="sub-title" @click="handleRefreshSaying">
-          {{ state.saying }}
-        </span>
+        <span class="sub-title" @click="handleRefreshSaying">「 {{ state.saying }} 」</span>
       </div>
     </div>
   </div>
@@ -183,11 +181,11 @@ const handleFullScreen = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-
       .sub-title {
-        padding: 2px 5px;
+        padding: 3px 5px;
         font-size: 12px;
-        background-color: #fcffff2d;
+        background-color: var(--bg-content-color);
+        color: var(--text-color);
         text-align: center;
         border-radius: 2px;
       }
