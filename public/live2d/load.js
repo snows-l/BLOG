@@ -40,7 +40,7 @@ const initConfig = {
       { selector: '.comment-form', text: 'Content Tooltip' },
       { selector: '.home-social a:last-child', text: 'Blog Tooltip' },
       { selector: '.list, .postname, .kbn-read, .kbn-article', type: 'read' },
-      { selector: 'a, .kbn-link', type: 'link' },
+      { selector: 'a, .link, .kbn-link', type: 'link' },
       { selector: '.kbn-qq, .kbn-weixin, .kbn-wechat, .kbn-email, kbn-chart', type: 'chart' },
       { selector: '.kbn-music', type: 'music' },
       { selector: '.kbn-custom', type: 'custom' }

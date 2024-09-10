@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 15:27:57
+ * @LastEditTime: 2024-09-10 15:37:05
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -25,8 +25,8 @@
           </div>
 
           <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 30px; align-items: center">
-            <text class="to pointer" @click="handleBlog" style="width: 20px; height: 20px; font-size: 20px; margin-right: 20px">🏡</text>
-            <img class="to pointer" @click="handleToBack" style="width: 20px; height: 20px" src="@/assets/images/icon/backstage.png" />
+            <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="width: 20px; height: 20px; font-size: 20px; margin-right: 20px">🏡</text>
+            <img class="to pointer kbn-link" data-tip="后台管理" @click="handleToBack" style="width: 20px; height: 20px" src="@/assets/images/icon/backstage.png" />
           </div>
         </div>
       </div>

@@ -208,7 +208,7 @@ var Paul_Pio = function (prop) {
             } else if (t.type == 'music') {
               e[j].onmouseover = function () {
                 const text = (this.dataset && this.dataset.tip) || this.innerText || '这个音乐';
-                modules.render('想听听 %t 吗？点击即可播放。'.replace(/%t/, '“' + text + '”'));
+                modules.render('想听听 %t 吗？'.replace(/%t/, '“' + text + '”'));
               };
             } else if (t.type == 'custom') {
               e[j].onmouseover = function () {
