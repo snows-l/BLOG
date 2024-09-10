@@ -1511,6 +1511,13 @@ vue3-count-to@^1.1.2:
     core-js "^3.8.1"
     vue-count-to "^1.0.13"
 
+vue3-flip-clock@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.npmjs.org/vue3-flip-clock/-/vue3-flip-clock-1.0.18.tgz#90b946751a042ca6cfbe4d9e50ae5039cfaa4ec2"
+  integrity sha512-cyFdZbUDaLlBk2ichkcWLsb5sVW/qwrzeFVSjDd5fQY+SNCrBrn6mDyrBoYDj99Ox4wy3r0OJwfN8H2Zyur2ZA==
+  dependencies:
+    vue3-flip-clock "^1.0.18"
+
 vue@^3.4.29:
   version "3.4.35"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.4.35.tgz#9ad23525919eece40153fdf8675d07ddd879eb33"

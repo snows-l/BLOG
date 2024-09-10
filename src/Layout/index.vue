@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 17:38:43
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-09-10 20:34:14
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -26,7 +26,7 @@
     <!-- layout-warp -->
     <div class="layout-content-warp" id="layout" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
       <!-- mobile header -->
-      <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi">
+      <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi" v-show="route.path != '/start'">
         <div class="icon-warp">
           <img style="width: 30px; height: 30px" v-if="state.mMenuShow" :src="getImgIcon('icon-close.svg')" @click="handleMMenuShow" />
           <img style="width: 30px; height: 30px" v-else :src="getImgIcon('icon-menu.svg')" @click="handleMMenuShow" />
@@ -39,7 +39,7 @@
       </header>
 
       <!-- pc header -->
-      <header v-else class="header-warp" :class="state.isFlutter ? 'flutter' : ''">
+      <header v-else class="header-warp" :class="state.isFlutter ? 'flutter' : ''" v-show="route.path != '/start'">
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
           <span class="title-sub-text" style="margin: 0 10px 0 5px">の</span>
@@ -59,24 +59,23 @@
       <!-- main -->
       <main @click="handleClickMain" id="main">
         <router-view></router-view>
-        <Footer></Footer>
+        <Footer v-show="route.path != '/start'"></Footer>
       </main>
     </div>
 
     <!-- 置顶 / 音乐 / 设置 -->
     <div class="top-set">
-      <div class="top pointer" style="padding: 5px 0" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
+      <div v-show="route.path != '/start'" class="top pointer" style="padding: 5px 0" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
         <i class="iconfont icon-yooxi"></i>
       </div>
-      <div class="set pointer" @click="handleSearch(false)" v-if="isMobi">
+      <div v-show="route.path != '/start'" class="set pointer" @click="handleSearch(false)" v-if="isMobi">
         <img width="25px" height="25px" :src="getImgIcon('icon-search.svg')" />
       </div>
-      <div class="set"></div>
-      <!-- <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
+      <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
         <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
-      </div> -->
-      <div class="set pointer" @click="handleSetShow">
+      </div>
+      <div v-show="route.path != '/start'" class="set pointer" @click="handleSetShow">
         <img width="25px" height="25px" :src="getImgIcon('icon-set.svg')" />
       </div>
     </div>

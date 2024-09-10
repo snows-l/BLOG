@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 15:47:57
- * @FilePath: /blog/src/views/start/index.vue
+ * @LastEditTime: 2024-09-10 20:28:09
+ * @FilePath: /BLOG/src/views/start/index.vue
 -->
 <template>
-  <div class="content-container" style="width: 100vw">
+  <div class="start-content-container">
     <img :src="state.bgImgUrl" style="width: 100%; height: 100%; object-fit: cover" />
     <div class="container-warp">
       <div class="header"></div>
@@ -41,10 +41,10 @@
 
 <script lang="ts" setup>
 import useResize from '@/hooks/useResize';
+import { getBackstageurl, getLunar, randomNum } from '@/utils/common';
 import axios from 'axios';
 import moment from 'moment';
-import { getLunar, getBackstageurl, randomNum } from '@/utils/common';
-import { reactive, ref, watch } from 'vue';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
 const { isMobi } = useResize();
@@ -113,11 +113,12 @@ const handleFullScreen = () => {
 </script>
 
 <style lang="scss" scoped>
-.content-container {
-  height: 100%;
+.start-content-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
   overflow: hidden;
   background-size: cover;
-  position: relative;
   .container-warp {
     height: 100%;
     display: flex;

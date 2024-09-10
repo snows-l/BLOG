@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 10:41:09
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-09-10 20:24:29
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -46,6 +46,16 @@ export const routes = [
         component: null
       }
     ]
+  },
+  {
+    path: '/start',
+    name: 'Start',
+    isHidden: true,
+    meta: {
+      title: '起始页',
+      textIcon: '🚀'
+    },
+    component: () => import('../views/start/index.vue')
   },
   {
     path: '/article',
@@ -247,15 +257,6 @@ const router = createRouter({
       name: 'Layout',
       component: Layout,
       children: [...routes]
-    },
-    {
-      path: '/start',
-      name: 'Start',
-      meta: {
-        title: '起始页',
-        textIcon: '🚀'
-      },
-      component: () => import('../views/start/index.vue')
     }
   ]
 });
