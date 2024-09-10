@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 20:52:46
+ * @LastEditTime: 2024-09-10 22:38:12
  * @FilePath: /BLOG/src/views/start/index.vue
 -->
 <template>
@@ -18,16 +18,16 @@
               <div class="clock-warp pointer kbn-custom" data-tip="点击全屏效果更佳！" data @click="handleFullScreen">
                 <Vue3FlipClock></Vue3FlipClock>
               </div>
-              <div class="date" :style="{ marginTop: state.isScreenFull ? '40px' : '40px', fontSize: state.isScreenFull ? '24px' : '20px' }">
+              <div class="date" style="margin-top: 40px; font-size: 30px">
                 <span>{{ state.currentDate }}</span>
                 <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
                 <span>{{ state.lunar }}</span>
               </div>
             </div>
 
-            <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 30px; align-items: center">
-              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="width: 30px; height: 30px; font-size: 28px; margin-right: 40px">🏡</text>
-              <img class="to pointer kbn-link" data-tip="后台管理" @click="handleToBack" style="width: 30px; height: 30px" src="@/assets/images/icon/backstage.png" />
+            <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
+              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 42px; font-size: 42px">🏡</text>
+              <img class="to pointer kbn-link" data-tip="后台管理" @click="handleToBack" style="width: 42px; height: 42px" src="@/assets/images/icon/backstage.png" />
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ const handleFullScreen = () => {
     state.clockSize = isMobi.value ? 0.5 : 0.8;
   } else {
     document.documentElement.requestFullscreen();
-    state.clockSize = isMobi.value ? 0.8 : 1.2;
+    state.clockSize = isMobi.value ? 0.7 : 1.2;
   }
   state.isScreenFull = !state.isScreenFull;
 };
