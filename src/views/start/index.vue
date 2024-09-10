@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 20:28:09
+ * @LastEditTime: 2024-09-10 20:52:46
  * @FilePath: /BLOG/src/views/start/index.vue
 -->
 <template>
@@ -15,7 +15,7 @@
         <div class="content-container-center">
           <div class="scale-warp" :style="{ transform: `scale(${state.clockSize})` }">
             <div class="time-select">
-              <div class="clock-warp" @click="handleFullScreen">
+              <div class="clock-warp pointer kbn-custom" data-tip="点击全屏效果更佳！" data @click="handleFullScreen">
                 <Vue3FlipClock></Vue3FlipClock>
               </div>
               <div class="date" :style="{ marginTop: state.isScreenFull ? '40px' : '40px', fontSize: state.isScreenFull ? '24px' : '20px' }">
