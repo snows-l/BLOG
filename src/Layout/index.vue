@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 11:08:41
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-10 17:38:43
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -71,10 +71,11 @@
       <div class="set pointer" @click="handleSearch(false)" v-if="isMobi">
         <img width="25px" height="25px" :src="getImgIcon('icon-search.svg')" />
       </div>
-      <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
+      <div class="set"></div>
+      <!-- <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
         <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
-      </div>
+      </div> -->
       <div class="set pointer" @click="handleSetShow">
         <img width="25px" height="25px" :src="getImgIcon('icon-set.svg')" />
       </div>
