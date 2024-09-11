@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 20:34:14
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-11 16:59:54
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -65,17 +65,17 @@
 
     <!-- 置顶 / 音乐 / 设置 -->
     <div class="top-set">
-      <div v-show="route.path != '/start'" class="top pointer" style="padding: 5px 0" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
+      <div v-show="route.path != '/start'" class="top pointer kbn-custom" data-tip="置顶" style="padding: 5px 0" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
         <i class="iconfont icon-yooxi"></i>
       </div>
-      <div v-show="route.path != '/start'" class="set pointer" @click="handleSearch(false)" v-if="isMobi">
+      <div v-show="route.path != '/start'" class="set pointer kbn-custom" data-tip="搜索" @click="handleSearch(false)" v-if="isMobi">
         <img width="25px" height="25px" :src="getImgIcon('icon-search.svg')" />
       </div>
-      <div class="set pointer" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
+      <div class="set pointer kbn-custom" data-tip="音乐播放器" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
         <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
       </div>
-      <div v-show="route.path != '/start'" class="set pointer" @click="handleSetShow">
+      <div v-show="route.path != '/start'" class="set pointer kbn-custom" data-tip="设置" @click="handleSetShow">
         <img width="25px" height="25px" :src="getImgIcon('icon-set.svg')" />
       </div>
     </div>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-11 10:13:09
+ * @LastEditTime: 2024-09-11 16:56:58
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="footer">
-        <span class="sub-title" @click="handleRefreshSaying">「 {{ state.saying }} 」</span>
+        <span class="sub-title pointer kbn-custom" data-tip="点击可以刷新名言名句！" @click="handleRefreshSaying">「 {{ state.saying }} 」</span>
       </div>
     </div>
   </div>
