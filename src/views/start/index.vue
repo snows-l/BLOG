@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 23:04:46
- * @FilePath: /BLOG/src/views/start/index.vue
+ * @LastEditTime: 2024-09-11 10:13:09
+ * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
   <div class="start-content-container">
@@ -15,23 +15,24 @@
         <div class="content-container-center">
           <div class="scale-warp" :style="{ transform: `scale(${state.clockSize})` }">
             <div class="time-select">
-              <div class="clock-warp pointer kbn-custom" data-tip="点击全屏效果更佳！" data @click="handleFullScreen">
+              <div class="clock-warp pointer kbn-custom" data-tip="点击可以切换全屏！" data @click="handleFullScreen">
                 <Vue3FlipClock></Vue3FlipClock>
               </div>
-              <div class="date" style="margin-top: 40px; font-size: 30px">
+              <div class="date" style="margin-top: 40px; font-size: 28px">
                 <span>{{ state.currentDate }}</span>
                 <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
-                <span>{{ state.lunar }}</span>
+                <span @click="handleToggleBg" class="pointer kbn-custom" data-tip="点击可切换背景哟！">{{ state.lunar }}</span>
               </div>
             </div>
 
             <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
-              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px; font-size: 40px">🏡</text>
+              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px" :style="{ fontSize: isMobi ? '40px' : '30px' }">🏡</text>
               <img
                 class="to pointer kbn-link"
                 data-tip="后台管理"
                 @click="handleToBack"
-                style="width: 40px; height: 40px; margin-top: 4px"
+                :style="{ width: isMobi ? '40px' : '30px', height: isMobi ? '40px' : '30px' }"
+                style="margin-top: 4px"
                 src="@/assets/images/icon/backstage.png" />
             </div>
           </div>
@@ -71,11 +72,9 @@ let state = reactive({
   currentDate: moment().format('MM月DD日'),
   week: moment().day(),
   lunar: getLunar(moment().format('YYYY-MM-DD')),
-  keyword: '',
-  type: 1,
   isScreenFull: false,
   clockSize: isMobi.value ? 0.5 : 0.8,
-  saying: '',
+  saying: '渔得鱼心满意足，樵得樵眼笑眉舒！',
   bgImgUrl: 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg'
 });
 
@@ -84,7 +83,11 @@ const getSaying = () => {
   axios.get('https://api.xygeng.cn/one', {}).then(response => {
     let res = response.data;
     if (res.code == 200) {
-      state.saying = res.data.content;
+      if (isMobi.value) {
+        state.saying = res.data.content.length > 20 ? res.data.content.slice(0, 20) + '...' : res.data.content;
+      } else {
+        state.saying = res.data.content.length > 40 ? res.data.content.slice(0, 40) + '...' : res.data.content;
+      }
     }
   });
 };
@@ -92,6 +95,11 @@ const getSaying = () => {
 getSaying();
 const handleRefreshSaying = () => {
   getSaying();
+};
+
+// 切换背景
+const handleToggleBg = () => {
+  state.bgImgUrl = 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg';
 };
 
 // 跳转到博客
@@ -214,7 +222,7 @@ const handleFullScreen = () => {
         background-color: var(--bg-content-color);
         color: var(--text-color);
         text-align: center;
-        border-radius: 2px;
+        border-radius: 4px;
       }
     }
   }

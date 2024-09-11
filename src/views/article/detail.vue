@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-09 12:24:53
+ * @LastEditTime: 2024-09-11 10:19:55
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -179,7 +179,7 @@ const handleAdd = (type: string) => {
   } else if (type === 'share') {
     addShareCount(articleId).then(res => {
       if (res.code == 200) {
-        getArticleDetailFn();
+        state.arcticleDetail.shareCount = res.data;
         // copy(window.location.href);
         // ElMessageBox({
         //   type: 'success',
