@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-11 16:56:58
+ * @LastEditTime: 2024-09-11 17:58:53
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -15,13 +15,13 @@
         <div class="content-container-center">
           <div class="scale-warp" :style="{ transform: `scale(${state.clockSize})` }">
             <div class="time-select">
-              <div class="clock-warp pointer kbn-custom" data-tip="点击可以切换全屏！" data @click="handleFullScreen">
+              <div class="clock-warp pointer kbn-custom" data-tip="点我 切换全屏！" data @click="handleFullScreen">
                 <Vue3FlipClock></Vue3FlipClock>
               </div>
               <div class="date" style="margin-top: 40px; font-size: 28px">
                 <span>{{ state.currentDate }}</span>
                 <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
-                <span @click="handleToggleBg" class="pointer kbn-custom" data-tip="点击可切换背景哟！">{{ state.lunar }}</span>
+                <span @click="handleToggleBg" class="pointer kbn-custom" data-tip="点我 切换背景哟（略略略）！">{{ state.lunar }}</span>
               </div>
             </div>
 
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="footer">
-        <span class="sub-title pointer kbn-custom" data-tip="点击可以刷新名言名句！" @click="handleRefreshSaying">「 {{ state.saying }} 」</span>
+        <span class="sub-title pointer kbn-custom" data-tip="点我 刷新名言名句！" @click="handleRefreshSaying">「 {{ state.saying }} 」</span>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-11 16:59:54
+ * @LastEditTime: 2024-09-11 17:53:26
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -71,7 +71,7 @@
       <div v-show="route.path != '/start'" class="set pointer kbn-custom" data-tip="搜索" @click="handleSearch(false)" v-if="isMobi">
         <img width="25px" height="25px" :src="getImgIcon('icon-search.svg')" />
       </div>
-      <div class="set pointer kbn-custom" data-tip="音乐播放器" style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
+      <div class="set pointer kbn-custom" data-tip=" 音乐播放器 " style="display: flex; align-items: center; justify-content: center" @click="handleShowMusicPlayer">
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
         <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
       </div>
