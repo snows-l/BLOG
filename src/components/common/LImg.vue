@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 12:23:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:50:30
+ * @LastEditTime: 2024-09-12 13:03:24
  * @FilePath: /blog/src/components/common/LImg.vue
 -->
 
@@ -22,7 +22,7 @@
 <template>
   <el-image class="pointer el-img-warp" preview-teleported hide-on-click-modal :src="src" :fit="fit" :previewSrcList="isUnPreview ? [] : [src]" :lazy="true">
     <template #placeholder>
-      <div class="img-loading-warp img-warp" style="width: 100%; height: 100%; background-color: #ffffff">
+      <div class="img-loading-warp pointer glogal-img-warp" style="width: 100%; height: 100%; background-color: #ffffff">
         <img v-if="isSpin" :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading.svg" alt="loading" />
         <img v-else :style="{ width: size, height: size }" class="img-loading" src="@/assets/images/common/loading10.gif" alt="loading" />
         <span v-if="isText" class="img-loading-text text">{{ loadingText }}</span>
@@ -30,7 +30,7 @@
     </template>
 
     <template #error>
-      <div class="img-error-warp img-warp">
+      <div class="img-error-warp glogal-img-warp">
         <img :style="{ width: size, height: size }" class="img-error" src="@/assets/images/common/error.png" alt="error" />
         <span v-if="isText" class="img-error-text text">😭 加载失败了</span>
       </div>
@@ -83,15 +83,19 @@ const props = defineProps({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .el-img-warp {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  .el-image__inner,
+  .el-image__preview {
+    cursor: url('@/assets/images/cursor/pointer.png'), auto !important;
+  }
 }
-.img-warp {
+.glogal-img-warp {
   display: flex;
   flex-direction: column;
   justify-content: center;

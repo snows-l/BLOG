@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-11 10:19:55
+ * @LastEditTime: 2024-09-12 12:59:30
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -14,7 +14,7 @@
       <div class="article-content-warp">
         <div class="article-content">
           <div class="article-cover-warp" :class="{ 'm-article-cover-warp': isMobi }">
-            <div class="cover-warp">
+            <div class="cover-warp pointer">
               <LImg class="cover-img" :src="state.arcticleDetail.cover" />
             </div>
             <div class="cover-title">COVER</div>
