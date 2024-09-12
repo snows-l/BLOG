@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-09 12:21:34
+ * @LastEditTime: 2024-09-12 12:51:18
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -20,9 +20,9 @@
     <div class="article-content-warp-out" :class="{ 'm-article-content-warp-out': isMobi }">
       <div class="other-content" v-if="!isMobi">
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read pointer" @click="handleArticle(item)" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+          <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
             <div class="img-left item-warp" v-if="index % 2 === 0">
-              <div class="cover-img-warp">
+              <div class="cover-img-warp pointer" @click="handleArticle(item)">
                 <LImg class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
               </div>
               <div class="item-content">
@@ -33,7 +33,7 @@
                     <span class="time">{{ item.createTime }}</span>
                   </div>
                 </div>
-                <div class="article-title">
+                <div class="article-title pointer" @click="handleArticle(item)">
                   {{ item.title }}
                 </div>
                 <div class="auth-info-warp">
@@ -78,7 +78,7 @@
                     <span class="time">{{ item.createTime }}</span>
                   </div>
                 </div>
-                <div class="article-title">
+                <div class="article-title pointer" @click="handleArticle(item)">
                   {{ item.title }}
                 </div>
                 <div class="auth-info-warp">
@@ -113,7 +113,7 @@
                   </div>
                 </div>
               </div>
-              <div class="cover-img-warp">
+              <div class="cover-img-warp pointer" @click="handleArticle(item)">
                 <LImg class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
               </div>
             </div>
@@ -126,9 +126,9 @@
       </div>
       <div class="other-content m-other-content" v-else>
         <div class="article-content-warp" v-if="state.articleList.length > 0">
-          <div class="article-item kbn-read" @click="handleArticle(item)" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
-            <div class="img-left item-warp pointer">
-              <div class="cover-img-warp">
+          <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+            <div class="img-left item-warp">
+              <div class="cover-img-warp pointer" @click="handleArticle(item)">
                 <LImg class="cover-img" :src="item.cover" :size="isMobi ? '120px' : '160px'" :isUnPreview="true" />
               </div>
               <div class="item-content">
@@ -139,7 +139,7 @@
                     <span class="time">{{ item.createTime }}</span>
                   </div>
                 </div>
-                <div class="article-title">
+                <div class="article-title pointer" @click="handleArticle(item)">
                   {{ item.title }}
                 </div>
                 <div class="auth-info-warp">

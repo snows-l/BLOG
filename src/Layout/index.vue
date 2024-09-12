@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-11 17:53:26
+ * @LastEditTime: 2024-09-12 12:46:29
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -717,27 +717,6 @@ onUnmounted(() => {
 </style>
 
 <style lang="scss">
-.n-menu.n-menu--horizontal {
-  .n-menu-item-content {
-    padding: 0 16px;
-  }
-}
-.n-submenu,
-.n-menu-item-content,
-.iconfont,
-.router-link-active,
-a {
-  cursor: url('@/assets/images/cursor/pointer.png'), auto !important;
-}
-.n-menu-item-content__icon {
-  margin-right: 4px !important;
-}
-.n-menu-item-content:hover {
-  a,
-  .iconfont {
-    color: var(--theme-color) !important;
-  }
-}
 .dark {
   .header-warp {
     background-image: none !important;
