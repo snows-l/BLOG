@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:48:38
- * @FilePath: /blog/src/components/common/pageTopCover.vue
+ * @LastEditTime: 2024-09-12 09:58:01
+ * @FilePath: /blog/src/components/common/PageTopCover.vue
 -->
 
 <!--
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getImgIcon, getQQAvatar } from '@/utils/common';
+import { getImgIcon } from '@/utils/common';
 const props = defineProps({
   coverImg: {
     type: String,
@@ -71,8 +71,6 @@ const props = defineProps({
     default: {}
   }
 });
-
-let avatar = getQQAvatar();
 </script>
 
 <style lang="scss" scoped>
@@ -107,7 +105,6 @@ let avatar = getQQAvatar();
     width: 100%;
     padding: 20px;
     border-radius: 20px;
-    background-color: v-bind(bgColor);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -118,7 +115,6 @@ let avatar = getQQAvatar();
       align-items: center;
       .iconfont {
         margin-right: 20px;
-        // color: var(--text-color);
         color: #fff;
         font-size: 24px;
       }
@@ -128,9 +124,9 @@ let avatar = getQQAvatar();
         margin-right: 20px;
       }
       .text {
-        // color: var(--text-color);
         color: #fff;
         font-size: 24px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
       }
     }
     .title-warp {
@@ -146,6 +142,7 @@ let avatar = getQQAvatar();
       text-overflow: ellipsis;
       text-align: center;
       color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
   }
   .default-bg-color {
