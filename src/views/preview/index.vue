@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 22:22:36
+ * @LastEditTime: 2024-09-13 22:34:04
  * @FilePath: /BLOG/src/views/preview/index.vue
 -->
 <template>
@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { previewArticleCodeToHtml } from '@/api/article';
 import { ElMessage } from 'element-plus';
-import { onUpdated, reactive, ref } from 'vue';
+import { onMounted, onUpdated, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -39,6 +39,10 @@ if (route.query.id) {
     }
   });
 }
+onMounted(() => {
+  const layout = document.querySelector('#layout');
+  layout?.scrollTo(0, 0);
+});
 onUpdated(() => {
   if (iframeRef.value) {
     // IE
