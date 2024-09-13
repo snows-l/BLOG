@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 20:24:29
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-09-13 17:27:24
+ * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -129,17 +129,6 @@ export const routes = [
         },
         isHidden: true,
         component: () => import('../views/article/preview.vue')
-      },
-      {
-        path: '/article/write',
-        name: 'Write',
-        meta: {
-          title: '写作',
-          icon: 'icon-fenxiang',
-          textIcon: '✍️'
-        },
-        isHidden: true,
-        component: Home
       }
     ]
   },
@@ -162,7 +151,7 @@ export const routes = [
           textIcon: '🎧'
         },
         component: () => import('@/views/play/music/index.vue')
-      }
+      },
       // {
       //   path: '/play/mp4',
       //   name: 'Mp4',
@@ -172,15 +161,16 @@ export const routes = [
       //   },
       //   component: () => import('@/views/play/video/index.vue')
       // }
-      // {
-      //   path: '/play/game',
-      //   name: 'Game',
-      //   meta: {
-      //     title: '小游戏',
-      //     icon: 'icon-yuleAPP'
-      //   },
-      //   component: () => import('@/views/play/game/index.vue')
-      // }
+      {
+        path: '/play/game',
+        name: 'Game',
+        meta: {
+          title: '小游戏',
+          icon: 'icon-yuleAPP',
+          textIcon: '🎮'
+        },
+        component: () => import('@/views/play/game/index.vue')
+      }
     ]
   },
   {
