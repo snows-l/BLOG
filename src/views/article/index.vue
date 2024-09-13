@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-12 12:51:18
+ * @LastEditTime: 2024-09-13 09:18:22
  * @FilePath: /blog/src/views/article/index.vue
 -->
 <template>
@@ -455,6 +455,7 @@ watch(
             justify-content: flex-start;
             margin-top: 10px;
             .type {
+              text-wrap: nowrap;
               font-size: 12px;
               color: var(--text-color);
               background-color: #dfdddd;

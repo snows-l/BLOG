@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-08 17:29:23
- * @FilePath: /BLOG/src/views/about/me/index.vue
+ * @LastEditTime: 2024-09-13 15:43:34
+ * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
@@ -76,7 +76,6 @@
             <div class="before">
               <div class="before-warp">
                 <div class="tltle">关于本网站</div>
-
                 <div class="content">
                   一款基于
                   <span>前端（vue3）</span>
@@ -90,6 +89,7 @@
               </div>
             </div>
             <div class="background">
+              <div class="title">技术栈</div>
               <div class="back-warp">
                 <div class="jishu-item" :style="{ 'background-color': item.color }" v-for="item in state.skillList" :key="item.text">
                   <img style="width: 16px; height: 16px" v-if="item.img" :src="item.img" alt="" />
@@ -524,9 +524,6 @@ getDictFn();
           .before {
             display: block;
             transition: all 0.8s ease-in-out;
-            .before-warp {
-            }
-
             .tltle {
               font-size: 22px;
               color: var(--text-color);
@@ -563,6 +560,11 @@ getDictFn();
             overflow-y: auto;
             width: 100%;
             height: 100%;
+            .title {
+              font-size: 22px;
+              color: var(--text-color);
+              margin-bottom: 10px;
+            }
             .back-warp {
               display: flex;
               flex-wrap: wrap;

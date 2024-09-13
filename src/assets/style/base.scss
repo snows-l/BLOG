@@ -27,6 +27,7 @@ body {
   --font-family: '';
   --content-max-width: 920px;
   --content-max-width-m: 90%;
+  --content-max-width-m-detail: 96%;
 
   --empty-text-color: #999999;
 
@@ -45,6 +46,9 @@ body {
   --bg-cover-color: #f9f4f48a;
   --border-color: #ece8e6;
   --bg-menu-flutter-color: #ffffff20;
+  --code-light-color: #f38484;
+  --code-color: #282727;
+  --bg-code-color: #e2dfdf;
 }
 
 :root.dark {
@@ -64,6 +68,9 @@ body {
   --bg-cover-color: #1e1e1e67;
   --border-color: #cbc3c372;
   --bg-menu-flutter-color: #00000020;
+  --code-light-color: #4fc1ff;
+  --code-color: #dddddd;
+  --bg-code-color: #202222;
 }
 
 // 定义（在全局样式中定义）

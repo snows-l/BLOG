@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-12 12:59:30
+ * @LastEditTime: 2024-09-13 15:36:21
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -381,7 +381,7 @@ onBeforeUnmount(() => {
         line-height: 20px !important;
         .article-cover-warp {
           width: 100%;
-          height: 240px;
+          height: 330px;
           padding: 0 10px;
           margin-bottom: 40px;
           overflow: hidden;
@@ -423,7 +423,7 @@ onBeforeUnmount(() => {
   }
   .m-article-content-warp-out {
     .article-content-warp {
-      max-width: var(--content-max-width-m) !important;
+      max-width: var(--content-max-width-m-detail) !important;
     }
   }
 
@@ -434,7 +434,7 @@ onBeforeUnmount(() => {
     height: calc(100vh - 400px);
   }
   .m-no-article {
-    max-width: var(--content-max-width-m) !important;
+    max-width: var(--content-max-width-m-detail) !important;
     margin: 0 auto !important;
     height: calc(100vh - 300px) !important;
   }
@@ -533,6 +533,18 @@ blockquote {
           color: var(--theme-color);
         }
       }
+    }
+  }
+}
+
+.w-e-text-container {
+  color: var(--code-color) !important;
+  pre > code {
+    text-shadow: 0px 0px !important;
+    background-color: var(--bg-code-color) !important;
+    .token,
+    .tag {
+      color: var(--code-light-color) !important;
     }
   }
 }

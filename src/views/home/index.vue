@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-12 12:41:05
+ * @LastEditTime: 2024-09-13 09:18:52
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -860,6 +860,7 @@ onUnmounted(() => {
             justify-content: flex-start;
             margin-top: 10px;
             .type {
+              text-wrap: nowrap;
               font-size: 12px;
               color: var(--text-color);
               background-color: var(--theme-light-color-9);
