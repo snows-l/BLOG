@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 21:18:45
+ * @LastEditTime: 2024-09-13 22:37:35
  * @FilePath: /BLOG/src/views/play/game/index.vue
 -->
 <template>
@@ -158,7 +158,11 @@ const handleGame = row => {
     .center-max-width-warp {
       width: var(--content-max-width-m) !important;
       .game-item {
+        width: 100% !important;
         margin: 10px 0 !important;
+        .game-item-title {
+          bottom: 0 !important;
+        }
       }
     }
   }
