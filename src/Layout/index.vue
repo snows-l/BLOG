@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-12 12:46:29
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-09-13 20:45:48
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -51,7 +51,6 @@
           </div>
           <div class="pointer secrh-warp">
             <i class="iconfont icon-sousuo1" @click="handleSearch(false)"></i>
-            <!-- <img style="width: 40px; height: 40px; border-radius: 50%" src="@/assets/images/common/default_avatar.png" alt="" /> -->
           </div>
         </div>
       </header>
@@ -59,7 +58,7 @@
       <!-- main -->
       <main @click="handleClickMain" id="main">
         <router-view></router-view>
-        <Footer v-show="route.path != '/start'"></Footer>
+        <Footer></Footer>
       </main>
     </div>
 

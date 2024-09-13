@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 17:54:56
- * @FilePath: /blog/src/views/play/game/index.vue
+ * @LastEditTime: 2024-09-13 21:18:45
+ * @FilePath: /BLOG/src/views/play/game/index.vue
 -->
 <template>
   <div class="game-out-warp">
@@ -12,7 +12,7 @@
     <div class="game-container" :class="{ 'm-game-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">欢迎👏来到我的博客，这里有很多好玩的小游戏，快来玩！</div>
+          <div class="item-1 text">这里有很多好玩的小游戏，快来玩！</div>
         </div>
         <div class="game-content-warp">
           <div class="game-warp-list">
@@ -30,10 +30,13 @@
 </template>
 
 <script lang="ts" setup>
-import { getArticleList, previewArticleCodeToHtml } from '@/api/article';
+import { getArticleList } from '@/api/article';
 import coverImg from '@/assets/images/bg/cover-game.png';
 import useResize from '@/hooks/useResize';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 const { isMobi } = useResize();
 
 const state = reactive({
@@ -55,14 +58,10 @@ const getListFn = () => {
 getListFn();
 
 const handleGame = row => {
-  previewArticleCodeToHtml(row.id).then(res => {
-    if (res.code == 200) {
-      window.open(res.data, '_blank');
-    } else {
-      ElMessage({
-        type: 'error',
-        message: '预览失败，请稍后再试！'
-      });
+  router.push({
+    path: '/preview',
+    query: {
+      id: row.id
     }
   });
 };
@@ -72,6 +71,7 @@ const handleGame = row => {
 .game-out-warp {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
   .game-container {
     width: 100%;
     height: 100%;
@@ -100,17 +100,22 @@ const handleGame = row => {
           flex-wrap: wrap;
           .game-item {
             border-radius: 10px;
-            width: 400px;
-            padding: 20px 20px;
+            width: 266px;
+            height: 240px;
+            // padding: 20px 20px;
             background-color: var(--bg-content-color);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 20px;
+            margin: 20px 13px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow: hidden;
             .game-item-img {
-              width: 240px;
-              height: 240px;
+              width: 220px;
+              height: 220px;
+              width: 100%;
+              height: 100%;
               overflow: hidden;
               transition: all 1.2s ease-in-out;
               img {
@@ -121,9 +126,9 @@ const handleGame = row => {
               }
             }
             .game-item-title {
+              width: 100%;
               font-size: 16px;
               font-weight: bold;
-              margin-top: 20px;
               text-align: center;
               color: var(--text-color);
               display: -webkit-box;
@@ -131,6 +136,18 @@ const handleGame = row => {
               -webkit-line-clamp: 1; /* 定义文本的行数 */
               overflow: hidden;
               text-overflow: ellipsis;
+              position: absolute;
+              bottom: -30px;
+              left: 0;
+              height: 30px;
+              line-height: 30px;
+              background-color: var(--bg-content-color);
+              transition: bottom 0.3s ease-in-out;
+            }
+            &:hover {
+              .game-item-title {
+                bottom: 0;
+              }
             }
           }
         }

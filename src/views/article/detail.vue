@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 15:36:21
- * @FilePath: /blog/src/views/article/detail.vue
+ * @LastEditTime: 2024-09-13 22:25:47
+ * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp" id="layout-content">
@@ -74,21 +74,21 @@
 </template>
 
 <script lang="ts" setup>
-import { addShareCount, getArticleDetail, previewArticleCodeToHtml } from '@/api/article';
+import { addShareCount, getArticleDetail } from '@/api/article';
 import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
 import { copy, isMobile, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
-import { ElMessage, ElMessageBox } from 'element-plus';
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 
 const commentViewRef = ref(null);
 const route = useRoute();
+const router = useRouter();
 let articleId = route.query.id;
 const tableOfContents = ref([]);
 const updateCount = ref(0);
@@ -302,17 +302,23 @@ const getTocRight = () => {
 };
 
 // 点击阅览
-const handleView = async () => {
-  previewArticleCodeToHtml(articleId).then(res => {
-    if (res.code == 200) {
-      window.open(res.data, '_blank');
-    } else {
-      ElMessage({
-        type: 'error',
-        message: '预览失败，请稍后再试！'
-      });
+const handleView = () => {
+  router.push({
+    path: '/preview',
+    query: {
+      id: articleId
     }
   });
+  // previewArticleCodeToHtml(articleId).then(res => {
+  //   if (res.code == 200) {
+  //     window.open(res.data, '_blank');
+  //   } else {
+  //     ElMessage({
+  //       type: 'error',
+  //       message: '预览失败，请稍后再试！'
+  //     });
+  //   }
+  // });
 };
 
 // 监听路由变化，重新获取文章详情

@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 17:27:24
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-09-13 21:09:28
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -131,6 +131,16 @@ export const routes = [
         component: () => import('../views/article/preview.vue')
       }
     ]
+  },
+  {
+    path: '/preview',
+    name: 'Preview',
+    meta: {
+      title: '预览',
+      icon: 'icon-fenxiang',
+      textIcon: '🔗'
+    },
+    component: () => import('../views/preview/index.vue')
   },
   {
     path: '/play',
