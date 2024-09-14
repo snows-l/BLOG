@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 14:46:19
+ * @LastEditTime: 2024-09-14 15:58:32
  * @FilePath: /blog/src/views/play/video/index.vue
 -->
 <template>
@@ -28,8 +28,8 @@
                   frameborder="no"
                   framespacing="0"
                   :allowfullscreen="true"
-                  sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"
-                  :autoplay="false"></iframe>
+                  :autoplay="true"
+                  sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
               </div>
               <div class="video-item-title">{{ item.title }}</div>
             </div>
@@ -53,12 +53,20 @@ const { isMobi } = useResize();
 const state = reactive({
   list: [
     {
-      url: '//player.bilibili.com/player.html?aid=413672301&bvid=BV1MV41167e9&cid=208508865&page=1',
+      url: '//player.bilibili.com/player.html?aid=413672301&bvid=BV1MV41167e9&cid=208508865&page=1&t=1&autoplay=0',
       title: '我想再看一眼这个世界'
     },
     {
-      url: 'https://player.bilibili.com/player.html?bvid=BV1JcpEevEyr&p=1&as_wide=1&high_quality=1&danmaku=0&t=30',
+      url: 'https://player.bilibili.com/player.html?bvid=BV1JcpEevEyr&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=0',
       title: '20首古风歌曲，开口跪系列，戏腔太惊艳了.....'
+    },
+    {
+      url: 'https://player.bilibili.com/player.html?bvid=BV1GFWUerE3k&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=0',
+      title: '国内的骑行片“这里叫贵州”'
+    },
+    {
+      url: 'https://player.bilibili.com/player.html?bvid=BV14SHpesE8f&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=0',
+      title: '周传雄最好听的50首歌曲精选'
     }
   ]
 });
@@ -123,8 +131,8 @@ const handlevideo = row => {
           .video-item {
             border-radius: 10px;
             width: 400px;
-            height: 340px;
-            background-color: var(--bg-content-color);
+            height: 300px;
+            background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin: 20px 20px;
             display: flex;
@@ -133,8 +141,6 @@ const handlevideo = row => {
             position: relative;
             overflow: hidden;
             .video-item-warp {
-              width: 360px;
-              height: 300px;
               width: 100%;
               height: 100%;
               overflow: hidden;
@@ -145,7 +151,7 @@ const handlevideo = row => {
                 width: 100%;
                 height: 100%;
                 left: 0;
-                top: 0;
+                bottom: 0;
               }
             }
             .video-item-title {
@@ -160,10 +166,10 @@ const handlevideo = row => {
               overflow: hidden;
               text-overflow: ellipsis;
               position: absolute;
-              bottom: -30px;
+              bottom: -40px;
               left: 0;
-              height: 30px;
-              line-height: 30px;
+              height: 40px;
+              line-height: 40px;
               background-color: var(--bg-content-color);
               transition: bottom 0.3s ease-in-out;
             }
@@ -183,8 +189,14 @@ const handlevideo = row => {
       .video-item {
         width: 100% !important;
         margin: 10px 0 !important;
+        padding: 20px 10px !important;
         .video-item-title {
-          bottom: 0 !important;
+          top: 0 !important;
+        }
+        &:hover {
+          .video-item-title {
+            top: 0;
+          }
         }
       }
     }
