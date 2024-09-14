@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 16:30:30
- * @FilePath: /blog/src/views/play/video/index.vue
+ * @LastEditTime: 2024-09-14 22:26:15
+ * @FilePath: /BLOG/src/views/play/video/index.vue
 -->
 <template>
   <div class="video-out-warp">
@@ -132,7 +132,7 @@ const handlevideo = row => {
           .video-item {
             border-radius: 10px;
             width: 420px;
-            height: 300px;
+            height: 330px;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin: 10px;
@@ -143,7 +143,7 @@ const handlevideo = row => {
             overflow: hidden;
             .video-item-warp {
               width: 100%;
-              height: 100%;
+              height: 300px;
               overflow: hidden;
               transition: all 1.2s ease-in-out;
               position: relative;
@@ -166,18 +166,10 @@ const handlevideo = row => {
               -webkit-line-clamp: 1; /* 定义文本的行数 */
               overflow: hidden;
               text-overflow: ellipsis;
-              position: absolute;
-              bottom: -30px;
-              left: 0;
               height: 30px;
               line-height: 30px;
               background-color: var(--bg-content-color);
               transition: bottom 0.3s ease-in-out;
-            }
-            &:hover {
-              .video-item-title {
-                bottom: 0;
-              }
             }
           }
         }
@@ -190,14 +182,7 @@ const handlevideo = row => {
       .video-item {
         width: 100% !important;
         margin: 10px 0 !important;
-        padding: 10px 10px !important;
         .video-item-title {
-          top: 10px !important;
-        }
-        &:hover {
-          .video-item-title {
-            top: 10px;
-          }
         }
       }
     }
