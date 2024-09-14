@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 12:39:15
+ * @LastEditTime: 2024-09-14 14:46:19
  * @FilePath: /blog/src/views/play/video/index.vue
 -->
 <template>
@@ -12,12 +12,12 @@
     <div class="video-container" :class="{ 'm-video-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">这里有很多好玩的小游戏，快来玩！</div>
+          <div class="item-1 text">本站所有影视均来源于互联网，仅供学习交流使用，请勿用于任何商业用途！</div>
         </div>
         <div class="video-content-warp">
           <div class="video-warp-list">
             <div class="video-item pointer" @click="handlevideo(item)" v-for="item in state.list">
-              <div class="video-item-img">
+              <div class="video-item-warp">
                 <iframe
                   ref="iframeRef"
                   :src="item.url"
@@ -28,6 +28,7 @@
                   frameborder="no"
                   framespacing="0"
                   :allowfullscreen="true"
+                  sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"
                   :autoplay="false"></iframe>
               </div>
               <div class="video-item-title">{{ item.title }}</div>
@@ -52,12 +53,12 @@ const { isMobi } = useResize();
 const state = reactive({
   list: [
     {
-      url: 'https://player.bilibili.com/player.html?aid=699690540&bvid=BV1Zm4y1e7eR&cid=1159067867&p=1&as_wide=1&high_quality=1&danmaku=0&t=30',
-      title: '《魔兽世界》：地牢战争'
-    },
-    {
       url: '//player.bilibili.com/player.html?aid=413672301&bvid=BV1MV41167e9&cid=208508865&page=1',
       title: '我想再看一眼这个世界'
+    },
+    {
+      url: 'https://player.bilibili.com/player.html?bvid=BV1JcpEevEyr&p=1&as_wide=1&high_quality=1&danmaku=0&t=30',
+      title: '20首古风歌曲，开口跪系列，戏腔太惊艳了.....'
     }
   ]
 });
@@ -77,12 +78,12 @@ const state = reactive({
 // getListFn();
 
 const handlevideo = row => {
-  router.push({
-    path: '/preview',
-    query: {
-      id: row.id
-    }
-  });
+  // router.push({
+  //   path: '/preview',
+  //   query: {
+  //     id: row.id
+  //   }
+  // });
 };
 </script>
 
@@ -121,29 +122,30 @@ const handlevideo = row => {
           flex-wrap: wrap;
           .video-item {
             border-radius: 10px;
-            width: 266px;
-            height: 240px;
-            // padding: 20px 20px;
+            width: 400px;
+            height: 340px;
             background-color: var(--bg-content-color);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 13px;
+            margin: 20px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             overflow: hidden;
-            .video-item-img {
-              width: 220px;
-              height: 220px;
+            .video-item-warp {
+              width: 360px;
+              height: 300px;
               width: 100%;
               height: 100%;
               overflow: hidden;
               transition: all 1.2s ease-in-out;
-              img {
+              position: relative;
+              iframe {
+                position: absolute;
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
-                border-radius: 5px;
+                left: 0;
+                top: 0;
               }
             }
             .video-item-title {

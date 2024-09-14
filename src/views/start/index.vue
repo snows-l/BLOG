@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 13:02:43
+ * @LastEditTime: 2024-09-14 14:15:34
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
-              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px" :style="{ fontSize: isMobi ? '32px' : '24px' }">🏡</text>
+              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px" :style="{ fontSize: isMobi ? '36px' : '24px' }">🏡</text>
               <img
                 class="to pointer kbn-link"
                 data-tip="后台管理"
