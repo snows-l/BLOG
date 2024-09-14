@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 22:26:15
+ * @LastEditTime: 2024-09-14 22:29:06
  * @FilePath: /BLOG/src/views/play/video/index.vue
 -->
 <template>
@@ -17,7 +17,7 @@
         <div class="video-content-warp">
           <div class="video-warp-list">
             <div class="video-item pointer" @click="handlevideo(item)" v-for="item in state.list">
-              <div class="video-item-warp">
+              <div class="video-ifarme-warp">
                 <iframe
                   ref="iframeRef"
                   :src="item.url"
@@ -141,7 +141,7 @@ const handlevideo = row => {
             align-items: center;
             position: relative;
             overflow: hidden;
-            .video-item-warp {
+            .video-ifarme-warp {
               width: 100%;
               height: 300px;
               overflow: hidden;
