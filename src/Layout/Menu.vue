@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-09 13:16:00
- * @FilePath: /blog/src/Layout/Menu.vue
+ * @LastEditTime: 2024-09-14 19:20:35
+ * @FilePath: /BLOG/src/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -39,7 +39,7 @@
     <template v-for="menus in menuList" :key="menus.path">
       <template v-if="menus.children">
         <li class="nav-item pointer one-level">
-          <span class="item-nav-warp">
+          <span class="item-nav-warp" @click="handleTo(menus)">
             <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
             <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 19:11:05
+ * @LastEditTime: 2024-09-14 19:18:46
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -311,6 +311,15 @@ const handleArticle = row => {
   } else {
     window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
   }
+};
+
+const handleView = row => {
+  router.push({
+    path: '/preview',
+    query: {
+      id: row.id
+    }
+  });
 };
 
 // 加在更多
