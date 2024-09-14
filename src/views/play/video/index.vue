@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 15:58:32
+ * @LastEditTime: 2024-09-14 16:26:54
  * @FilePath: /blog/src/views/play/video/index.vue
 -->
 <template>
@@ -122,19 +122,20 @@ const handlevideo = row => {
       }
       .video-content-warp {
         margin-top: 20px;
-        padding: 20px;
+        padding: 10px;
         background-color: var(--bg-content-color);
         border-radius: 10px;
         .video-warp-list {
           display: flex;
           flex-wrap: wrap;
+          justify-content: center;
           .video-item {
             border-radius: 10px;
-            width: 400px;
+            width: 420px;
             height: 300px;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 20px;
+            margin: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -166,10 +167,10 @@ const handlevideo = row => {
               overflow: hidden;
               text-overflow: ellipsis;
               position: absolute;
-              bottom: -40px;
+              bottom: -30px;
               left: 0;
-              height: 40px;
-              line-height: 40px;
+              height: 30px;
+              line-height: 30px;
               background-color: var(--bg-content-color);
               transition: bottom 0.3s ease-in-out;
             }
@@ -189,13 +190,13 @@ const handlevideo = row => {
       .video-item {
         width: 100% !important;
         margin: 10px 0 !important;
-        padding: 20px 10px !important;
+        padding: 10px 10px !important;
         .video-item-title {
-          top: 0 !important;
+          top: 10px !important;
         }
         &:hover {
           .video-item-title {
-            top: 0;
+            top: 10px;
           }
         }
       }
