@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 09:18:52
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-09-14 19:10:42
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -89,6 +89,10 @@
                       <IconComment :size="19" class="iconfont"></IconComment>
                       <span>{{ item.commentCount || 0 }}</span>
                     </div>
+                    <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                      <IconPreview class="iconfont" :size="18"></IconPreview>
+                      <span class="" style="font-size: 12px">预览</span>
+                    </div>
                   </div>
                   <div class="article-des text">
                     {{ item.subTitle }}
@@ -133,6 +137,10 @@
                     <div>
                       <IconComment :size="19" class="iconfont"></IconComment>
                       <span>{{ item.commentCount || 0 }}</span>
+                    </div>
+                    <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                      <IconPreview class="iconfont" :size="18"></IconPreview>
+                      <span class="" style="font-size: 12px">预览</span>
                     </div>
                   </div>
                   <div class="article-des text">
@@ -199,6 +207,10 @@
                       <div>
                         <IconComment :size="18" class="iconfont"></IconComment>
                         <span>{{ item.commentCount || 0 }}</span>
+                      </div>
+                      <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                        <IconPreview class="iconfont" :size="18"></IconPreview>
+                        <span class="" style="font-size: 12px">预览</span>
                       </div>
                     </div>
                     <div class="article-des text">
@@ -369,16 +381,6 @@ const handleToggleMove = (type: string) => {
 // 切换首页背景
 const handleToggleHomeBg = () => {
   state.bgImgUrl = 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg';
-  // axios
-  //   .get('/bg/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg', {
-  //     headers: {
-  //       'Content-Type': 'application/octet-stream;charset=utf-8'
-  //     },
-  //     responseType: 'blob'
-  //   })
-  //   .then(res => {
-  //     state.bgImg = new URL(window.URL.createObjectURL(res.data)).href;
-  //   });
 };
 handleToggleHomeBg();
 
@@ -439,6 +441,16 @@ const handleArticle = row => {
   } else {
     window.open(`${window.location.origin}/article/detail?id=${row.id}`, '_blank');
   }
+};
+
+// 点击阅览
+const handleView = row => {
+  router.push({
+    path: '/preview',
+    query: {
+      id: row.id
+    }
+  });
 };
 
 // 下一页

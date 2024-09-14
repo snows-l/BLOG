@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 09:18:22
- * @FilePath: /blog/src/views/article/index.vue
+ * @LastEditTime: 2024-09-14 19:11:05
+ * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
   <div class="article-detail-warp">
@@ -53,6 +53,10 @@
                     <IconComment :size="19" class="iconfont"></IconComment>
                     <span>{{ item.commentCount || 0 }}</span>
                   </div>
+                  <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                    <IconPreview class="iconfont" :size="18"></IconPreview>
+                    <span class="" style="font-size: 12px">预览</span>
+                  </div>
                 </div>
                 <div class="article-des text">
                   {{ item.subTitle }}
@@ -97,6 +101,10 @@
                   <div>
                     <IconComment :size="19" class="iconfont"></IconComment>
                     <span>{{ item.commentCount || 0 }}</span>
+                  </div>
+                  <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                    <IconPreview class="iconfont" :size="18"></IconPreview>
+                    <span class="" style="font-size: 12px">预览</span>
                   </div>
                 </div>
                 <div class="article-des text">
@@ -158,6 +166,10 @@
                   <div>
                     <IconComment :size="19" class="iconfont"></IconComment>
                     <span>{{ item.commentCount || 0 }}</span>
+                  </div>
+                  <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                    <IconPreview class="iconfont" :size="18"></IconPreview>
+                    <span class="" style="font-size: 12px">预览</span>
                   </div>
                 </div>
                 <div class="article-des text">
