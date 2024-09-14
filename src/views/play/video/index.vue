@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 16:26:54
+ * @LastEditTime: 2024-09-14 16:30:30
  * @FilePath: /blog/src/views/play/video/index.vue
 -->
 <template>
@@ -186,7 +186,7 @@ const handlevideo = row => {
   }
   .m-video-container {
     .center-max-width-warp {
-      width: var(--content-max-width-m) !important;
+      width: var(--content-max-width-m-more) !important;
       .video-item {
         width: 100% !important;
         margin: 10px 0 !important;

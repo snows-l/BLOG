@@ -429,7 +429,7 @@ onBeforeUnmount(() => {
   }
   .m-article-content-warp-out {
     .article-content-warp {
-      max-width: var(--content-max-width-m-detail) !important;
+      max-width: var(--content-max-width-m-more) !important;
     }
   }
 
@@ -440,7 +440,7 @@ onBeforeUnmount(() => {
     height: calc(100vh - 400px);
   }
   .m-no-article {
-    max-width: var(--content-max-width-m-detail) !important;
+    max-width: var(--content-max-width-m-more) !important;
     margin: 0 auto !important;
     height: calc(100vh - 300px) !important;
   }
