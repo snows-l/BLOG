@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 13:00:19
+ * @LastEditTime: 2024-09-14 13:02:43
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -167,7 +167,7 @@ const handleFullScreen = () => {
       position: relative;
       .content-container-center {
         position: absolute;
-        top: 50%;
+        top: 46%;
         left: 50%;
         transform: translate(-50%, -100%);
       }
