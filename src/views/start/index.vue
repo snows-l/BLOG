@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-11 17:58:53
+ * @LastEditTime: 2024-09-14 13:00:19
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -18,7 +18,7 @@
               <div class="clock-warp pointer kbn-custom" data-tip="点我 切换全屏！" data @click="handleFullScreen">
                 <Vue3FlipClock></Vue3FlipClock>
               </div>
-              <div class="date" style="margin-top: 40px; font-size: 28px">
+              <div class="date" style="margin-top: 40px; font-size: 24px">
                 <span>{{ state.currentDate }}</span>
                 <span style="margin: 0 10px">{{ weekConfig[state.week] }}</span>
                 <span @click="handleToggleBg" class="pointer kbn-custom" data-tip="点我 切换背景哟（略略略）！">{{ state.lunar }}</span>
@@ -26,12 +26,12 @@
             </div>
 
             <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
-              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px" :style="{ fontSize: isMobi ? '40px' : '30px' }">🏡</text>
+              <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px" :style="{ fontSize: isMobi ? '32px' : '24px' }">🏡</text>
               <img
                 class="to pointer kbn-link"
                 data-tip="后台管理"
                 @click="handleToBack"
-                :style="{ width: isMobi ? '40px' : '30px', height: isMobi ? '40px' : '30px' }"
+                :style="{ width: isMobi ? '32px' : '24px', height: isMobi ? '32px' : '24px' }"
                 style="margin-top: 4px"
                 src="@/assets/images/icon/backstage.png" />
             </div>
@@ -124,7 +124,7 @@ const handleFullScreen = () => {
 
     if (requestMethod) {
       requestMethod.call(document.documentElement);
-      state.clockSize = isMobi.value ? 0.7 : 1.2;
+      state.clockSize = isMobi.value ? 0.7 : 2;
       state.isScreenFull = true;
     } else if (typeof window.ActiveXObject !== 'undefined') {
       var wscript = new ActiveXObject('WScript.Shell');
@@ -136,7 +136,7 @@ const handleFullScreen = () => {
     // 退出全屏
     if (document.exitFullscreen) {
       document.exitFullscreen();
-      state.clockSize = isMobi.value ? 0.5 : 0.8;
+      state.clockSize = isMobi.value ? 0.5 : 1;
       state.isScreenFull = false;
     }
   }

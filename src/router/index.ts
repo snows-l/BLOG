@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 09:37:09
+ * @LastEditTime: 2024-09-14 09:54:40
  * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
@@ -152,15 +152,15 @@ export const routes = [
         },
         component: () => import('@/views/play/music/index.vue')
       },
-      // {
-      //   path: '/play/mp4',
-      //   name: 'Mp4',
-      //   meta: {
-      //     title: '影视',
-      //     icon: 'icon-shipin'
-      //   },
-      //   component: () => import('@/views/play/video/index.vue')
-      // }
+      {
+        path: '/play/mp4',
+        name: 'Mp4',
+        meta: {
+          title: '影视',
+          icon: 'icon-shipin'
+        },
+        component: () => import('@/views/play/video/index.vue')
+      },
       {
         path: '/play/game',
         name: 'Game',

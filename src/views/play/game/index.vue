@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 22:37:35
- * @FilePath: /BLOG/src/views/play/game/index.vue
+ * @LastEditTime: 2024-09-14 11:01:33
+ * @FilePath: /blog/src/views/play/game/index.vue
 -->
 <template>
   <div class="game-out-warp">
@@ -18,7 +18,7 @@
           <div class="game-warp-list">
             <div class="game-item pointer" @click="handleGame(item)" v-for="item in state.list">
               <div class="game-item-img">
-                <img :src="item.cover" alt="" />
+                <LImg :src="item.cover" alt="" />
               </div>
               <div class="game-item-title">{{ item.title }}</div>
             </div>
