@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 09:28:21
- * @FilePath: /BLOG/src/Layout/useLayout.js
+ * @LastEditTime: 2024-09-14 17:47:05
+ * @FilePath: /blog/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.avif';
 import bg2 from '@/assets/images/bg/bg2.png';
@@ -35,6 +35,7 @@ export const useLayout = handleSearch => {
   // 切换背景特效
   const effects = [
     { class: Snow, playload: { num: isMobi ? 1 : 2, maxR: 3, minR: 13, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() } },
+    { class: null, playload: {} },
     { class: Snow, playload: { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: false, swingProbability: 0, spin: false, shape: RmbImg() } },
     { class: Snow, playload: { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.3, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: snowImg() } },
     { class: Particle, playload: { proximity: 90, range: 100 } },
@@ -47,13 +48,19 @@ export const useLayout = handleSearch => {
       state.bgEffectIndex++;
     }
     removeEffect();
-    new effects[state.bgEffectIndex].class('#snow', effects[state.bgEffectIndex].playload);
+    if (effects[state.bgEffectIndex].class) {
+      new effects[state.bgEffectIndex].class('#snow', effects[state.bgEffectIndex].playload);
+    }
   };
 
   // 切换光标样式
   const cursorSet = [
     {
       class: window.cursoreffects.bubbleCursor,
+      playload: {}
+    },
+    {
+      class: null,
       playload: {}
     },
     {
@@ -86,7 +93,9 @@ export const useLayout = handleSearch => {
     if (window.custorEffect) {
       window.custorEffect.destroy();
     }
-    window.custorEffect = new cursorSet[state.cursorIndex].class(cursorSet[state.cursorIndex].playload);
+    if (cursorSet[state.cursorIndex].class) {
+      window.custorEffect = new cursorSet[state.cursorIndex].class(cursorSet[state.cursorIndex].playload);
+    }
   };
 
   // 切换背景
