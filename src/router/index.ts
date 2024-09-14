@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 22:28:29
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-09-14 09:37:09
+ * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -38,7 +38,7 @@ export const routes = [
     children: [
       {
         path: '/start',
-        name: 'View',
+        name: 'Start',
         meta: {
           title: '起始页',
           textIcon: '🚀'
@@ -129,6 +129,7 @@ export const routes = [
       icon: 'icon-fenxiang',
       textIcon: '🔗'
     },
+    isHidden: true,
     component: () => import('../views/preview/index.vue')
   },
   {
