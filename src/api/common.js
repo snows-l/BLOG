@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 20:55:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-08-30 23:51:04
+ * @LastEditTime: 2024-09-15 22:25:52
  * @FilePath: /BLOG/src/api/common.js
  */
 import request from '@/utils/request';
@@ -31,5 +31,14 @@ export function getBlogVisit() {
   return request({
     url: '/blog/visit/total',
     method: 'get'
+  });
+}
+
+// 获取博客访问量列表
+export function getBlogVisitList(data) {
+  return request({
+    url: '/log/province',
+    method: 'get',
+    params: data
   });
 }

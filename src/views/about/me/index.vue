@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 15:43:34
- * @FilePath: /blog/src/views/about/me/index.vue
+ * @LastEditTime: 2024-09-15 22:49:39
+ * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
@@ -187,6 +187,9 @@
             </div>
           </div>
         </div>
+        <div class="visity-map-warp">
+          <MapCharts />
+        </div>
       </div>
     </div>
   </div>
@@ -208,6 +211,7 @@ import iconNode from '@/assets/images/icon/Nodejs.png';
 import iconQQ from '@/assets/images/icon/qq.png';
 import iconVue from '@/assets/images/icon/Vue.svg';
 import iconWeixin from '@/assets/images/icon/weixin.png';
+import MapCharts from '@/components/MapCharts/index.vue';
 import useResize from '@/hooks/useResize';
 import { getQQAvatar } from '@/utils/common';
 import { getRandomColor } from '@/utils/theme';
@@ -698,6 +702,14 @@ getDictFn();
           }
         }
       }
+      .visity-map-warp {
+        margin-top: 20px;
+        width: 100%;
+        height: 600px;
+        background-color: var(--bg-content-color);
+        border-radius: 15px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
     }
   }
   .m-me-container-warp {
@@ -731,6 +743,9 @@ getDictFn();
           margin-top: 20px;
           margin-left: 0px !important;
         }
+      }
+      .visity-map-warp {
+        height: 300px !important;
       }
     }
   }
