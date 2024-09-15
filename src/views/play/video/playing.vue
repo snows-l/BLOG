@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-15 10:39:54
+ * @LastEditTime: 2024-09-15 11:02:22
  * @FilePath: /BLOG/src/views/play/video/playing.vue
 -->
 <template>
@@ -69,8 +69,9 @@ onUpdated(() => {});
   width: 100vw;
   height: 100vh;
   background-color: #000;
+  position: relative;
 }
 .is-mobi {
-  padding: 120px 10px 200px 10px;
+  padding: 120px 10px 240px 10px;
 }
 </style>
