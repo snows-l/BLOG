@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-15 22:49:39
+ * @LastEditTime: 2024-09-15 23:22:46
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -177,7 +177,10 @@
             </el-carousel>
           </div>
         </div>
-
+        <div class="visity-map-warp">
+          <div class="title">访问地区分布</div>
+          <MapCharts />
+        </div>
         <div class="my-label-warp">
           <div class="title">我的标签</div>
           <div class="content-warp">
@@ -186,9 +189,6 @@
               {{ item.label }}
             </div>
           </div>
-        </div>
-        <div class="visity-map-warp">
-          <MapCharts />
         </div>
       </div>
     </div>
@@ -709,6 +709,18 @@ getDictFn();
         background-color: var(--bg-content-color);
         border-radius: 15px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        .title {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          height: 30px;
+          line-height: 30px;
+          color: var(--text-color);
+          font-size: 22px;
+          color: var(--text-color);
+          margin-bottom: 10px;
+        }
       }
     }
   }
