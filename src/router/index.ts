@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 09:54:40
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-09-15 10:10:34
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -160,6 +160,17 @@ export const routes = [
           icon: 'icon-shipin'
         },
         component: () => import('@/views/play/video/index.vue')
+      },
+      {
+        path: '/play/mp4/playing',
+        name: 'Playing',
+        meta: {
+          title: '视频播放',
+          icon: 'icon-fenxiang',
+          textIcon: '🔗'
+        },
+        isHidden: true,
+        component: () => import('@/views/play/video/playing.vue')
       },
       {
         path: '/play/game',

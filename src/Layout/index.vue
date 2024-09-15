@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 20:45:48
+ * @LastEditTime: 2024-09-15 10:44:05
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -282,12 +282,12 @@ const scorllCallback = () => {
 };
 
 // 要展示樱花背景的路由
-let isShowSnow = ['', '/', '', '/play/mp3', '/play/mp4', '/msg-board', '/about/zone', '/about/friends', '/about/me'];
+let isShowSnowRoute = ['', '/', '', '/play/mp3', '/play/mp4', '/msg-board', '/about/zone', '/about/friends', '/about/me'];
+let isUnShowSnowRoute = ['/play/mp4/playing', '/article/share', '/preview'];
 watch(
   () => route.path,
   n => {
-    n.includes('article') ? (state.isShowSnow = false) : (state.isShowSnow = true);
-    // isShowSnow.includes(n) ? (state.isShowSnow = true) : (state.isShowSnow = false);
+    isUnShowSnowRoute.includes(n) ? (state.isShowSnow = false) : (state.isShowSnow = true);
   },
   { immediate: true }
 );
