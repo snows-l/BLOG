@@ -3,11 +3,30 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-15 10:44:05
+ * @LastEditTime: 2024-09-16 15:26:13
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
+    <div class="m-progress-warp" v-show="isMobi">
+      <div class="progress" :style="{ width: `${currentScorllProgress}%` }"></div>
+      <img
+        class="progress-icon"
+        v-show="currentScorllProgress != 0"
+        :style="{ marginLeft: `calc(${currentScorllProgress}% - 2px)` }"
+        src="@/assets/images/icon/progress.svg"
+        alt="" />
+    </div>
+    <div class="progress-warp" v-show="!isMobi && route.path != '/start'">
+      <div class="progress" :style="{ height: `calc(${currentScorllProgress}% - 0px)` }"></div>
+      <img
+        @click="handleTop"
+        class="progress-icon pointer"
+        v-show="currentScorllProgress != 0"
+        :style="{ marginTop: `calc(${currentScorllProgress}% - 20px)` }"
+        src="@/assets/images/icon/progress.svg"
+        alt="" />
+    </div>
     <!-- 移动端 菜单 -->
     <div class="mobile-menu-warp" :class="{ mMenuShow: state.mMenuShow }">
       <div class="mobile-menu">
@@ -64,7 +83,13 @@
 
     <!-- 置顶 / 音乐 / 设置 -->
     <div class="top-set">
-      <div v-show="route.path != '/start'" class="top pointer kbn-custom" data-tip="置顶" style="padding: 5px 0" :class="{ topShow: state.scrollTop > 200 }" @click="handleTop">
+      <div
+        v-show="route.path != '/start' && false"
+        class="top pointer kbn-custom"
+        data-tip="置顶"
+        style="padding: 5px 0"
+        :class="{ topShow: state.scrollTop > 200 }"
+        @click="handleTop">
         <i class="iconfont icon-yooxi"></i>
       </div>
       <div v-show="route.path != '/start'" class="set pointer kbn-custom" data-tip="搜索" @click="handleSearch(false)" v-if="isMobi">
@@ -137,7 +162,7 @@ import { routes } from '@/router';
 import { getImgIcon, getQQAvatar } from '@/utils/common';
 import { ElMessage, ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
+import { onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
 
@@ -145,6 +170,8 @@ const { isMobi } = useResize();
 const route = useRoute();
 const router = useRouter();
 const layoutRef = ref(null);
+
+const currentScorllProgress = ref(0);
 
 const state = reactive({
   isFlutter: true,
@@ -307,6 +334,11 @@ onMounted(() => {
   new Snow('#snow', { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
+onUpdated(() => {
+  // 计算当前页面滚动百分比
+  currentScorllProgress.value = (layoutRef.value.scrollTop / (layoutRef.value.scrollHeight - layoutRef.value.clientHeight)) * 100 || 0;
+});
+
 onUnmounted(() => {
   layoutRef.value && layoutRef.value.removeEventListener('scroll', scorllCallback);
 });
@@ -329,6 +361,43 @@ onUnmounted(() => {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  .m-progress-warp {
+    position: fixed;
+    top: 6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    z-index: 9999;
+    .progress {
+      background-color: var(--theme-light-color-4);
+      height: 100%;
+    }
+    .progress-icon {
+      position: absolute;
+      top: -4px;
+      left: 0;
+      width: 10px;
+      height: 10px;
+    }
+  }
+  .progress-warp {
+    position: fixed;
+    top: 0px;
+    right: 28px;
+    width: 2px;
+    height: 100vh;
+    z-index: 998;
+    .progress {
+      background-color: var(--theme-light-color-9);
+      width: 100%;
+    }
+    .progress-icon {
+      position: absolute;
+      right: -10px;
+      width: 30px;
+      height: 30px;
+    }
+  }
 
   .mobile-menu-warp {
     width: var(--m-menu-width);
