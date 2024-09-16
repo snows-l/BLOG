@@ -3,27 +3,21 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-16 15:26:13
+ * @LastEditTime: 2024-09-16 19:10:17
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
     <div class="m-progress-warp" v-show="isMobi">
       <div class="progress" :style="{ width: `${currentScorllProgress}%` }"></div>
-      <img
-        class="progress-icon"
-        v-show="currentScorllProgress != 0"
-        :style="{ marginLeft: `calc(${currentScorllProgress}% - 2px)` }"
-        src="@/assets/images/icon/progress.svg"
-        alt="" />
     </div>
     <div class="progress-warp" v-show="!isMobi && route.path != '/start'">
-      <div class="progress" :style="{ height: `calc(${currentScorllProgress}% - 0px)` }"></div>
+      <div class="progress" :style="{ height: `calc(${currentScorllProgress}% - 145px)` }"></div>
       <img
         @click="handleTop"
         class="progress-icon pointer"
         v-show="currentScorllProgress != 0"
-        :style="{ marginTop: `calc(${currentScorllProgress}% - 20px)` }"
+        :style="{ marginTop: `calc(${currentScorllProgress}% - 5px)` }"
         src="@/assets/images/icon/progress.svg"
         alt="" />
     </div>
@@ -84,7 +78,7 @@
     <!-- 置顶 / 音乐 / 设置 -->
     <div class="top-set">
       <div
-        v-show="route.path != '/start' && false"
+        v-show="route.path != '/start' && isMobi"
         class="top pointer kbn-custom"
         data-tip="置顶"
         style="padding: 5px 0"
@@ -363,39 +357,46 @@ onUnmounted(() => {
   position: relative;
   .m-progress-warp {
     position: fixed;
-    top: 6px;
+    top: 0px;
     left: 0;
     width: 100%;
     height: 2px;
     z-index: 9999;
     .progress {
-      background-color: var(--theme-light-color-4);
+      background: linear-gradient(-90deg, #f03e07, #c15594, #23a6d5, #23d5ab);
+      background-size: 100%;
       height: 100%;
-    }
-    .progress-icon {
-      position: absolute;
-      top: -4px;
-      left: 0;
-      width: 10px;
-      height: 10px;
     }
   }
   .progress-warp {
     position: fixed;
     top: 0px;
-    right: 28px;
-    width: 2px;
+    right: 29px;
+    width: 1px;
     height: 100vh;
     z-index: 998;
     .progress {
-      background-color: var(--theme-light-color-9);
       width: 100%;
+      background: linear-gradient(-45deg, #ee7752, #ce3e75, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: animation 10s ease infinite;
     }
     .progress-icon {
       position: absolute;
-      right: -10px;
+      right: -14px;
       width: 30px;
       height: 30px;
+    }
+  }
+  @keyframes animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 

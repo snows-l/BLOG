@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 17:11:16
+ * @LastEditTime: 2024-09-16 19:12:50
  * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
@@ -110,7 +110,6 @@ import { addComment, getCommentList } from '@/api/comment';
 import coverImg from '@/assets/images/bg/cover-comment.png';
 import useResize from '@/hooks/useResize';
 import { getBackstageurl, getQQAvatar, tranListToTree } from '@/utils/common';
-import axios from 'axios';
 import { reactive } from 'vue';
 const { isMobi } = useResize();
 
@@ -125,10 +124,10 @@ const state = reactive({
       nickName: 'snows_l',
       avatarUrl: '',
       email: 'snows_l@163.com',
-      websiteUrl: getBackstageurl(),
+      websiteUrl: getBackstageurl() + '/view',
       time: '2024-08-12 10:04:53',
-      browser: 'Chrome',
-      os: 'Mac OS',
+      browser: 'Google Chrome/114.0.5735.196',
+      os: 'HarmonyOS',
       isPrivacy: false,
       isEmailFeekback: false
     },
@@ -142,8 +141,8 @@ const state = reactive({
       email: 'snows_l@163.com',
       websiteUrl: 'http://124.223.41.220',
       time: '2024-08-12 10:04:53',
-      browser: 'Chrome',
-      os: 'Mac OS',
+      browser: 'Google Chrome/114.0.5735.196',
+      os: 'HarmonyOS',
       isPrivacy: false,
       isEmailFeekback: false
     }
@@ -169,14 +168,6 @@ const state = reactive({
     page: 1,
     size: 50,
     total: 0
-  }
-});
-
-let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + '37523953' + '&_wpnonce=7ccc55456e';
-axios.get(url).then(res => {
-  if (res.data.code === 200) {
-    state.list[0].nickName = res.data.name;
-    state.list[1].nickName = res.data.name;
   }
 });
 

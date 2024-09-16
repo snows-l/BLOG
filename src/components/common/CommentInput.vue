@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 13:13:23
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-06 12:43:04
- * @FilePath: /blog/src/components/common/CommentInput.vue
+ * @LastEditTime: 2024-09-16 19:11:47
+ * @FilePath: /BLOG/src/components/common/CommentInput.vue
  * @Copyright © 2020-2024 snows_l. All rights reserved.
 -->
 
@@ -106,16 +106,8 @@ const update = (e, type) => {
 // 根据qq获取用户信息 并更新 昵称 头像 邮箱
 const handleGetInfoByQQ = () => {
   if (!props.modelValue.qq) return;
-  let url = 'https://www.moeshou.com/wp-json/sakura/v1/qqinfo/json?qq=' + props.modelValue.qq + '&_wpnonce=7ccc55456e';
-  fetch(url).then(res => {
-    if (res.formData.status !== 200) {
-      const n = { ...props.modelValue, email: props.modelValue.qq + '@qq.com', avatar: getQQAvatar(props.modelValue.qq) };
-      emits('update:modelValue', n);
-    } else {
-      const n = { ...props.modelValue, avatar: res.data.avatar, nickName: res.data.name, email: props.modelValue.qq + '@qq.com' };
-      emits('update:modelValue', n);
-    }
-  });
+  const n = { ...props.modelValue, email: props.modelValue.qq + '@qq.com', avatar: getQQAvatar(props.modelValue.qq) };
+  emits('update:modelValue', n);
 };
 
 //  提交
