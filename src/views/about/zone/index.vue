@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 09:10:37
+ * @LastEditTime: 2024-09-17 17:54:02
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -37,8 +37,11 @@
                 </div>
               </div>
               <div class="zone-item-content">{{ item.text }}</div>
-              <div class="zone-item-img-warp">
-                <LImg class="img" v-for="img in item.imgs" :src="img" alt="" />
+              <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
+                <template v-for="img in item.imgs">
+                  <video v-if="img.includes('.mp4')" controls muted cover class="img" :src="img"></video>
+                  <LImg class="img" v-else :src="img" alt="" />
+                </template>
               </div>
             </div>
           </div>
@@ -171,6 +174,16 @@ const handleLoadMore = () => {
                 display: inline-block;
                 margin: 5px;
                 border: 1px solid #ccc;
+              }
+            }
+            .zone-item-img-warp-3 {
+              margin: 20px 13px;
+              justify-content: flex-start !important;
+              .img {
+                width: 256px;
+                height: 240px;
+                object-fit: cover;
+                display: inline-block;
               }
             }
             .zone-item-content {
