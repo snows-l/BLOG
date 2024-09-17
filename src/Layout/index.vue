@@ -3,21 +3,22 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-16 19:10:17
+ * @LastEditTime: 2024-09-17 15:29:41
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
+    <!-- 移动端 进度条 -->
     <div class="m-progress-warp" v-show="isMobi">
       <div class="progress" :style="{ width: `${currentScorllProgress}%` }"></div>
     </div>
-    <div class="progress-warp" v-show="!isMobi && route.path != '/start'">
-      <div class="progress" :style="{ height: `calc(${currentScorllProgress}% - 145px)` }"></div>
+    <!-- pc 进度条 -->
+    <div class="progress-warp" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
+      <div class="progress" :style="{ height: `calc(${currentScorllProgress}%)` }"></div>
       <img
         @click="handleTop"
         class="progress-icon pointer"
-        v-show="currentScorllProgress != 0"
-        :style="{ marginTop: `calc(${currentScorllProgress}% - 5px)` }"
+        :style="{ marginTop: `calc(${currentScorllProgress}% - 5px)`, opacity: currentScorllProgress != 0 ? 1 : 0 }"
         src="@/assets/images/icon/progress.svg"
         alt="" />
     </div>
@@ -156,7 +157,7 @@ import { routes } from '@/router';
 import { getImgIcon, getQQAvatar } from '@/utils/common';
 import { ElMessage, ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
-import { onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue';
+import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
 
@@ -207,7 +208,7 @@ const handleMMenuShow = (falg: boolean) => {
 
 // 置顶
 const handleTop = () => {
-  layoutRef.value.scrollTop = 0;
+  (layoutRef.value as any).scrollTop = 0;
 };
 
 // 显示/隐藏 音乐播放器
@@ -239,7 +240,7 @@ const handleSetShow = () => {
 };
 
 // 显示/隐藏 搜索
-const handleSearch = isClose => {
+const handleSearch = (isClose: boolean) => {
   if (isClose) {
     state.isShowSearch = false;
   } else {
@@ -258,7 +259,7 @@ import { useLayout } from './useLayout';
 const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handleToggleColor, currentPrimaryColor, handleToggerTheme, handleToggleCursor } = useLayout(handleSearch);
 
 // 统计访问量，统一ip只会新增一次访问量
-addBlogVisit().then(res => {
+addBlogVisit().then((res: any) => {
   if (res.code == 200) {
     if (route.path == '/' || route.path == '') {
       if (!isMobi.value) {
@@ -293,9 +294,10 @@ watch(
 
 // 监听滚动条
 const scorllCallback = () => {
+  currentScorllProgress.value = ((layoutRef.value as any).scrollTop / ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) * 100 || 0;
+  state.scrollTop = (layoutRef.value as any).scrollTop;
   if (state.mMenuShow) state.mMenuShow = false;
-  state.scrollTop = layoutRef.value.scrollTop;
-  if (layoutRef.value.scrollTop > 60) {
+  if ((layoutRef.value as any).scrollTop > 60) {
     state.isFlutter = false;
   } else {
     state.isFlutter = true;
@@ -304,7 +306,7 @@ const scorllCallback = () => {
 
 // 要展示樱花背景的路由
 let isShowSnowRoute = ['', '/', '', '/play/mp3', '/play/mp4', '/msg-board', '/about/zone', '/about/friends', '/about/me'];
-let isUnShowSnowRoute = ['/play/mp4/playing', '/article/share', '/preview'];
+let isUnShowSnowRoute = ['/play/mp4/playing', '/article/share', '/article/detail', '/preview'];
 watch(
   () => route.path,
   n => {
@@ -314,7 +316,7 @@ watch(
 );
 
 onMounted(() => {
-  layoutRef.value.addEventListener('scroll', scorllCallback);
+  (layoutRef.value as any).addEventListener('scroll', scorllCallback);
   setTimeout(() => {
     state.isMenuShow = true;
   }, 200);
@@ -328,13 +330,8 @@ onMounted(() => {
   new Snow('#snow', { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
-onUpdated(() => {
-  // 计算当前页面滚动百分比
-  currentScorllProgress.value = (layoutRef.value.scrollTop / (layoutRef.value.scrollHeight - layoutRef.value.clientHeight)) * 100 || 0;
-});
-
 onUnmounted(() => {
-  layoutRef.value && layoutRef.value.removeEventListener('scroll', scorllCallback);
+  (layoutRef.value as any) && (layoutRef.value as any).removeEventListener('scroll', scorllCallback);
 });
 </script>
 
@@ -386,6 +383,7 @@ onUnmounted(() => {
       right: -14px;
       width: 30px;
       height: 30px;
+      transition: opacity 1s ease;
     }
   }
   @keyframes animation {
