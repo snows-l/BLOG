@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-15 19:43:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-16 10:47:02
+ * @LastEditTime: 2024-09-18 20:59:09
  * @FilePath: /BLOG/src/components/MapCharts/index.vue
 -->
 <template>
@@ -37,6 +37,11 @@ geoJson.features.forEach(function (v) {
     value: sum,
     data: list
   });
+});
+state.data.push({
+  name: '其他国家（国外）',
+  value: 0,
+  data: [{ name: '访问数量 ', value: 0 }]
 });
 
 const convertData = (geoCoordMap, data) => {
@@ -262,13 +267,21 @@ const getBlogVisitListFn = () => {
     if (res.code == 200) {
       state.data.forEach((item, index) => {
         let sum = 0;
+        let otherSum = 0;
         res.data.forEach(item2 => {
           if (item2.city.includes(item.name)) {
             sum = item2.total;
           }
+          if (item2.city.includes('其他')) {
+            otherSum = item2.total;
+          }
         });
         item.value = sum;
         item.data[0].value = sum;
+        if (item.name.includes('其他')) {
+          item.value = otherSum;
+          item.data[0].value = item.value;
+        }
       });
     }
     const option = getOption();
