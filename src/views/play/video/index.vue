@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 12:19:57
+ * @LastEditTime: 2024-09-19 14:38:31
  * @FilePath: /blog/src/views/play/video/index.vue
 -->
 <template>
@@ -68,8 +68,8 @@ const getZoneListFn = () => {
         let imgs = (item.imgs && item.imgs.split(',')) || [];
 
         state.list.push({
-          url: `https://player.bilibili.com/player.html?bvid=${item.text}&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1`,
-          title: item.remark,
+          url: `https://player.bilibili.com/player.html?bvid=${item.remark}&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1`,
+          title: item.text,
           cover: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + imgs[0] : import.meta.env.VITE_PROD_BASE_SERVER + imgs[0]
         });
       });
