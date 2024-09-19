@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-15 10:35:43
- * @FilePath: /BLOG/src/views/play/video/index.vue
+ * @LastEditTime: 2024-09-19 12:19:57
+ * @FilePath: /blog/src/views/play/video/index.vue
 -->
 <template>
   <div class="video-out-warp">
@@ -18,7 +18,7 @@
           <div class="video-warp-list">
             <div class="video-item pointer" @click="handlevideo(item)" v-for="item in state.list">
               <div class="video-ifarme-warp">
-                <LImg :src="getCoverImg(item.cover)" :isUnPreview="true" />
+                <LImg :src="item.cover.includes('http') ? item.cover : getCoverImg(item.cover)" :isUnPreview="true" />
                 <i class="iconfont icon-bofang"></i>
               </div>
               <div class="video-item-title">{{ item.title }}</div>
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-// import { getArticleList } from '@/api/article';
+import { getZoneList } from '@/api/zone';
 import coverImg from '@/assets/images/bg/cover-game.png';
 import useResize from '@/hooks/useResize';
 import { reactive } from 'vue';
@@ -43,6 +43,7 @@ const { isMobi } = useResize();
 /**
  *
  * @description: 影视列表
+ * @param { Object }  Item { url: String, title: String, cover: String }
  * @param { String }  bvid 视频的bvid 必填
  * @param { String }  cid 视频的cid bvid有了可以不填
  * @param { Number }  as_wide 是否宽屏 1: 宽屏, 0: 小屏
@@ -53,33 +54,29 @@ const { isMobi } = useResize();
  * @param { Boolean }  autoplay 视频的自动播放
  */
 const state = reactive({
-  list: [
-    {
-      url: 'https://player.bilibili.com/player.html?aid=413672301&bvid=BV1MV41167e9&cid=208508865&page=1&t=1&volume=1&autoplay=1',
-      title: '我想再看一眼这个世界',
-      cover: 'video-1.png'
-    },
-    {
-      url: 'https://player.bilibili.com/player.html?bvid=BV1JcpEevEyr&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1',
-      title: '20首古风歌曲，开口跪系列，戏腔太惊艳了.....',
-      cover: 'video-2.png'
-    },
-    {
-      url: 'https://player.bilibili.com/player.html?bvid=BV1GFWUerE3k&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1',
-      title: '国内的骑行片“这里叫贵州”',
-      cover: 'video-3.png'
-    },
-    {
-      url: 'https://player.bilibili.com/player.html?bvid=BV14SHpesE8f&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1',
-      title: '周传雄最好听的50首歌曲精选',
-      cover: 'video-4.png'
-    }
-  ]
+  list: []
 });
 
 const getCoverImg = (name: String) => {
   return new URL(`../../../assets/images/bg/${name}`, import.meta.url).href;
 };
+
+const getZoneListFn = () => {
+  getZoneList({ type: 1, page: 1, size: 100 }).then(res => {
+    if (res.code == 200) {
+      res.data.forEach(item => {
+        let imgs = (item.imgs && item.imgs.split(',')) || [];
+
+        state.list.push({
+          url: `https://player.bilibili.com/player.html?bvid=${item.text}&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1`,
+          title: item.remark,
+          cover: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + imgs[0] : import.meta.env.VITE_PROD_BASE_SERVER + imgs[0]
+        });
+      });
+    }
+  });
+};
+getZoneListFn();
 
 const handlevideo = row => {
   router.push({
@@ -124,7 +121,7 @@ const handlevideo = row => {
         .video-warp-list {
           display: flex;
           flex-wrap: wrap;
-          justify-content: center;
+          justify-content: space-between;
           .video-item {
             border-radius: 10px;
             width: 420px;
