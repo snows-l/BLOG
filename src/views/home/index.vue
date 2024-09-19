@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 15:05:24
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-09-19 20:39:52
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -49,7 +49,7 @@
       <div class="bottom-bg1 bottom-bg"></div>
     </div>
     <div class="other-content-warp">
-      <Notice class="other-content"></Notice>
+      <Notice class="other-content" :class="{ 'm-other-content': isMobi }"></Notice>
       <div class="other-content" v-if="!isMobi">
         <div class="other-content-item">
           <div class="article-title-warp">
@@ -254,12 +254,12 @@
 <script setup lang="ts">
 import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
+import Notice from '@/components/Notice/index.vue';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
 import { getQQAvatar, randomNum } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
-import Notice from '@/components/Notice/index.vue';
 import { onMounted, onUnmounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
