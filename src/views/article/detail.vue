@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 17:36:36
+ * @LastEditTime: 2024-09-19 17:38:11
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -204,7 +204,7 @@ const copyCode = () => {
   codeBlocks.forEach(codeBlock => {
     codeBlock.style.borderTopLeftRadius = '0px';
     codeBlock.style.borderTopRightRadius = '0px';
-    codeBlock.style.marginTop = '22px';
+    codeBlock.style.marginTop = '30px';
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.innerText = '复制';
@@ -236,7 +236,6 @@ const copyCode = () => {
     codeTitle.style.backgroundColor = '#181818';
     codeTitle.style.borderTopLeftRadius = '4px';
     codeTitle.style.borderTopRightRadius = '4px';
-    // codeTitle.style.border = '1px solid var(--w-e-textarea-slight-border-color)';
     codeTitle.style.borderBottom = '0';
     codeTitle.style.overflow = 'hidden';
     const img = document.createElement('img');
