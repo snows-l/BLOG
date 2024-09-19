@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 22:25:47
- * @FilePath: /BLOG/src/views/article/detail.vue
+ * @LastEditTime: 2024-09-19 17:36:36
+ * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp" id="layout-content">
@@ -77,7 +77,7 @@
 import { addShareCount, getArticleDetail } from '@/api/article';
 import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
-import { copy, isMobile, tranListToTree } from '@/utils/common';
+import { copy, isMobile, tranListToTree, getImgIcon } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
@@ -202,11 +202,16 @@ const activeIndex = ref(0);
 const copyCode = () => {
   const codeBlocks = document.querySelectorAll('#editor pre > code');
   codeBlocks.forEach(codeBlock => {
+    codeBlock.style.borderTopLeftRadius = '0px';
+    codeBlock.style.borderTopRightRadius = '0px';
+    codeBlock.style.marginTop = '22px';
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.innerText = '复制';
     copyButton.classList.add('copy-button');
     copyButton.classList.add('pointer');
+    copyButton.style.borderTopLeftRadius = '0px';
+    copyButton.style.borderTopRightRadius = '0px';
 
     // 为复制按钮添加点击事件处理程序
     copyButton.addEventListener('click', () => {
@@ -220,8 +225,28 @@ const copyCode = () => {
       }, 3000); // 毫秒为单位，您可以调整时间长度
     });
 
+    const codeTitle = document.createElement('div');
+    codeTitle.style.position = 'absolute';
+    codeTitle.classList.add('code-title');
+    codeTitle.style.top = '-20px';
+    codeTitle.style.left = '0px';
+    codeTitle.style.width = '100%';
+    codeTitle.style.height = '22px';
+    codeTitle.style.lineHeight = '22px';
+    codeTitle.style.backgroundColor = '#181818';
+    codeTitle.style.borderTopLeftRadius = '4px';
+    codeTitle.style.borderTopRightRadius = '4px';
+    // codeTitle.style.border = '1px solid var(--w-e-textarea-slight-border-color)';
+    codeTitle.style.borderBottom = '0';
+    codeTitle.style.overflow = 'hidden';
+    const img = document.createElement('img');
+    img.style.height = '100%';
+    img.style.marginLeft = '5px';
+    img.src = getImgIcon('macos-close.png');
+    codeTitle.appendChild(img);
     // 将复制按钮添加到代码块的父级元素中
     codeBlock.appendChild(copyButton);
+    codeBlock.appendChild(codeTitle);
   });
 };
 
@@ -550,7 +575,14 @@ blockquote {
     background-color: var(--bg-code-color) !important;
     .token,
     .tag {
-      color: var(--code-light-color) !important;
+      // color: var(--code-light-color) !important;
+    }
+  }
+}
+.dark {
+  .article-detail-warp {
+    .code-title {
+      border: 1px solid #e8e8e8;
     }
   }
 }
