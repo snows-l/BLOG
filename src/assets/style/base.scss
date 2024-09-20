@@ -102,29 +102,35 @@ html {
 
 /* 自定义整个滚动条 */
 ::-webkit-scrollbar {
-  // width: 2px; /* 设置滚动条的宽度 */
-  // height: 2px;
+  position: absolute;
+  right: 10px; /* 滚动条距离右侧距离 */
+  // width: 4px; /* 设置滚动条的宽度 */
+  // height: 4px;
   width: 0;
   height: 0; /* 隐藏滚动条 */
+  background-color: transparent; /* 背景透明 */
 }
 
 /* 自定义滚动条轨道 */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* 设置轨道的背景颜色 */
+  background-color: transparent; /* 设置轨道的背景颜色 */
 }
 
 /* 自定义滚动条的滑块（thumb） */
 ::-webkit-scrollbar-thumb {
-  background: var(--theme-light-color-3); /* 设置滑块的背景颜色 */
-  border-radius: 2px;
+  border-top: 5px solid var(--theme-light-color-3);
+  border-bottom: 5px solid var(--theme-light-color-3);
+  // background: var(--theme-light-color-3); /* 设置滑块的背景颜色 */
+  border-radius: 4px;
 }
 
 /* 当滑块悬停或活动时，可以添加更多样式 */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--theme-light-color); /* 设置滑块在悬停状态下的背景颜色 */
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
+// el-scrollbar 自定义滚动条
 .el-scrollbar {
   .el-scrollbar__bar.is-horizontal {
     height: 2px; // 添加横向高度

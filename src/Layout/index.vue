@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-17 15:29:41
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-20 15:45:53
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -13,9 +13,10 @@
       <div class="progress" :style="{ width: `${currentScorllProgress}%` }"></div>
     </div>
     <!-- pc 进度条 -->
-    <div class="progress-warp" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
+    <div class="progress-warp" ref="progressRef" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
       <div class="progress" :style="{ height: `calc(${currentScorllProgress}%)` }"></div>
       <img
+        ref="progressImgRef"
         @click="handleTop"
         class="progress-icon pointer"
         :style="{ marginTop: `calc(${currentScorllProgress}% - 5px)`, opacity: currentScorllProgress != 0 ? 1 : 0 }"
@@ -165,6 +166,8 @@ const { isMobi } = useResize();
 const route = useRoute();
 const router = useRouter();
 const layoutRef = ref(null);
+const progressImgRef = ref(null);
+const progressRef = ref(null);
 
 const currentScorllProgress = ref(0);
 
@@ -304,6 +307,35 @@ const scorllCallback = () => {
   }
 };
 
+// 拖动自定义滚动条
+const handleProgressDrag = () => {
+  return;
+  // const progress = progressRef.value as any;
+  // const progressIcon = progressImgRef.value as any;
+  // progressIcon.onmousedown = function (e: any) {
+  //   console.log('------- mousedown -------');
+  //   const h = progress.clientHeight;
+  //   document.onmousemove = (moveE: any) => {
+  //     let moveLen = (moveE.clientY / h) * 100;
+  //     if (moveLen < 0) {
+  //       moveLen = 0;
+  //     } else if (moveLen > 100) {
+  //       moveLen = 100;
+  //     }
+  //     currentScorllProgress.value = moveLen;
+  //     (layoutRef.value as any).scrollTop = (currentScorllProgress.value * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / 100;
+  //   };
+  //   document.onmouseup = function (evt) {
+  //     console.log('------- mouseup -------');
+  //     evt.stopPropagation();
+  //     document.onmousemove = null;
+  //     document.onmouseup = null;
+  //     progressIcon.releaseCapture && progressIcon.releaseCapture();
+  //   };
+  //   progressIcon.setCapture && progressIcon.setCapture();
+  // };
+};
+
 // 要展示樱花背景的路由
 let isShowSnowRoute = ['', '/', '', '/play/mp3', '/play/mp4', '/msg-board', '/about/zone', '/about/friends', '/about/me'];
 let isUnShowSnowRoute = ['/play/mp4/playing', '/article/share', '/article/detail', '/preview'];
@@ -327,6 +359,7 @@ onMounted(() => {
       state.isMusicPlayerShow = true;
     }
   });
+  handleProgressDrag();
   new Snow('#snow', { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 

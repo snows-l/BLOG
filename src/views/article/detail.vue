@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-20 10:41:46
+ * @LastEditTime: 2024-09-20 15:52:20
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -250,7 +250,7 @@ const addCopyCodeAndMacosStyle = () => {
   });
 };
 
-// 添加代码超过指定行数时自动折叠，点击更多按钮展开的逻辑
+// 添加代码超过指定行数时自动折叠，点击展开按钮展开的逻辑
 const addCodeFold = () => {
   const codeBlocks = document.querySelectorAll('#editor pre > code');
 
@@ -263,14 +263,13 @@ const addCodeFold = () => {
       codeBlock.style.borderBottomRightRadius = '0px';
       codeBlock.style.transition = 'height 0.3s ease';
       const foldButton = document.createElement('div');
-      foldButton.innerText = '更多';
+      foldButton.innerText = '展开';
       foldButton.classList.add('fold');
       foldButton.classList.add('pointer');
 
       foldButton.style.backgroundColor = '#ccc';
       foldButton.style.color = '#333';
       foldButton.style.fontSize = '12px';
-      foldButton.style.transition = 'all 0.3s ease';
       foldButton.style.position = 'absolute';
       foldButton.style.width = '100%';
       foldButton.style.height = '22px';
@@ -280,20 +279,19 @@ const addCodeFold = () => {
       foldButton.style.left = '0';
       foldButton.style.borderBottomLeftRadius = '4px';
       foldButton.style.borderBottomRightRadius = '4px';
-      foldButton.style.border = '1px solid #fff';
       foldButton.style.borderTop = '0';
       // foldButton.style.boxShadow = '0px -22px 22px rgba(0, 0, 0, 0.8)';
       // 为展开按钮添加点击事件处理程序
       foldButton.addEventListener('click', () => {
         foldButton.classList.toggle('fold');
         if (foldButton.classList.contains('fold')) {
+          foldButton.innerText = '展开';
+          codeBlock.style.height = '440px';
+          codeBlock.style.overflow = 'hidden';
+        } else {
           foldButton.innerText = '收起';
           codeBlock.style.height = 'auto';
           codeBlock.style.overflow = 'visible';
-        } else {
-          foldButton.innerText = '更多';
-          codeBlock.style.height = '440px';
-          codeBlock.style.overflow = 'hidden';
         }
       });
 
@@ -636,6 +634,9 @@ blockquote {
 .dark {
   .article-detail-warp {
     .code-title {
+      border: 1px solid #e8e8e8;
+    }
+    .fold {
       border: 1px solid #e8e8e8;
     }
   }
