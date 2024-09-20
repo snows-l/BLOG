@@ -102,12 +102,12 @@ html {
 
 /* 自定义整个滚动条 */
 ::-webkit-scrollbar {
-  position: absolute;
+  position: fixed !important;
   right: 10px; /* 滚动条距离右侧距离 */
-  // width: 4px; /* 设置滚动条的宽度 */
-  // height: 4px;
-  width: 0;
-  height: 0; /* 隐藏滚动条 */
+  width: 4px; /* 设置滚动条的宽度 */
+  height: 4px;
+  // width: 0;
+  // height: 0; /* 隐藏滚动条 */
   background-color: transparent; /* 背景透明 */
 }
 
@@ -118,8 +118,7 @@ html {
 
 /* 自定义滚动条的滑块（thumb） */
 ::-webkit-scrollbar-thumb {
-  border-top: 5px solid var(--theme-light-color-3);
-  border-bottom: 5px solid var(--theme-light-color-3);
+  border: 1px solid var(--theme-light-color-3);
   // background: var(--theme-light-color-3); /* 设置滑块的背景颜色 */
   border-radius: 4px;
 }
