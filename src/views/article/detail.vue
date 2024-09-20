@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 17:38:11
+ * @LastEditTime: 2024-09-20 10:41:46
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -198,20 +198,19 @@ const handleAdd = (type: string) => {
 // 当前高亮的目录项索引
 const activeIndex = ref(0);
 
-// 添加复制按钮的逻辑
-const copyCode = () => {
+// 添加复制按钮的逻辑 以及 mac os 系统的关闭按钮样式
+const addCopyCodeAndMacosStyle = () => {
   const codeBlocks = document.querySelectorAll('#editor pre > code');
   codeBlocks.forEach(codeBlock => {
     codeBlock.style.borderTopLeftRadius = '0px';
     codeBlock.style.borderTopRightRadius = '0px';
     codeBlock.style.marginTop = '30px';
+    codeBlock.style.marginBottom = '0px';
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.innerText = '复制';
     copyButton.classList.add('copy-button');
     copyButton.classList.add('pointer');
-    copyButton.style.borderTopLeftRadius = '0px';
-    copyButton.style.borderTopRightRadius = '0px';
 
     // 为复制按钮添加点击事件处理程序
     copyButton.addEventListener('click', () => {
@@ -225,6 +224,7 @@ const copyCode = () => {
       }, 3000); // 毫秒为单位，您可以调整时间长度
     });
 
+    // 为代码块添加macos系统的关闭按钮样式
     const codeTitle = document.createElement('div');
     codeTitle.style.position = 'absolute';
     codeTitle.classList.add('code-title');
@@ -243,9 +243,63 @@ const copyCode = () => {
     img.style.marginLeft = '5px';
     img.src = getImgIcon('macos-close.png');
     codeTitle.appendChild(img);
+
     // 将复制按钮添加到代码块的父级元素中
     codeBlock.appendChild(copyButton);
     codeBlock.appendChild(codeTitle);
+  });
+};
+
+// 添加代码超过指定行数时自动折叠，点击更多按钮展开的逻辑
+const addCodeFold = () => {
+  const codeBlocks = document.querySelectorAll('#editor pre > code');
+
+  codeBlocks.forEach(codeBlock => {
+    const lines = codeBlock.textContent.split('\n').length;
+    if (lines > 20) {
+      codeBlock.style.height = '440px';
+      codeBlock.style.overflow = 'hidden';
+      codeBlock.style.borderBottomLeftRadius = '0px';
+      codeBlock.style.borderBottomRightRadius = '0px';
+      codeBlock.style.transition = 'height 0.3s ease';
+      const foldButton = document.createElement('div');
+      foldButton.innerText = '更多';
+      foldButton.classList.add('fold');
+      foldButton.classList.add('pointer');
+
+      foldButton.style.backgroundColor = '#ccc';
+      foldButton.style.color = '#333';
+      foldButton.style.fontSize = '12px';
+      foldButton.style.transition = 'all 0.3s ease';
+      foldButton.style.position = 'absolute';
+      foldButton.style.width = '100%';
+      foldButton.style.height = '22px';
+      foldButton.style.lineHeight = '22px';
+      foldButton.style.bottom = '-22px';
+      foldButton.style.textAlign = 'center';
+      foldButton.style.left = '0';
+      foldButton.style.borderBottomLeftRadius = '4px';
+      foldButton.style.borderBottomRightRadius = '4px';
+      foldButton.style.border = '1px solid #fff';
+      foldButton.style.borderTop = '0';
+      // foldButton.style.boxShadow = '0px -22px 22px rgba(0, 0, 0, 0.8)';
+      // 为展开按钮添加点击事件处理程序
+      foldButton.addEventListener('click', () => {
+        foldButton.classList.toggle('fold');
+        if (foldButton.classList.contains('fold')) {
+          foldButton.innerText = '收起';
+          codeBlock.style.height = 'auto';
+          codeBlock.style.overflow = 'visible';
+        } else {
+          foldButton.innerText = '更多';
+          codeBlock.style.height = '440px';
+          codeBlock.style.overflow = 'hidden';
+        }
+      });
+
+      // 将展开按钮添加到代码块的父级元素中
+      codeBlock.appendChild(foldButton);
+    }
   });
 };
 
@@ -379,7 +433,8 @@ onUpdated(() => {
     tableOfContents.value = generateTableOfContents();
   }
   addAnchorLinks();
-  copyCode();
+  addCopyCodeAndMacosStyle();
+  addCodeFold();
 });
 
 // 组件销毁时，也及时销毁编辑器
