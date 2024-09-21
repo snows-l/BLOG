@@ -7,7 +7,12 @@ body {
 }
 
 .text {
+  user-select: text;
   cursor: url('@/assets/images/cursor/text.png'), auto !important; // text cursor to assets/images/cursor/text.png
+}
+
+.select {
+  user-select: text;
 }
 
 :root {

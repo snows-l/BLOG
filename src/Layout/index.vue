@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-21 19:36:16
+ * @LastEditTime: 2024-09-21 22:10:09
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -16,13 +16,7 @@
     <div class="progress-warp" ref="progressRef" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
       <div class="progress" :style="{ height: `calc(${currentScorllProgress}%)` }"></div>
       <!--  -->
-      <img
-        ref="progressImgRef"
-        :style="{ opacity: currentScorllProgress != 0 ? 1 : 0 }"
-        class="progress-icon pointer"
-        @click="handleTop"
-        src="@/assets/images/icon/progress.svg"
-        alt="" />
+      <div ref="progressImgRef" :style="{ opacity: currentScorllProgress != 0 ? 1 : 0 }" class="progress-icon pointer" @click="handleTop" alt=""></div>
     </div>
     <!-- 移动端 菜单 -->
     <div class="mobile-menu-warp" :class="{ mMenuShow: state.mMenuShow }">
@@ -40,7 +34,7 @@
     </div>
 
     <!-- layout-warp -->
-    <div class="layout-content-warp" id="layout" :class="{ mainRight: state.mMenuShow }" ref="layoutRef">
+    <div class="layout-content-warp" id="layout" :class="{ mainRight: state.mMenuShow, smooth: state.disabledSnooth }" ref="layoutRef">
       <!-- mobile header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi" v-show="route.path != '/start'">
         <div class="icon-warp">
@@ -72,7 +66,7 @@
       </header>
 
       <!-- main -->
-      <main @click="handleClickMain" id="main">
+      <main @click="handleClickMain" class="select" id="main">
         <router-view></router-view>
         <Footer></Footer>
       </main>
@@ -180,6 +174,7 @@ const state = reactive({
   mMenuShow: false,
   isSetShow: false,
   isShowSnow: true,
+  disabledSnooth: true,
   isMusicPlayerShow: false,
   isMusicPlaying: false,
   isShowSearch: false,
@@ -309,29 +304,30 @@ const scorllCallback = () => {
 
 // 拖动自定义滚动条
 const handleProgressDrag = () => {
-  return false;
-  // const progress = progressRef.value as any;
-  // const progressIcon = progressImgRef.value as any;
-  // const h = progress.clientHeight; // 滚动条的高度
-  // progressIcon.onmousedown = function (e: any) {
-  //   document.onmousemove = (moveE: any) => {
-  //     console.log('-------- mousemove --------');
-  //     let moveLen = (moveE.clientY / h) * 100;
-  //     if (moveE.clientY >= h) {
-  //       return;
-  //     }
-  //     currentScorllProgress.value = moveLen;
-  //     (layoutRef.value as any).scrollTop = (moveE.clientY * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / h;
-  //   };
-  //   document.onmouseup = function (evt) {
-  //     console.log('-------- mouseup --------');
-  //     evt.stopPropagation();
-  //     document.onmousemove = null;
-  //     document.onmouseup = null;
-  //     progressIcon.releaseCapture && progressIcon.releaseCapture();
-  //   };
-  //   progressIcon.setCapture && progressIcon.setCapture();
-  // };
+  const progress = progressRef.value as any;
+  const progressIcon = progressImgRef.value as any;
+  const h = progress.clientHeight; // 滚动条的高度
+  progressIcon.onmousedown = function (e: any) {
+    document.onmousemove = (moveE: any) => {
+      state.disabledSnooth = false; // 取消平滑滚动
+      let moveLen = (moveE.clientY / h) * 100;
+      if (moveE.clientY < 0) {
+        moveE = 0;
+      } else if (moveLen > 100) {
+        moveLen = 100;
+      }
+      currentScorllProgress.value = moveLen;
+      (layoutRef.value as any).scrollTop = (moveE.clientY * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / h;
+    };
+    document.onmouseup = function (evt) {
+      state.disabledSnooth = true;
+      evt.stopPropagation();
+      document.onmousemove = null;
+      document.onmouseup = null;
+      progressIcon.releaseCapture && progressIcon.releaseCapture();
+    };
+    progressIcon.setCapture && progressIcon.setCapture();
+  };
 };
 
 // 要展示樱花背景的路由
@@ -369,18 +365,6 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-// Y轴旋转动画
-@keyframes quan {
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(180deg);
-  }
-  100% {
-    transform: rotateY(360deg);
-  }
-}
 .layout-warp {
   height: 100vh;
   overflow: hidden;
@@ -401,7 +385,7 @@ onUnmounted(() => {
   .progress-warp {
     position: fixed;
     top: 0px;
-    right: 29px;
+    right: 30px;
     width: 1px;
     height: 100vh;
     z-index: 998;
@@ -415,10 +399,12 @@ onUnmounted(() => {
       justify-content: center;
     }
     .progress-icon {
-      margin-left: -14px;
+      margin-left: -15px;
       margin-top: -5px;
       width: 30px;
       height: 30px;
+      background-image: url('@/assets/images/icon/progress.svg');
+      background-size: 100%;
       transition: opacity 1s ease;
     }
   }
@@ -518,7 +504,11 @@ onUnmounted(() => {
   .mMenuShow {
     left: 0 !important;
   }
+  .smooth {
+    scroll-behavior: smooth; // 平滑滚动
+  }
   .layout-content-warp {
+    user-select: none; // 禁止选中
     position: relative;
     width: 100%;
     height: 100vh;
@@ -526,7 +516,6 @@ onUnmounted(() => {
     overflow-x: hidden;
     left: 0;
     transition: left 0.8s ease;
-    scroll-behavior: smooth; // 平滑滚动
     .header-warp {
       width: 100%;
       height: 60px;
@@ -543,9 +532,6 @@ onUnmounted(() => {
       z-index: 999;
       border-radius: 0px;
       font-weight: 600;
-      // background-image: radial-gradient(transparent 1px, #ffffff8c 1px);
-      // background-size: 6px 6px;
-      // backdrop-filter: saturate(50%) blur(2px);
       .title-text {
         font-size: 25px;
         padding: 5px 10px;
@@ -815,6 +801,19 @@ onUnmounted(() => {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+// Y轴旋转动画
+@keyframes quan {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
   }
 }
 </style>

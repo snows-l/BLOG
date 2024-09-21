@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-21 09:48:47
+ * @LastEditTime: 2024-09-21 22:06:27
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
-  <div class="article-detail-warp" id="layout-content">
+  <div class="article-detail-warp select" id="layout-content">
     <PageTopCover :moduleTitle="'文章详情'" :textIcon="'📝'" :coverImg="articleCover" :isMobile="isMobi" :mudulDesc="state.arcticleDetail.title" :isArticle="false"></PageTopCover>
 
     <div class="article-content-warp-out" v-if="valueHtml" :class="{ 'm-article-content-warp-out': isMobi }">
