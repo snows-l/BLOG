@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-20 17:09:44
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-09-21 17:02:49
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -15,11 +15,12 @@
     <!-- pc 进度条 -->
     <div class="progress-warp" ref="progressRef" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
       <div class="progress" :style="{ height: `calc(${currentScorllProgress}%)` }"></div>
+      <!-- @click="handleTop" -->
       <img
         ref="progressImgRef"
         @click="handleTop"
         class="progress-icon pointer"
-        :style="{ marginTop: `calc(${currentScorllProgress}% - 5px)`, opacity: currentScorllProgress != 0 ? 1 : 0 }"
+        :style="{ opacity: currentScorllProgress != 0 ? 1 : 0 }"
         src="@/assets/images/icon/progress.svg"
         alt="" />
     </div>
@@ -158,7 +159,7 @@ import { routes } from '@/router';
 import { getImgIcon, getQQAvatar } from '@/utils/common';
 import { ElMessage, ElNotification } from 'element-plus';
 import { Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
+import { nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Menu from './Menu.vue';
 
@@ -309,24 +310,21 @@ const scorllCallback = () => {
 
 // 拖动自定义滚动条
 const handleProgressDrag = () => {
-  return;
   // const progress = progressRef.value as any;
   // const progressIcon = progressImgRef.value as any;
+  // const h = progress.clientHeight; // 滚动条的高度
   // progressIcon.onmousedown = function (e: any) {
-  //   console.log('------- mousedown -------');
-  //   const h = progress.clientHeight;
   //   document.onmousemove = (moveE: any) => {
   //     let moveLen = (moveE.clientY / h) * 100;
-  //     if (moveLen < 0) {
-  //       moveLen = 0;
-  //     } else if (moveLen > 100) {
-  //       moveLen = 100;
-  //     }
-  //     currentScorllProgress.value = moveLen;
-  //     (layoutRef.value as any).scrollTop = (currentScorllProgress.value * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / 100;
+  //     // if (moveLen < 0) {
+  //     //   moveLen = 0;
+  //     // } else if (moveLen > 100) {
+  //     //   moveLen = 100;
+  //     // }
+  //     // currentScorllProgress.value = moveLen;
+  //     // (layoutRef.value as any).scrollTop = (moveE.clientY * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / h;
   //   };
   //   document.onmouseup = function (evt) {
-  //     console.log('------- mouseup -------');
   //     evt.stopPropagation();
   //     document.onmousemove = null;
   //     document.onmouseup = null;
@@ -359,7 +357,10 @@ onMounted(() => {
       state.isMusicPlayerShow = true;
     }
   });
-  handleProgressDrag();
+  nextTick(() => {
+    handleProgressDrag();
+  });
+
   new Snow('#snow', { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
@@ -410,10 +411,13 @@ onUnmounted(() => {
       background: linear-gradient(-45deg, #ee7752, #ce3e75, #23a6d5, #23d5ab);
       background-size: 400% 400%;
       animation: animation 10s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .progress-icon {
-      position: absolute;
-      right: -14px;
+      margin-left: -14px;
+      margin-top: -5px;
       width: 30px;
       height: 30px;
       transition: opacity 1s ease;

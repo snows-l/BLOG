@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-20 17:49:29
- * @FilePath: /blog/src/views/article/detail.vue
+ * @LastEditTime: 2024-09-21 09:48:47
+ * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp" id="layout-content">
@@ -77,7 +77,7 @@
 import { addShareCount, getArticleDetail } from '@/api/article';
 import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
-import { copy, isMobile, tranListToTree, getImgIcon } from '@/utils/common';
+import { copy, getImgIcon, isMobile, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
@@ -258,7 +258,7 @@ const addCodeFold = () => {
     const lines = codeBlock.textContent.split('\n').length;
     if (lines > 20) {
       codeBlock.style.height = '440px';
-      codeBlock.style.overflow = 'auto';
+      codeBlock.style.overflowY = 'hidden';
       codeBlock.style.borderBottomLeftRadius = '0px';
       codeBlock.style.borderBottomRightRadius = '0px';
       codeBlock.style.transition = 'height 0.3s ease';
@@ -287,11 +287,11 @@ const addCodeFold = () => {
         if (foldButton.classList.contains('fold')) {
           foldButton.innerText = '展开';
           codeBlock.style.height = '440px';
-          codeBlock.style.overflow = 'auto';
+          codeBlock.style.overflowY = 'hidden';
         } else {
           foldButton.innerText = '收起';
           codeBlock.style.height = 'auto';
-          codeBlock.style.overflow = 'auto';
+          codeBlock.style.overflowY = 'visible';
         }
       });
 

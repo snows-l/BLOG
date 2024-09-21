@@ -104,10 +104,10 @@ html {
 ::-webkit-scrollbar {
   position: fixed !important;
   right: 10px; /* 滚动条距离右侧距离 */
-  width: 4px; /* 设置滚动条的宽度 */
-  height: 4px;
-  // width: 0;
-  // height: 0; /* 隐藏滚动条 */
+  // width: 4px; /* 设置滚动条的宽度 */
+  // height: 4px;
+  width: 0;
+  height: 0; /* 隐藏滚动条 */
   background-color: transparent; /* 背景透明 */
 }
 
