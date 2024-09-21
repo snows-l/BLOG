@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-21 17:02:49
+ * @LastEditTime: 2024-09-21 19:36:16
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -15,12 +15,12 @@
     <!-- pc 进度条 -->
     <div class="progress-warp" ref="progressRef" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
       <div class="progress" :style="{ height: `calc(${currentScorllProgress}%)` }"></div>
-      <!-- @click="handleTop" -->
+      <!--  -->
       <img
         ref="progressImgRef"
-        @click="handleTop"
-        class="progress-icon pointer"
         :style="{ opacity: currentScorllProgress != 0 ? 1 : 0 }"
+        class="progress-icon pointer"
+        @click="handleTop"
         src="@/assets/images/icon/progress.svg"
         alt="" />
     </div>
@@ -292,7 +292,6 @@ watch(
   () => {
     if (state.isSetShow) state.isSetShow = false;
     if (state.isMusicPlayerShow) state.isMusicPlayerShow = false;
-    // handleClickMain();
   }
 );
 
@@ -310,21 +309,22 @@ const scorllCallback = () => {
 
 // 拖动自定义滚动条
 const handleProgressDrag = () => {
+  return false;
   // const progress = progressRef.value as any;
   // const progressIcon = progressImgRef.value as any;
   // const h = progress.clientHeight; // 滚动条的高度
   // progressIcon.onmousedown = function (e: any) {
   //   document.onmousemove = (moveE: any) => {
+  //     console.log('-------- mousemove --------');
   //     let moveLen = (moveE.clientY / h) * 100;
-  //     // if (moveLen < 0) {
-  //     //   moveLen = 0;
-  //     // } else if (moveLen > 100) {
-  //     //   moveLen = 100;
-  //     // }
-  //     // currentScorllProgress.value = moveLen;
-  //     // (layoutRef.value as any).scrollTop = (moveE.clientY * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / h;
+  //     if (moveE.clientY >= h) {
+  //       return;
+  //     }
+  //     currentScorllProgress.value = moveLen;
+  //     (layoutRef.value as any).scrollTop = (moveE.clientY * ((layoutRef.value as any).scrollHeight - (layoutRef.value as any).clientHeight)) / h;
   //   };
   //   document.onmouseup = function (evt) {
+  //     console.log('-------- mouseup --------');
   //     evt.stopPropagation();
   //     document.onmousemove = null;
   //     document.onmouseup = null;
@@ -360,7 +360,6 @@ onMounted(() => {
   nextTick(() => {
     handleProgressDrag();
   });
-
   new Snow('#snow', { num: isMobi ? 1 : 2, maxR: 3, minR: 12, maxSpeed: 0.4, minSpeed: 0.1, swing: true, swingProbability: 0.1, spin: true, shape: sakura() });
 });
 
