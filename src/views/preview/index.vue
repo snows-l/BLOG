@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-25 17:17:24
+ * @LastEditTime: 2024-09-25 17:34:26
  * @FilePath: /blog/src/views/preview/index.vue
 -->
 <template>
@@ -14,7 +14,7 @@
     <div class="jian-content" v-if="!isMobi">
       <iframe ref="iframeRef" :src="pdfUrl" width="100%" height="100%" frameborder="0"></iframe>
     </div>
-    <div class="jian-content" v-else>
+    <div class="jian-content" v-loading="state.loading" v-else>
       <div class="opertion">
         <img class="print pointer" @click="printPdf" style="width: 20px; height: 20px; margin: 0 5px" src="@/assets/images/icon/icon-print.svg" />
         <a class="pdf-download pointer" :href="pdfUrl" target="_blank" rel="noopener noreferrer">
@@ -71,6 +71,7 @@ if (route.query.type && route.query.type === 'introduce') {
 
 // 这里必须使用异步去引用pdf文件，直接去import会报错，也不知道为什么
 const loadFile = async () => {
+  state.loading = true;
   let pdfjs = await import('pdfjs-dist/build/pdf');
   let pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
   pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -84,6 +85,7 @@ const loadFile = async () => {
     for (let pageNum = 1; pageNum <= doc.numPages; pageNum++) {
       await getPdfPage(pageNum);
     }
+    state.loading = false;
   });
 };
 
@@ -211,6 +213,7 @@ onUpdated(() => {
   min-height: 100vh;
   overflow: scroll;
   .jian-content {
+    min-height: calc(100vh - 80px);
     height: auto !important;
     max-width: var(--content-max-width-m);
     padding: 30px 10px 20px 10px;
