@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-25 20:06:29
+ * @LastEditTime: 2024-09-25 20:09:33
  * @FilePath: /BLOG/src/views/preview/index.vue
 -->
 <template>
@@ -86,8 +86,8 @@ const loadFile = async () => {
     // 加载pdf所有页
     for (let pageNum = 1; pageNum <= doc.numPages; pageNum++) {
       await getPdfPage(pageNum);
+      state.loading = false;
     }
-    state.loading = false;
   });
 };
 
