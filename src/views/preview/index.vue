@@ -3,12 +3,17 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 22:34:04
- * @FilePath: /BLOG/src/views/preview/index.vue
+ * @LastEditTime: 2024-09-25 14:55:02
+ * @FilePath: /blog/src/views/preview/index.vue
 -->
 <template>
-  <div class="iframe" v-loading="state.loading">
+  <div v-if="state.type === 'preview'" class="iframe" v-loading="state.loading">
     <iframe ref="iframeRef" :src="state.url" width="100%" height="100%" frameborder="0"></iframe>
+  </div>
+  <div v-if="state.type === 'jianli'" class="jianli-warp" :class="{ 'jianli-warp-mobi': isMobi }">
+    <div class="jian-content">
+      <iframe ref="iframeRef" src="http://124.223.41.220:3333/common/jl_15240861635.pdf" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
   </div>
 </template>
 
@@ -17,9 +22,12 @@ import { previewArticleCodeToHtml } from '@/api/article';
 import { ElMessage } from 'element-plus';
 import { onMounted, onUpdated, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import useResize from '@/hooks/useResize';
+const { isMobi } = useResize();
 
 const route = useRoute();
 const state = reactive({
+  type: 'preview',
   url: '',
   loading: false
 });
@@ -38,6 +46,9 @@ if (route.query.id) {
       });
     }
   });
+}
+if (route.query.type && route.query.type === 'jianli') {
+  state.type = 'jianli';
 }
 onMounted(() => {
   const layout = document.querySelector('#layout');
@@ -65,5 +76,23 @@ onUpdated(() => {
 .iframe {
   width: 100vw;
   height: 100vh;
+}
+.jianli-warp {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 80px;
+  .jian-content {
+    height: calc(100vh - 100px);
+    max-width: var(--content-max-width);
+    padding: 20px 5px;
+    margin: 10px auto;
+    background-color: var(--bg-warp-color);
+    border-radius: 10px;
+  }
+}
+.jianli-warp-mobi {
+  .jian-content {
+    max-width: var(--content-max-width-m);
+  }
 }
 </style>

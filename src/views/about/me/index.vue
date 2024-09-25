@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-15 23:22:46
- * @FilePath: /BLOG/src/views/about/me/index.vue
+ * @LastEditTime: 2024-09-25 14:35:30
+ * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
@@ -50,6 +50,11 @@
             <div class="me-3">
               一名
               <div class="name">前端开发程序员 🧑‍💻</div>
+              <div class="jianli" @click="handleViewJian">
+                <ToolTip content="我的简历">
+                  <img style="width: 20px; height: 20px" src="@/assets/images/icon/icon-jianli.svg" />
+                </ToolTip>
+              </div>
             </div>
             <div class="me-4">
               <div class="chart email">
@@ -217,6 +222,9 @@ import { getQQAvatar } from '@/utils/common';
 import { getRandomColor } from '@/utils/theme';
 import { ElCarousel, ElCarouselItem } from 'element-plus';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 const { isMobi } = useResize();
 
 const state = reactive({
@@ -280,6 +288,15 @@ const getDictFn = () => {
   });
 };
 getDictFn();
+
+const handleViewJian = () => {
+  router.push({
+    path: '/preview',
+    query: {
+      type: 'jianli'
+    }
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -490,6 +507,13 @@ getDictFn();
             right: 15px;
             animation: swing 1s ease-in-out infinite alternate;
             top: 15px;
+          }
+          .jianli {
+            margin-left: 20px;
+            // position: absolute;
+            // right: 60px;
+            animation: shan 1s ease-in-out infinite alternate;
+            // top: 15px;
           }
         }
         .site-warp {
@@ -795,6 +819,24 @@ getDictFn();
   }
   100% {
     transform: rotate(-18deg);
+  }
+}
+
+@keyframes shan {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @keyframes changeColor {
