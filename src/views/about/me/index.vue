@@ -293,7 +293,7 @@ const handleViewJian = () => {
   router.push({
     path: '/preview',
     query: {
-      type: 'jianli'
+      type: 'introduce'
     }
   });
 };
