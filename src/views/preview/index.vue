@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-25 17:34:26
+ * @LastEditTime: 2024-09-25 17:38:19
  * @FilePath: /blog/src/views/preview/index.vue
 -->
 <template>
@@ -213,7 +213,7 @@ onUpdated(() => {
   min-height: 100vh;
   overflow: scroll;
   .jian-content {
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px);
     height: auto !important;
     max-width: var(--content-max-width-m);
     padding: 30px 10px 20px 10px;
