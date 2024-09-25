@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-25 17:38:19
- * @FilePath: /blog/src/views/preview/index.vue
+ * @LastEditTime: 2024-09-25 20:06:29
+ * @FilePath: /BLOG/src/views/preview/index.vue
 -->
 <template>
   <div v-if="state.type === 'preview'" class="iframe" v-loading="state.loading">
@@ -16,22 +16,24 @@
     </div>
     <div class="jian-content" v-loading="state.loading" v-else>
       <div class="opertion">
-        <img class="print pointer" @click="printPdf" style="width: 20px; height: 20px; margin: 0 5px" src="@/assets/images/icon/icon-print.svg" />
+        <!-- <img class="print pointer" @click="printPdf" style="width: 20px; height: 20px; margin: 0 5px" src="@/assets/images/icon/icon-print.svg" /> -->
         <a class="pdf-download pointer" :href="pdfUrl" target="_blank" rel="noopener noreferrer">
           <img style="width: 20px; height: 20px; margin: 0 5px" src="@/assets/images/icon/icon-down.svg" />
         </a>
       </div>
-      <canvas class="pdf-viewer" v-for="i in pdfParams.pdfPageTotal" :key="i" :id="'pdf-render' + i"></canvas>
+      <div class="pdf-warp">
+        <canvas class="pdf-viewer" v-for="i in pdfParams.pdfPageTotal" :key="i" :id="'pdf-render' + i"></canvas>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { previewArticleCodeToHtml } from '@/api/article';
+import useResize from '@/hooks/useResize';
 import { ElMessage } from 'element-plus';
 import { onMounted, onUpdated, reactive, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
 
 const route = useRoute();
@@ -201,7 +203,7 @@ onUpdated(() => {
   .jian-content {
     height: calc(100vh - 80px);
     max-width: var(--content-max-width);
-    padding: 20px 10px;
+    padding: 10px 10px;
     margin: 10px auto;
     background-color: var(--bg-warp-color);
     border-radius: 10px;
@@ -216,11 +218,11 @@ onUpdated(() => {
     min-height: calc(100vh - 100px);
     height: auto !important;
     max-width: var(--content-max-width-m);
-    padding: 30px 10px 20px 10px;
+    padding: 40px 10px 10px 10px;
     .opertion {
       position: absolute;
       top: 10px;
-      right: 10px;
+      right: 5px;
       text-decoration: none;
     }
   }
