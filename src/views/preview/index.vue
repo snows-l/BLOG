@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-13 21:01:36
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-25 20:09:33
- * @FilePath: /BLOG/src/views/preview/index.vue
+ * @LastEditTime: 2024-09-26 09:40:54
+ * @FilePath: /blog/src/views/preview/index.vue
 -->
 <template>
   <div v-if="state.type === 'preview'" class="iframe" v-loading="state.loading">
@@ -50,7 +50,7 @@ const pdfParams = reactive({
 });
 
 let pdfDoc = null;
-let pdfUrl = 'http://124.223.41.220:3333/common/jl_15240861635.pdf';
+let pdfUrl = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/common/snows_l-online-introduce.pdf';
 
 const iframeRef = ref(null);
 
