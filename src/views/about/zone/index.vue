@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 16:08:51
+ * @LastEditTime: 2024-09-26 16:24:40
  * @FilePath: /blog/src/views/about/zone/index.vue
 -->
 <template>
@@ -179,7 +179,7 @@ const handleLoadMore = () => {
                   object-fit: cover;
                   display: inline-block;
                   margin: 5px;
-                  border: 1px solid #ccc;
+                  border-radius: var(--border-radius-1);
                 }
               }
               .zone-item-img-warp-3 {
@@ -194,7 +194,7 @@ const handleLoadMore = () => {
               }
               .zone-item-content {
                 font-size: 13px;
-                margin-top: 10px;
+                margin-top: 20px;
                 color: var(--text-color);
                 margin-bottom: 20px;
                 min-height: 80px;

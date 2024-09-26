@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 16:09:43
+ * @LastEditTime: 2024-09-26 16:25:41
  * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
@@ -392,14 +392,14 @@ const handleComment = () => {
               }
             }
             .msg {
-              margin-top: 10px;
+              margin-top: 20px;
               font-size: 13px;
               color: var(--text-color);
               word-break: break-all;
               text-indent: 30px;
               background-image: url('@/assets/images/bg/wordline.webp');
               line-height: 40px;
-              min-height: 80px;
+              min-height: 120px;
             }
           }
         }
@@ -408,7 +408,7 @@ const handleComment = () => {
           padding: 0 0 0 30px;
           margin-top: 10px;
           .sub-comment-padding {
-            border-radius: var(--border-radius-2);
+            border-radius: var(--border-radius-1);
             background-color: var(--bg-content-color-2);
             .sub-comment-item {
               width: 100%;
