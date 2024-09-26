@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 20:39:52
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-09-26 12:32:42
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -279,7 +279,7 @@ const state = reactive({
   articleList: [],
   articleTypeList: [],
   bgImg: '',
-  bgImgUrl: '',
+  bgImgUrl: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/1.png',
   page: {
     page: 1,
     size: 5,
@@ -372,19 +372,14 @@ const handleLoadMore = () => {
 
 // 切换tool
 const handleToggleMove = (type: string) => {
-  // if (type === 'next') {
-  //   state.isToolNext = true;
-  // } else {
-  //   state.isToolNext = false;
-  // }
   handleToggleHomeBg();
 };
 
 // 切换首页背景
 const handleToggleHomeBg = () => {
-  state.bgImgUrl = 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg';
+  state.bgImgUrl =
+    import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 10) + '.png';
 };
-handleToggleHomeBg();
 
 // infoMap
 const infoMap = {

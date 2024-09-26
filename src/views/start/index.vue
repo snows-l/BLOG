@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 14:15:34
+ * @LastEditTime: 2024-09-26 12:34:11
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -75,7 +75,7 @@ let state = reactive({
   isScreenFull: false,
   clockSize: isMobi.value ? 0.5 : 0.8,
   saying: '渔得鱼心满意足，樵得樵眼笑眉舒！',
-  bgImgUrl: 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg'
+  bgImgUrl: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/1.png'
 });
 
 // 获取名言名句
@@ -99,7 +99,8 @@ const handleRefreshSaying = () => {
 
 // 切换背景
 const handleToggleBg = () => {
-  state.bgImgUrl = 'https://gitcode.net/qq_44112897/images/-/raw/master/comic/' + randomNum(1, 40) + '.jpg';
+  state.bgImgUrl =
+    import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 10) + '.png';
 };
 
 // 跳转到博客
