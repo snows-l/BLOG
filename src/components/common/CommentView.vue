@@ -157,14 +157,14 @@ defineExpose({
   .max-width-center {
     padding: 15px;
     background-color: var(--bg-warp-color);
-    border-radius: 15px;
+    border-radius: var(--border-radius-2);
     height: 100%;
     max-width: var(--content-max-width);
     margin: 0 auto;
     .comment-view-content {
       background-color: var(--bg-content-color);
       border: 1px solid var(--border-color);
-      border-radius: 15px;
+      border-radius: var(--border-radius-2);
       overflow: hidden;
       .comment-item {
         background-color: var(--bg-warp-light-color-2);

@@ -206,7 +206,7 @@ onUpdated(() => {
     padding: 10px 10px;
     margin: 10px auto;
     background-color: var(--bg-warp-color);
-    border-radius: 10px;
+    border-radius: var(--border-radius-2);
     position: relative;
   }
 }

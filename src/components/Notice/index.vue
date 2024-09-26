@@ -43,7 +43,7 @@ const handleTo = (path: string) => {
     margin-bottom: 20px;
   }
   .notice-content-padding {
-    border-radius: 10px;
+    border-radius: var(--border-radius-2);
     padding: 0 10px;
     background-color: var(--bg-content-color);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);

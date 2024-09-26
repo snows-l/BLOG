@@ -133,7 +133,7 @@ const handleTo = item => {
       .wecom {
         width: 100%;
         padding: 15px;
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         background-color: var(--bg-content-color);
         .wecom-title {
@@ -170,12 +170,12 @@ const handleTo = item => {
         margin-top: 20px;
         padding: 20px;
         background-color: var(--bg-content-color);
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         .friend-list {
           display: flex;
           flex-wrap: wrap;
           .friend-item {
-            border-radius: 10px;
+            border-radius: var(--border-radius-2);
             width: 160px;
             padding: 10px 20px;
             background-color: var(--bg-content-color);

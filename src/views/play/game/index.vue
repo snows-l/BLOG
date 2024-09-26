@@ -94,12 +94,12 @@ const handleGame = row => {
         margin-top: 20px;
         padding: 20px;
         background-color: var(--bg-content-color);
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         .game-warp-list {
           display: flex;
           flex-wrap: wrap;
           .game-item {
-            border-radius: 10px;
+            border-radius: var(--border-radius-2);
             width: 266px;
             height: 240px;
             // padding: 20px 20px;

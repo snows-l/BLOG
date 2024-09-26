@@ -357,7 +357,7 @@ watch(
       margin: 0 auto;
       .article-item {
         margin: 24px 0;
-        border-radius: 15px;
+        border-radius: var(--border-radius-2);
         width: 100%;
         height: 100%;
         overflow: hidden;
@@ -554,7 +554,7 @@ watch(
     .btn-more {
       margin-bottom: 20px;
       padding: 10px 20px;
-      border-radius: 20px;
+      border-radius: var(--border-radius-3);
       background-color: var(--theme-light-color-9);
       color: var(--theme-color);
     }

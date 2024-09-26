@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-16 19:12:50
- * @FilePath: /BLOG/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-09-26 16:09:43
+ * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -331,7 +331,7 @@ const handleComment = () => {
             padding: 20px 20px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
-            border-radius: 15px;
+            border-radius: var(--border-radius-2);
             background-color: var(--bg-content-color);
             .info-warp {
               width: 100%;
@@ -393,11 +393,13 @@ const handleComment = () => {
             }
             .msg {
               margin-top: 10px;
-              font-size: 14px;
+              font-size: 13px;
               color: var(--text-color);
-              line-height: 1.6;
               word-break: break-all;
               text-indent: 30px;
+              background-image: url('@/assets/images/bg/wordline.webp');
+              line-height: 40px;
+              min-height: 80px;
             }
           }
         }
@@ -406,17 +408,18 @@ const handleComment = () => {
           padding: 0 0 0 30px;
           margin-top: 10px;
           .sub-comment-padding {
-            border-radius: 10px;
+            border-radius: var(--border-radius-2);
             background-color: var(--bg-content-color-2);
             .sub-comment-item {
               width: 100%;
               padding: 10px 5px 10px 10px;
               .sub-content {
                 margin-top: 5px;
-                font-size: 14px;
+                font-size: 13px;
                 color: var(--text-color);
-                line-height: 1.6;
                 word-break: break-all;
+                background-image: url('@/assets/images/bg/wordline.webp');
+                line-height: 40px;
               }
             }
           }
@@ -466,7 +469,7 @@ const handleComment = () => {
   .btn-more {
     margin-bottom: 20px;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: var(--border-radius-3);
     background-color: var(--theme-light-color-9);
     color: var(--theme-color);
   }

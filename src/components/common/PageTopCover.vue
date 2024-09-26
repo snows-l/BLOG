@@ -104,7 +104,7 @@ const props = defineProps({
     max-width: var(--content-max-width);
     width: 100%;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: var(--border-radius-3);
     display: flex;
     flex-direction: column;
     justify-content: center;

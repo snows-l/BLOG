@@ -458,7 +458,7 @@ onBeforeUnmount(() => {
       .article-content {
         padding: 20px 0px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 15px;
+        border-radius: var(--border-radius-2);
         background-color: var(--bg-content-color);
         color: var(--text-color);
         line-height: 20px !important;
@@ -469,7 +469,7 @@ onBeforeUnmount(() => {
           margin-bottom: 40px;
           overflow: hidden;
           .cover-warp {
-            border-radius: 10px;
+            border-radius: var(--border-radius-2);
             height: calc(100% - 30px);
             overflow: hidden;
           }
@@ -590,7 +590,7 @@ blockquote {
 }
 
 .m-flex-container {
-  border-radius: 10px;
+  border-radius: var(--border-radius-2);
   width: 100%;
   background-color: var(--bg-warp-color);
   margin-bottom: 20px;

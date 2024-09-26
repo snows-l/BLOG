@@ -117,13 +117,13 @@ const handlevideo = row => {
         margin-top: 20px;
         padding: 10px;
         background-color: var(--bg-content-color);
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         .video-warp-list {
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
           .video-item {
-            border-radius: 10px;
+            border-radius: var(--border-radius-2);
             width: 420px;
             height: 330px;
             background-color: #fff;

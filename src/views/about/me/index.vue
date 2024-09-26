@@ -358,7 +358,7 @@ const handleViewJian = () => {
           justify-content: space-around;
           .saying-text {
             padding: 2px 10px;
-            border-radius: 20px;
+            border-radius: var(--border-radius-3);
             border-width: 1px;
             border-style: solid;
             // 不换行
@@ -448,7 +448,7 @@ const handleViewJian = () => {
           margin: 10px 0;
           width: 446px;
           height: 200px;
-          border-radius: 15px;
+          border-radius: var(--border-radius-2);
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           padding: 20px;
         }
@@ -598,7 +598,7 @@ const handleViewJian = () => {
               flex-wrap: wrap;
               .jishu-item {
                 padding: 4px 8px;
-                border-radius: 20px;
+                border-radius: var(--border-radius-3);
                 margin: 5px;
                 border: 1px solid var(--text-color);
                 display: flex;
@@ -632,7 +632,7 @@ const handleViewJian = () => {
           height: 100%;
           background-color: var(--bg-content-color);
           padding: 20px;
-          border-radius: 15px;
+          border-radius: var(--border-radius-2);
           width: 300px;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           .title {
@@ -646,7 +646,7 @@ const handleViewJian = () => {
             justify-content: space-between;
             flex-wrap: wrap;
             padding: 0 15px;
-            border-radius: 15px;
+            border-radius: var(--border-radius-2);
             .visit-item {
               width: 48%;
               margin: 10px 0;
@@ -666,7 +666,7 @@ const handleViewJian = () => {
         }
         .hobby-warp {
           margin-left: 30px;
-          border-radius: 15px;
+          border-radius: var(--border-radius-2);
           background-color: var(--bg-content-color);
           padding: 20px;
           flex: 1;
@@ -694,7 +694,7 @@ const handleViewJian = () => {
               font-size: 12px;
               color: #fff;
               background-color: #5098fe5b;
-              border-radius: 10px;
+              border-radius: var(--border-radius-2);
               border: 1px solid #fff;
               padding: 4px 8px;
             }
@@ -705,7 +705,7 @@ const handleViewJian = () => {
         margin-top: 20px;
         background-color: var(--bg-content-color);
         padding: 20px;
-        border-radius: 15px;
+        border-radius: var(--border-radius-2);
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         .title {
           font-size: 22px;
@@ -717,7 +717,7 @@ const handleViewJian = () => {
           flex-wrap: wrap;
           .my-label-item {
             padding: 4px 10px;
-            border-radius: 20px;
+            border-radius: var(--border-radius-3);
             margin: 5px;
             color: #fff;
             border: 1px solid var(--text-color-2);
@@ -731,7 +731,7 @@ const handleViewJian = () => {
         width: 100%;
         height: 600px;
         background-color: var(--bg-content-color);
-        border-radius: 15px;
+        border-radius: var(--border-radius-2);
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         position: relative;
         .title {

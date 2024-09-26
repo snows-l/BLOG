@@ -286,7 +286,7 @@ onUnmounted(() => {
     padding: 50px 20px 30px 20px;
     .input-warp {
       height: 50px;
-      border-radius: 15px;
+      border-radius: var(--border-radius-2);
       border: 1px solid var(--text-color-2);
       overflow: hidden;
       width: 100%;
@@ -324,7 +324,7 @@ onUnmounted(() => {
       margin-top: 20px;
       width: 100%;
       height: calc(100% - 80px);
-      border-radius: 15px;
+      border-radius: var(--border-radius-2);
       background: var(--bg-content-color);
       overflow: hidden;
       padding: 20px;
@@ -358,7 +358,7 @@ onUnmounted(() => {
                 padding: 10px 20px;
                 box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
                 margin: 10px 0;
-                border-radius: 15px;
+                border-radius: var(--border-radius-2);
                 background-color: var(--bg-content-color);
                 .music-item-warp {
                   display: flex;
@@ -414,7 +414,7 @@ onUnmounted(() => {
               margin: 0 auto;
               .article-item {
                 margin: 20px 0;
-                border-radius: 15px;
+                border-radius: var(--border-radius-2);
                 width: 100%;
                 height: 100%;
                 overflow: hidden;

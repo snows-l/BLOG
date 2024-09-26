@@ -127,10 +127,10 @@ const handleSubmit = () => {
   width: 100%;
   padding: 20px;
   border: 1px solid var(--border-color);
-  border-radius: 15px;
+  border-radius: var(--border-radius-2);
   background-color: var(--bg-warp-light-color-2);
   .input-out-warp {
-    border-radius: 10px;
+    border-radius: var(--border-radius-2);
     background-color: var(--bg-content-color);
     .input-warp {
       position: relative;
@@ -141,7 +141,7 @@ const handleSubmit = () => {
       background-repeat: no-repeat;
       background-position: right;
       resize: vertical;
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       &:focus-within {
         border-color: var(--theme-color);
       }
@@ -198,7 +198,7 @@ const handleSubmit = () => {
       background-color: var(--bg-content-color);
       position: relative;
       border: 1px solid var(--text-color);
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       margin-bottom: 40px;
       &:focus-within {
         border-color: var(--theme-color);
@@ -208,7 +208,7 @@ const handleSubmit = () => {
         outline: none;
         width: 100%;
         height: 30px;
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         background-color: transparent;
         color: var(--text-color);
       }
@@ -258,14 +258,14 @@ const handleSubmit = () => {
     justify-content: center;
     .btn {
       border: 1px solid var(--text-color);
-      border-radius: 15px;
+      border-radius: var(--border-radius-2);
       width: 100%;
       max-width: 350px;
       line-height: 30px;
       text-align: center;
       height: 40px;
       padding: 5px 20px;
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       background-color: var(--bg-content-color);
       color: var(--text-color);
     }

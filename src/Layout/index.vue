@@ -462,7 +462,7 @@ onUnmounted(() => {
           left: calc(var(--m-menu-width) + 10px);
           background-color: var(--bg-content-color);
           padding: 10px;
-          border-radius: 10px;
+          border-radius: var(--border-radius-2);
           .iconfont {
             font-size: 14px;
             color: var(--text-color);
@@ -606,7 +606,7 @@ onUnmounted(() => {
       left: 18px;
       top: 20px;
       z-index: 999;
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       word-break: keep-all;
       border: 1px solid var(--text-color-2);
       -webkit-transition: all 0.8s ease !important;
@@ -685,7 +685,7 @@ onUnmounted(() => {
     min-width: 200px;
     background-color: transparent;
     z-index: 99999;
-    border-radius: 10px;
+    border-radius: var(--border-radius-2);
     display: flex;
     transition: bottom 0.8s ease;
     .theme-warp {
@@ -695,7 +695,7 @@ onUnmounted(() => {
       align-items: center;
       justify-content: center;
       padding: 10px;
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       background-color: var(--bg-warp-light-color);
       .theme-item {
         width: 50px;
@@ -709,7 +709,7 @@ onUnmounted(() => {
       }
     }
     .set-item {
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       color: var(--text-color);
       box-shadow: 0 1px 20px 10px rgba(255, 255, 255, 0.394);
       background-color: var(--bg-content-color);
@@ -720,7 +720,7 @@ onUnmounted(() => {
       justify-content: center;
       align-items: center;
       img {
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
       }
     }
     .bg-img-warp {
@@ -729,7 +729,7 @@ onUnmounted(() => {
       display: flex;
       flex-wrap: wrap;
       padding: 10px;
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       background-color: var(--bg-warp-light-color);
       .bg-img-item {
         width: 40px;
@@ -749,7 +749,7 @@ onUnmounted(() => {
       display: flex;
       flex-direction: column;
       padding: 10px;
-      border-radius: 10px;
+      border-radius: var(--border-radius-2);
       background-color: var(--bg-warp-light-color);
       .font-item {
         width: 40px;
@@ -769,7 +769,7 @@ onUnmounted(() => {
     width: 320px;
     background-color: transparent;
     z-index: 99999;
-    border-radius: 10px;
+    border-radius: var(--border-radius-2);
     display: flex;
     transition: bottom 0.8s ease;
   }

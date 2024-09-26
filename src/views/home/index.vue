@@ -533,7 +533,7 @@ onUnmounted(() => {
         min-width: 350px;
         padding: 20px 0;
         margin-top: 30px;
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         background-color: var(--bg-content-color);
         color: var(--text-color);
         display: flex;
@@ -597,7 +597,7 @@ onUnmounted(() => {
           margin: 0 10px;
           cursor: url('@/assets/images/cursor/pointer.png'), auto;
           padding: 8px;
-          border-radius: 15px;
+          border-radius: var(--border-radius-2);
           background-color: var(--bg-warp-color);
           display: flex;
           justify-content: center;
@@ -751,7 +751,7 @@ onUnmounted(() => {
         }
         .article-item {
           margin: 24px 0;
-          border-radius: 15px;
+          border-radius: var(--border-radius-2);
           width: 100%;
           height: 100%;
           overflow: hidden;
@@ -934,7 +934,7 @@ onUnmounted(() => {
       .btn-more {
         margin-bottom: 20px;
         padding: 10px 20px;
-        border-radius: 20px;
+        border-radius: var(--border-radius-3);
         background-color: var(--theme-light-color-9);
         color: var(--theme-color);
       }

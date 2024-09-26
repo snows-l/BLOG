@@ -153,7 +153,7 @@ onUnmounted(() => {
           padding: 10px 20px;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           margin: 10px 0;
-          border-radius: 15px;
+          border-radius: var(--border-radius-2);
           background-color: var(--bg-content-color);
           .music-item-warp {
             display: flex;

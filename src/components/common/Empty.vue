@@ -60,7 +60,7 @@ const props = defineProps({
   padding: 20px 0;
   .empty-warp {
     background-color: var(--bg-image-warp-color);
-    border-radius: 15px;
+    border-radius: var(--border-radius-2);
     height: 100%;
     width: 100%;
     padding: 20px 0;

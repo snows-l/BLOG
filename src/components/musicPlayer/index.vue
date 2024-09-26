@@ -292,7 +292,7 @@ watch(
     width: 80px;
     background-color: var(--bg-warp-light-color);
     padding: 10px 6px;
-    border-radius: 15px;
+    border-radius: var(--border-radius-2);
     position: relative;
     overflow: hidden;
     .cover-img-warp {
@@ -301,7 +301,7 @@ watch(
       align-items: center;
       justify-content: center;
       background-color: var(--bg-content-color);
-      border-radius: 15px;
+      border-radius: var(--border-radius-2);
       padding: 5px;
       .cover-img {
         border: 1px solid var(--text-color);
@@ -332,7 +332,7 @@ watch(
   .contral-music-warp {
     background-color: var(--bg-warp-light-color);
     padding: 10px;
-    border-radius: 15px;
+    border-radius: var(--border-radius-2);
     margin-left: 10px;
     width: 220px;
     height: 100px;
@@ -340,7 +340,7 @@ watch(
       width: 200px;
       padding: 0 10px;
       height: 80px;
-      border-radius: 15px;
+      border-radius: var(--border-radius-2);
       display: flex;
       flex-direction: column;
       align-items: center;

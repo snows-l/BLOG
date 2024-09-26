@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-17 17:54:02
- * @FilePath: /BLOG/src/views/about/zone/index.vue
+ * @LastEditTime: 2024-09-26 16:08:51
+ * @FilePath: /blog/src/views/about/zone/index.vue
 -->
 <template>
   <div class="zone-container-warp">
@@ -36,12 +36,14 @@
                   {{ item.browser }}
                 </div>
               </div>
-              <div class="zone-item-content">{{ item.text }}</div>
-              <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
-                <template v-for="img in item.imgs">
-                  <video v-if="img.includes('.mp4')" controls muted cover class="img" :src="img"></video>
-                  <LImg class="img" v-else :src="img" alt="" />
-                </template>
+              <div class="content-warp-line">
+                <div class="zone-item-content">{{ item.text }}</div>
+                <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
+                  <template v-for="img in item.imgs">
+                    <video v-if="img.includes('.mp4')" controls muted cover class="img" :src="img"></video>
+                    <LImg class="img" v-else :src="img" alt="" />
+                  </template>
+                </div>
               </div>
             </div>
           </div>
@@ -140,15 +142,16 @@ const handleLoadMore = () => {
       .zone-list-warp {
         margin: 20px 0;
         background-color: var(--bg-content-color);
-        border-radius: 10px;
+        border-radius: var(--border-radius-2);
         padding: 20px;
         .zone-list {
           .zone-item {
-            border-radius: 10px;
+            border-radius: var(--border-radius-2);
             padding: 20px;
             background-color: var(--bg-content-color);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             margin: 10px 8px;
+
             .time-loacl-warp {
               font-size: 12px;
               line-height: 18px;
@@ -163,36 +166,40 @@ const handleLoadMore = () => {
                 }
               }
             }
-            .zone-item-img-warp {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: space-between;
-              .img {
-                height: 220px;
-                width: 48%;
-                object-fit: cover;
-                display: inline-block;
-                margin: 5px;
-                border: 1px solid #ccc;
+            .content-warp-line {
+              background-image: url('@/assets/images/bg/wordline.webp');
+              line-height: 40px;
+              .zone-item-img-warp {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                .img {
+                  height: 220px;
+                  width: 48%;
+                  object-fit: cover;
+                  display: inline-block;
+                  margin: 5px;
+                  border: 1px solid #ccc;
+                }
               }
-            }
-            .zone-item-img-warp-3 {
-              margin: 20px 13px;
-              justify-content: flex-start !important;
-              .img {
-                width: 256px;
-                height: 240px;
-                object-fit: cover;
-                display: inline-block;
+              .zone-item-img-warp-3 {
+                margin: 20px 13px;
+                justify-content: flex-start !important;
+                .img {
+                  width: 256px;
+                  height: 240px;
+                  object-fit: cover;
+                  display: inline-block;
+                }
               }
-            }
-            .zone-item-content {
-              font-size: 16px;
-              line-height: 20px;
-              font-weight: bold;
-              margin-top: 10px;
-              color: var(--text-color);
-              margin-bottom: 20px;
+              .zone-item-content {
+                font-size: 13px;
+                margin-top: 10px;
+                color: var(--text-color);
+                margin-bottom: 20px;
+                min-height: 80px;
+                text-indent: 26px;
+              }
             }
           }
         }
@@ -227,7 +234,7 @@ const handleLoadMore = () => {
   .btn-more {
     margin-bottom: 20px;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: var(--border-radius-3);
     background-color: var(--theme-light-color-9);
     color: var(--theme-color);
   }
