@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 17:47:05
+ * @LastEditTime: 2024-09-26 17:05:05
  * @FilePath: /blog/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.avif';
@@ -29,7 +29,7 @@ export const useLayout = handleSearch => {
     cursorIndex: 0
   });
 
-  const bgImg = ref(bg1);
+  const bgImg = ref('');
   const currentPrimaryColor = ref(localStorage.getItem('primaryColor') || '#18a058');
 
   // 切换背景特效
@@ -99,7 +99,7 @@ export const useLayout = handleSearch => {
   };
 
   // 切换背景
-  const bgSet = [bg1, bg2, bg3, bg4];
+  const bgSet = ['', bg1, bg2, bg3, bg4];
   const handleToggleBgImg = () => {
     if (state.bgImgIndex == bgSet.length - 1) {
       state.bgImgIndex = 0;

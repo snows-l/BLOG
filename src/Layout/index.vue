@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-21 22:10:09
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-26 17:08:55
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
-  <div class="layout-warp" :style="{ backgroundImage: `url(${bgImg})` }">
+  <div class="layout-warp" :class="{ nobg: !bgImg }" :style="{ backgroundImage: `url(${bgImg})` }">
     <!-- 移动端 进度条 -->
     <div class="m-progress-warp" v-show="isMobi">
       <div class="progress" :style="{ width: `${currentScorllProgress}%` }"></div>
@@ -793,6 +793,9 @@ onUnmounted(() => {
   .setShow {
     bottom: 20px;
   }
+}
+.nobg {
+  background: var(--under-background) !important;
 }
 
 @keyframes spin {
