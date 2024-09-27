@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 13:18:11
+ * @LastEditTime: 2024-09-27 13:53:16
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -506,9 +506,9 @@ onUnmounted(() => {
     .content-warp {
       width: 100%;
       position: absolute;
-      top: 20%;
+      top: 25%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, 0);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -640,7 +640,7 @@ onUnmounted(() => {
       }
     }
     .showContent {
-      top: 50%;
+      top: 25%;
       opacity: 1;
     }
     .bottom-bg {
