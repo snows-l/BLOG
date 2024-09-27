@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 16:29:55
- * @FilePath: /blog/src/views/article/detail.vue
+ * @LastEditTime: 2024-09-27 23:08:52
+ * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp select" id="layout-content">
@@ -32,6 +32,15 @@
             <div class="pointer" @click="handleAdd('share')">
               <IconLike :size="18" class="iconfont" />
               <span>{{ state.arcticleDetail.shareCount || 0 }}</span>
+            </div>
+            <div class="pointer" @click="downloadCode">
+              <img
+                class="down-icon pointer kbn-custom"
+                :class="{ disabled: state.loading }"
+                data-tip="点击 下载源代码"
+                style="width: 20px; height: 20px; margin-right: 10px"
+                src="@/assets/images/icon/icon-down.svg" />
+              <span class="" style="font-size: 12px">源码下载</span>
             </div>
             <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
               <IconPreview class="iconfont" :size="18"></IconPreview>
@@ -77,7 +86,7 @@
 import { addShareCount, getArticleDetail } from '@/api/article';
 import { getCommentList2 } from '@/api/comment';
 import articleCover from '@/assets/images/bg/cover-article.png';
-import { copy, getImgIcon, isMobile, tranListToTree } from '@/utils/common';
+import { copy, downloadFileOfPreviewUrl, getImgIcon, isMobile, tranListToTree } from '@/utils/common';
 import { Editor } from '@wangeditor/editor-for-vue';
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, onMounted, onUpdated, reactive, ref, shallowRef, watch } from 'vue';
@@ -340,6 +349,12 @@ const generateTableOfContents = () => {
     toc.push({ id: id, text: heading.textContent, level: level, index: index }); // 将标题文本、id和等级添加到目录项中
   });
   return toc;
+};
+
+// 下载源代码
+const downloadCode = () => {
+  let url = 'http://124.223.41.220:3333/html/preview.html';
+  downloadFileOfPreviewUrl(url, 'preview.html');
 };
 
 // 监听滚动事件，更新目录项高亮状态
@@ -636,6 +651,16 @@ blockquote {
     }
   }
 }
+
+.m-article-content-warp-out {
+  .w-e-text-container {
+    padding: 10px 0px !important;
+  }
+  .m-comment-view-container {
+    width: var(--content-max-width-m-more) !important;
+  }
+}
+
 .dark {
   .article-detail-warp {
     .code-title {
