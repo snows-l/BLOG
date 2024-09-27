@@ -3,10 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-13 21:29:21
- * @FilePath: /BLOG/src/main.ts
+ * @LastEditTime: 2024-09-27 10:46:43
+ * @FilePath: /blog/src/main.ts
  */
 import '@/assets/font/iconfont/iconfont.css';
+import 'default-passive-events';
 import Loading from '@/direvtive/loading';
 import store from '@/store/index';
 import moment from 'moment';

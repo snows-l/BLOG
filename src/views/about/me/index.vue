@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 10:33:55
+ * @LastEditTime: 2024-09-27 10:44:24
  * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
@@ -97,7 +97,7 @@
               <div class="title">技术栈</div>
               <div class="back-warp">
                 <div class="jishu-item" :style="{ 'background-color': item.color }" v-for="item in state.skillList" :key="item.text">
-                  <img style="width: 16px; height: 16px" v-if="item.img" :src="item.img" alt="" />
+                  <img style="width: 16px; height: 16px" v-if="item.img" :src="getImgIcon(item.img)" alt="" />
                   <span>{{ item.text }}</span>
                 </div>
               </div>
@@ -206,19 +206,12 @@ import coverImg from '@/assets/images/bg/cover-about.png';
 import hobbyChiji from '@/assets/images/bg/hobby-chiji.avif';
 import hobbyQx from '@/assets/images/bg/hobby-qixing.avif';
 import hobbyWangzhe from '@/assets/images/bg/hobby-wangzhe.avif';
-import iconAxios from '@/assets/images/icon/axios.svg';
-import iconCSS from '@/assets/images/icon/CSS3.svg';
-import iconElement from '@/assets/images/icon/element-plus.svg';
-import iconHtml from '@/assets/images/icon/html5.svg';
-import iconLodash from '@/assets/images/icon/lodash.png';
 import iconEmail from '@/assets/images/icon/mail.png';
-import iconNode from '@/assets/images/icon/Nodejs.png';
 import iconQQ from '@/assets/images/icon/qq.png';
-import iconVue from '@/assets/images/icon/Vue.svg';
 import iconWeixin from '@/assets/images/icon/weixin.png';
 import MapCharts from '@/components/MapCharts/index.vue';
 import useResize from '@/hooks/useResize';
-import { getQQAvatar } from '@/utils/common';
+import { getQQAvatar, getImgIcon } from '@/utils/common';
 import { getRandomColor } from '@/utils/theme';
 import { ElCarousel, ElCarouselItem } from 'element-plus';
 import { reactive } from 'vue';
@@ -232,18 +225,18 @@ const state = reactive({
   leftSayings: ['不想被束缚 自由自在地去追求', '平平淡淡，简简单单', '内向', '渴望健康，平平安安才是真'],
   rightSayings: ['就活这一次 下次不来了', '身体才是革命的本钱', '逃跑吧 跑出这满是世俗的生活', '不求大富大贵 但求健健康康'],
   skillList: [
-    { img: iconVue, text: 'VUE3', color: getRandomColor() },
-    { img: iconCSS, text: 'CSS3', color: getRandomColor() },
-    { img: iconHtml, text: 'HTML5', color: getRandomColor() },
-    { img: iconNode, text: 'node.js', color: getRandomColor() },
+    { img: 'Vue.svg', text: 'VUE3', color: getRandomColor() },
+    { img: 'CSS3.svg', text: 'CSS3', color: getRandomColor() },
+    { img: 'html5.svg', text: 'HTML5', color: getRandomColor() },
+    { img: 'Nodejs.png', text: 'node.js', color: getRandomColor() },
     { img: '', text: 'express', color: getRandomColor() },
-    { img: iconLodash, text: 'lodash', color: getRandomColor() },
-    { img: iconAxios, text: 'Axios', color: getRandomColor() },
+    { img: 'lodash.png', text: 'lodash', color: getRandomColor() },
+    { img: 'axios.svg', text: 'Axios', color: getRandomColor() },
     { img: '', text: 'VITE', color: getRandomColor() },
     { img: '', text: 'JWT', color: getRandomColor() },
-    { img: iconElement, text: 'ElImage', color: getRandomColor() },
-    { img: iconElement, text: 'ElToolTip', color: getRandomColor() },
-    { img: iconElement, text: 'ElCarousel', color: getRandomColor() },
+    { img: 'element-plus.svg', text: 'ElImage', color: getRandomColor() },
+    { img: 'element-plus.svg', text: 'ElToolTip', color: getRandomColor() },
+    { img: 'element-plus.svg', text: 'ElCarousel', color: getRandomColor() },
     { img: '', text: 'vue3-flip-clock', color: getRandomColor() },
     { img: '', text: 'vue3-count-to', color: getRandomColor() },
     { img: '', text: 'jparticles', color: getRandomColor() },
