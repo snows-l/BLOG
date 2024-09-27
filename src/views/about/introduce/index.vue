@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 10:34:58
+ * @LastEditTime: 2024-09-27 15:49:20
  * @FilePath: /blog/src/views/about/introduce/index.vue
 -->
 <template>
@@ -190,9 +190,9 @@ onUpdated(() => {
         }
       }
       .introduce-warp {
-        min-height: 100vh;
+        min-height: calc(100vh - 500px);
         .jian-content {
-          min-height: 100vh;
+          min-height: calc(100vh - 500px);
           max-width: var(--content-max-width);
           margin: 10px auto;
           background-color: var(--bg-warp-color);
@@ -209,12 +209,11 @@ onUpdated(() => {
       }
       .introduce-warp-mobi {
         min-width: 100vw;
-        min-height: 100vh;
+        min-height: calc(100vh - 500px);
         overflow: scroll;
         .jian-content {
-          min-height: 100vh;
-          height: auto !important;
-          max-width: var(--content-max-width-m);
+          min-height: calc(100vh - 500px);
+          max-width: var(--content-max-width-m-more);
           padding: 30px 10px 10px 10px;
         }
       }

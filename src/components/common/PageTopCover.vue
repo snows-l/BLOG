@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 16:53:10
+ * @LastEditTime: 2024-09-27 15:50:38
  * @FilePath: /blog/src/components/common/PageTopCover.vue
 -->
 
@@ -20,7 +20,7 @@
   * articleInfo: 文章信息
 -->
 <template>
-  <div class="back">
+  <div class="back" :class="{ 'm-back': isMobile }">
     <div class="page-top-cover-warp" :class="{ 'm-page-top-cover-warp': isMobile }">
       <img class="cover-img" :src="coverImg" />
       <div class="content-warp">
@@ -79,6 +79,7 @@ const props = defineProps({
 .back {
   background: var(--under-background);
 }
+
 .page-top-cover-warp {
   width: 100%;
   height: 400px;
@@ -123,11 +124,15 @@ const props = defineProps({
         margin-right: 20px;
         color: #fff;
         font-size: 24px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        filter: drop-shadow(4px 4px 4px #000);
       }
       .icon-img {
         width: 36px;
         height: 36px;
         margin-right: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        filter: drop-shadow(4px 4px 4px #000);
       }
       .text {
         color: #fff;
