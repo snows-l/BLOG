@@ -3,12 +3,12 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 10:33:18
+ * @LastEditTime: 2024-09-27 10:34:58
  * @FilePath: /blog/src/views/about/introduce/index.vue
 -->
 <template>
   <div class="introduce-container-warp">
-    <PageTopCover :moduleTitle="'我的简历'" :textIcon="'📒'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
+    <PageTopCover :moduleTitle="'我的简历'" :textIcon="'📄'" :coverImg="coverImg" :isMobile="isMobi" :mudulDesc="''" :isArticle="false"></PageTopCover>
     <div class="introduce-container" :class="{ 'm-introduce-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
