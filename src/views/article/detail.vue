@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-21 22:06:27
- * @FilePath: /BLOG/src/views/article/detail.vue
+ * @LastEditTime: 2024-09-27 13:43:34
+ * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
   <div class="article-detail-warp select" id="layout-content">
@@ -258,7 +258,7 @@ const addCodeFold = () => {
     const lines = codeBlock.textContent.split('\n').length;
     if (lines > 20) {
       codeBlock.style.height = '440px';
-      codeBlock.style.overflowY = 'hidden';
+      codeBlock.style.overflowY = 'auto';
       codeBlock.style.borderBottomLeftRadius = '0px';
       codeBlock.style.borderBottomRightRadius = '0px';
       codeBlock.style.transition = 'height 0.3s ease';
@@ -287,7 +287,7 @@ const addCodeFold = () => {
         if (foldButton.classList.contains('fold')) {
           foldButton.innerText = '展开';
           codeBlock.style.height = '440px';
-          codeBlock.style.overflowY = 'hidden';
+          codeBlock.style.overflowY = 'auto';
         } else {
           foldButton.innerText = '收起';
           codeBlock.style.height = 'auto';
