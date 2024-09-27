@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 11:29:33
+ * @LastEditTime: 2024-09-27 13:18:35
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
 import useResize from '@/hooks/useResize';
-import { getBackstageurl, getLunar, randomNum } from '@/utils/common';
+import { getBackstageurl, getLunar, changeBgImg } from '@/utils/common';
 import axios from 'axios';
 import moment from 'moment';
 import { reactive } from 'vue';
@@ -75,7 +75,7 @@ let state = reactive({
   isScreenFull: false,
   clockSize: isMobi.value ? 0.5 : 0.8,
   saying: '渔得鱼心满意足，樵得樵眼笑眉舒！',
-  bgImgUrl: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/5.avif'
+  bgImgUrl: changeBgImg(14)
 });
 
 // 获取名言名句
@@ -99,8 +99,7 @@ const handleRefreshSaying = () => {
 
 // 切换背景
 const handleToggleBg = () => {
-  state.bgImgUrl =
-    import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif';
+  state.bgImgUrl = changeBgImg();
 };
 
 // 跳转到博客

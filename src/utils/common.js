@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-10 10:49:24
+ * @LastEditTime: 2024-09-27 13:17:19
  * @FilePath: /blog/src/utils/common.js
  */
 
@@ -455,4 +455,22 @@ export const getLunar = newDate => {
   }
   //农历函数结束
   return Draw();
+};
+
+// 切换背景图片
+export const changeBgImg = name => {
+  let url = '';
+  if (name) {
+    url =
+      import.meta.env.VITE_CURRENT_ENV == 'dev'
+        ? import.meta.env.VITE_DEV_BASE_SERVER + '/assets/bg/' + name + '.avif'
+        : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + name + '.avif';
+  } else {
+    url =
+      import.meta.env.VITE_CURRENT_ENV == 'dev'
+        ? import.meta.env.VITE_DEV_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif'
+        : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif';
+  }
+  console.log('------- url -------', url);
+  return url;
 };

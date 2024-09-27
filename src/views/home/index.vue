@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 11:27:35
+ * @LastEditTime: 2024-09-27 13:18:11
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -257,7 +257,7 @@ import { getDict } from '@/api/common';
 import Notice from '@/components/Notice/index.vue';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
-import { getQQAvatar, randomNum } from '@/utils/common';
+import { getQQAvatar, changeBgImg } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
@@ -279,7 +279,7 @@ const state = reactive({
   articleList: [],
   articleTypeList: [],
   bgImg: '',
-  bgImgUrl: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/1.avif',
+  bgImgUrl: changeBgImg(1),
   page: {
     page: 1,
     size: 5,
@@ -377,8 +377,7 @@ const handleToggleMove = (type: string) => {
 
 // 切换首页背景
 const handleToggleHomeBg = () => {
-  state.bgImgUrl =
-    import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif';
+  state.bgImgUrl = changeBgImg();
 };
 
 // infoMap
