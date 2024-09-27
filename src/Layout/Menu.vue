@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 18:08:27
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 19:20:35
- * @FilePath: /BLOG/src/Layout/Menu.vue
+ * @LastEditTime: 2024-09-27 18:57:44
+ * @FilePath: /blog/src/Layout/Menu.vue
 -->
 <template>
   <ul class="nav-list-warp nav-list" v-if="!isMobile">
@@ -15,14 +15,14 @@
             <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
             <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
-            <span>{{ menus.meta.title }}</span>
+            <span class="nav-title">{{ menus.meta.title }}</span>
           </span>
           <ul class="nav-list-sub-contetn">
             <li class="nav-item-sub nav-item item-nav-warp pointer" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
               <img class="icon-img" v-if="menu.meta.img" :src="getImgIcon(menu.meta.img)" />
               <span class="iconfont" v-else-if="menu.meta.textIcon">{{ menu.meta.textIcon }}</span>
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
-              <span>{{ menu.meta.title }}</span>
+              <span class="nav-title">{{ menu.meta.title }}</span>
             </li>
           </ul>
         </li>
@@ -31,7 +31,7 @@
         <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
         <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
-        <span>{{ menus.meta.title }}</span>
+        <span class="nav-title">{{ menus.meta.title }}</span>
       </li>
     </template>
   </ul>
@@ -43,14 +43,14 @@
             <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
             <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
             <i v-else class="iconfont" :class="menus.meta.icon"></i>
-            <span>{{ menus.meta.title }}</span>
+            <span class="nav-title">{{ menus.meta.title }}</span>
           </span>
           <ul class="m-nav-list-sub-contetn">
             <li class="nav-item-sub nav-item pointer item-nav-warp" v-for="menu in menus.children" :key="menu.path" @click="handleTo(menu)">
               <img class="icon-img" v-if="menu.meta.img" :src="getImgIcon(menu.meta.img)" />
               <span class="iconfont" v-else-if="menu.meta.textIcon">{{ menu.meta.textIcon }}</span>
               <i v-else class="iconfont" :class="menu.meta.icon"></i>
-              <span>{{ menu.meta.title }}</span>
+              <span class="nav-title">{{ menu.meta.title }}</span>
             </li>
           </ul>
         </li>
@@ -59,7 +59,7 @@
         <img class="icon-img" v-if="menus.meta.img" :src="getImgIcon(menus.meta.img)" />
         <span class="iconfont" v-else-if="menus.meta.textIcon">{{ menus.meta.textIcon }}</span>
         <i v-else class="iconfont" :class="menus.meta.icon"></i>
-        <span>{{ menus.meta.title }}</span>
+        <span class="nav-title">{{ menus.meta.title }}</span>
       </li>
     </template>
   </ul>
@@ -192,6 +192,9 @@ const handleTo = item => {
           color: var(--theme-color);
         }
       }
+    }
+    .nav-title {
+      text-shadow: var(--text-shadow);
     }
   }
   .nav-item:hover {
