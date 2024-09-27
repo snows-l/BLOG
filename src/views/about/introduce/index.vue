@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 15:49:20
+ * @LastEditTime: 2024-09-27 16:39:48
  * @FilePath: /blog/src/views/about/introduce/index.vue
 -->
 <template>
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import coverImg from '@/assets/images/bg/cover-zone.avif';
+import coverImg from '@/assets/images/bg/cover-jianli.png';
 import useResize from '@/hooks/useResize';
 import { reactive, onMounted, onUpdated, ref } from 'vue';
 const { isMobi } = useResize();

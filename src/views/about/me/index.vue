@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 10:44:24
+ * @LastEditTime: 2024-09-27 16:39:33
  * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
@@ -202,7 +202,7 @@
 
 <script lang="ts" setup>
 import { getBlogVisit, getDict } from '@/api/common';
-import coverImg from '@/assets/images/bg/cover-about.png';
+import coverImg from '@/assets/images/bg/cover-me.avif';
 import hobbyChiji from '@/assets/images/bg/hobby-chiji.avif';
 import hobbyQx from '@/assets/images/bg/hobby-qixing.avif';
 import hobbyWangzhe from '@/assets/images/bg/hobby-wangzhe.avif';

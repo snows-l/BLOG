@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 17:08:55
+ * @LastEditTime: 2024-09-27 16:34:53
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -332,7 +332,7 @@ const handleProgressDrag = () => {
 
 // 要展示樱花背景的路由
 let isShowSnowRoute = ['', '/', '', '/play/mp3', '/play/mp4', '/msg-board', '/about/zone', '/about/friends', '/about/me'];
-let isUnShowSnowRoute = ['/play/mp4/playing', '/article/share', '/article/detail', '/preview'];
+let isUnShowSnowRoute = ['/play/mp4/playing', '/article/share', '/article/detail', '/preview', '/about/introduce'];
 watch(
   () => route.path,
   n => {
