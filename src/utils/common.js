@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 13:39:38
+ * @LastEditTime: 2024-09-27 17:18:50
  * @FilePath: /blog/src/utils/common.js
  */
 
@@ -472,4 +472,22 @@ export const changeBgImg = name => {
         : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif';
   }
   return url;
+};
+
+// 下载阅览地址的文件
+export const downloadFileOfPreviewUrl = (url, filename) => {
+  fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+      // 创建一个隐藏的<a>标签
+      const blobUrl = URL.createObjectURL(blob);
+      const a = window.document.createElement('a');
+      a.setAttribute('target', '_blank');
+      a.setAttribute('download', filename); // 如果服务器端设置了CORS策略，可能需要设置正确的响应头以允许跨域下载
+      a.href = blobUrl;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click(); // 模拟点击事件，开始下载
+      document.body.removeChild(a); // 下载完成后移除<a>标签
+    });
 };
