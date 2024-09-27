@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-07 22:07:34
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 13:17:19
+ * @LastEditTime: 2024-09-27 13:39:38
  * @FilePath: /blog/src/utils/common.js
  */
 
@@ -471,6 +471,5 @@ export const changeBgImg = name => {
         ? import.meta.env.VITE_DEV_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif'
         : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif';
   }
-  console.log('------- url -------', url);
   return url;
 };
