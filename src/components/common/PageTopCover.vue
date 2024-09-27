@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 15:50:38
+ * @LastEditTime: 2024-09-27 16:21:05
  * @FilePath: /blog/src/components/common/PageTopCover.vue
 -->
 
@@ -155,6 +155,7 @@ const props = defineProps({
       text-align: center;
       color: #fff;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      filter: drop-shadow(4px 4px 4px #000);
     }
   }
   .default-bg-color {

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 13:43:34
+ * @LastEditTime: 2024-09-27 16:29:55
  * @FilePath: /blog/src/views/article/detail.vue
 -->
 <template>
@@ -621,7 +621,12 @@ blockquote {
 }
 
 .w-e-text-container {
+  padding: 10px 20px;
   color: var(--code-color) !important;
+  background-color: var(--bg-content-color) !important;
+  strong {
+    color: var(--code-color) !important;
+  }
   pre > code {
     text-shadow: 0px 0px !important;
     background-color: var(--bg-code-color) !important;
