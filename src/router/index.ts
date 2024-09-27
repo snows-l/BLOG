@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-15 10:10:34
- * @FilePath: /BLOG/src/router/index.ts
+ * @LastEditTime: 2024-09-27 09:30:43
+ * @FilePath: /blog/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -215,12 +215,20 @@ export const routes = [
         component: () => import('../views/about/me/index.vue')
       },
       {
+        path: '/about/introduce',
+        name: 'Introduce',
+        meta: {
+          title: '简历',
+          textIcon: '📄'
+        },
+        component: () => import('../views/about/introduce/index.vue')
+      },
+      {
         path: '/about/zone',
         name: 'Zone',
         meta: {
           title: '随笔',
           icon: 'icon-guanyu',
-          // img: 'pengyouquan.png',
           textIcon: '📒'
         },
         component: () => import('../views/about/zone/index.vue')

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-25 14:35:30
+ * @LastEditTime: 2024-09-27 10:33:55
  * @FilePath: /blog/src/views/about/me/index.vue
 -->
 <template>
@@ -291,10 +291,7 @@ getDictFn();
 
 const handleViewJian = () => {
   router.push({
-    path: '/preview',
-    query: {
-      type: 'introduce'
-    }
+    path: '/about/introduce'
   });
 };
 </script>
