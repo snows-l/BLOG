@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 17:13:15
+ * @LastEditTime: 2024-09-27 11:27:35
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -279,7 +279,7 @@ const state = reactive({
   articleList: [],
   articleTypeList: [],
   bgImg: '',
-  bgImgUrl: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/1.png',
+  bgImgUrl: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/1.avif',
   page: {
     page: 1,
     size: 5,
@@ -378,7 +378,7 @@ const handleToggleMove = (type: string) => {
 // 切换首页背景
 const handleToggleHomeBg = () => {
   state.bgImgUrl =
-    import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 10) + '.png';
+    import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER : import.meta.env.VITE_PROD_BASE_SERVER + '/assets/bg/' + randomNum(1, 15) + '.avif';
 };
 
 // infoMap
