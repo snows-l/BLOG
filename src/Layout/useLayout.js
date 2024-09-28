@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 17:05:05
- * @FilePath: /blog/src/Layout/useLayout.js
+ * @LastEditTime: 2024-09-28 19:54:15
+ * @FilePath: /BLOG/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.avif';
 import bg2 from '@/assets/images/bg/bg2.png';
@@ -14,10 +14,11 @@ import RmbImg from '@/assets/images/icon/rmb';
 import sakura from '@/assets/images/icon/sakura';
 import snowImg from '@/assets/images/icon/snow';
 import useResize from '@/hooks/useResize';
+import { useAppStore } from '@/store/app';
 import { removeEffect } from '@/utils/bgEffect';
 import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
 import { Line, Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 const { isMobi } = useResize();
 
 export const useLayout = handleSearch => {
@@ -28,6 +29,8 @@ export const useLayout = handleSearch => {
     bgEffectIndex: 0,
     cursorIndex: 0
   });
+
+  const isFullscreen = ref(false);
 
   const bgImg = ref('');
   const currentPrimaryColor = ref(localStorage.getItem('primaryColor') || '#18a058');
@@ -136,6 +139,46 @@ export const useLayout = handleSearch => {
     handleSearch(true);
   };
 
+  // 全屏/退出全屏 兼容性处理
+  const appStore = useAppStore();
+  const handleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      // 进入全屏
+      var requestMethod =
+        document.documentElement.requestFullScreen || //W3C
+        document.documentElement.webkitRequestFullScreen || //Chrome等
+        document.documentElement.mozRequestFullScreen || //FireFox
+        document.documentElement.msRequestFullscreen; //IE11
+
+      if (requestMethod) {
+        requestMethod.call(document.documentElement);
+        isFullscreen.value = true;
+        appStore.SET_FULL_SCREEN(true);
+      } else if (typeof window.ActiveXObject !== 'undefined') {
+        var wscript = new ActiveXObject('WScript.Shell');
+        if (wscript !== null) {
+          wscript.SendKeys('{F11}');
+          isFullscreen.value = true;
+          appStore.SET_FULL_SCREEN(true);
+        }
+      }
+    } else {
+      // 退出全屏
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        isFullscreen.value = false;
+        appStore.SET_FULL_SCREEN(false);
+      }
+    }
+  };
+
+  watch(
+    () => appStore.isFullSreen,
+    n => {
+      isFullscreen.value = n;
+    }
+  );
+
   return {
     handleToggleBgEffect,
     handleToggleBgImg,
@@ -144,6 +187,8 @@ export const useLayout = handleSearch => {
     handleToggleFont,
     handleToggleColor,
     currentPrimaryColor,
-    handleToggerTheme
+    handleToggerTheme,
+    isFullscreen,
+    handleFullScreen
   };
 };

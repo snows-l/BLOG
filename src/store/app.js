@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 10:22:55
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 10:14:42
+ * @LastEditTime: 2024-09-28 19:45:44
  * @FilePath: /BLOG/src/store/app.js
  */
 
@@ -13,7 +13,8 @@ export const useAppStore = defineStore('app', {
     return {
       articleDict: [],
       musicDict: [],
-      musicList: []
+      musicList: [],
+      isFullSreen: false
     };
   },
 
@@ -29,6 +30,10 @@ export const useAppStore = defineStore('app', {
     // 设置音乐列表
     SET_MUSIC_LIST(payload) {
       this.musicList = payload;
+    },
+    // 设置全屏状态
+    SET_FULL_SCREEN(payload) {
+      this.isFullSreen = payload;
     }
   },
 
@@ -38,7 +43,7 @@ export const useAppStore = defineStore('app', {
       {
         key: '_LOCAL_APP',
         storage: localStorage,
-        paths: ['articeDict', 'musicDict'] //指定要长久化的字段
+        paths: ['articeDict', 'musicDict', 'isFullSreen', 'musicList'] //指定要长久化的字段
       }
     ]
   }

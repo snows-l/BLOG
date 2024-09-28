@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 13:18:35
- * @FilePath: /blog/src/views/start/index.vue
+ * @LastEditTime: 2024-09-28 20:13:34
+ * @FilePath: /BLOG/src/views/start/index.vue
 -->
 <template>
   <div class="start-content-container">
@@ -25,7 +25,7 @@
               </div>
             </div>
 
-            <div class="to-warp" v-if="!state.isScreenFull" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
+            <div class="to-warp" v-if="!state.isFullSreen" style="width: 100%; display: flex; justify-content: center; margin-top: 40px; align-items: center">
               <text class="to pointer kbn-link" data-tip="首页" @click="handleBlog" style="margin-right: 40px" :style="{ fontSize: isMobi ? '36px' : '24px' }">🏡</text>
               <img
                 class="to pointer kbn-link"
@@ -47,13 +47,16 @@
 
 <script lang="ts" setup>
 import useResize from '@/hooks/useResize';
-import { getBackstageurl, getLunar, changeBgImg } from '@/utils/common';
+import { useAppStore } from '@/store/app';
+import { changeBgImg, getBackstageurl, getLunar } from '@/utils/common';
 import axios from 'axios';
 import moment from 'moment';
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const { isMobi } = useResize();
+const appStore = useAppStore();
+
 const router = useRouter();
 
 const weekConfig = {
@@ -72,11 +75,19 @@ let state = reactive({
   currentDate: moment().format('MM月DD日'),
   week: moment().day(),
   lunar: getLunar(moment().format('YYYY-MM-DD')),
-  isScreenFull: false,
+  isFullSreen: appStore.isFullSreen,
   clockSize: isMobi.value ? 0.5 : 0.8,
   saying: '渔得鱼心满意足，樵得樵眼笑眉舒！',
-  bgImgUrl: changeBgImg(14)
+  bgImgUrl: changeBgImg(14),
+  screenSize: window.devicePixelRatio
 });
+
+// 是否全屏
+if (state.isFullSreen) {
+  state.clockSize = isMobi.value ? 0.7 : state.screenSize;
+} else {
+  state.clockSize = isMobi.value ? 0.5 : 1;
+}
 
 // 获取名言名句
 const getSaying = () => {
@@ -124,12 +135,16 @@ const handleFullScreen = () => {
 
     if (requestMethod) {
       requestMethod.call(document.documentElement);
-      state.clockSize = isMobi.value ? 0.7 : 2;
-      state.isScreenFull = true;
+      state.clockSize = isMobi.value ? 0.7 : state.screenSize;
+      state.isFullSreen = true;
+      appStore.SET_FULL_SCREEN(true);
     } else if (typeof window.ActiveXObject !== 'undefined') {
       var wscript = new ActiveXObject('WScript.Shell');
       if (wscript !== null) {
         wscript.SendKeys('{F11}');
+        state.isFullSreen = true;
+        state.clockSize = isMobi.value ? 0.7 : state.screenSize;
+        appStore.SET_FULL_SCREEN(true);
       }
     }
   } else {
@@ -137,10 +152,23 @@ const handleFullScreen = () => {
     if (document.exitFullscreen) {
       document.exitFullscreen();
       state.clockSize = isMobi.value ? 0.5 : 1;
-      state.isScreenFull = false;
+      state.isFullSreen = false;
+      appStore.SET_FULL_SCREEN(false);
     }
   }
 };
+
+watch(
+  () => appStore.isFullSreen,
+  n => {
+    state.isFullSreen = n;
+    if (n) {
+      state.clockSize = isMobi.value ? 0.7 : state.screenSize;
+    } else {
+      state.clockSize = isMobi.value ? 0.5 : 1;
+    }
+  }
+);
 </script>
 
 <style lang="scss" scoped>
@@ -169,7 +197,7 @@ const handleFullScreen = () => {
         position: absolute;
         top: 46%;
         left: 50%;
-        transform: translate(-50%, -100%);
+        transform: translate(-50%, -60%);
       }
       .time-select {
         display: flex;

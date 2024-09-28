@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 15:42:51
+ * @LastEditTime: 2024-09-28 19:21:38
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -112,8 +112,12 @@
         <div class="bg-img-item set-item pointer" @click="handleToggleBgEffect">
           <img width="30px" height="30px" src="@/assets/images/icon/icon-bgeffect.svg" fit="fill" />
         </div>
-        <div class="cursor-effect set-item pointer" @click="handleToggleBgImg">
-          <img width="80px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
+        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg">
+          <img width="30px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
+        </div>
+        <div class="bg-img-item set-item pointer" @click="handleFullScreen">
+          <img width="30px" v-if="isFullscreen" height="30px" src="@/assets/images/icon/icon-unfullscreen.svg" fit="fill" />
+          <img width="30px" v-else height="30px" src="@/assets/images/icon/icon-fullscreen.svg" fit="fill" />
         </div>
       </div>
       <div class="font-warp">
@@ -255,7 +259,18 @@ const handleClickSrearchModal = () => {
 };
 
 import { useLayout } from './useLayout';
-const { handleToggleBgEffect, handleToggleBgImg, bgImg, handleToggleFont, handleToggleColor, currentPrimaryColor, handleToggerTheme, handleToggleCursor } = useLayout(handleSearch);
+const {
+  handleToggleBgEffect,
+  handleToggleBgImg,
+  bgImg,
+  handleToggleFont,
+  handleToggleColor,
+  currentPrimaryColor,
+  handleToggerTheme,
+  handleToggleCursor,
+  isFullscreen,
+  handleFullScreen
+} = useLayout(handleSearch);
 
 // 统计访问量，统一ip只会新增一次访问量
 addBlogVisit().then((res: any) => {
