@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 19:21:38
+ * @LastEditTime: 2024-09-28 20:50:17
  * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
@@ -115,17 +115,18 @@
         <div class="bg-img-item set-item pointer" @click="handleToggleBgImg">
           <img width="30px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
         </div>
-        <div class="bg-img-item set-item pointer" @click="handleFullScreen">
-          <img width="30px" v-if="isFullscreen" height="30px" src="@/assets/images/icon/icon-unfullscreen.svg" fit="fill" />
-          <img width="30px" v-else height="30px" src="@/assets/images/icon/icon-fullscreen.svg" fit="fill" />
+
+        <div class="bg-img-item set-item pointer b">
+          <input :value="currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
         </div>
       </div>
       <div class="font-warp">
+        <div class="font-item set-item pointer" @click="handleFullScreen">
+          <img width="30px" v-if="isFullscreen" height="30px" src="@/assets/images/icon/icon-unfullscreen.svg" fit="fill" />
+          <img width="30px" v-else height="30px" src="@/assets/images/icon/icon-fullscreen.svg" fit="fill" />
+        </div>
         <div class="font-item set-item pointer a" @click="handleToggleFont">
           <img width="25px" height="25px" src="@/assets/images/icon/icon-fontToggle.svg" fit="fill" />
-        </div>
-        <div class="font-item set-item pointer b">
-          <input :value="currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
         </div>
       </div>
     </div>
