@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 23:08:52
+ * @LastEditTime: 2024-09-28 15:46:03
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -33,16 +33,11 @@
               <IconLike :size="18" class="iconfont" />
               <span>{{ state.arcticleDetail.shareCount || 0 }}</span>
             </div>
-            <div class="pointer" @click="downloadCode">
-              <img
-                class="down-icon pointer kbn-custom"
-                :class="{ disabled: state.loading }"
-                data-tip="点击 下载源代码"
-                style="width: 20px; height: 20px; margin-right: 10px"
-                src="@/assets/images/icon/icon-down.svg" />
+            <div class="pointer kbn-custom" data-tip="点击 下载源代码" v-if="state.arcticleDetail.isPreview === 1" @click="downloadCode">
+              <img class="down-icon" :class="{ disabled: state.loading }" style="width: 20px; height: 20px; margin-right: 10px" src="@/assets/images/icon/icon-down.svg" />
               <span class="" style="font-size: 12px">源码下载</span>
             </div>
-            <div class="pointer" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
+            <div class="pointer kanban-custom" data-tip="点击 预览" v-if="state.arcticleDetail.isPreview === 1" @click="handleView">
               <IconPreview class="iconfont" :size="18"></IconPreview>
               <span class="" style="font-size: 12px">预览</span>
             </div>

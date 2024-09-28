@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 16:34:53
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-09-28 15:42:51
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :class="{ nobg: !bgImg }" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -90,7 +90,7 @@
         <img v-if="state.isMusicPlaying" width="25px" height="25px" style="border-radius: 50%" src="@/assets/images/common/playing.gif" alt="" />
         <img v-else width="25px" height="25px" :src="getImgIcon('icon-music.svg')" />
       </div>
-      <div v-show="route.path != '/start'" class="set pointer kbn-custom" data-tip="设置" @click="handleSetShow">
+      <div class="set pointer kbn-custom" data-tip="设置" @click="handleSetShow">
         <img width="25px" height="25px" :src="getImgIcon('icon-set.svg')" />
       </div>
     </div>
