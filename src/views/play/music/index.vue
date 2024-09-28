@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 09:22:36
+ * @LastEditTime: 2024-09-28 16:07:52
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -191,6 +191,7 @@ onUnmounted(() => {
             .music-artist,
             .music-type {
               font-size: 12px;
+              margin-top: 5px;
             }
             .music-title {
               margin-bottom: 15px;
