@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 19:54:15
+ * @LastEditTime: 2024-09-28 20:48:11
  * @FilePath: /BLOG/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.avif';
@@ -33,7 +33,7 @@ export const useLayout = handleSearch => {
   const isFullscreen = ref(false);
 
   const bgImg = ref('');
-  const currentPrimaryColor = ref(localStorage.getItem('primaryColor') || '#18a058');
+  const currentPrimaryColor = ref(localStorage.getItem('primaryColor') || '#25bbe4');
 
   // 切换背景特效
   const effects = [
