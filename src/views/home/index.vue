@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 13:53:16
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-09-28 09:56:57
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -174,7 +174,7 @@
         <div class="other-content-item">
           <div class="article-title-warp">
             <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
-            <h2 class="content-title">Article</h2>
+            <h2 class="content-title">ARTICLE</h2>
             <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
               <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
                 <div class="img-left item-warp">
@@ -257,7 +257,7 @@ import { getDict } from '@/api/common';
 import Notice from '@/components/Notice/index.vue';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
-import { getQQAvatar, changeBgImg } from '@/utils/common';
+import { changeBgImg, getQQAvatar } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
 import { onMounted, onUnmounted, reactive } from 'vue';
@@ -746,6 +746,7 @@ onUnmounted(() => {
             font-size: 20px;
             font-weight: 600;
             color: var(--text-color);
+            text-shadow: var(--text-shadow);
           }
         }
         .article-item {

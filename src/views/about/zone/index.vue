@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 16:24:40
- * @FilePath: /blog/src/views/about/zone/index.vue
+ * @LastEditTime: 2024-09-28 09:51:40
+ * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
   <div class="zone-container-warp">
@@ -15,35 +15,33 @@
           <div class="item-1 text">欢迎👏来到我的博客，这里是关于我的随笔！</div>
         </div>
 
-        <div class="zone-list-warp">
-          <div class="zone-list">
-            <div class="zone-item pointer" v-for="(item, index) in state.zoneList" :key="index">
-              <div class="time-loacl-warp">
-                <div style="display: flex; align-items: center">
-                  <div class="item time">
-                    <IconCalendar class="icon-img"></IconCalendar>
-                    {{ item.createTime }}
-                  </div>
-                  <div class="item local">
-                    <img class="icon-img" :src="getImgIcon('icon-dingwei.svg')" alt="" />
-                    {{ item.city }}
-                  </div>
+        <div class="zone-list">
+          <div class="zone-item pointer" v-for="(item, index) in state.zoneList" :key="index">
+            <div class="time-loacl-warp">
+              <div style="display: flex; align-items: center">
+                <div class="item time">
+                  <IconCalendar class="icon-img"></IconCalendar>
+                  {{ item.createTime }}
                 </div>
-                <div class="item local" v-if="!isMobi">
-                  <i class="iconfont icon-caozuoxitong"></i>
-                  {{ item.os }}
-                  <i class="iconfont icon-icon__dakailiulanqi" style="margin-left: 10px"></i>
-                  {{ item.browser }}
+                <div class="item local">
+                  <img class="icon-img" :src="getImgIcon('icon-dingwei.svg')" alt="" />
+                  {{ item.city }}
                 </div>
               </div>
-              <div class="content-warp-line">
-                <div class="zone-item-content">{{ item.text }}</div>
-                <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
-                  <template v-for="img in item.imgs">
-                    <video v-if="img.includes('.mp4')" controls muted cover class="img" :src="img"></video>
-                    <LImg class="img" v-else :src="img" alt="" />
-                  </template>
-                </div>
+              <div class="item local" v-if="!isMobi">
+                <i class="iconfont icon-caozuoxitong"></i>
+                {{ item.os }}
+                <i class="iconfont icon-icon__dakailiulanqi" style="margin-left: 10px"></i>
+                {{ item.browser }}
+              </div>
+            </div>
+            <div class="content-warp-line">
+              <div class="zone-item-content">{{ item.text }}</div>
+              <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
+                <template v-for="img in item.imgs">
+                  <video v-if="img.includes('.mp4')" controls muted cover class="img" :src="img"></video>
+                  <LImg class="img" v-else :src="img" alt="" />
+                </template>
               </div>
             </div>
           </div>
@@ -139,68 +137,65 @@ const handleLoadMore = () => {
           text-align: center;
         }
       }
-      .zone-list-warp {
-        margin: 20px 0;
-        background-color: var(--bg-content-color);
-        border-radius: var(--border-radius-2);
-        padding: 20px;
-        .zone-list {
-          .zone-item {
-            border-radius: var(--border-radius-2);
-            padding: 20px;
-            background-color: var(--bg-content-color);
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin: 10px 8px;
+      .zone-list {
+        .zone-item {
+          border-radius: var(--border-radius-2);
+          padding: 20px;
+          background-color: var(--bg-content-color);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          margin: 20px 8px;
 
-            .time-loacl-warp {
-              font-size: 12px;
-              line-height: 18px;
+          .time-loacl-warp {
+            font-size: 12px;
+            line-height: 18px;
+            display: flex;
+            color: var(--text-color);
+            .item {
               display: flex;
+              align-items: center;
+              margin-right: 20px;
+              .iconfont {
+                margin-right: 10px;
+              }
+            }
+          }
+          .content-warp-line {
+            background-image: url('@/assets/images/bg/wordline.webp');
+            line-height: 40px;
+            .zone-item-img-warp {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+              .img {
+                height: 220px;
+                width: 48%;
+                object-fit: cover;
+                display: inline-block;
+                margin: 5px;
+                border-radius: var(--border-radius-1);
+              }
+            }
+            .zone-item-img-warp-3 {
+              margin: 20px 13px;
+              justify-content: flex-start !important;
+              .img {
+                width: 256px;
+                height: 240px;
+                object-fit: cover;
+                display: inline-block;
+              }
+            }
+            .zone-item-content {
+              font-size: 13px;
+              margin-top: 20px;
               color: var(--text-color);
-              .item {
-                display: flex;
-                align-items: center;
-                margin-right: 20px;
-                .iconfont {
-                  margin-right: 10px;
-                }
-              }
+              margin-bottom: 20px;
+              min-height: 80px;
+              text-indent: 26px;
             }
-            .content-warp-line {
-              background-image: url('@/assets/images/bg/wordline.webp');
-              line-height: 40px;
-              .zone-item-img-warp {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                .img {
-                  height: 220px;
-                  width: 48%;
-                  object-fit: cover;
-                  display: inline-block;
-                  margin: 5px;
-                  border-radius: var(--border-radius-1);
-                }
-              }
-              .zone-item-img-warp-3 {
-                margin: 20px 13px;
-                justify-content: flex-start !important;
-                .img {
-                  width: 256px;
-                  height: 240px;
-                  object-fit: cover;
-                  display: inline-block;
-                }
-              }
-              .zone-item-content {
-                font-size: 13px;
-                margin-top: 20px;
-                color: var(--text-color);
-                margin-bottom: 20px;
-                min-height: 80px;
-                text-indent: 26px;
-              }
-            }
+          }
+          &:hover {
+            box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
           }
         }
       }
@@ -209,9 +204,6 @@ const handleLoadMore = () => {
   .m-zone-container {
     .center-max-width-warp {
       width: var(--content-max-width-m) !important;
-      .zone-list-warp {
-        padding: 10px 0px !important;
-      }
       .zone-list {
         .zone-item-img-warp {
           .img {

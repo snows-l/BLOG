@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 11:01:33
- * @FilePath: /blog/src/views/play/game/index.vue
+ * @LastEditTime: 2024-09-28 10:03:23
+ * @FilePath: /BLOG/src/views/play/game/index.vue
 -->
 <template>
   <div class="game-out-warp">
@@ -15,13 +15,16 @@
           <div class="item-1 text">这里有很多好玩的小游戏，快来玩！</div>
         </div>
         <div class="game-content-warp">
-          <div class="game-warp-list">
+          <div class="game-warp-list" v-if="state.list.length > 0">
             <div class="game-item pointer" @click="handleGame(item)" v-for="item in state.list">
               <div class="game-item-img">
                 <LImg :src="item.cover" alt="" />
               </div>
               <div class="game-item-title">{{ item.title }}</div>
             </div>
+          </div>
+          <div class="no-article" v-else>
+            <Empty :text="'暂无资源，期待您的分享~'" :loadingText="'资源正在拼命加载中...'" :loading="state.loading" />
           </div>
         </div>
       </div>
@@ -40,20 +43,26 @@ const router = useRouter();
 const { isMobi } = useResize();
 
 const state = reactive({
-  list: []
+  list: [],
+  loading: false
 });
 
 const getListFn = () => {
-  getArticleList({ isUnPage: false, game: 1 }).then(res => {
-    if (res.code === 200) {
-      state.list = res.data.map(item => {
-        return {
-          ...item,
-          cover: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover
-        };
-      });
-    }
-  });
+  state.loading = true;
+  getArticleList({ isUnPage: false, game: 1 })
+    .then(res => {
+      if (res.code === 200) {
+        state.list = res.data.map(item => {
+          return {
+            ...item,
+            cover: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover
+          };
+        });
+      }
+    })
+    .finally(() => {
+      state.loading = false;
+    });
 };
 getListFn();
 

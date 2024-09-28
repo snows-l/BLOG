@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 16:39:48
- * @FilePath: /blog/src/views/about/introduce/index.vue
+ * @LastEditTime: 2024-09-28 09:42:34
+ * @FilePath: /BLOG/src/views/about/introduce/index.vue
 -->
 <template>
   <div class="introduce-container-warp">
@@ -35,7 +35,7 @@
 <script lang="ts" setup>
 import coverImg from '@/assets/images/bg/cover-jianli.png';
 import useResize from '@/hooks/useResize';
-import { reactive, onMounted, onUpdated, ref } from 'vue';
+import { onMounted, onUpdated, reactive, ref } from 'vue';
 const { isMobi } = useResize();
 
 let pdfDoc = null;
@@ -214,7 +214,7 @@ onUpdated(() => {
         .jian-content {
           min-height: calc(100vh - 500px);
           max-width: var(--content-max-width-m-more);
-          padding: 30px 10px 10px 10px;
+          padding: 40px 10px 10px 10px;
         }
       }
     }

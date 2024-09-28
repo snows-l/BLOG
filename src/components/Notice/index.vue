@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-19 15:01:50
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 22:38:52
+ * @LastEditTime: 2024-09-28 09:58:22
  * @FilePath: /BLOG/src/components/Notice/index.vue
 -->
 <template>
@@ -41,9 +41,10 @@ const handleTo = (path: string) => {
   margin-bottom: 20px;
   .title {
     margin-bottom: 20px;
+    text-shadow: var(--text-shadow);
   }
   .notice-content-padding {
-    border-radius: var(--border-radius-2);
+    border-radius: var(--border-radius-1);
     padding: 0 10px;
     background-color: var(--bg-content-color);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);

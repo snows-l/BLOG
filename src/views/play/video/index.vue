@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-19 14:38:31
- * @FilePath: /blog/src/views/play/video/index.vue
+ * @LastEditTime: 2024-09-28 10:05:48
+ * @FilePath: /BLOG/src/views/play/video/index.vue
 -->
 <template>
   <div class="video-out-warp">
@@ -15,7 +15,7 @@
           <div class="item-1 text">本站所有影视均来源于互联网，仅供学习交流使用，请勿用于任何商业用途！</div>
         </div>
         <div class="video-content-warp">
-          <div class="video-warp-list">
+          <div class="video-warp-list" v-if="state.list.length > 0">
             <div class="video-item pointer" @click="handlevideo(item)" v-for="item in state.list">
               <div class="video-ifarme-warp">
                 <LImg :src="item.cover.includes('http') ? item.cover : getCoverImg(item.cover)" :isUnPreview="true" />
@@ -23,6 +23,9 @@
               </div>
               <div class="video-item-title">{{ item.title }}</div>
             </div>
+          </div>
+          <div class="no-article" v-else>
+            <Empty :text="'暂无影视资源，期待您的分享~'" :loadingText="'视频正在拼命加载中...'" :loading="state.loading" />
           </div>
         </div>
       </div>
@@ -54,6 +57,7 @@ const { isMobi } = useResize();
  * @param { Boolean }  autoplay 视频的自动播放
  */
 const state = reactive({
+  loading: false,
   list: []
 });
 
@@ -62,19 +66,23 @@ const getCoverImg = (name: String) => {
 };
 
 const getZoneListFn = () => {
-  getZoneList({ type: 1, page: 1, size: 100 }).then(res => {
-    if (res.code == 200) {
-      res.data.forEach(item => {
-        let imgs = (item.imgs && item.imgs.split(',')) || [];
-
-        state.list.push({
-          url: `https://player.bilibili.com/player.html?bvid=${item.remark}&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1`,
-          title: item.text,
-          cover: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + imgs[0] : import.meta.env.VITE_PROD_BASE_SERVER + imgs[0]
+  state.loading = true;
+  getZoneList({ type: 1, page: 1, size: 100 })
+    .then(res => {
+      if (res.code == 200) {
+        res.data.forEach(item => {
+          let imgs = (item.imgs && item.imgs.split(',')) || [];
+          state.list.push({
+            url: `https://player.bilibili.com/player.html?bvid=${item.remark}&p=1&as_wide=1&high_quality=1&danmaku=0&t=0&autoplay=1`,
+            title: item.text,
+            cover: import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + imgs[0] : import.meta.env.VITE_PROD_BASE_SERVER + imgs[0]
+          });
         });
-      });
-    }
-  });
+      }
+    })
+    .finally(() => {
+      state.loading = false;
+    });
 };
 getZoneListFn();
 
@@ -181,8 +189,12 @@ const handlevideo = row => {
     .center-max-width-warp {
       width: var(--content-max-width-m-more) !important;
       .video-item {
+        height: 230px !important;
         width: 100% !important;
         margin: 10px 0 !important;
+        .video-ifarme-warp {
+          height: 200px !important;
+        }
         .video-item-title {
         }
       }
