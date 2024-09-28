@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 10:05:48
+ * @LastEditTime: 2024-09-28 20:56:54
  * @FilePath: /BLOG/src/views/play/video/index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     <div class="video-container" :class="{ 'm-video-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">本站所有影视均来源于互联网，仅供学习交流使用，请勿用于任何商业用途！</div>
+          <div class="item-1 text text-shadow">本站所有影视均来源于互联网，仅供学习交流使用，请勿用于任何商业用途！</div>
         </div>
         <div class="video-content-warp">
           <div class="video-warp-list" v-if="state.list.length > 0">

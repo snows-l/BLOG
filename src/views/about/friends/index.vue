@@ -36,7 +36,7 @@
         </div>
 
         <div class="shengming-warp">
-          <div class="item-1" style="margin-bottom: 20px">
+          <div class="item-1 text-shadow" style="margin-bottom: 20px">
             <span style="margin-left: 0">❌</span>
             经常宕机
             <span>❌</span>
@@ -50,7 +50,7 @@
             <span>✅</span>
             技术优先
           </div>
-          <div class="item-2">欢迎👏来到我的博客，这里是我的友情链接，你可以在这里找到我感兴趣的网站，欢迎交换友链，共同进步！</div>
+          <div class="item-2 text-shadow">欢迎👏来到我的博客，这里是我的友情链接，你可以在这里找到我感兴趣的网站，欢迎交换友链，共同进步！</div>
         </div>
 
         <div class="friend-list-warp">

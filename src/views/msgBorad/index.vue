@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-26 16:25:41
- * @FilePath: /blog/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-09-28 20:57:44
+ * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -23,14 +23,14 @@
           <div class="poem-wrap">
             <div class="poem-border poem-left"></div>
             <div class="poem-border poem-right"></div>
-            <h1 class="poem-title">念两句诗</h1>
-            <div class="poem-content">江南好，风景旧曾谙。</div>
-            <div class="poem-author">【唐代】白居易《忆江南·江南好》</div>
+            <h1 class="poem-title text-shadow">念两句诗</h1>
+            <div class="poem-content text-shadow">江南好，风景旧曾谙。</div>
+            <div class="poem-author text-shadow">【唐代】白居易《忆江南·江南好》</div>
           </div>
-          <p @click="handleTome" class="thanks-msg">很感谢你能访问该页面，如果你有什么和博主说的或者有什么问题想问的，可以随时在下面评论哦~</p>
+          <p @click="handleTome" class="thanks-msg text-shadow">很感谢你能访问该页面，如果你有什么和博主说的或者有什么问题想问的，可以随时在下面评论哦~</p>
         </div>
         <div class="msg-list-content" :class="{ 'm-msg-list-content': isMobi }">
-          <div class="components">Conments {{ state.page.total + 2 }} 条留言</div>
+          <div class="components text-shadow">Conments {{ state.page.total + 2 }} 条留言</div>
           <div class="msg-list-hav" v-if="state.list.length > 0">
             <div class="msg-list" v-for="(item, index) in state.list" :key="index">
               <div class="msg-item">

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 09:42:34
+ * @LastEditTime: 2024-09-28 20:58:46
  * @FilePath: /BLOG/src/views/about/introduce/index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     <div class="introduce-container" :class="{ 'm-introduce-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">欢迎👏来到我的博客，这里是我的简历！</div>
+          <div class="item-1 text text-shadow">欢迎👏来到我的博客，这里是我的简历！</div>
         </div>
         <div class="introduce-warp" :class="{ 'introduce-warp-mobi': isMobi }">
           <div class="jian-content" v-loading="pdfParams.loading">

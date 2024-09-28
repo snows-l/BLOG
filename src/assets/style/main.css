@@ -40,3 +40,7 @@ h6 {
   font-weight: 500;
   line-height: 19px;
 }
+
+.text-shadow {
+  text-shadow: var(--text-shadow);
+}

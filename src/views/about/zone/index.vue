@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 10:14:51
+ * @LastEditTime: 2024-09-28 20:59:00
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     <div class="zone-container" :class="{ 'm-zone-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">欢迎👏来到我的博客，这里是关于我的随笔！</div>
+          <div class="item-1 text text-shadow">欢迎👏来到我的博客，这里是关于我的随笔！</div>
         </div>
 
         <div class="zone-list">

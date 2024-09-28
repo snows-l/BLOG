@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 10:03:23
+ * @LastEditTime: 2024-09-28 20:58:17
  * @FilePath: /BLOG/src/views/play/game/index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
     <div class="game-container" :class="{ 'm-game-container': isMobi }">
       <div class="center-max-width-warp">
         <div class="shengming-warp">
-          <div class="item-1 text">这里有很多好玩的小游戏，快来玩！</div>
+          <div class="item-1 text text-shadow">这里有很多好玩的小游戏，快来玩！</div>
         </div>
         <div class="game-content-warp">
           <div class="game-warp-list" v-if="state.list.length > 0">
