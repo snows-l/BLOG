@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 09:51:40
+ * @LastEditTime: 2024-09-28 10:14:51
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -194,9 +194,6 @@ const handleLoadMore = () => {
               text-indent: 26px;
             }
           }
-          &:hover {
-            box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
-          }
         }
       }
     }
@@ -244,5 +241,14 @@ const handleLoadMore = () => {
 .iconfont {
   color: var(--theme-color);
   font-size: 12px;
+}
+.dark {
+  .zone-container-warp {
+    .zone-item {
+      &:hover {
+        box-shadow: 2px 2px 10px 2px var(--theme-light-color-2) !important;
+      }
+    }
+  }
 }
 </style>
