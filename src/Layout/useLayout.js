@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:48:11
- * @FilePath: /BLOG/src/Layout/useLayout.js
+ * @LastEditTime: 2024-09-29 10:27:32
+ * @FilePath: /blog/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.avif';
 import bg2 from '@/assets/images/bg/bg2.png';
@@ -20,6 +20,7 @@ import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
 import { Line, Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { reactive, ref, watch } from 'vue';
 const { isMobi } = useResize();
+import { ElMessage } from 'element-plus';
 
 export const useLayout = handleSearch => {
   const state = reactive({
@@ -114,7 +115,7 @@ export const useLayout = handleSearch => {
   };
 
   // 切换字体
-  const fontFamilys = ['default', '优设标题黑', '华文行楷', 'apple', 'DSDIGI', 'default'];
+  const fontFamilys = ['喵喵体', '优设标题黑', '华文行楷', '电影旁白体', '菜单体', '教科书拼音体', '系统默认'];
   const handleToggleFont = () => {
     if (state.fontFamilyIndex === fontFamilys.length - 1) {
       state.fontFamilyIndex = 0;
@@ -122,6 +123,14 @@ export const useLayout = handleSearch => {
       state.fontFamilyIndex++;
     }
     setFontFamily(fontFamilys[state.fontFamilyIndex]);
+    // ElMessage({
+    //   type: 'success',
+    //   message: fontFamilys[state.fontFamilyIndex],
+    //   offset: 31,
+    //   center: true,
+    //   plain: true,
+    //   customClass: 'font-toggle-toast'
+    // });
     handleSearch(true);
   };
 

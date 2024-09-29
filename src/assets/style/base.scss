@@ -15,6 +15,42 @@ body {
   user-select: text;
 }
 
+// 定义（在全局样式中定义）
+@font-face {
+  font-family: 优设标题黑;
+  src: url('@/assets/font/fontFamily/优设标题黑.ttf');
+}
+
+@font-face {
+  font-family: 华文行楷;
+  src: url('@/assets/font/fontFamily/STXINGKA.TTF');
+}
+
+@font-face {
+  font-family: DSDIGI;
+  src: url('@/assets/font/fontFamily/DSDIGI.TTF');
+}
+
+@font-face {
+  font-family: 喵喵体;
+  src: url('@/assets/font/fontFamily/喵喵体.ttf');
+}
+
+@font-face {
+  font-family: 电影旁白体;
+  src: url('@/assets/font/fontFamily/电影旁白体.ttf');
+}
+
+@font-face {
+  font-family: 菜单体;
+  src: url('@/assets/font/fontFamily/菜单体.ttf');
+}
+
+@font-face {
+  font-family: 教科书拼音体;
+  src: url('@/assets/font/fontFamily/教科书拼音体.ttf');
+}
+
 :root {
   --theme: 'light';
   --theme-color: #25bbe4;
@@ -41,7 +77,7 @@ body {
       rgba(109, 186, 130, 0.1)
     ),
     white;
-  --font-family: '';
+  --font-family: '喵喵体'; // 默认字体
   --content-max-width: 920px;
   --content-max-width-m: 95%;
   --content-max-width-m-more: 95%;
@@ -92,27 +128,6 @@ body {
   --code-color: #d7d2d2;
   --bg-code-color: #222323;
   --text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-}
-
-// 定义（在全局样式中定义）
-@font-face {
-  font-family: 优设标题黑;
-  src: url('@/assets/font/fontFamily/优设标题黑.ttf');
-}
-
-@font-face {
-  font-family: apple;
-  src: url('@/assets/font/fontFamily/apple.ttf');
-}
-
-@font-face {
-  font-family: 华文行楷;
-  src: url('@/assets/font/fontFamily/STXINGKA.TTF');
-}
-
-@font-face {
-  font-family: DSDIGI;
-  src: url('@/assets/font/fontFamily/DSDIGI.TTF');
 }
 
 html {

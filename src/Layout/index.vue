@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:50:17
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-29 10:25:19
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :class="{ nobg: !bgImg }" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -98,34 +98,34 @@
     <!-- 设置 弹窗 -->
     <div class="set-warp" :class="{ setShow: state.isSetShow }">
       <div class="theme-warp">
-        <div class="theme-item set-item pointer" @click="handleToggerTheme('light')">
+        <div class="theme-item set-item pointer kbn-custom" data-tip="白天模式" @click="handleToggerTheme('light')">
           <img width="30px" height="30px" src="@/assets/images/icon/light.png" fit="fill" />
         </div>
-        <div class="theme-item set-item pointer" @click="handleToggerTheme('dark')">
+        <div class="theme-item set-item pointer kbn-custom" data-tip="夜间模式" @click="handleToggerTheme('dark')">
           <img width="30px" height="30px" src="@/assets/images/icon/night.png" fit="fill" />
         </div>
       </div>
       <div class="bg-img-warp">
-        <div class="bg-img-item set-item pointer" @click="handleToggleCursor">
+        <div class="bg-img-item set-item pointer kbn-custom" data-tip="切换光标滑动效果" @click="handleToggleCursor">
           <img width="30px" height="30px" src="@/assets/images/icon/icon-cursor.svg" fit="fill" />
         </div>
-        <div class="bg-img-item set-item pointer" @click="handleToggleBgEffect">
+        <div class="bg-img-item set-item pointer kbn-custom" data-tip="切换背景特效" @click="handleToggleBgEffect">
           <img width="30px" height="30px" src="@/assets/images/icon/icon-bgeffect.svg" fit="fill" />
         </div>
-        <div class="bg-img-item set-item pointer" @click="handleToggleBgImg">
+        <div class="bg-img-item set-item pointer kbn-custom" data-tip="切换背景" @click="handleToggleBgImg">
           <img width="30px" height="30px" src="@/assets/images/icon/icon-diandian.png" fit="fill" />
         </div>
 
-        <div class="bg-img-item set-item pointer b">
+        <div class="bg-img-item set-item pointer b kbn-custom" data-tip="切换主色">
           <input :value="currentPrimaryColor" style="height: 20px; width: 30px" type="color" name="color" id="color" @change="handleToggleColor" />
         </div>
       </div>
       <div class="font-warp">
-        <div class="font-item set-item pointer" @click="handleFullScreen">
+        <div class="font-item set-item pointer kbn-custom" data-tip="切换全屏" @click="handleFullScreen">
           <img width="30px" v-if="isFullscreen" height="30px" src="@/assets/images/icon/icon-unfullscreen.svg" fit="fill" />
           <img width="30px" v-else height="30px" src="@/assets/images/icon/icon-fullscreen.svg" fit="fill" />
         </div>
-        <div class="font-item set-item pointer a" @click="handleToggleFont">
+        <div class="font-item set-item pointer a kbn-custom" data-tip="切换字体" @click="handleToggleFont">
           <img width="25px" height="25px" src="@/assets/images/icon/icon-fontToggle.svg" fit="fill" />
         </div>
       </div>
@@ -846,5 +846,10 @@ onUnmounted(() => {
 .welcome-toast {
   font-size: 12px;
   text-wrap: nowrap;
+}
+.font-toggle-toast {
+  font-size: 12px;
+  text-wrap: nowrap;
+  padding-right: 12px;
 }
 </style>
