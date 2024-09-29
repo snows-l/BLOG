@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 12:46:15
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-09-29 19:13:06
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :class="{ nobg: !bgImg }" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -69,7 +69,7 @@
       <main @click="handleClickMain" style="min-height: 100vh" class="select" id="main">
         <router-view></router-view>
       </main>
-      <Footer></Footer>
+      <Footer v-show="route.path != '/start'"></Footer>
     </div>
 
     <!-- 置顶 / 音乐 / 设置 -->
