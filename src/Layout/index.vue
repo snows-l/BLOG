@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 10:25:19
+ * @LastEditTime: 2024-09-29 12:42:32
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -67,7 +67,7 @@
 
       <!-- main -->
       <main @click="handleClickMain" class="select" id="main">
-        <router-view></router-view>
+        <router-view style="min-height: 100vh"></router-view>
         <Footer></Footer>
       </main>
     </div>
