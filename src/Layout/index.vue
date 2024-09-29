@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 12:42:32
+ * @LastEditTime: 2024-09-29 12:46:15
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -66,10 +66,10 @@
       </header>
 
       <!-- main -->
-      <main @click="handleClickMain" class="select" id="main">
-        <router-view style="min-height: 100vh"></router-view>
-        <Footer></Footer>
+      <main @click="handleClickMain" style="min-height: 100vh" class="select" id="main">
+        <router-view></router-view>
       </main>
+      <Footer></Footer>
     </div>
 
     <!-- 置顶 / 音乐 / 设置 -->

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 16:21:05
+ * @LastEditTime: 2024-09-29 12:50:49
  * @FilePath: /blog/src/components/common/PageTopCover.vue
 -->
 
@@ -20,8 +20,8 @@
   * articleInfo: 文章信息
 -->
 <template>
-  <div class="back" :class="{ 'm-back': isMobile }">
-    <div class="page-top-cover-warp" :class="{ 'm-page-top-cover-warp': isMobile }">
+  <div class="out-big-warp" :class="{ 'm-out-big-warp': isMobile }">
+    <div class="page-top-cover-warp">
       <img class="cover-img" :src="coverImg" />
       <div class="content-warp">
         <div class="mudule">
@@ -76,97 +76,101 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.back {
+.out-big-warp {
   background: var(--under-background);
-}
-
-.page-top-cover-warp {
   width: 100%;
   height: 400px;
-  position: relative;
-  background-image: url('@/assets/images/bg/default-cover.png');
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+  .page-top-cover-warp {
     width: 100%;
     height: 100%;
-    background-color: var(--bg-warp-light-color-2);
-  }
-  .cover-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-    position: absolute;
-  }
-  .content-warp {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 200px;
-    height: 180px;
-    max-width: var(--content-max-width);
-    width: 100%;
-    padding: 20px;
-    border-radius: var(--border-radius-3);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .mudule {
-      height: 36px;
+    position: relative;
+    background-image: url('@/assets/images/bg/default-cover.png');
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-warp-light-color-2);
+    }
+    .cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+    .content-warp {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 200px;
+      height: 180px;
+      max-width: var(--content-max-width);
+      width: 100%;
+      padding: 20px;
+      border-radius: var(--border-radius-3);
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      .iconfont {
-        margin-right: 20px;
-        color: #fff;
-        font-size: 24px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        filter: drop-shadow(4px 4px 4px #000);
-      }
-      .icon-img {
-        width: 36px;
+      .mudule {
         height: 36px;
-        margin-right: 20px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        filter: drop-shadow(4px 4px 4px #000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .iconfont {
+          margin-right: 20px;
+          color: #fff;
+          font-size: 24px;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          filter: drop-shadow(4px 4px 4px #000);
+        }
+        .icon-img {
+          width: 36px;
+          height: 36px;
+          margin-right: 20px;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          filter: drop-shadow(4px 4px 4px #000);
+        }
+        .text {
+          color: #fff;
+          font-size: 24px;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          filter: drop-shadow(4px 4px 4px #000);
+        }
       }
-      .text {
+      .title-warp {
+        margin-top: 10px;
+        height: 50px;
+        line-height: 25px;
+        font-size: 18px;
+        color: var(--text-color);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
         color: #fff;
-        font-size: 24px;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         filter: drop-shadow(4px 4px 4px #000);
       }
     }
-    .title-warp {
-      margin-top: 10px;
-      height: 50px;
-      line-height: 25px;
-      font-size: 18px;
-      color: var(--text-color);
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-      color: #fff;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-      filter: drop-shadow(4px 4px 4px #000);
+    .default-bg-color {
+      // background-color: var(--bg-cover-color);
     }
-  }
-  .default-bg-color {
-    // background-color: var(--bg-cover-color);
   }
 }
-.m-page-top-cover-warp {
+
+.m-out-big-warp {
   height: 300px !important;
-  .content-warp {
-    top: 100px !important;
-    max-width: var(--content-max-width-m) !important;
+  .page-top-cover-warp {
+    .content-warp {
+      top: 100px !important;
+      max-width: var(--content-max-width-m) !important;
+    }
   }
 }
 </style>
