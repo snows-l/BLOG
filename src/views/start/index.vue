@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 11:28:55
+ * @LastEditTime: 2024-09-29 12:35:32
  * @FilePath: /blog/src/views/start/index.vue
 -->
 <template>
@@ -207,16 +207,11 @@ watch(
         .clock-warp {
           cursor: pointer;
         }
-        .time {
-          font-family: DSDIGI;
-          font-size: 60px;
-          font-weight: 900;
-        }
         .date {
           margin-top: 10px;
           font-size: 16px;
           font-weight: 500;
-          font-family: DSDIGI;
+          // font-family: DSDIGI;
           text-shadow: 1px 1px 1px #000;
         }
       }
