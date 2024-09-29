@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:58:46
+ * @LastEditTime: 2024-09-29 21:59:16
  * @FilePath: /BLOG/src/views/about/introduce/index.vue
 -->
 <template>
@@ -198,7 +198,7 @@ onUpdated(() => {
           background-color: var(--bg-warp-color);
           border-radius: var(--border-radius-2);
           position: relative;
-          padding: 20px 10px 10px 10px;
+          padding: 40px 10px 10px 10px;
           .opertion {
             position: absolute;
             top: 10px;
