@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:59:00
- * @FilePath: /BLOG/src/views/about/zone/index.vue
+ * @LastEditTime: 2024-09-29 17:27:32
+ * @FilePath: /blog/src/views/about/zone/index.vue
 -->
 <template>
   <div class="zone-container-warp">
@@ -38,11 +38,18 @@
             <div class="content-warp-line">
               <div class="zone-item-content">{{ item.text }}</div>
               <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
-                <template v-for="img in item.imgs">
-                  <video v-if="img.includes('.mp4')" controls muted cover class="img" :src="img"></video>
-                  <LImg class="img" v-else :src="img" alt="" />
+                <template v-for="img in item.images">
+                  <LImg class="img" :src="img" alt="" />
+                </template>
+                <template v-for="img in item.mp4s">
+                  <video class="img" :src="img" controls></video>
                 </template>
               </div>
+              <template v-if="item.mp3s && item.mp3s.length > 0">
+                <div class="mp3-warp" style="margin-top: 30px" v-for="(mp3, index) in item.mp3s">
+                  <audio class="mp3" :src="mp3" controls></audio>
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -86,9 +93,27 @@ const getZoneListFn = () => {
     .then(res => {
       if (res.code === 200) {
         res.data.forEach(item => {
-          item.imgs =
+          item.images = [];
+          item.mp3s = [];
+          item.mp4s = [];
+          item.images =
             item.imgs &&
-            item.imgs.split(',').map(img => (import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + img : import.meta.env.VITE_PROD_BASE_SERVER + img));
+            item.imgs
+              .split(',')
+              .map(img => (import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + img : import.meta.env.VITE_PROD_BASE_SERVER + img))
+              .filter(img => img.includes('.jpg') || img.includes('.png') || img.includes('.jpeg') || img.includes('.gif'));
+          item.mp3s =
+            item.imgs &&
+            item.imgs
+              .split(',')
+              .map(mp3 => (import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + mp3 : import.meta.env.VITE_PROD_BASE_SERVER + mp3))
+              .filter(mp3 => mp3.includes('.mp3'));
+          item.mp4s =
+            item.imgs &&
+            item.imgs
+              .split(',')
+              .map(mp4 => (import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + mp4 : import.meta.env.VITE_PROD_BASE_SERVER + mp4))
+              .filter(mp4 => mp4.includes('.mp4'));
         });
         state.zoneList = [...state.zoneList, ...res.data];
         state.page.total = res.total;
