@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 10:44:12
+ * @LastEditTime: 2024-09-30 14:26:17
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -678,13 +678,14 @@ onUnmounted(() => {
     }
     .transition-warp {
       position: absolute;
-      bottom: -80px;
-      height: 80px;
+      bottom: -160px;
+      height: 160px;
       width: 100%;
       left: 0;
       z-index: 3;
       opacity: 1;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.65) 60%, rgba(255, 255, 255, 0.1));
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.57) 60%, rgba(255, 255, 255, 0.1));
+      pointer-events: none;
     }
     .bottom-down {
       position: absolute;
