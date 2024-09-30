@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 11:24:53
+ * @LastEditTime: 2024-09-30 12:44:18
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -283,12 +283,12 @@ addBlogVisit().then((res: any) => {
       if (!isMobi.value) {
         ElNotification({
           title: '',
-          message: '欢迎来自「 ' + res.data.city + ' 」的朋友！',
+          message: '欢迎来自「 ' + res.data.city + ' 」的小伙伴！',
           offset: 80
         });
       } else {
         ElMessage({
-          message: '欢迎来自「 ' + res.data.city + ' 」的朋友！ ',
+          message: '欢迎来自「 ' + res.data.city + ' 」的的小伙伴！ ',
           offset: 31,
           center: true,
           plain: true,
