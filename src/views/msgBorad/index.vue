@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:57:44
- * @FilePath: /BLOG/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-09-30 09:34:55
+ * @FilePath: /blog/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -171,8 +171,9 @@ const state = reactive({
   }
 });
 
-const getCommentListFn = () => {
+const getCommentListFn = (isReset = false) => {
   state.loading = true;
+  if (isReset) state.list = [];
   getCommentList({ ...state.page, type: 0 }).then(res => {
     if (res.code === 200) {
       state.list = tranListToTree([...state.list, ...res.data], 'id', 'pId', 'children');
@@ -229,7 +230,7 @@ const handleComment = () => {
       state.form.pId = '';
       state.form.toId = '';
       state.form.toNickName = '';
-      getCommentListFn();
+      getCommentListFn(true);
     }
   });
 };
@@ -399,7 +400,7 @@ const handleComment = () => {
               text-indent: 30px;
               background-image: url('@/assets/images/bg/wordline.webp');
               line-height: 40px;
-              min-height: 120px;
+              min-height: 80px;
             }
           }
         }
@@ -435,6 +436,7 @@ const handleComment = () => {
           .back-title {
             font-size: 14px;
             line-height: 40px;
+            text-shadow: var(--text-shadow);
           }
           .back-me {
             position: absolute;

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 12:50:49
+ * @LastEditTime: 2024-09-30 09:31:30
  * @FilePath: /blog/src/components/common/PageTopCover.vue
 -->
 
@@ -25,7 +25,7 @@
       <img class="cover-img" :src="coverImg" />
       <div class="content-warp">
         <div class="mudule">
-          <img class="icon-img" v-if="imgIcon" :src="getImgIcon(imgIcon)" alt="" />
+          <img class="icon-img iconfont" v-if="imgIcon" :src="getImgIcon(imgIcon)" alt="" />
           <span v-else-if="textIcon" class="iconfont">{{ textIcon }}</span>
           <i v-else class="iconfont" :class="icon"></i>
           <span class="text">{{ moduleTitle }}</span>
@@ -124,7 +124,7 @@ const props = defineProps({
           margin-right: 20px;
           color: #fff;
           font-size: 24px;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          text-shadow: var(--text-shadow);
           filter: drop-shadow(4px 4px 4px #000);
         }
         .icon-img {
@@ -137,7 +137,7 @@ const props = defineProps({
         .text {
           color: #fff;
           font-size: 24px;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+          text-shadow: var(--text-shadow);
           filter: drop-shadow(4px 4px 4px #000);
         }
       }
