@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 09:56:57
- * @FilePath: /BLOG/src/views/home/index.vue
+ * @LastEditTime: 2024-09-30 09:57:39
+ * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -47,6 +47,7 @@
       <div class="bottom-bg"></div>
       <div class="bottom-bg1 bottom-bg"></div>
       <div class="bottom-bg1 bottom-bg"></div>
+      <div class="transition-warp"></div>
     </div>
     <div class="other-content-warp">
       <Notice class="other-content" :class="{ 'm-other-content': isMobi }"></Notice>
@@ -675,6 +676,16 @@ onUnmounted(() => {
       animation-iteration-count: infinite;
       background-image: url('@/assets/images/common/wave2.png');
     }
+    .transition-warp {
+      position: absolute;
+      bottom: -80px;
+      height: 80px;
+      width: 100%;
+      left: 0;
+      z-index: 3;
+      opacity: 1;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.65) 60%, rgba(255, 255, 255, 0.1));
+    }
     .bottom-down {
       position: absolute;
       bottom: 80px;
@@ -684,7 +695,7 @@ onUnmounted(() => {
   }
   .other-content-warp {
     position: relative;
-    margin-top: -0px;
+    padding-top: 40px;
     // background-color: var(--bg-warp-light-color-2);
     display: flex;
     flex-direction: column;
