@@ -3,19 +3,18 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 19:13:06
- * @FilePath: /BLOG/src/Layout/index.vue
+ * @LastEditTime: 2024-09-30 10:43:39
+ * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
-  <div class="layout-warp" :class="{ nobg: !bgImg }" :style="{ backgroundImage: `url(${bgImg})` }">
+  <div class="layout-warp" :class="{ nobg: !bgImg || route.path == '/' }" :style="{ backgroundImage: `url(${bgImg})` }">
     <!-- 移动端 进度条 -->
     <div class="m-progress-warp" v-show="isMobi">
       <div class="progress" :style="{ width: `${currentScorllProgress}%` }"></div>
     </div>
     <!-- pc 进度条 -->
-    <div class="progress-warp" ref="progressRef" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start'">
+    <div class="progress-warp" ref="progressRef" style="height: calc(100vh - 145px)" v-show="!isMobi && route.path != '/start' && route.path != '/preview'">
       <div class="progress" :style="{ height: `calc(${currentScorllProgress}%)` }"></div>
-      <!--  -->
       <div ref="progressImgRef" :style="{ opacity: currentScorllProgress != 0 ? 1 : 0 }" class="progress-icon pointer" @click="handleTop" alt=""></div>
     </div>
     <!-- 移动端 菜单 -->
@@ -35,7 +34,7 @@
 
     <!-- layout-warp -->
     <div class="layout-content-warp" id="layout" :class="{ mainRight: state.mMenuShow, smooth: state.disabledSnooth }" ref="layoutRef">
-      <!-- mobile header -->
+      <!-- 移动端 header -->
       <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi" v-show="route.path != '/start'">
         <div class="icon-warp">
           <img style="width: 30px; height: 30px" v-if="state.mMenuShow" :src="getImgIcon('icon-close.svg')" @click="handleMMenuShow" />
@@ -49,7 +48,7 @@
       </header>
 
       <!-- pc header -->
-      <header v-else class="header-warp" :class="state.isFlutter ? 'flutter' : ''" v-show="route.path != '/start'">
+      <header v-else class="header-warp" :class="state.isFlutter ? 'flutter' : ''" v-show="route.path != '/start' && route.path != '/preview'">
         <div class="app-title">
           <span class="title-text" @click="handleTo('/')">snows_l</span>
           <span class="title-sub-text" style="margin: 0 10px 0 5px">の</span>

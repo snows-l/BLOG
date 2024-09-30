@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 09:57:39
+ * @LastEditTime: 2024-09-30 10:44:12
  * @FilePath: /blog/src/views/home/index.vue
 -->
 <template>
@@ -696,7 +696,7 @@ onUnmounted(() => {
   .other-content-warp {
     position: relative;
     padding-top: 40px;
-    // background-color: var(--bg-warp-light-color-2);
+    background-color: var(--under-background);
     display: flex;
     flex-direction: column;
     justify-content: center;
