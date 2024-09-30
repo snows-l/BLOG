@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 14:26:17
- * @FilePath: /blog/src/views/home/index.vue
+ * @LastEditTime: 2024-09-30 23:16:32
+ * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
   <div class="home-warp">
@@ -256,13 +256,15 @@
 import { getArticleList } from '@/api/article';
 import { getDict } from '@/api/common';
 import Notice from '@/components/Notice/index.vue';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
 import { changeBgImg, getQQAvatar } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import moment from 'moment';
-import { onMounted, onUnmounted, reactive } from 'vue';
+import { onMounted, onUnmounted, onUpdated, reactive } from 'vue';
 import { useRouter } from 'vue-router';
+const { intersectionObserver } = useIntersectionObserver();
 
 const { isMobi } = useResize();
 const router = useRouter();
@@ -336,7 +338,7 @@ const getArticleListFn = () => {
         });
         state.articleList = [...state.articleList, ...res.data];
         state.page.total = res.total;
-        if (state.articleList.length >= res.total) {
+        if (res.data.length === 0 || state.articleList.length >= res.total) {
           state.isMore = false; // 已经没有更多数据了
         }
       }
@@ -477,6 +479,10 @@ onMounted(() => {
   //监听localStorage变化
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';
+});
+
+onUpdated(() => {
+  intersectionObserver('.article-item');
 });
 
 // 卸载 优化
@@ -678,13 +684,13 @@ onUnmounted(() => {
     }
     .transition-warp {
       position: absolute;
-      bottom: -160px;
-      height: 160px;
+      bottom: -80px;
+      height: 80px;
       width: 100%;
       left: 0;
       z-index: 3;
       opacity: 1;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.57) 60%, rgba(255, 255, 255, 0.1));
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 60%, rgba(255, 255, 255, 0.1));
       pointer-events: none;
     }
     .bottom-down {

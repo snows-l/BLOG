@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 10:51:01
- * @FilePath: /blog/src/router/index.ts
+ * @LastEditTime: 2024-09-30 23:24:12
+ * @FilePath: /BLOG/src/router/index.ts
  */
 import Layout from '@/Layout/index.vue';
 import { getBackstageurl } from '@/utils/common';
@@ -58,14 +58,17 @@ export const routes = [
     component: () => import('../views/start/index.vue')
   },
   {
-    path: '/article',
+    path: '/article/share',
     name: 'Article',
     meta: {
       title: '文章',
       icon: 'icon-guidang',
-      textIcon: '📝'
+      textIcon: '📝',
+      query: {
+        type: '1'
+      }
     },
-    redirect: { name: 'FrontEnd', query: { type: '1' } },
+    redirect: { name: 'FrontEnd' },
     children: [
       {
         path: '/article/share',
@@ -99,7 +102,7 @@ export const routes = [
         path: '/article/share',
         name: 'Other',
         meta: {
-          title: '其他分享',
+          title: '其他',
           icon: 'icon-zonghecaiwu',
           textIcon: '📚',
           query: {
@@ -109,10 +112,20 @@ export const routes = [
         component: () => import('../views/article/index.vue')
       },
       {
+        link: 'https://blog.csdn.net/snows_l?type=blog',
+        path: '',
+        name: 'MoreArticle',
+        meta: {
+          title: '更多分享',
+          textIcon: '🍃'
+        },
+        component: null
+      },
+      {
         path: '/article/detail',
         name: 'Detail',
         meta: {
-          title: '详情',
+          title: '文章详情',
           icon: 'icon-fenxiang',
           textIcon: '🔗'
         },

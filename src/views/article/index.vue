@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-14 19:18:46
+ * @LastEditTime: 2024-09-30 23:40:16
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -216,11 +216,13 @@ import qianduanCover from '@/assets/images/bg/cover-qianduan.avif';
 import { useAppStore } from '@/store/app';
 import { getQQAvatar } from '@/utils/common';
 import moment from 'moment';
-import { reactive, watch } from 'vue';
+import { onUpdated, reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
+const { intersectionObserver } = useIntersectionObserver();
 
 const store = useAppStore();
 const router = useRouter();
@@ -341,6 +343,10 @@ watch(
     getArticleListFn();
   }
 );
+
+onUpdated(() => {
+  intersectionObserver('.article-item');
+});
 </script>
 
 <style lang="scss" scoped>

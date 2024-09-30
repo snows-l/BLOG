@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:21:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 16:07:52
+ * @LastEditTime: 2024-09-30 23:32:56
  * @FilePath: /BLOG/src/views/play/music/index.vue
 -->
 <template>
@@ -54,10 +54,13 @@ import { getMusicList } from '@/api/music';
 import coverImg from '@/assets/images/bg/cover-music.avif';
 import $bus from '@/bus/index';
 import { useAppStore } from '@/store/app';
-import { onMounted, onUnmounted, reactive } from 'vue';
+import { onMounted, onUnmounted, onUpdated, reactive } from 'vue';
 
 import useResize from '@/hooks/useResize';
 const { isMobi } = useResize();
+
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+const { intersectionObserver } = useIntersectionObserver();
 const store = useAppStore();
 
 const state = reactive({
@@ -123,6 +126,12 @@ onMounted(() => {
   $bus.on('musicPlayerCurrentMusicChange', (id: number) => {
     state.currentMusicId = id;
   });
+
+  intersectionObserver('.music-item');
+});
+
+onUpdated(() => {
+  intersectionObserver('.music-item');
 });
 
 onUnmounted(() => {

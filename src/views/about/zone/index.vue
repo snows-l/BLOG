@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 17:27:32
- * @FilePath: /blog/src/views/about/zone/index.vue
+ * @LastEditTime: 2024-09-30 23:39:27
+ * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
   <div class="zone-container-warp">
@@ -66,10 +66,12 @@
 <script lang="ts" setup>
 import { getZoneList } from '@/api/zone';
 import coverImg from '@/assets/images/bg/cover-zone.avif';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
 import { getImgIcon } from '@/utils/common';
-import { reactive } from 'vue';
+import { onUpdated, reactive } from 'vue';
 const { isMobi } = useResize();
+const { intersectionObserver } = useIntersectionObserver();
 
 const state = reactive({
   isMore: true,
@@ -138,6 +140,10 @@ const handleLoadMore = () => {
   state.page.page++;
   getZoneListFn();
 };
+
+onUpdated(() => {
+  intersectionObserver('.zone-item');
+});
 </script>
 
 <style lang="scss" scoped>

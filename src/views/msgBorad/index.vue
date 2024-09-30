@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-13 10:04:53
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 09:34:55
- * @FilePath: /blog/src/views/msgBorad/index.vue
+ * @LastEditTime: 2024-09-30 23:29:47
+ * @FilePath: /BLOG/src/views/msgBorad/index.vue
 -->
 <template>
   <div class="msg-borad-warp">
@@ -108,9 +108,11 @@
 <script lang="ts" setup>
 import { addComment, getCommentList } from '@/api/comment';
 import coverImg from '@/assets/images/bg/cover-comment.png';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
 import { getBackstageurl, getQQAvatar, tranListToTree } from '@/utils/common';
-import { reactive } from 'vue';
+import { onUpdated, reactive } from 'vue';
+const { intersectionObserver } = useIntersectionObserver();
 const { isMobi } = useResize();
 
 const state = reactive({
@@ -234,6 +236,10 @@ const handleComment = () => {
     }
   });
 };
+
+onUpdated(() => {
+  intersectionObserver('.msg-item');
+});
 </script>
 
 <style lang="scss" scoped>

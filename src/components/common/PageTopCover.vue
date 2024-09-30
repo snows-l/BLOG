@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 09:31:30
- * @FilePath: /blog/src/components/common/PageTopCover.vue
+ * @LastEditTime: 2024-09-30 22:02:19
+ * @FilePath: /BLOG/src/components/common/PageTopCover.vue
 -->
 
 <!--
@@ -136,7 +136,7 @@ const props = defineProps({
         }
         .text {
           color: #fff;
-          font-size: 24px;
+          font-size: 36px;
           text-shadow: var(--text-shadow);
           filter: drop-shadow(4px 4px 4px #000);
         }
