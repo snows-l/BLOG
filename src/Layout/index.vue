@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 10:43:39
+ * @LastEditTime: 2024-09-30 11:24:53
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -35,7 +35,11 @@
     <!-- layout-warp -->
     <div class="layout-content-warp" id="layout" :class="{ mainRight: state.mMenuShow, smooth: state.disabledSnooth }" ref="layoutRef">
       <!-- 移动端 header -->
-      <header class="mobile-header-warp header-warp" :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }" v-if="isMobi" v-show="route.path != '/start'">
+      <header
+        class="mobile-header-warp header-warp"
+        :class="{ rightHeader: state.mMenuShow, flutter: state.isFlutter }"
+        v-if="isMobi"
+        v-show="route.path != '/start' && route.path != '/preview'">
         <div class="icon-warp">
           <img style="width: 30px; height: 30px" v-if="state.mMenuShow" :src="getImgIcon('icon-close.svg')" @click="handleMMenuShow" />
           <img style="width: 30px; height: 30px" v-else :src="getImgIcon('icon-menu.svg')" @click="handleMMenuShow" />
