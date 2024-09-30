@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 12:44:18
+ * @LastEditTime: 2024-09-30 14:30:25
  * @FilePath: /blog/src/Layout/index.vue
 -->
 <template>
@@ -837,6 +837,9 @@ onUnmounted(() => {
   100% {
     transform: rotateY(360deg);
   }
+}
+.icon-sousuo1 {
+  text-shadow: var(--text-shadow);
 }
 </style>
 
