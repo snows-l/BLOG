@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-20 22:54:21
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 10:27:32
- * @FilePath: /blog/src/Layout/useLayout.js
+ * @LastEditTime: 2024-10-01 14:36:46
+ * @FilePath: /BLOG/src/Layout/useLayout.js
  */
 import bg1 from '@/assets/images/bg/bg1.avif';
 import bg2 from '@/assets/images/bg/bg2.png';
@@ -20,7 +20,6 @@ import { setFontFamily, setPrimaryColor, setTheme } from '@/utils/theme';
 import { Line, Particle, Snow } from 'jparticles'; // 引入粒子效果库 引入雪花效果库
 import { reactive, ref, watch } from 'vue';
 const { isMobi } = useResize();
-import { ElMessage } from 'element-plus';
 
 export const useLayout = handleSearch => {
   const state = reactive({
@@ -60,8 +59,8 @@ export const useLayout = handleSearch => {
   // 切换光标样式
   const cursorSet = [
     {
-      class: window.cursoreffects.bubbleCursor,
-      playload: {}
+      class: window.cursoreffects.textFlag,
+      playload: { text: 'snows_l', color: '#41BCE3' }
     },
     {
       class: null,
@@ -71,9 +70,10 @@ export const useLayout = handleSearch => {
       class: window.cursoreffects.clockCursor,
       playload: {}
     },
+
     {
-      class: window.cursoreffects.textFlag,
-      playload: { text: 'snows_l', color: '#ff0000' }
+      class: window.cursoreffects.bubbleCursor,
+      playload: {}
     },
     {
       class: window.cursoreffects.springyEmojiCursor,
