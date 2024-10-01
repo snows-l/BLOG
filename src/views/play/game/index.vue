@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:58:17
+ * @LastEditTime: 2024-10-01 11:02:30
  * @FilePath: /BLOG/src/views/play/game/index.vue
 -->
 <template>
@@ -36,11 +36,14 @@
 import { getArticleList } from '@/api/article';
 import coverImg from '@/assets/images/bg/cover-game.png';
 import useResize from '@/hooks/useResize';
-import { reactive } from 'vue';
+
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { onUpdated, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const { isMobi } = useResize();
+const { intersectionObserver } = useIntersectionObserver();
 
 const state = reactive({
   list: [],
@@ -74,6 +77,10 @@ const handleGame = row => {
     }
   });
 };
+
+onUpdated(() => {
+  intersectionObserver('.game-item');
+});
 </script>
 
 <style lang="scss" scoped>

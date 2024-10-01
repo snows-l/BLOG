@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 16:01:58
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 14:30:25
- * @FilePath: /blog/src/Layout/index.vue
+ * @LastEditTime: 2024-10-01 11:18:45
+ * @FilePath: /BLOG/src/Layout/index.vue
 -->
 <template>
   <div class="layout-warp" :class="{ nobg: !bgImg || route.path == '/' }" :style="{ backgroundImage: `url(${bgImg})` }">
@@ -381,6 +381,14 @@ onMounted(() => {
 onUnmounted(() => {
   (layoutRef.value as any) && (layoutRef.value as any).removeEventListener('scroll', scorllCallback);
 });
+
+// 监听路由变化 回到顶部
+watch(
+  () => route.path,
+  n => {
+    layoutRef.value.scrollTop = 0;
+  }
+);
 </script>
 
 <style lang="scss" scoped>

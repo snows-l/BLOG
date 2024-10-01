@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-27 16:39:33
- * @FilePath: /blog/src/views/about/me/index.vue
+ * @LastEditTime: 2024-10-01 11:09:34
+ * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
   <div class="me-out-warp">
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="info-warp-1">
+        <div class="info-warp-1 observer-item">
           <div class="info-1-item me-warp">
             <div class="me-1">Hello 很荣幸遇见你</div>
             <div class="me-2">
@@ -77,7 +77,7 @@
               </ToolTip>
             </div>
           </div>
-          <div class="info-1-item site-warp">
+          <div class="info-1-item site-warp observer-item">
             <div class="before">
               <div class="before-warp">
                 <div class="tltle">关于本网站</div>
@@ -112,7 +112,7 @@
           </div>
         </div>
 
-        <div class="info-warp-2">
+        <div class="info-warp-2 observer-item">
           <div class="visit-warp">
             <div class="title">访问统计</div>
             <div class="visit-item-warp">
@@ -170,7 +170,7 @@
               </div>
             </div>
           </div>
-          <div class="hobby-warp">
+          <div class="hobby-warp" observer-item>
             <div class="title">HOBBY</div>
             <el-carousel style="margin-top: 20px" height="140px" :type="!isMobi ? 'card' : ''" :interval="2000" :loop="true">
               <el-carousel-item v-for="item in state.hobbyList" :key="item.name">
@@ -182,11 +182,11 @@
             </el-carousel>
           </div>
         </div>
-        <div class="visity-map-warp">
+        <div class="visity-map-warp observer-item">
           <div class="title">访问地区分布</div>
           <MapCharts />
         </div>
-        <div class="my-label-warp">
+        <div class="my-label-warp observer-item">
           <div class="title">我的标签</div>
           <div class="content-warp">
             <div class="my-label-item" :style="{ 'background-color': item.color }" v-for="item in state.labelList" :key="item.label">
@@ -210,15 +210,17 @@ import iconEmail from '@/assets/images/icon/mail.png';
 import iconQQ from '@/assets/images/icon/qq.png';
 import iconWeixin from '@/assets/images/icon/weixin.png';
 import MapCharts from '@/components/MapCharts/index.vue';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
-import { getQQAvatar, getImgIcon } from '@/utils/common';
+import { getImgIcon, getQQAvatar } from '@/utils/common';
 import { getRandomColor } from '@/utils/theme';
 import { ElCarousel, ElCarouselItem } from 'element-plus';
-import { reactive } from 'vue';
+import { onUpdated, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const { isMobi } = useResize();
+const { intersectionObserver } = useIntersectionObserver();
 
 const state = reactive({
   avatar: getQQAvatar(),
@@ -287,6 +289,10 @@ const handleViewJian = () => {
     path: '/about/introduce'
   });
 };
+
+onUpdated(() => {
+  intersectionObserver('.observer-item');
+});
 </script>
 
 <style lang="scss" scoped>

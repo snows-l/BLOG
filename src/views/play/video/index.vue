@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 20:56:54
+ * @LastEditTime: 2024-10-01 11:06:32
  * @FilePath: /BLOG/src/views/play/video/index.vue
 -->
 <template>
@@ -36,12 +36,14 @@
 <script lang="ts" setup>
 import { getZoneList } from '@/api/zone';
 import coverImg from '@/assets/images/bg/cover-game.png';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
-import { reactive } from 'vue';
+import { onUpdated, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const { isMobi } = useResize();
+const { intersectionObserver } = useIntersectionObserver();
 
 /**
  *
@@ -94,6 +96,10 @@ const handlevideo = row => {
     }
   });
 };
+
+onUpdated(() => {
+  intersectionObserver('.video-item');
+});
 </script>
 
 <style lang="scss" scoped>
