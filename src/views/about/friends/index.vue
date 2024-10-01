@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-07 09:30:35
+ * @LastEditTime: 2024-10-01 15:11:34
  * @FilePath: /BLOG/src/views/about/friends/index.vue
 -->
 <template>
@@ -55,7 +55,7 @@
 
         <div class="friend-list-warp">
           <div class="friend-list" v-if="state.friendList.length > 0">
-            <div class="friend-item pointer" @click="handleTo(item)" v-for="(item, index) in state.friendList" :key="index">
+            <div class="friend-item observer-item pointer" @click="handleTo(item)" v-for="(item, index) in state.friendList" :key="index">
               <div class="friend-item-img">
                 <img :src="item.logo" alt="" />
               </div>
@@ -79,10 +79,13 @@
 <script lang="ts" setup>
 import { getFriendLindList } from '@/api/friend';
 import coverImg from '@/assets/images/bg/cover-friends.avif';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
 import { getQQAvatar } from '@/utils/common';
-import { reactive } from 'vue';
+
+import { onUpdated, reactive } from 'vue';
 const { isMobi } = useResize();
+const { intersectionObserver } = useIntersectionObserver();
 
 const state = reactive({
   loading: false,
@@ -115,6 +118,10 @@ getFriendLindListFn();
 const handleTo = item => {
   window.open(item.url, '_blank');
 };
+
+onUpdated(() => {
+  intersectionObserver('.observer-item');
+});
 </script>
 
 <style lang="scss" scoped>

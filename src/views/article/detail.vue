@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-28 15:46:03
+ * @LastEditTime: 2024-10-01 16:14:11
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -209,7 +209,6 @@ const addCopyCodeAndMacosStyle = () => {
     codeBlock.style.borderTopLeftRadius = '0px';
     codeBlock.style.borderTopRightRadius = '0px';
     codeBlock.style.marginTop = '30px';
-    codeBlock.style.marginBottom = '0px';
     // 创建复制按钮
     const copyButton = document.createElement('button');
     copyButton.innerText = '复制';
@@ -256,21 +255,22 @@ const addCopyCodeAndMacosStyle = () => {
 
 // 添加代码超过指定行数时自动折叠，点击展开按钮展开的逻辑
 const addCodeFold = () => {
+  const lineNum = 12; // 代码超过指定行数时自动折叠
   const codeBlocks = document.querySelectorAll('#editor pre > code');
 
   codeBlocks.forEach(codeBlock => {
     const lines = codeBlock.textContent.split('\n').length;
-    if (lines > 20) {
-      codeBlock.style.height = '440px';
-      codeBlock.style.overflowY = 'auto';
+    if (lines > lineNum) {
+      codeBlock.style.height = lineNum * 22 + 'px';
+      codeBlock.style.marginBottom = '30px';
+      codeBlock.style.overflowY = 'hidden';
       codeBlock.style.borderBottomLeftRadius = '0px';
       codeBlock.style.borderBottomRightRadius = '0px';
       codeBlock.style.transition = 'height 0.3s ease';
       const foldButton = document.createElement('div');
-      foldButton.innerText = '展开';
+      foldButton.innerText = '一键展开';
       foldButton.classList.add('fold');
       foldButton.classList.add('pointer');
-
       foldButton.style.backgroundColor = '#ccc';
       foldButton.style.color = '#333';
       foldButton.style.fontSize = '12px';
@@ -284,16 +284,15 @@ const addCodeFold = () => {
       foldButton.style.borderBottomLeftRadius = '4px';
       foldButton.style.borderBottomRightRadius = '4px';
       foldButton.style.borderTop = '0';
-      // foldButton.style.boxShadow = '0px -22px 22px rgba(0, 0, 0, 0.8)';
       // 为展开按钮添加点击事件处理程序
       foldButton.addEventListener('click', () => {
         foldButton.classList.toggle('fold');
         if (foldButton.classList.contains('fold')) {
-          foldButton.innerText = '展开';
-          codeBlock.style.height = '440px';
-          codeBlock.style.overflowY = 'auto';
+          foldButton.innerText = '一键展开';
+          codeBlock.style.height = lineNum * 22 + 'px';
+          codeBlock.style.overflowY = 'hidden';
         } else {
-          foldButton.innerText = '收起';
+          foldButton.innerText = '一键收起';
           codeBlock.style.height = 'auto';
           codeBlock.style.overflowY = 'visible';
         }

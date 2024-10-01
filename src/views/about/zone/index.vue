@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 23:39:27
+ * @LastEditTime: 2024-10-01 15:05:37
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -46,7 +46,7 @@
                 </template>
               </div>
               <template v-if="item.mp3s && item.mp3s.length > 0">
-                <div class="mp3-warp" style="margin-top: 30px" v-for="(mp3, index) in item.mp3s">
+                <div class="mp3-warp" style="margin-top: 0px" v-for="(mp3, index) in item.mp3s">
                   <audio class="mp3" :src="mp3" controls></audio>
                 </div>
               </template>
@@ -193,6 +193,7 @@ onUpdated(() => {
           .content-warp-line {
             background-image: url('@/assets/images/bg/wordline.webp');
             line-height: 40px;
+            padding-bottom: 20px;
             .zone-item-img-warp {
               display: flex;
               flex-wrap: wrap;
@@ -207,7 +208,7 @@ onUpdated(() => {
               }
             }
             .zone-item-img-warp-3 {
-              margin: 20px 13px;
+              margin: 0px 13px;
               justify-content: flex-start !important;
               .img {
                 width: 256px;
@@ -220,7 +221,7 @@ onUpdated(() => {
               font-size: 13px;
               margin-top: 20px;
               color: var(--text-color);
-              margin-bottom: 20px;
+              margin-bottom: 10px;
               min-height: 80px;
               text-indent: 26px;
             }

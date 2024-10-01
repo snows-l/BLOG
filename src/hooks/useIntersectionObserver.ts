@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-30 23:09:59
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-01 10:57:39
+ * @LastEditTime: 2024-10-01 15:48:21
  * @FilePath: /BLOG/src/hooks/useIntersectionObserver.ts
  */
 export default function () {
@@ -13,15 +13,15 @@ export default function () {
         entry => {
           let target = entry.target as HTMLElement;
           const rect = entry.boundingClientRect; // 获取元素的位置信息
-          if (rect.top > 0) {
-            if (entry.isIntersecting) {
-              target.style.transition = 'all 0.2s ease-in-out';
-              target.style.transform = 'scale(1)';
-            } else {
-              target.style.transition = 'all 0.2s ease-in-out';
-              target.style.transform = 'scale(0.75)';
-            }
+          // if (rect.top > 0) {
+          if (entry.isIntersecting) {
+            target.style.transition = 'all 0.2s ease-in-out';
+            target.style.transform = 'scale(1)';
+          } else {
+            target.style.transition = 'all 0.2s ease-in-out';
+            target.style.transform = 'scale(0.75)';
           }
+          // }
         },
         {
           root: null,
