@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-01 15:05:37
+ * @LastEditTime: 2024-10-02 15:21:54
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -37,7 +37,13 @@
             </div>
             <div class="content-warp-line">
               <div class="zone-item-content">{{ item.text }}</div>
-              <div class="zone-item-img-warp" :class="{ 'zone-item-img-warp-3': item.imgs.length > 4 && !isMobi }">
+              <div
+                class="zone-item-img-warp"
+                :class="{
+                  'zone-item-img-warp-4': item.images.length + item.mp4s.length > 4 && !isMobi,
+                  'zone-item-img-warp-1': item.images.length + item.mp4s.length == 1 && !isMobi,
+                  'zone-item-img-warp-1-m': item.images.length + item.mp4s.length == 1 && isMobi
+                }">
                 <template v-for="img in item.images">
                   <LImg class="img" :src="img" alt="" />
                 </template>
@@ -55,7 +61,7 @@
         </div>
         <div class="bottom-loading">
           <img v-if="state.loading && state.zoneList.length > 0" style="width: 40px; height: 40px; margin-bottom: 20px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
-          <div v-if="!state.loading && state.isMore && state.zoneList.length >= state.page.total" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
+          <div v-if="!state.loading && state.isMore && state.zoneList.length <= state.page.total" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
           <div v-if="!state.isMore && state.zoneList.length > 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
         </div>
       </div>
@@ -76,17 +82,8 @@ const { intersectionObserver } = useIntersectionObserver();
 const state = reactive({
   isMore: true,
   loading: false,
-  zoneList: [
-    {
-      createTime: '2024-08-15',
-      text: '渔得鱼心满意足，樵得樵眼笑眉舒！',
-      imgs: [],
-      city: '杭州',
-      os: 'Harmoney OS',
-      browser: 'Chrome'
-    }
-  ],
-  page: { page: 1, size: 5, total: 0 }
+  zoneList: [],
+  page: { page: 1, size: 10, total: 0 }
 });
 
 const getZoneListFn = () => {
@@ -207,7 +204,7 @@ onUpdated(() => {
                 border-radius: var(--border-radius-1);
               }
             }
-            .zone-item-img-warp-3 {
+            .zone-item-img-warp-4 {
               margin: 0px 13px;
               justify-content: flex-start !important;
               .img {
@@ -215,6 +212,20 @@ onUpdated(() => {
                 height: 240px;
                 object-fit: cover;
                 display: inline-block;
+              }
+            }
+            .zone-item-img-warp-1 {
+              .img {
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                display: inline-block;
+              }
+            }
+            .zone-item-img-warp-1-m {
+              .img {
+                width: 100% !important;
+                height: 200px !important;
               }
             }
             .zone-item-content {
