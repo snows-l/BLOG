@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-01 16:14:11
+ * @LastEditTime: 2024-10-02 18:51:52
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -474,8 +474,7 @@ onBeforeUnmount(() => {
         .article-cover-warp {
           width: 100%;
           height: 330px;
-          padding: 0 10px;
-          margin-bottom: 40px;
+          padding: 0 10px 40px 10px;
           overflow: hidden;
           .cover-warp {
             border-radius: var(--border-radius-2);
@@ -628,26 +627,31 @@ blockquote {
     }
   }
 }
-
-.w-e-text-container {
-  padding: 10px 20px;
-  color: var(--code-color) !important;
-  background-color: var(--bg-content-color) !important;
-  strong {
+.editor-content-warp {
+  padding: 10px 0px;
+  .w-e-text-container {
+    padding: 0 20px;
     color: var(--code-color) !important;
-  }
-  pre > code {
-    text-shadow: 0px 0px !important;
-    background-color: var(--bg-code-color) !important;
-    .token,
-    .tag {
-      // color: var(--code-light-color) !important;
+    background-color: var(--bg-content-color) !important;
+    background-image: linear-gradient(90deg, rgba(159, 219, 252, 0.35) 3%, transparent 0), linear-gradient(1turn, rgba(159, 219, 252, 0.35) 3%, transparent 0);
+    background-position: 50%;
+    background-size: 20px 20px;
+    strong {
+      color: var(--code-color) !important;
+    }
+    pre > code {
+      text-shadow: 0px 0px !important;
+      background-color: var(--bg-code-color) !important;
+      .token,
+      .tag {
+        // color: var(--code-light-color) !important;
+      }
     }
   }
 }
 
 .m-article-content-warp-out {
-  .w-e-text-container {
+  .editor-content-warp {
     padding: 10px 0px !important;
   }
   .m-comment-view-container {
@@ -663,6 +667,9 @@ blockquote {
     .fold {
       border: 1px solid #e8e8e8;
     }
+  }
+  .w-e-text-container {
+    background-image: linear-gradient(90deg, rgba(159, 219, 252, 0.08) 3%, transparent 0), linear-gradient(1turn, rgba(159, 219, 252, 0.08) 3%, transparent 0);
   }
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 11:01:12
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 23:40:16
+ * @LastEditTime: 2024-10-03 13:27:15
  * @FilePath: /BLOG/src/views/article/index.vue
 -->
 <template>
@@ -256,7 +256,7 @@ const state = reactive({
   type: route.query.type,
   page: {
     page: 1,
-    size: 5,
+    size: 10,
     total: 0
   },
   articleList: [],
