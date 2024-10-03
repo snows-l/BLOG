@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-09-15 19:43:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-18 20:59:09
+ * @LastEditTime: 2024-10-03 13:54:06
  * @FilePath: /BLOG/src/components/MapCharts/index.vue
 -->
 <template>
@@ -12,9 +12,20 @@
 
 <script setup>
 import { getBlogVisitList } from '@/api/common';
-import * as echarts from 'echarts';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
-import geoJson from './chinaJson.json';
+import chinaGeoJson from './chinaJson.json';
+
+// 引入 ECharts 核心模块
+import * as echarts from 'echarts/core';
+// 引入地图初始化组件
+import { EffectScatterChart, MapChart, ScatterChart } from 'echarts/charts';
+// 引入地图的相关组件
+import { LegendComponent, ToolboxComponent, TooltipComponent, VisualMapComponent } from 'echarts/components';
+// 引入 Canvas 渲染器
+import { CanvasRenderer } from 'echarts/renderers';
+
+// 注册必须的组件
+echarts.use([ToolboxComponent, TooltipComponent, LegendComponent, CanvasRenderer, VisualMapComponent, ScatterChart, EffectScatterChart, MapChart]);
 
 const chartContainer = ref(null);
 const chartInstance = ref(null);
@@ -24,7 +35,7 @@ const state = reactive({
 });
 
 const geoCoordMap = {};
-geoJson.features.forEach(function (v) {
+chinaGeoJson.features.forEach(function (v) {
   let name = v.properties.name; // 地区名称
   geoCoordMap[name] = v.properties.center; // 地区经纬度
   let sum = 0;
@@ -296,7 +307,7 @@ const resetViewCharts = () => {
 
 onMounted(() => {
   chartInstance.value = echarts.init(chartContainer.value);
-  echarts.registerMap('china', geoJson);
+  echarts.registerMap('china', chinaGeoJson);
   const option = getOption();
   chartInstance.value.setOption(option);
 
