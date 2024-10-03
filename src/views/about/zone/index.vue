@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-02 15:21:54
+ * @LastEditTime: 2024-10-03 14:53:09
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -52,7 +52,7 @@
                 </template>
               </div>
               <template v-if="item.mp3s && item.mp3s.length > 0">
-                <div class="mp3-warp" style="margin-top: 0px" v-for="(mp3, index) in item.mp3s">
+                <div class="mp3-warp" style="margin-top: 20px" v-for="(mp3, index) in item.mp3s">
                   <audio class="mp3" :src="mp3" controls></audio>
                 </div>
               </template>
