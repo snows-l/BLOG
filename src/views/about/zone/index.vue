@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-03 14:56:04
+ * @LastEditTime: 2024-10-03 16:29:59
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -40,7 +40,7 @@
               <div
                 class="zone-item-img-warp"
                 :class="{
-                  'zone-item-img-warp-4': item.images.length + item.mp4s.length > 4 && !isMobi,
+                  'zone-item-img-warp-3': (item.images.length + item.mp4s.length > 4 || item.images.length + item.mp4s.length == 3) && !isMobi,
                   'zone-item-img-warp-1': item.images.length + item.mp4s.length == 1 && !isMobi,
                   'zone-item-img-warp-1-m': item.images.length + item.mp4s.length == 1 && isMobi
                 }">
@@ -205,10 +205,10 @@ onUpdated(() => {
                 border-radius: var(--border-radius-1);
               }
             }
-            .zone-item-img-warp-4 {
-              margin: 0px 13px;
+            .zone-item-img-warp-3 {
               justify-content: flex-start !important;
               .img {
+                margin: 10px 16px;
                 width: 256px;
                 height: 240px;
                 object-fit: cover;
