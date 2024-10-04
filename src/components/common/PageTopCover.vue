@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-09 16:19:38
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-30 22:02:19
+ * @LastEditTime: 2024-10-04 23:21:09
  * @FilePath: /BLOG/src/components/common/PageTopCover.vue
 -->
 
@@ -136,20 +136,20 @@ const props = defineProps({
         }
         .text {
           color: #fff;
-          font-size: 36px;
+          font-size: 28px;
           text-shadow: var(--text-shadow);
           filter: drop-shadow(4px 4px 4px #000);
         }
       }
       .title-warp {
         margin-top: 10px;
-        height: 50px;
+        height: 75px;
         line-height: 25px;
-        font-size: 18px;
+        font-size: 20px;
         color: var(--text-color);
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         overflow: hidden;
         text-overflow: ellipsis;
         text-align: center;
