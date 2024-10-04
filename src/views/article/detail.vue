@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-02 18:51:52
+ * @LastEditTime: 2024-10-04 23:12:50
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -46,7 +46,7 @@
             <div class="table-of-contents-warp">
               <div v-if="tableOfContents.length > 0" class="table-of-contents">
                 <!-- 目录内容 -->
-                <ul list-none p-l-0>
+                <ul>
                   <li v-for="(item, index) in tableOfContents" :key="item.id" :style="{ paddingLeft: item.level * (state.isMobile ? 25 : 16) + 'px' }">
                     <!-- <a :class="{ active: activeIndex === index }" :href="`#${item.id}`" @click="handleItemClick(index)">{{ item.text }}</a> -->
                     <a
@@ -327,7 +327,7 @@ const handleItemClick = (item, index: number) => {
   const containerRect = container.getBoundingClientRect();
   activeIndex.value = index;
   const element = document.querySelector(`#section-${index + 1}`);
-  const offsetTop = element.offsetTop + 770; // 770 顶部封面 + COVER的高度
+  const offsetTop = element.offsetTop + 770 - 60; // 770 顶部封面 + COVER的高度
   scorllContainer.scrollTop = offsetTop;
 };
 
