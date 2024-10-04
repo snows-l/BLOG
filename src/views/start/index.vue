@@ -3,8 +3,8 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-03-24 17:51:09
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-29 12:35:32
- * @FilePath: /blog/src/views/start/index.vue
+ * @LastEditTime: 2024-10-04 22:07:30
+ * @FilePath: /BLOG/src/views/start/index.vue
 -->
 <template>
   <div class="start-content-container">
@@ -78,7 +78,7 @@ let state = reactive({
   isFullSreen: appStore.isFullSreen,
   clockSize: isMobi.value ? 0.5 : 0.8,
   saying: '渔得鱼心满意足，樵得樵眼笑眉舒！',
-  bgImgUrl: changeBgImg(14),
+  bgImgUrl: changeBgImg(),
   screenSize: window.screen.width / 1000
 });
 

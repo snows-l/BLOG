@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-03 13:27:01
+ * @LastEditTime: 2024-10-04 22:07:45
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -282,7 +282,7 @@ const state = reactive({
   articleList: [],
   articleTypeList: [],
   bgImg: '',
-  bgImgUrl: changeBgImg(1),
+  bgImgUrl: changeBgImg(),
   page: {
     page: 1,
     size: 10,
