@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-05 19:51:54
+ * @LastEditTime: 2024-10-05 19:57:57
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -1119,7 +1119,7 @@ onUnmounted(() => {
           }
           .visit-total {
             margin-top: 20px;
-            background-image: linear-gradient(#ffffff00, #dff2f3 50%, #9de5d4 100%);
+            background-image: linear-gradient(#ffffff00, #e3f4f5 20%, #f0becb 100%);
             .visit-total-content {
               padding: 20px;
               .visit-total-item {
