@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-05 11:48:25
+ * @LastEditTime: 2024-10-05 11:53:03
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -255,7 +255,7 @@ const addCopyCodeAndMacosStyle = () => {
 
 // 添加代码超过指定行数时自动折叠，点击展开按钮展开的逻辑
 const addCodeFold = () => {
-  const lineNum = 12; // 代码超过指定行数时自动折叠
+  const lineNum = 20; // 代码超过指定行数时自动折叠
   const codeBlocks = document.querySelectorAll('#editor pre > code');
 
   codeBlocks.forEach(codeBlock => {
