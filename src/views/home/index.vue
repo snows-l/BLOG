@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-05 15:54:54
+ * @LastEditTime: 2024-10-05 19:51:54
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -253,10 +253,10 @@
         </div>
         <div class="slider-warp" v-if="!state.isMobile">
           <div class="position-warp">
-            <div class="auth-bg">
-              <div class="auth-warp slider-item-warp article-item">
+            <div class="auth-warp slider-item-warp article-item">
+              <div class="auth-content-warp">
                 <img class="avatar" :src="state.avatar" alt="" />
-                <div class="mingyan">snows_l</div>
+                <div class="mingyan" style="font-size: 18px">snows_l</div>
                 <div class="mingyan">渔得鱼心满意足，樵得樵眼笑眉舒！</div>
                 <div class="article-total">
                   <div class="article-total-item">
@@ -272,6 +272,30 @@
                     <div class="num">{{ state.lebels || 0 }}</div>
                   </div>
                 </div>
+                <div class="code-store">
+                  <img @click="handleToCodeStore(1)" class="icon-code link pointer" data-tip="我的github" src="@/assets/images/icon/github.svg" alt="" srcset="" />
+                  <img @click="handleToCodeStore(2)" class="icon-code link pointer" data-tip="我的gitlab" src="@/assets/images/icon/gitlab.png" alt="" srcset="" />
+                  <img @click="handleToCodeStore(3)" class="icon-code link pointer" data-tip="我的gitee" src="@/assets/images/icon/gitee.svg" alt="" srcset="" />
+                </div>
+              </div>
+            </div>
+            <div class="visit-total slider-item-warp article-item">
+              <div class="slider-title">
+                关于/统计
+                <div class="mac-style"></div>
+              </div>
+              <div class="visit-total-content">
+                <div class="visit-total-item total">
+                  <div class="label">👀 总访问量</div>
+                  <div class="num">{{ state.blogVisitTotal.sum || 0 }}</div>
+                </div>
+                <div class="visit-total-item">
+                  <div class="label">🌈 运行时间</div>
+                  <div class="time-warp">
+                    <IconHour24 class="time-24" />
+                  </div>
+                  天
+                </div>
               </div>
             </div>
             <div class="visit-info slider-item-warp article-item">
@@ -281,7 +305,7 @@
               </div>
               <div class="visit-content-warp">
                 <div class="visit-item">
-                  <div class="visit-label">时间：</div>
+                  <div class="visit-label">日期：</div>
                   <div class="visit-value">{{ state.visit.week }}</div>
                 </div>
                 <div class="visit-item">
@@ -353,7 +377,7 @@
 
 <script setup lang="ts">
 import { getArticleList, getTopArticle } from '@/api/article';
-import { getDict } from '@/api/common';
+import { getBlogVisit, getDict } from '@/api/common';
 import Notice from '@/components/Notice/index.vue';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
@@ -400,6 +424,12 @@ const state = reactive({
     tip: ''
   },
   hotArticleList: [],
+  blogVisitTotal: {
+    today: 0,
+    yeasterday: 0,
+    currentMonth: 0,
+    sum: 0
+  },
   dog: '你跟他已经醒了吧?我今天捡垃圾挣了一百多明天给你打过去你快点休息吧我明天叫你起床给你点外卖买烟给你点你最喜欢的奶茶晚上我会继续去摆地摊的你不用担心我烦你床只有那么大睡不下三个你要好好照顾好自己不要让他抢你被子我永远爱你',
   page: {
     page: 1,
@@ -462,6 +492,26 @@ getTopArticle().then(res => {
     });
   }
 });
+
+//
+const getBlogVisitFn = () => {
+  getBlogVisit().then(res => {
+    if (res.code === 200) {
+      state.blogVisitTotal = res.data;
+    }
+  });
+};
+getBlogVisitFn();
+
+const handleToCodeStore = (type: number) => {
+  if (type === 1) {
+    window.open('https://github.com/snows-l', '_blank');
+  } else if (type === 2) {
+    window.open('https://gitlab.com/snows_l', '_blank');
+  } else if (type === 3) {
+    window.open('https://gitee.com/snows_l', '_blank');
+  }
+};
 
 // 获取文章列表
 const getArticleListFn = () => {
@@ -879,6 +929,7 @@ onUnmounted(() => {
             box-shadow: var(--box-shadow);
             border-radius: var(--border-radius-1);
             position: relative;
+            overflow: hidden;
             .slider-title {
               padding-left: 14px;
               height: 44px;
@@ -902,46 +953,60 @@ onUnmounted(() => {
               top: 17px;
             }
           }
-          .auth-bg {
+          .auth-warp {
             background-image: url('@/assets/images/bg/aside_author_image.jpg');
             background-size: 100% 30%;
             background-repeat: no-repeat;
             border-radius: var(--border-radius-1);
-          }
-          .auth-warp {
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: linear-gradient(#ffffff00, #ebfcfd 40%, #caeafa 100%);
-            .avatar {
-              width: 100px;
-              height: 100px;
-              border-radius: 50%;
-              border: rgba(144, 147, 153, 0.23) 3px solid;
-            }
-            .mingyan {
-              margin-top: 10px;
-              line-height: 30px;
-              color: #333;
-            }
-            .article-total {
-              margin-top: 30px;
+            .auth-content-warp {
+              padding: 30px 20px;
               display: flex;
-              justify-content: space-around;
-              .article-total-item {
-                margin: 0 10px;
+              flex-direction: column;
+              align-items: center;
+              background-image: linear-gradient(#ffffff00, #ebfcfd 40%, #caeafa 100%);
+              .avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: rgba(144, 147, 153, 0.23) 3px solid;
+              }
+              .mingyan {
+                margin-top: 10px;
+                line-height: 30px;
+                color: #333;
+              }
+              .article-total {
+                margin-top: 30px;
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                .label {
-                  font-size: 16px;
-                  margin-bottom: 10px;
-                  color: #111;
+                justify-content: space-around;
+                .article-total-item {
+                  margin: 0 10px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  .label {
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                    color: #111;
+                  }
+                  .num {
+                    font-size: 20px;
+                    color: var(--theme-color);
+                  }
                 }
-                .num {
-                  font-size: 20px;
-                  color: var(--theme-color);
+              }
+              .code-store {
+                margin-top: 20px;
+                width: 100%;
+                border-top: 1px solid #cacaca;
+                display: flex;
+                justify-content: center;
+                padding: 20px 10px 0 10px;
+                .icon-code {
+                  margin: 0 15px;
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 50%;
                 }
               }
             }
@@ -1050,6 +1115,44 @@ onUnmounted(() => {
               padding-bottom: 20px;
               text-align: center;
               color: #222;
+            }
+          }
+          .visit-total {
+            margin-top: 20px;
+            background-image: linear-gradient(#ffffff00, #dff2f3 50%, #9de5d4 100%);
+            .visit-total-content {
+              padding: 20px;
+              .visit-total-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                height: 60px;
+                color: #222;
+
+                .label,
+                .num {
+                  color: #222;
+                  font-size: 18px;
+                }
+                .time-warp {
+                  position: absolute;
+                  top: -60px;
+                  right: 40px;
+                  width: 60px;
+                  height: 120px;
+                  padding: 60px 0 0 0;
+                  animation: swing 1.3s ease-in-out infinite alternate;
+                  display: flex;
+                  .time-24 {
+                    width: 60px;
+                    height: 60px;
+                  }
+                }
+              }
+              .total {
+                height: 30px;
+              }
             }
           }
         }
@@ -1275,6 +1378,15 @@ onUnmounted(() => {
 .m-home-warp {
   .flex-warp {
     display: block !important;
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(18deg);
+  }
+  100% {
+    transform: rotate(-18deg);
   }
 }
 

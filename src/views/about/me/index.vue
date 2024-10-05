@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-14 10:00:17
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-01 11:09:34
+ * @LastEditTime: 2024-10-05 19:24:20
  * @FilePath: /BLOG/src/views/about/me/index.vue
 -->
 <template>
@@ -333,8 +333,9 @@ onUpdated(() => {
               display: flex;
               justify-content: center;
               align-items: center;
-              animation: rotate 2s linear infinite;
-              background: linear-gradient(-45deg, #f80202, #dabf5d, #23a6d5, #72dfbb);
+              border: 3px solid #ffffff04;
+              // animation: rotate 2s linear infinite;
+              // background: linear-gradient(-45deg, #f80202, #dabf5d, #23a6d5, #72dfbb);
             }
             .avatar-img {
               position: absolute;
