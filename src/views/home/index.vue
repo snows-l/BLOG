@@ -279,25 +279,7 @@
                 </div>
               </div>
             </div>
-            <div class="visit-total slider-item-warp article-item">
-              <div class="slider-title">
-                关于/统计
-                <div class="mac-style"></div>
-              </div>
-              <div class="visit-total-content">
-                <div class="visit-total-item total">
-                  <div class="label">👀 总访问量</div>
-                  <div class="num">{{ state.blogVisitTotal.sum || 0 }}</div>
-                </div>
-                <div class="visit-total-item">
-                  <div class="label">🌈 运行时间</div>
-                  <div class="time-warp">
-                    <IconHour24 class="time-24" />
-                  </div>
-                  天
-                </div>
-              </div>
-            </div>
+
             <div class="visit-info slider-item-warp article-item">
               <div class="slider-title">
                 访问信息
@@ -339,6 +321,27 @@
                 <div class="visit-tip">{{ state.visit.tip }}</div>
               </div>
             </div>
+
+            <div class="visit-total slider-item-warp article-item">
+              <div class="slider-title">
+                关于/统计
+                <div class="mac-style"></div>
+              </div>
+              <div class="visit-total-content">
+                <div class="visit-total-item total">
+                  <div class="label">👀 总访问量</div>
+                  <div class="num">{{ state.blogVisitTotal.sum || 0 }}</div>
+                </div>
+                <div class="visit-total-item">
+                  <div class="label">🌈 运行时间</div>
+                  <div class="time-warp">
+                    <IconHour24 class="time-24" />
+                  </div>
+                  天
+                </div>
+              </div>
+            </div>
+
             <div class="tiangou-log-warp slider-item-warp article-item">
               <div class="slider-title">
                 (❁´◡`❁)舔狗日记
@@ -349,6 +352,7 @@
               </div>
               <div class="buttom-btn pointer kbn-custom" data-tip="换一个 舔(❁´◡`❁)" @click="getDog()">换一个</div>
             </div>
+
             <div class="hot-article slider-item-warp article-item">
               <div class="slider-title">
                 热门文章
