@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-05 19:57:57
+ * @LastEditTime: 2024-10-05 20:14:47
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -989,7 +989,7 @@ onUnmounted(() => {
                   flex-direction: column;
                   align-items: center;
                   .label {
-                    font-size: 16px;
+                    font-size: 14px;
                     margin-bottom: 10px;
                     color: #111;
                   }
