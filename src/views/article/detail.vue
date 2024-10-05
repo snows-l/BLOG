@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-08 10:56:18
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-04 23:12:50
+ * @LastEditTime: 2024-10-05 11:48:25
  * @FilePath: /BLOG/src/views/article/detail.vue
 -->
 <template>
@@ -636,9 +636,7 @@ blockquote {
     background-image: linear-gradient(90deg, rgba(159, 219, 252, 0.35) 3%, transparent 0), linear-gradient(1turn, rgba(159, 219, 252, 0.35) 3%, transparent 0);
     background-position: 50%;
     background-size: 20px 20px;
-    strong {
-      color: var(--code-color) !important;
-    }
+
     pre > code {
       text-shadow: 0px 0px !important;
       background-color: var(--bg-code-color) !important;
