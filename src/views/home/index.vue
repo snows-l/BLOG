@@ -3,11 +3,11 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-05 15:37:35
+ * @LastEditTime: 2024-10-05 15:54:54
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
-  <div class="home-warp">
+  <div class="home-warp" :class="{ 'm-home-warp': isMobi }">
     <div class="first-screen" :style="{ backgroundImage: `url(${state.bgImg})` }">
       <img :src="state.bgImgUrl" style="width: 100%; height: 100%; object-fit: cover" />
       <div class="content-warp" :class="{ showContent: state.isShowContent }">
@@ -251,10 +251,10 @@
             <div v-if="!state.isMore && !state.loading && state.articleList.length != 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
           </div>
         </div>
-        <div class="slider-warp">
+        <div class="slider-warp" v-if="!state.isMobile">
           <div class="position-warp">
             <div class="auth-bg">
-              <div class="auth-warp slider-item-warp">
+              <div class="auth-warp slider-item-warp article-item">
                 <img class="avatar" :src="state.avatar" alt="" />
                 <div class="mingyan">snows_l</div>
                 <div class="mingyan">渔得鱼心满意足，樵得樵眼笑眉舒！</div>
@@ -274,7 +274,7 @@
                 </div>
               </div>
             </div>
-            <div class="visit-info slider-item-warp">
+            <div class="visit-info slider-item-warp article-item">
               <div class="slider-title">
                 访问信息
                 <div class="mac-style"></div>
@@ -315,7 +315,7 @@
                 <div class="visit-tip">{{ state.visit.tip }}</div>
               </div>
             </div>
-            <div class="tiangou-log-warp slider-item-warp">
+            <div class="tiangou-log-warp slider-item-warp article-item">
               <div class="slider-title">
                 (❁´◡`❁)舔狗日记
                 <div class="mac-style"></div>
@@ -325,7 +325,7 @@
               </div>
               <div class="buttom-btn pointer kbn-custom" data-tip="换一个 舔(❁´◡`❁)" @click="getDog()">换一个</div>
             </div>
-            <div class="hot-article slider-item-warp">
+            <div class="hot-article slider-item-warp article-item">
               <div class="slider-title">
                 热门文章
                 <div class="mac-style"></div>
@@ -358,7 +358,7 @@ import Notice from '@/components/Notice/index.vue';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
-import { changeBgImg, getQQAvatar } from '@/utils/common';
+import { changeBgImg, getQQAvatar, isMobile } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
 import axios from 'axios';
 import moment from 'moment';
@@ -384,6 +384,7 @@ const state = reactive({
   lebels: 0,
   bgImg: '',
   bgImgUrl: changeBgImg(),
+  isMobile: isMobile(1260),
   visit: {
     time: '',
     week: '',
@@ -610,6 +611,10 @@ const localStorageChangeCallback = (e: StorageEvent) => {
   }
 };
 
+const resizeCallback = () => {
+  state.isMobile = isMobile(1260);
+};
+
 let timer: null | number = null;
 let timer2: null | number = null;
 onMounted(() => {
@@ -623,6 +628,8 @@ onMounted(() => {
   window.addEventListener('setItemEvent', localStorageChangeCallback);
   state.isDark = getTheme() === 'dark';
 });
+
+window.addEventListener('resize', resizeCallback);
 
 onUpdated(() => {
   intersectionObserver('.article-item');
@@ -643,6 +650,7 @@ onUnmounted(() => {
     intervalTimer = null;
   }
   window.removeEventListener('setItemEvent', localStorageChangeCallback);
+  window.removeEventListener('resize', resizeCallback);
 });
 </script>
 
@@ -847,9 +855,10 @@ onUnmounted(() => {
     padding-top: 40px;
     background-color: var(--under-background);
     .flex-warp {
-      width: 1240px;
+      max-width: 1240px;
       margin: 0 auto;
       display: flex;
+      justify-content: center;
       .content-center {
         position: relative;
         display: flex;
@@ -1261,6 +1270,11 @@ onUnmounted(() => {
         color: var(--theme-light-color-3);
       }
     }
+  }
+}
+.m-home-warp {
+  .flex-warp {
+    display: block !important;
   }
 }
 
