@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-04 22:07:45
+ * @LastEditTime: 2024-10-05 15:37:35
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -50,210 +50,309 @@
       <div class="transition-warp"></div>
     </div>
     <div class="other-content-warp">
-      <Notice class="other-content" :class="{ 'm-other-content': isMobi }"></Notice>
-      <div class="other-content" v-if="!isMobi">
-        <div class="other-content-item">
-          <div class="article-title-warp">
-            <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
-            <h2 class="content-title">ARTICLE</h2>
-          </div>
-          <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-            <div class="article-item kbn-read" v-for="(item, index) in state.articleList" :key="index">
-              <div class="img-left item-warp" v-if="index % 2 === 0">
-                <div class="cover-img-warp pointer" @click="handleArticle(item)">
-                  <LImg class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :fit="isMobi ? 'contain' : ''" :isUnPreview="true" />
-                </div>
-                <div class="item-content">
-                  <div class="create-time">
-                    <div class="time-warp">
-                      <IconCalendar class="iconfont"></IconCalendar>
-                      <span>发布于：</span>
-                      <span class="time">{{ item.createTime }}</span>
+      <div class="flex-warp">
+        <div class="content-center">
+          <Notice class="other-content" :class="{ 'm-other-content': isMobi }"></Notice>
+          <div class="other-content" v-if="!isMobi">
+            <div class="other-content-item">
+              <div class="article-title-warp">
+                <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
+                <h2 class="content-title">ARTICLE</h2>
+              </div>
+              <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
+                <div class="article-item kbn-read" v-for="(item, index) in state.articleList" :key="index">
+                  <div class="img-left item-warp" v-if="index % 2 === 0">
+                    <div class="cover-img-warp pointer" @click="handleArticle(item)">
+                      <LImg class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :fit="isMobi ? 'contain' : ''" :isUnPreview="true" />
+                    </div>
+                    <div class="item-content">
+                      <div class="create-time">
+                        <div class="time-warp">
+                          <IconCalendar class="iconfont"></IconCalendar>
+                          <span>发布于：</span>
+                          <span class="time">{{ item.createTime }}</span>
+                        </div>
+                      </div>
+                      <div class="article-title pointer" @click="handleArticle(item)">
+                        {{ item.title }}
+                      </div>
+                      <div class="auth-info-warp">
+                        <div>
+                          <img :src="state.avatar" alt="" />
+                          <span>snows_l</span>
+                        </div>
+                        <div>
+                          <IconHot class="iconfont"></IconHot>
+                          <span>{{ item.readCount || 0 }}</span>
+                        </div>
+                        <div>
+                          <IconLike :size="18" class="iconfont" />
+                          <span>{{ item.shareCount || 0 }}</span>
+                        </div>
+                        <div>
+                          <IconComment :size="19" class="iconfont"></IconComment>
+                          <span>{{ item.commentCount || 0 }}</span>
+                        </div>
+                        <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                          <IconPreview class="iconfont" :size="18"></IconPreview>
+                          <span class="" style="font-size: 12px">预览</span>
+                        </div>
+                      </div>
+                      <div class="article-des text">
+                        {{ item.subTitle }}
+                      </div>
+                      <div class="label-warp">
+                        <div class="type">
+                          <IconType class="iconfont"></IconType>
+                          {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                        </div>
+                        <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                          <IconLabel class="iconfont"></IconLabel>
+                          <span class="label">{{ label }}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="article-title pointer" @click="handleArticle(item)">
-                    {{ item.title }}
-                  </div>
-                  <div class="auth-info-warp">
-                    <div>
-                      <img :src="state.avatar" alt="" />
-                      <span>snows_l</span>
+                  <div class="img-right item-warp" v-else>
+                    <div class="item-content">
+                      <div class="create-time">
+                        <div class="time-warp">
+                          <IconCalendar class="iconfont"></IconCalendar>
+                          <span>发布于：</span>
+                          <span class="time">{{ item.createTime }}</span>
+                        </div>
+                      </div>
+                      <div class="article-title pointer" @click="handleArticle(item)">
+                        {{ item.title }}
+                      </div>
+                      <div class="auth-info-warp">
+                        <div>
+                          <img :src="state.avatar" alt="" />
+                          <span>snows_l</span>
+                        </div>
+                        <div>
+                          <IconHot class="iconfont"></IconHot>
+                          <span>{{ item.readCount || 0 }}</span>
+                        </div>
+                        <div>
+                          <IconLike :size="18" class="iconfont" />
+                          <span>{{ item.shareCount || 0 }}</span>
+                        </div>
+                        <div>
+                          <IconComment :size="19" class="iconfont"></IconComment>
+                          <span>{{ item.commentCount || 0 }}</span>
+                        </div>
+                        <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                          <IconPreview class="iconfont" :size="18"></IconPreview>
+                          <span class="" style="font-size: 12px">预览</span>
+                        </div>
+                      </div>
+                      <div class="article-des text">
+                        {{ item.subTitle }}
+                      </div>
+                      <div class="label-warp">
+                        <div class="type">
+                          <IconType class="iconfont"></IconType>
+                          {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                        </div>
+                        <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                          <IconLabel class="iconfont"></IconLabel>
+                          <span class="label">{{ label }}</span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <IconHot class="iconfont"></IconHot>
-                      <span>{{ item.readCount || 0 }}</span>
-                    </div>
-                    <div>
-                      <IconLike :size="18" class="iconfont" />
-                      <span>{{ item.shareCount || 0 }}</span>
-                    </div>
-                    <div>
-                      <IconComment :size="19" class="iconfont"></IconComment>
-                      <span>{{ item.commentCount || 0 }}</span>
-                    </div>
-                    <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
-                      <IconPreview class="iconfont" :size="18"></IconPreview>
-                      <span class="" style="font-size: 12px">预览</span>
-                    </div>
-                  </div>
-                  <div class="article-des text">
-                    {{ item.subTitle }}
-                  </div>
-                  <div class="label-warp">
-                    <div class="type">
-                      <IconType class="iconfont"></IconType>
-                      {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                    </div>
-                    <div class="label-item" v-for="(label, index) in item.labels" :key="index">
-                      <IconLabel class="iconfont"></IconLabel>
-                      <span class="label">{{ label }}</span>
+                    <div class="cover-img-warp pointer" @click="handleArticle(item)">
+                      <LImg class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :isUnPreview="true" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="img-right item-warp" v-else>
-                <div class="item-content">
-                  <div class="create-time">
-                    <div class="time-warp">
-                      <IconCalendar class="iconfont"></IconCalendar>
-                      <span>发布于：</span>
-                      <span class="time">{{ item.createTime }}</span>
-                    </div>
-                  </div>
-                  <div class="article-title pointer" @click="handleArticle(item)">
-                    {{ item.title }}
-                  </div>
-                  <div class="auth-info-warp">
-                    <div>
-                      <img :src="state.avatar" alt="" />
-                      <span>snows_l</span>
-                    </div>
-                    <div>
-                      <IconHot class="iconfont"></IconHot>
-                      <span>{{ item.readCount || 0 }}</span>
-                    </div>
-                    <div>
-                      <IconLike :size="18" class="iconfont" />
-                      <span>{{ item.shareCount || 0 }}</span>
-                    </div>
-                    <div>
-                      <IconComment :size="19" class="iconfont"></IconComment>
-                      <span>{{ item.commentCount || 0 }}</span>
-                    </div>
-                    <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
-                      <IconPreview class="iconfont" :size="18"></IconPreview>
-                      <span class="" style="font-size: 12px">预览</span>
-                    </div>
-                  </div>
-                  <div class="article-des text">
-                    {{ item.subTitle }}
-                  </div>
-                  <div class="label-warp">
-                    <div class="type">
-                      <IconType class="iconfont"></IconType>
-                      {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                    </div>
-                    <div class="label-item" v-for="(label, index) in item.labels" :key="index">
-                      <IconLabel class="iconfont"></IconLabel>
-                      <span class="label">{{ label }}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="cover-img-warp pointer" @click="handleArticle(item)">
-                  <LImg class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :isUnPreview="true" />
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="no-article" v-else>
-            <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+              <div class="no-article" v-else>
+                <Empty :text="'暂无文章，期待您的分享~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="other-content m-other-content" v-else>
-        <div class="other-content-item">
-          <div class="article-title-warp">
-            <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
-            <h2 class="content-title">ARTICLE</h2>
-            <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
-              <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
-                <div class="img-left item-warp">
-                  <div class="cover-img-warp pointer" @click="handleArticle(item)">
-                    <LImg class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :isUnPreview="true" />
-                  </div>
-                  <div class="item-content">
-                    <div class="create-time">
-                      <div class="time-warp">
-                        <IconCalendar class="iconfont"></IconCalendar>
-                        <span>发布于：</span>
-                        <span class="time">{{ item.createTime }}</span>
+          <div class="other-content m-other-content" v-else>
+            <div class="other-content-item">
+              <div class="article-title-warp">
+                <img class="article-icon" src="@/assets/images/common/article.png" alt="" />
+                <h2 class="content-title">ARTICLE</h2>
+                <div class="article-warp" v-if="state.articleList && state.articleList.length > 0">
+                  <div class="article-item kbn-read" :data-tip="item.title" v-for="(item, index) in state.articleList" :key="index">
+                    <div class="img-left item-warp">
+                      <div class="cover-img-warp pointer" @click="handleArticle(item)">
+                        <LImg class="cover-img" :size="isMobi ? '120px' : '160px'" :src="item.cover" :isUnPreview="true" />
                       </div>
-                    </div>
-                    <div class="article-title pointer" @click="handleArticle(item)">
-                      {{ item.title }}
-                    </div>
-                    <div class="auth-info-warp">
-                      <div>
-                        <img :src="state.avatar" vertical-align="middle" alt="" />
-                        <span>snows_l</span>
-                      </div>
-                      <div>
-                        <IconHot class="iconfont"></IconHot>
-                        <span>{{ item.readCount || 0 }}</span>
-                      </div>
-                      <div>
-                        <IconLike :size="18" class="iconfont" />
-                        <span>{{ item.shareCount || 0 }}</span>
-                      </div>
-                      <div>
-                        <IconComment :size="18" class="iconfont"></IconComment>
-                        <span>{{ item.commentCount || 0 }}</span>
-                      </div>
-                      <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
-                        <IconPreview class="iconfont" :size="18"></IconPreview>
-                        <span class="" style="font-size: 12px">预览</span>
-                      </div>
-                    </div>
-                    <div class="article-des text">
-                      {{ item.subTitle }}
-                    </div>
-                    <div class="label-warp">
-                      <div class="type">
-                        <IconType class="iconfont"></IconType>
-                        {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
-                      </div>
-                      <div class="label-item" v-for="(label, index) in item.labels" :key="index">
-                        <IconLabel class="iconfont"></IconLabel>
-                        <span class="label">{{ label }}</span>
+                      <div class="item-content">
+                        <div class="create-time">
+                          <div class="time-warp">
+                            <IconCalendar class="iconfont"></IconCalendar>
+                            <span>发布于：</span>
+                            <span class="time">{{ item.createTime }}</span>
+                          </div>
+                        </div>
+                        <div class="article-title pointer" @click="handleArticle(item)">
+                          {{ item.title }}
+                        </div>
+                        <div class="auth-info-warp">
+                          <div>
+                            <img :src="state.avatar" vertical-align="middle" alt="" />
+                            <span>snows_l</span>
+                          </div>
+                          <div>
+                            <IconHot class="iconfont"></IconHot>
+                            <span>{{ item.readCount || 0 }}</span>
+                          </div>
+                          <div>
+                            <IconLike :size="18" class="iconfont" />
+                            <span>{{ item.shareCount || 0 }}</span>
+                          </div>
+                          <div>
+                            <IconComment :size="18" class="iconfont"></IconComment>
+                            <span>{{ item.commentCount || 0 }}</span>
+                          </div>
+                          <div class="pointer" data-tip="点击 可直接阅览" v-if="item.isPreview === 1" @click="handleView(item)">
+                            <IconPreview class="iconfont" :size="18"></IconPreview>
+                            <span class="" style="font-size: 12px">预览</span>
+                          </div>
+                        </div>
+                        <div class="article-des text">
+                          {{ item.subTitle }}
+                        </div>
+                        <div class="label-warp">
+                          <div class="type">
+                            <IconType class="iconfont"></IconType>
+                            {{ state.articleTypeList.find(v => v.value == item.type)?.label || '未知类型' }}
+                          </div>
+                          <div class="label-item" v-for="(label, index) in item.labels" :key="index">
+                            <IconLabel class="iconfont"></IconLabel>
+                            <span class="label">{{ label }}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div class="m-no-article" v-else>
+                  <Empty :text="'暂无文章，等待作者更新~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+                </div>
               </div>
             </div>
-            <div class="m-no-article" v-else>
-              <Empty :text="'暂无文章，等待作者更新~'" :loadingText="'文章正在拼命加载中...'" :loading="state.loading" />
+          </div>
+          <div class="bottom-loading">
+            <img
+              v-if="state.loading && state.articleList.length != 0"
+              style="width: 40px; height: 40px; margin-bottom: 20px"
+              src="@/assets/images/common/loading.svg"
+              alt=""
+              srcset="" />
+            <div v-if="!state.loading && state.isMore && state.articleList.length != 0" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
+            <div v-if="!state.isMore && !state.loading && state.articleList.length != 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
+          </div>
+        </div>
+        <div class="slider-warp">
+          <div class="position-warp">
+            <div class="auth-bg">
+              <div class="auth-warp slider-item-warp">
+                <img class="avatar" :src="state.avatar" alt="" />
+                <div class="mingyan">snows_l</div>
+                <div class="mingyan">渔得鱼心满意足，樵得樵眼笑眉舒！</div>
+                <div class="article-total">
+                  <div class="article-total-item">
+                    <div class="label">📚 文章总数</div>
+                    <div class="num">{{ state.page.total }}</div>
+                  </div>
+                  <div class="article-total-item">
+                    <div class="label">📒 分类</div>
+                    <div class="num">{{ state.articleTypeList.length || 0 }}</div>
+                  </div>
+                  <div class="article-total-item">
+                    <div class="label">🔖 标签</div>
+                    <div class="num">{{ state.lebels || 0 }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="visit-info slider-item-warp">
+              <div class="slider-title">
+                访问信息
+                <div class="mac-style"></div>
+              </div>
+              <div class="visit-content-warp">
+                <div class="visit-item">
+                  <div class="visit-label">时间：</div>
+                  <div class="visit-value">{{ state.visit.week }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">IP：</div>
+                  <div class="visit-value">{{ state.visit.ip }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">城市：</div>
+                  <div class="visit-value">{{ state.visit.location }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">浏览器：</div>
+                  <div class="visit-value">{{ state.visit.browser }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">平台：</div>
+                  <div class="visit-value">{{ state.visit.system }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">气温：</div>
+                  <div class="visit-value">{{ state.visit.low }} ~ {{ state.visit.high }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">天气：</div>
+                  <div class="visit-value">{{ state.visit.tq }}</div>
+                </div>
+                <div class="visit-item">
+                  <div class="visit-label">风力：</div>
+                  <div class="visit-value">{{ state.visit.fl }} {{ state.visit.fengxiang }}</div>
+                </div>
+                <div class="visit-tip">{{ state.visit.tip }}</div>
+              </div>
+            </div>
+            <div class="tiangou-log-warp slider-item-warp">
+              <div class="slider-title">
+                (❁´◡`❁)舔狗日记
+                <div class="mac-style"></div>
+              </div>
+              <div class="content-warp">
+                <div class="content">{{ state.dog }}</div>
+              </div>
+              <div class="buttom-btn pointer kbn-custom" data-tip="换一个 舔(❁´◡`❁)" @click="getDog()">换一个</div>
+            </div>
+            <div class="hot-article slider-item-warp">
+              <div class="slider-title">
+                热门文章
+                <div class="mac-style"></div>
+              </div>
+              <div class="hot-article-item-warp">
+                <div class="hot-article-item" @click="handleArticle(item)" v-for="(item, index) in state.hotArticleList" :key="index">
+                  <LImg class="cover-img" :src="item.cover" alt="" />
+                  <div class="info">
+                    <div class="article-title">{{ item.title }}</div>
+                    <div class="h">
+                      <IconHot class="iconfont"></IconHot>
+                      {{ item.readCount || 0 }} - {{ item.createTime }}
+                    </div>
+                  </div>
+                  <div class="top" :class="'top-' + (index + 1)">{{ index + 1 }}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="bottom-loading">
-        <img
-          v-if="state.loading && state.articleList.length != 0"
-          style="width: 40px; height: 40px; margin-bottom: 20px"
-          src="@/assets/images/common/loading.svg"
-          alt=""
-          srcset="" />
-        <div v-if="!state.loading && state.isMore && state.articleList.length != 0" class="btn-more pointer" @click="handleLoadMore">更早的文章</div>
-        <div v-if="!state.isMore && !state.loading && state.articleList.length != 0" class="no-more">很高兴你翻到这里，但是真的没有了...</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { getArticleList } from '@/api/article';
+import { getArticleList, getTopArticle } from '@/api/article';
 import { getDict } from '@/api/common';
 import Notice from '@/components/Notice/index.vue';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
@@ -261,6 +360,7 @@ import useResize from '@/hooks/useResize';
 import { useAppStore } from '@/store/app';
 import { changeBgImg, getQQAvatar } from '@/utils/common';
 import { getTheme } from '@/utils/theme';
+import axios from 'axios';
 import moment from 'moment';
 import { onMounted, onUnmounted, onUpdated, reactive } from 'vue';
 import { useRouter } from 'vue-router';
@@ -281,8 +381,25 @@ const state = reactive({
   isToolNext: false,
   articleList: [],
   articleTypeList: [],
+  lebels: 0,
   bgImg: '',
   bgImgUrl: changeBgImg(),
+  visit: {
+    time: '',
+    week: '',
+    ip: '',
+    location: '',
+    browser: '',
+    system: '',
+    low: '',
+    high: '',
+    tq: '',
+    fl: '',
+    fengxiang: '',
+    tip: ''
+  },
+  hotArticleList: [],
+  dog: '你跟他已经醒了吧?我今天捡垃圾挣了一百多明天给你打过去你快点休息吧我明天叫你起床给你点外卖买烟给你点你最喜欢的奶茶晚上我会继续去摆地摊的你不用担心我烦你床只有那么大睡不下三个你要好好照顾好自己不要让他抢你被子我永远爱你',
   page: {
     page: 1,
     size: 10,
@@ -323,6 +440,27 @@ const infoList = [
     }
   ]
 ];
+
+axios.get('https://api.vvhan.com/api/visitor.info').then(res => {
+  state.visit = res.data;
+});
+
+const getDog = () => {
+  axios.get('https://v2.api-m.com/api/dog').then(res => {
+    state.dog = res.data.data;
+  });
+};
+getDog();
+
+getTopArticle().then(res => {
+  if (res.code === 200) {
+    state.hotArticleList = res.data;
+    state.hotArticleList.forEach(item => {
+      item.cover = import.meta.env.VITE_CURRENT_ENV == 'dev' ? import.meta.env.VITE_DEV_BASE_SERVER + item.cover : import.meta.env.VITE_PROD_BASE_SERVER + item.cover;
+      item.createTime = item.createTime && moment(item.createTime).format('YYYY-MM-DD');
+    });
+  }
+});
 
 // 获取文章列表
 const getArticleListFn = () => {
@@ -422,6 +560,11 @@ const getArticleTypeList = () => {
     if (res.code === 200) {
       state.articleTypeList = res.data;
       store.SET_ARTICLE_DICT(res.data);
+    }
+  });
+  getDict({ dictType: 'blog_label' }).then(res => {
+    if (res.code === 200) {
+      state.lebels = res.data.length;
     }
   });
 };
@@ -701,50 +844,207 @@ onUnmounted(() => {
     }
   }
   .other-content-warp {
-    position: relative;
     padding-top: 40px;
     background-color: var(--under-background);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .bottom-bg {
-      height: 65px;
-      position: absolute;
-      top: 0;
-      width: 400%;
-      left: -236px;
-      background-image: url('@/assets/images/common/wave2.png');
-      z-index: 3;
-      transform: rotateX(180deg);
-      opacity: 1;
-      transition-duration: 0.4s, 0.4s;
-      animation-name: move2;
-      animation-duration: 20s;
-      animation-fill-mode: backwards;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      animation-fill-mode: backwards;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-    }
-    .bottom-bg1 {
-      height: 80px;
-      width: 400%;
-      left: 0;
-      z-index: 3;
-      opacity: 1;
-      transition-duration: 0.4s, 0.4s;
-      animation-name: move2;
-      animation-duration: 40s;
-      animation-fill-mode: backwards;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      animation-fill-mode: backwards;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      background-image: url('@/assets/images/common/wave2.png');
-      transform: rotateX(180deg);
+    .flex-warp {
+      width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      .content-center {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .slider-warp {
+        margin-top: 75px;
+        min-width: 300px;
+        margin-left: 20px;
+        .position-warp {
+          position: sticky;
+          top: 70px;
+          padding-bottom: 20px;
+          .slider-item-warp {
+            width: 100%;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius-1);
+            position: relative;
+            .slider-title {
+              padding-left: 14px;
+              height: 44px;
+              font-size: 16px;
+              line-height: 44px;
+              border-bottom: 1px solid #ccc;
+              color: #222;
+            }
+            .mac-style {
+              content: ' ';
+              position: absolute;
+              -webkit-border-radius: 50%;
+              border-radius: 50%;
+              background: #fc625d !important;
+              width: 11px;
+              height: 11px;
+              -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+              box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+              float: right;
+              right: 55px;
+              top: 17px;
+            }
+          }
+          .auth-bg {
+            background-image: url('@/assets/images/bg/aside_author_image.jpg');
+            background-size: 100% 30%;
+            background-repeat: no-repeat;
+            border-radius: var(--border-radius-1);
+          }
+          .auth-warp {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: linear-gradient(#ffffff00, #ebfcfd 40%, #caeafa 100%);
+            .avatar {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              border: rgba(144, 147, 153, 0.23) 3px solid;
+            }
+            .mingyan {
+              margin-top: 10px;
+              line-height: 30px;
+              color: #333;
+            }
+            .article-total {
+              margin-top: 30px;
+              display: flex;
+              justify-content: space-around;
+              .article-total-item {
+                margin: 0 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .label {
+                  font-size: 16px;
+                  margin-bottom: 10px;
+                  color: #111;
+                }
+                .num {
+                  font-size: 20px;
+                  color: var(--theme-color);
+                }
+              }
+            }
+          }
+          .visit-info {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(#ffffff00, #caf3f4 50%, #b4f6e2 100%);
+            .visit-content-warp {
+              padding: 20px 20px;
+              .visit-item {
+                color: #222;
+                display: flex;
+                justify-content: flex-start;
+                margin: 10px 0;
+                .visit-label {
+                  width: 80px;
+                }
+              }
+              .visit-tip {
+                margin-top: 20px;
+                color: #222;
+              }
+            }
+          }
+          .hot-article {
+            margin-top: 20px;
+            background-color: #fff;
+            .hot-article-item-warp {
+              padding: 10px;
+              .hot-article-item {
+                position: relative;
+                width: 100%;
+                margin: 10px 0;
+                border-radius: var(--border-radius-1);
+                overflow: hidden;
+                transition: opacity 0.8s ease-in-out;
+                background-color: var(--bg-content-color);
+                .cover-img {
+                  width: 100%;
+                  height: 120px;
+                  border-radius: var(--border-radius-1);
+                }
+                .info {
+                  width: 100%;
+                  height: 100%;
+                  padding: 5px 10px;
+                  color: var(--text-color);
+                  .article-title {
+                    // 两行显示省略号
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    text-shadow: var(--text-shadow);
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                  }
+                }
+                .top {
+                  // 右旋转45度
+                  transform: rotate(45deg);
+                  -webkit-transform: rotate(45deg);
+                  position: absolute;
+                  top: 10px;
+                  right: -20px;
+                  width: 80px;
+                  height: 20px;
+                  color: #fff;
+                  text-align: center;
+                  line-height: 20px;
+                }
+                .top-1 {
+                  background-color: #ff183b;
+                }
+                .top-2 {
+                  background-color: #ff5c38;
+                }
+                .top-3 {
+                  background-color: rgb(242, 193, 16);
+                }
+              }
+            }
+          }
+          .tiangou-log-warp {
+            margin-top: 20px;
+            background-color: #fff;
+            .content-warp {
+              padding: 20px;
+              .content {
+                color: #222;
+                line-height: 32px;
+                border: 1px solid #d3d5db;
+                padding: 15px;
+                background: #f2f6fc;
+                border-bottom-left-radius: 15px 225px;
+                border-bottom-right-radius: 20px 205px;
+                border-top-left-radius: 28px 125px;
+                border-top-right-radius: 100px 30px;
+              }
+            }
+            .buttom-btn {
+              padding-bottom: 20px;
+              text-align: center;
+              color: #222;
+            }
+          }
+        }
+      }
     }
 
     .other-content {

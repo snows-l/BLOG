@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-11 12:04:39
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-09-01 15:10:29
+ * @LastEditTime: 2024-10-05 14:37:54
  * @FilePath: /BLOG/src/api/article.js
  */
 import request from '@/utils/request';
@@ -51,6 +51,14 @@ export function addShareCount(id) {
 export function previewArticleCodeToHtml(id) {
   return request({
     url: '/article/preview/' + id,
+    method: 'get'
+  });
+}
+
+// 获取访问量前三的文章
+export function getTopArticle() {
+  return request({
+    url: '/article/topRead',
     method: 'get'
   });
 }
