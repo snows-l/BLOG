@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-15 12:22:30
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-03 16:29:59
+ * @LastEditTime: 2024-10-05 20:29:33
  * @FilePath: /BLOG/src/views/about/zone/index.vue
 -->
 <template>
@@ -15,7 +15,7 @@
           <div class="item-1 text text-shadow">欢迎👏来到我的博客，这里是关于我的随笔！</div>
         </div>
 
-        <div class="zone-list">
+        <div class="zone-list" v-if="state.zoneList.length > 0">
           <div class="zone-item pointer" v-for="(item, index) in state.zoneList" :key="index">
             <div class="time-loacl-warp">
               <div style="display: flex; align-items: center">
@@ -58,6 +58,9 @@
               </template>
             </div>
           </div>
+        </div>
+        <div class="m-no-article" v-else>
+          <Empty :text="'暂无内容，请等待博主更新~'" :loadingText="'正在拼命加载中...'" :loading="state.loading" />
         </div>
         <div class="bottom-loading">
           <img v-if="state.loading && state.zoneList.length > 0" style="width: 40px; height: 40px; margin-bottom: 20px" src="@/assets/images/common/loading.svg" alt="" srcset="" />
@@ -261,6 +264,7 @@ onUpdated(() => {
   }
 }
 .bottom-loading {
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
