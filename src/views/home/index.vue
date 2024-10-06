@@ -3,7 +3,7 @@
  * @Author: snows_l snows_l@163.com
  * @Date: 2024-08-05 12:46:00
  * @LastEditors: snows_l snows_l@163.com
- * @LastEditTime: 2024-10-05 20:14:47
+ * @LastEditTime: 2024-10-06 11:48:07
  * @FilePath: /BLOG/src/views/home/index.vue
 -->
 <template>
@@ -253,7 +253,7 @@
         </div>
         <div class="slider-warp" v-if="!state.isMobile">
           <div class="position-warp">
-            <div class="auth-warp slider-item-warp article-item">
+            <div class="auth-warp slider-item-warp">
               <div class="auth-content-warp">
                 <img class="avatar" :src="state.avatar" alt="" />
                 <div class="mingyan" style="font-size: 18px">snows_l</div>
@@ -280,7 +280,7 @@
               </div>
             </div>
 
-            <div class="visit-info slider-item-warp article-item">
+            <div class="visit-info slider-item-warp">
               <div class="slider-title">
                 访问信息
                 <div class="mac-style"></div>
@@ -322,7 +322,7 @@
               </div>
             </div>
 
-            <div class="visit-total slider-item-warp article-item">
+            <div class="visit-total slider-item-warp">
               <div class="slider-title">
                 关于/统计
                 <div class="mac-style"></div>
@@ -342,7 +342,7 @@
               </div>
             </div>
 
-            <div class="tiangou-log-warp slider-item-warp article-item">
+            <div class="tiangou-log-warp slider-item-warp">
               <div class="slider-title">
                 (❁´◡`❁)舔狗日记
                 <div class="mac-style"></div>
@@ -353,7 +353,7 @@
               <div class="buttom-btn pointer kbn-custom" data-tip="换一个 舔(❁´◡`❁)" @click="getDog()">换一个</div>
             </div>
 
-            <div class="hot-article slider-item-warp article-item">
+            <div class="hot-article slider-item-warp">
               <div class="slider-title">
                 热门文章
                 <div class="mac-style"></div>
@@ -1050,6 +1050,8 @@ onUnmounted(() => {
                 overflow: hidden;
                 transition: opacity 0.8s ease-in-out;
                 background-color: var(--bg-content-color);
+                box-shadow: var(--box-shadow);
+                padding-bottom: 10px;
                 .cover-img {
                   width: 100%;
                   height: 120px;
@@ -1058,7 +1060,8 @@ onUnmounted(() => {
                 .info {
                   width: 100%;
                   height: 100%;
-                  padding: 5px 10px;
+                  padding: 0px 10px;
+                  margin-top: 10px;
                   color: var(--text-color);
                   .article-title {
                     // 两行显示省略号
@@ -1070,7 +1073,7 @@ onUnmounted(() => {
                     white-space: normal;
                     text-shadow: var(--text-shadow);
                     font-size: 16px;
-                    margin-bottom: 10px;
+                    margin: 5px 0;
                   }
                 }
                 .top {
